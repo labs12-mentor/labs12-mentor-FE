@@ -24,10 +24,10 @@ export const getOrganization = () => dispatch => {
     return axios    
         .get(url)
         .then(res => {
-            dispatch({ type: GET_ORGANIZATION_SUCCESS });
+            dispatch({ type: GET_ORGANIZATION_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: GET_ORGANIZATION_FAILURE })
+            dispatch({ type: GET_ORGANIZATION_FAILURE, payload: err })
         });
 };
 
@@ -37,17 +37,35 @@ export const createOrganization = newOrg => dispatch => {
     return axios    
         .post(url, newOrg)
         .then(res => {
-            dispatch({ type: CREATE_ORGANIZATION_SUCCESS });
+            dispatch({ type: CREATE_ORGANIZATION_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: CREATE_ORGANIZATION_FAILURE })
+            dispatch({ type: CREATE_ORGANIZATION_FAILURE, payload: err })
         });
 };
 
-export const updateOrganization = () => dispatch => {
+export const updateOrganization = (id, updatedOrg) => dispatch => {
+    dispatch({ type: UPDATE_ORGANIZATION_START });
+    
+    return axios    
+        .put(`${url}orgs/${id}`, updatedOrg)
+        .then(res => {
+            dispatch({ type: UPDATE_ORGANIZATION_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            dispatch({ type: UPDATE_ORGANIZATION_FAILURE, payload: err })
+        });
+};
 
-}
-
-export const deleteOrganization = () => dispatch => {
-
-}
+export const deleteOrganization = id => dispatch => {
+    dispatch({ type: DELETE_ORGANIZATION_START });
+    
+    return axios    
+        .delete(`${url}orgs/${id}`)
+        .then(res => {
+            dispatch({ type: GET_ORGANIZATION_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            dispatch({ type: GET_ORGANIZATION_FAILURE, payload: err })
+        });
+};
