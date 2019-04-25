@@ -1,8 +1,9 @@
 import React from 'react';
+import MeetingsForm from '../components/MeetingsComponents/MeetingsForm';
 
 const MeetingsContainer = (props) => {
     return(
-        <h1>Meetings Components go here</h1>
+        <MeetingsForm/>
     )
 }
 
