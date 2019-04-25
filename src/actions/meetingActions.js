@@ -66,7 +66,7 @@ export const deleteMeeting = id => dispatch => {
     .delete(`${url}/meetings/${id}`)
     .then(res => {
       console.log(res);
-      dispatch({ type: DELETE_MEETING_START, payload: id });
+      dispatch({ type: DELETE_MEETING_SUCCESS, payload: id });
     })
     .catch(err => {
       console.log(err);
