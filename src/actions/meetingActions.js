@@ -20,7 +20,7 @@ const url = "http://mentorbe.tfolbrecht.com";
 export const getMeetings = () => dispatch => {
   dispatch({ type: GET_MEETINGS_START });
   return axios
-    .get(url)
+    .get(`${url}/meetings`)
     .then(res => {
       console.log(res);
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
@@ -33,7 +33,7 @@ export const getMeetings = () => dispatch => {
 export const createMeeting = info => dispatch => {
   dispatch({ type: CREATE_MEETING_START });
   return axios
-    .post(url, info)
+    .post(`${url}/meetings`, info)
     .then(res => {
       console.log(res);
       dispatch({ type: CREATE_MEETING_SUCCESS, payload: res.data });
