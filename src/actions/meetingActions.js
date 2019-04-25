@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//backend url
+//backend  meetings url
 const url = "http://mentorbe.tfolbrecht.com/";
 
 export const GET_MEETINGS_START = "CREATE_MEETINGS_START";
@@ -10,7 +10,7 @@ export const GET_MEETINGS_FAILURE = "CREATE_MEETINGS_FAILURE";
 export const getMeetings = () => dispatch => {
   dispatch({ type: GET_MEETINGS_START });
   return axios
-    .get(url, {})
+    .get(url)
     .then(res => {
       console.log(res);
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
@@ -59,3 +59,17 @@ export const updateMeeting = info => dispatch => {
 export const DELETE_MEETING_START = "DELETE_MEETING_START";
 export const DELETE_MEETING_SUCCESS = "DELETE_MEETING_SUCCESS";
 export const DELETE_MEETING_FAILURE = "DELETE_MEETING_FAILURE";
+
+export const deleteMeeting = id => dispatch => {
+    dispatch({type: DELETE_MEETING_START});
+    return axios
+        .delete(`${url}/meetings/${id}`)
+        .then(res => {
+            console.log(res);
+            dispatch({type: DELETE_MEETING_START, payload:id})
+        })
+        .catch(err => {
+            console.log(err);
+            dispatch({type: DELETE_MEETING_FAILURE, payload: err})
+        })
+}
