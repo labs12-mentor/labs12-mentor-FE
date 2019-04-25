@@ -36,3 +36,11 @@ export const createMeeting = info => dispatch => {
       console.log(err.response.data);
     });
 };
+
+export const UPDATE_MEETING_START = "UPDATE_MEETING_START";
+export const UPDATE_MEETING_SUCCESS = "UPDATE_MEETING_SUCCESS";
+export const UPDATE_MEETING_FAILURE = "UPDATE_MEETING_FAILURE";
+
+export const DELETE_MEETING_START = "DELETE_MEETING_START";
+export const DELETE_MEETING_SUCCESS = "DELETE_MEETING_SUCCESS";
+export const DELETE_MEETING_FAILURE = "DELETE_MEETING_FAILURE";
