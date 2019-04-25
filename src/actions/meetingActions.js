@@ -3,9 +3,9 @@ import axios from "axios";
 //backend  meetings url
 const url = "http://mentorbe.tfolbrecht.com/";
 
-export const GET_MEETINGS_START = "CREATE_MEETINGS_START";
-export const GET_MEETINGS_SUCCESS = "CREATE_MEETINGS_SUCCESS";
-export const GET_MEETINGS_FAILURE = "CREATE_MEETINGS_FAILURE";
+export const GET_MEETINGS_START = "GET_MEETINGS_START";
+export const GET_MEETINGS_SUCCESS = "GET_MEETINGS_SUCCESS";
+export const GET_MEETINGS_FAILURE = "GET_MEETINGS_FAILURE";
 
 export const getMeetings = () => dispatch => {
   dispatch({ type: GET_MEETINGS_START });
