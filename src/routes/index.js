@@ -8,7 +8,7 @@ import OrganizationRegister from '../pages/OrganizationRegister';
 
 const Routes = (props) => {
     return (
-        <Router history={history}>
+        <Router history={props.history}>
             <Route path="/organization/register" component={OrganizationRegister} />
         </Router>
     )
