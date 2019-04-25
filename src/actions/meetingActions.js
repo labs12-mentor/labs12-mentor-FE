@@ -33,13 +33,28 @@ export const createMeeting = info => dispatch => {
       dispatch({ type: CREATE_MEETING_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log(err.response.data);
+      console.log(err);
+      dispatch({type: CREATE_MEETING_FAILURE, payload: err})
     });
 };
 
 export const UPDATE_MEETING_START = "UPDATE_MEETING_START";
 export const UPDATE_MEETING_SUCCESS = "UPDATE_MEETING_SUCCESS";
 export const UPDATE_MEETING_FAILURE = "UPDATE_MEETING_FAILURE";
+
+export const updateMeeting = info => dispatch => {
+    dispatch({type: UPDATE_MEETING_START})
+    return axios
+        .put(url, info)
+        .then(res => {
+            console.log(res);
+            dispatch({type: UPDATE_MEETING_SUCCESS, payload: res.data})
+        })
+        .catch(err => {
+            console.log(err);
+            dispatch({type: UPDATE_MEETING_FAILURE, payload: err})
+          });
+}
 
 export const DELETE_MEETING_START = "DELETE_MEETING_START";
 export const DELETE_MEETING_SUCCESS = "DELETE_MEETING_SUCCESS";
