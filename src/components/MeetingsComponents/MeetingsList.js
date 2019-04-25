@@ -15,7 +15,9 @@ class MeetingsList extends React.Component {
     return (
       <div>
         <h1>Your Meetings</h1>
-        {this.props.meetingsList}
+        {this.props.meetingsList.map(meeting => {
+            return <h1>Meeting Card will go here</h1>
+        })}
       </div>
     );
   }
