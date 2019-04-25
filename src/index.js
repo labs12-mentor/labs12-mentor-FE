@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Routes from './routes';
 import * as serviceWorker from './serviceWorker';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import store from './store';
+import history from './history';
 
 ReactDOM.render(
     <Provider store={store} >
-        <App />
+        <Routes history={history} />
     </Provider>,
 document.getElementById('root'));
 
