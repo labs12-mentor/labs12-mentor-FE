@@ -20,7 +20,7 @@ const url = 'http://mentorbe.tfolbrecht.com/';
 
 export const getOrganization = () => dispatch => {
     dispatch({ type: GET_ORGANIZATION_START });
-    
+
     return axios    
         .get(url)
         .then(res => {
@@ -31,9 +31,18 @@ export const getOrganization = () => dispatch => {
         });
 };
 
-export const createOrganization = () => dispatch => {
-
-}
+export const createOrganization = newOrg => dispatch => {
+    dispatch({ type: CREATE_ORGANIZATION_START });
+    
+    return axios    
+        .post(url, newOrg)
+        .then(res => {
+            dispatch({ type: CREATE_ORGANIZATION_SUCCESS });
+        })
+        .catch(err => {
+            dispatch({ type: CREATE_ORGANIZATION_FAILURE })
+        });
+};
 
 export const updateOrganization = () => dispatch => {
 
