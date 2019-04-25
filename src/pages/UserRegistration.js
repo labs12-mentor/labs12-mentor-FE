@@ -51,9 +51,11 @@ class UserRegistration extends Component {
     const { firstName, lastName, email, password, linkedIn } = this.state;
     return(
       <div>
+        {/*Org logo*/}
         <div>
           <h2>User Registration</h2>
-          {/*Org name and logo*/}
+          <p>Join |name of program here|</p>
+          {/*Org name*/}
         </div>
         <div>
           <Form onSubmit={this.saveUser}>
