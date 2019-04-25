@@ -44,7 +44,7 @@ export const createMeeting = info => dispatch => {
     });
 };
 
-export const updateMeeting = (info, id) => dispatch => {
+export const updateMeeting = (id, info) => dispatch => {
   dispatch({ type: UPDATE_MEETING_START });
   return axios
     .put(`${url}/meetings/${id}`, info)
