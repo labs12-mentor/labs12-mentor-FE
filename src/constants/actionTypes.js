@@ -1,4 +1,3 @@
-
 //Action types for meetings
 
 export const GET_MEETINGS_START = "GET_MEETINGS_START";
