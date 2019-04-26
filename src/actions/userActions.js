@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
-    CREATE_USER_START,
-    CREATE_USER_SUCCESS,
-    CREATE_USER_FAILURE,
+    REGISTER_USER_START,
+    REGISTER_USER_SUCCESS,
+    REGISTER_USER_FAILURE,
     LOGIN_USER_START,
     LOGIN_USER_SUCCESS,
     LOGIN_USER_FAILURE
@@ -11,15 +11,15 @@ import {
 const url = 'http://mentorbe.tfolbrecht.com/';
 
 export const registerUser = newUser => dispatch => {
-    dispatch({ type: CREATE_USER_START });
+    dispatch({ type: REGISTER_USER_START });
 
     return axios
         .post(url, newUser)
         .then(res => {
-            dispatch({ type: CREATE_USER_SUCCESS, payload: res.data });
+            dispatch({ type: REGISTER_USER_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: CREATE_USER_FAILURE, payload: err });
+            dispatch({ type: REGISTER_USER_FAILURE, payload: err });
         });
 };
 
