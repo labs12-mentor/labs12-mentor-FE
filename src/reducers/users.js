@@ -1,13 +1,18 @@
 import {
     REGISTER_USER_START,
     REGISTER_USER_SUCCESS,
-    REGISTER_USER_FAILURE
+    REGISTER_USER_FAILURE,
+    LOGIN_USER_START,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_FAILURE
 } from '../constants/actionTypes';
 
 const initialState = {
     token: localStorage.getItem('token'),
-    creatingUser: false,
+    registeringUser: false,
     newUser: null,
+    loggingInUser: false,
+    currentUser: false,
     error: null
 }
 
@@ -16,20 +21,40 @@ export default (state=initialState, action) => {
         case REGISTER_USER_START:
             return {
                 ...state,
-                creatingUser: true
+                registeringUser: true
             }
 
         case REGISTER_USER_SUCCESS:
             return {
                 ...state,
-                creatingUser: false,
+                registeringUser: false,
                 newUser: action.payload
             }
 
         case REGISTER_USER_FAILURE:
             return {
                 ...state,
-                creatingUser: false,
+                registeringUser: false,
+                error: action.payload
+            }
+
+        case LOGIN_USER_START:
+            return {
+                ...state,
+                loggingInUser: true
+            }
+
+        case LOGIN_USER_SUCCESS:
+            return {
+                ...state,
+                loggingInUser: false,
+                currentUser: action.payload
+            }
+
+        case LOGIN_USER_FAILURE:
+            return {
+                ...state,
+                loggingInUser: false,
                 error: action.payload
             }
 
