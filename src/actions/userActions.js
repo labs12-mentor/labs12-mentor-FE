@@ -24,7 +24,7 @@ export const registerUser = newUser => dispatch => {
 };
 
 
-export const loginUser = credentials => {
+export const loginUser = credentials => dispatch => {
     dispatch({ type: LOGIN_USER_START });
 
     return axios

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { 
     Form,
     FormGroup,
@@ -6,6 +7,8 @@ import {
     Input,
     Button
  } from 'reactstrap';
+
+ import { loginUser } from '../actions/userActions';
 
 
 class UserLogin extends Component {
@@ -24,6 +27,7 @@ class UserLogin extends Component {
 
   handleSubmit = e => {
       e.preventDefault();
+      this.props.loginUser(this.state);
   }
 
   render(){
@@ -61,4 +65,5 @@ class UserLogin extends Component {
   }
 }
 
-export default UserLogin;
+
+export default connect(null, { loginUser })(UserLogin);
