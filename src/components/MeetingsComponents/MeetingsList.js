@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getMeetings } from "../../actions/meetingActions.js";
+import MeetingCard from "./MeetingCard.js";
 
 class MeetingsList extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class MeetingsList extends React.Component {
       <div>
         <h1>Your Meetings</h1>
         {this.props.meetingsList.map(meeting => {
-            return <h1>Meeting Card will go here</h1>
+          return <MeetingCard />;
         })}
       </div>
     );
