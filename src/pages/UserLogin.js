@@ -14,17 +14,31 @@ class UserLogin extends Component {
     password: ""
   }
 
+  changeHandler = e => {
+      e.preventDefault();
+      this.setState({
+          ...this.state,
+          [e.target.name]: e.target.value
+      });
+  }
+
+  handleSubmit = e => {
+      e.preventDefault();
+  }
+
   render(){
     return(
         <div className="UserLogin">
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
                     <Label for="username"></Label>
                     <Input 
                         type="username" 
                         name="username" 
                         id="username" 
-                        placeholder="Enter a username" 
+                        placeholder="Enter a username"
+                        onChange={this.changeHandler}
+                        value={this.state.username}
                     />
                 </FormGroup>
 
@@ -34,11 +48,14 @@ class UserLogin extends Component {
                         type="password" 
                         name="password" 
                         id="password" 
-                        placeholder="Enter a password" 
+                        placeholder="Enter a password"
+                        onChange={this.changeHandler}
+                        value={this.state.password}
                     />
                 </FormGroup>
             </Form>
-            <Button>Login</Button>
+
+            <Button type="submit">Login</Button>
         </div>
     )
   }
