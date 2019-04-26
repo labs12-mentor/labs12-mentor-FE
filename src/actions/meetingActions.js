@@ -14,13 +14,13 @@ import {
   DELETE_MEETING_FAILURE
 } from "../constants/actionTypes.js";
 
-//backend  meetings url
-const url = "http://mentorbe.tfolbrecht.com/";
+//backend meetings url
+const url = "http://mentorbe.tfolbrecht.com";
 
 export const getMeetings = () => dispatch => {
   dispatch({ type: GET_MEETINGS_START });
   return axios
-    .get(url)
+    .get(`${url}/meetings`)
     .then(res => {
       console.log(res);
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
@@ -33,7 +33,7 @@ export const getMeetings = () => dispatch => {
 export const createMeeting = info => dispatch => {
   dispatch({ type: CREATE_MEETING_START });
   return axios
-    .post(url, info)
+    .post(`${url}/meetings`, info)
     .then(res => {
       console.log(res);
       dispatch({ type: CREATE_MEETING_SUCCESS, payload: res.data });
@@ -44,10 +44,10 @@ export const createMeeting = info => dispatch => {
     });
 };
 
-export const updateMeeting = info => dispatch => {
+export const updateMeeting = (id, info) => dispatch => {
   dispatch({ type: UPDATE_MEETING_START });
   return axios
-    .put(url, info)
+    .put(`${url}/meetings/${id}`, info)
     .then(res => {
       console.log(res);
       dispatch({ type: UPDATE_MEETING_SUCCESS, payload: res.data });
