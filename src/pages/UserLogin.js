@@ -28,6 +28,7 @@ class UserLogin extends Component {
   handleSubmit = e => {
       e.preventDefault();
       this.props.loginUser(this.state);
+      //add .then that redirects to the user's page
   }
 
   render(){

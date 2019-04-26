@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 //add Reactstrap
 import { Form, Input, Button } from 'reactstrap';
 
-//import add user action
+import { registerUser } from '../actions/userActions';
 
 class UserRegistration extends Component {
   constructor(props){
@@ -35,16 +35,18 @@ class UserRegistration extends Component {
   //save user
   saveUser = (e) => {
     e.preventDefault();
-    //redux action
-    //this.props.____(this.state);
-    console.log(this.state);
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      linkedIn: ''
+    this.props.registerUser(this.state)
+    .then(() => {
+      this.setState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        linkedIn: ''
+      })
     })
+    //add another .then that redirects to the login page
+    
   }
 
   render(){
@@ -59,19 +61,59 @@ class UserRegistration extends Component {
         </div>
         <div>
           <Form onSubmit={this.saveUser}>
-            <Input className="" name="firstName" type="text" placeholder="First Name" value={firstName} onChange={this.handleInput} />
-            <Input className="" name="lastName" type="text" placeholder="Last Name" value={lastName} onChange={this.handleInput} />
-            <Input className="" name="email" type="text" placeholder="name@email.com" value={email} onChange={this.handleInput} />
-            <Input className="" name="password" type="password" placeholder="password" value={password} onChange={this.handleInput} />
-            <Input className="" name="linkedIn" type="text" placeholder="https://www.linkedin.com/in/first-last" value={linkedIn} onChange={this.handleInput} />
+            <Input 
+              className="" 
+              name="firstName" 
+              type="text" 
+              placeholder="First Name" 
+              value={firstName} 
+              onChange={this.handleInput} 
+            />
+
+            <Input 
+              className="" 
+              name="lastName" 
+              type="text" 
+              placeholder="Last Name" 
+              value={lastName} 
+              onChange={this.handleInput} 
+            />
+
+            <Input 
+              className="" 
+              name="email" 
+              type="text" 
+              placeholder="name@email.com" 
+              value={email} 
+              onChange={this.handleInput} 
+            />
+
+            <Input 
+              className="" 
+              name="password" 
+              type="password" 
+              placeholder="password" 
+              value={password} 
+              onChange={this.handleInput}
+            />
+
+            <Input 
+              className="" 
+              name="linkedIn" 
+              type="text" 
+              placeholder="https://www.linkedin.com/in/first-last" 
+              value={linkedIn} 
+              onChange={this.handleInput} 
+            />
           </Form>
+
           <Button className="" onClick={this.saveUser} color="success">Create Account</Button>
         </div>
         <div>
           <p>Already have an account? Click here to log in</p>
           {/* update with link to login page */}
           <Link to="/">
-            <Button color="primary">Sign In</Button>
+            <Button type="submit" color="primary">Sign In</Button>
           </Link>
         </div>
       </div>
@@ -83,5 +125,5 @@ class UserRegistration extends Component {
 
 // }
 
-//connect to store
-export default UserRegistration;
+
+export default connect(null, { registerUser })(UserRegistration);
