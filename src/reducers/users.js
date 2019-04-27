@@ -4,7 +4,10 @@ import {
     REGISTER_USER_FAILURE,
     LOGIN_USER_START,
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_FAILURE
+    LOGIN_USER_FAILURE,
+    GET_STUDENT_INFO_START,
+    GET_STUDENT_INFO_SUCCESS,
+    GET_STUDENT_INFO_FAILURE
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -57,6 +60,7 @@ export default (state=initialState, action) => {
                 loggingInUser: false,
                 error: action.payload
             }
+
 
         default:
             return state;
