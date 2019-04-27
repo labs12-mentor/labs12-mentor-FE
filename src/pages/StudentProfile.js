@@ -5,7 +5,12 @@ import {
     Label,
     Input,
     Col,
-    Row
+    Row,
+
+    Card,
+    CardBody,
+    CardTitle,
+    CardText
 } from 'reactstrap';
 
 class StudentProfile extends React.Component {
@@ -102,17 +107,127 @@ class StudentProfile extends React.Component {
                         </Col>
                     </Row>
 
-                    {/* <FormGroup row>
-                        <Label for="checkbox" sm={2}>Checkbox</Label>
-                        <Col sm={{ size: 10 }}> */}
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Interests</CardTitle>
+
                             <FormGroup check>
                                 <Label check>
                                     <Input type="checkbox" id="checkbox" />
                                     Check me out
                                 </Label>
                             </FormGroup>
-                        {/* </Col>
-                    </FormGroup> */}
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Check me out
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Check me out
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Check me out
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="addMore">Add More</Label>
+                                <Input 
+                                    type="text"
+                                    name="addMore"
+                                />
+                            </FormGroup>
+
+                        </CardBody>
+                    </Card>
+
+                    <Card>
+                        <CardBody>
+                            <CardTitle>Experience</CardTitle>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Software Development
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    UI/UX Design
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Engineering Management
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Product Development
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Executive Management
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    Quality Assurance Testing
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup check>
+                                <Label check>
+                                    <Input type="checkbox" id="checkbox" />
+                                    technology Educator
+                                </Label>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label for="addMore">Other</Label>
+                                <Input 
+                                    type="text"
+                                    name="addMore"
+                                />
+                            </FormGroup>
+
+                        </CardBody>
+                    </Card>
+
+                    <Card>
+                        <CardBody>
+                            <CardTitle>I would like to be mentored so I can</CardTitle>
+
+                            <FormGroup check>
+                                <Input 
+                                    type="textarea"
+                                    name="mentorshipJustification"
+                                />
+                            </FormGroup>
+
+                        </CardBody>
+                    </Card>
+                            
                 </Form>
             </div>
         );
