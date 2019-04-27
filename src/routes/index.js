@@ -7,6 +7,7 @@ import {
 import OrganizationRegister from '../pages/OrganizationRegister';
 import userRegister from '../pages/UserRegistration';
 import userLogin from '../pages/UserLogin';
+import StudentProfile from '../pages/StudentProfile';
 
 const Routes = (props) => {
     return (
@@ -14,6 +15,7 @@ const Routes = (props) => {
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={userRegister} />
             <Route exact path="/user/login" component={userLogin} />
+            <Route exact path="/user/profile" component={StudentProfile} />
         </Router>
     )
 }
