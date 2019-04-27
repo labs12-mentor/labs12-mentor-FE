@@ -23,6 +23,18 @@ class StudentProfile extends React.Component {
         linkedIn: ""
     }
 
+    changeHandler = e => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    submitHandler = e => {
+        e.preventDefault();
+        //add submit fxn to props and pass in state
+    }
+
     render() {
         return (
             <div className="StudentProfile">
@@ -227,7 +239,7 @@ class StudentProfile extends React.Component {
 
                         </CardBody>
                     </Card>
-                            
+                    
                 </Form>
             </div>
         );
