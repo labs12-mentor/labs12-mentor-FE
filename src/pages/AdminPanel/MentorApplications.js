@@ -6,7 +6,9 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+
+    Table
 } from 'reactstrap';
 
 class MentorApplications extends React.Component {
@@ -38,6 +40,77 @@ class MentorApplications extends React.Component {
                         <DropdownItem>Denied</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
+
+                <h3>Applications</h3>
+                {/* will need to use map function to create table rows of students and mentors */}
+                <Table striped>
+                    <thead>
+                        <tr>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+
+                        <tr>
+                            <td>Doe</td>
+                            <td>Jane</td>
+                            <td>user@domain.com</td>
+                            <td>Approved</td>
+                        </tr>
+                    </tbody>
+                </Table>
             </div>
         );
     }
