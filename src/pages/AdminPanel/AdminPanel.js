@@ -13,6 +13,8 @@ import {
 import classnames from 'classnames';
 
 import MentorApplications from './MentorApplications';
+import MentorAssignment from './MentorAssignment';
+import ProfileForms from './ProfileForms';
 
 
 class AdminPanel extends React.Component {
@@ -68,11 +70,11 @@ class AdminPanel extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="2">
-
+                        <MentorAssignment />
                     </TabPane>
 
                     <TabPane tabId="3">
-
+                        <ProfileForms />
                     </TabPane>
                 </TabContent>
             </div>
