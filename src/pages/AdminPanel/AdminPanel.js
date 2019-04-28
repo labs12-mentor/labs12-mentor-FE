@@ -7,9 +7,12 @@ import {
     TabPane,
     Row,
     Col,
-    InputGroup
+    InputGroup,
+    Input
 } from 'reactstrap';
 import classnames from 'classnames';
+
+import MentorApplications from './MentorApplications';
 
 
 class AdminPanel extends React.Component {
@@ -59,9 +62,9 @@ class AdminPanel extends React.Component {
                     </NavItem>
                 </Nav>
 
-                <TabContent>
+                <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        
+                        <MentorApplications />
                     </TabPane>
 
                     <TabPane tabId="2">
