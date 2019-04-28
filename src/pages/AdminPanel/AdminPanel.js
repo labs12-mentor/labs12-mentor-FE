@@ -5,10 +5,6 @@ import {
     NavLink,
     TabContent,
     TabPane,
-    Row,
-    Col,
-    InputGroup,
-    Input
 } from 'reactstrap';
 import classnames from 'classnames';
 
