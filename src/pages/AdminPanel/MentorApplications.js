@@ -16,7 +16,7 @@ class MentorApplications extends React.Component {
         dropdownOpen: false
     }
 
-    toggle = () => {
+    toggleDropdown = () => {
         this.setState(prevState => ({
             dropdownOpen: !prevState.dropdownOpen
         }));
@@ -29,7 +29,7 @@ class MentorApplications extends React.Component {
                     <Input placeholder="Search by email or name" />
                 </InputGroup>
 
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
                     <DropdownToggle caret>
                         All
                     </DropdownToggle>

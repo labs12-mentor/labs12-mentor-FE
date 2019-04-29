@@ -18,7 +18,7 @@ class AdminPanel extends React.Component {
         activeTab: '1'
     }
 
-    toggle = tab => {
+    toggleTab = tab => {
         if(this.state.activeTab !== tab){
             this.setState({
                 activeTab: tab
@@ -35,7 +35,7 @@ class AdminPanel extends React.Component {
                     <NavItem>
                         <NavLink 
                             className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggle('1'); }} 
+                            onClick={() => { this.toggleTab('1'); }} 
                         >
                             Mentor Applications
                         </NavLink>
@@ -44,7 +44,7 @@ class AdminPanel extends React.Component {
                     <NavItem>
                         <NavLink 
                             className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => { this.toggle('2'); }} 
+                            onClick={() => { this.toggleTab('2'); }} 
                         >
                             Mentor Assignment
                         </NavLink>
@@ -53,7 +53,7 @@ class AdminPanel extends React.Component {
                     <NavItem>
                         <NavLink 
                             className={classnames({ active: this.state.activeTab === '3' })}
-                            onClick={() => { this.toggle('3'); }} 
+                            onClick={() => { this.toggleTab('3'); }} 
                         >
                             Profile Forms
                         </NavLink>
