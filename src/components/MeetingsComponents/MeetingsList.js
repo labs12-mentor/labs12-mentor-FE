@@ -4,9 +4,6 @@ import { getMeetings } from "../../actions/meetingActions.js";
 import MeetingCard from "./MeetingCard.js";
 
 class MeetingsList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.getMeetings();
@@ -16,9 +13,13 @@ class MeetingsList extends React.Component {
     return (
       <div>
         <h1>Your Meetings</h1>
-        {this.props.meetingsList.map(meeting => {
+
+        <h2>Upcoming Meetings</h2>
+        {/* {this.props.meetingsList.map(meeting => {
           return <MeetingCard />;
-        })}
+        })} */}
+
+        <h2>Past Meetings</h2>
       </div>
     );
   }
@@ -26,9 +27,11 @@ class MeetingsList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    meetingsList: state.meetingsReducer.meetingsList
+    //meetingsList: state.meetingsReducer.meetingsList
+     meetingsList: state
   };
 }
+
 
 export default connect(
   mapStateToProps,

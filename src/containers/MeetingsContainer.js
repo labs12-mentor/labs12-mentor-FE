@@ -1,18 +1,22 @@
 import React from "react";
-import connect from 'react-redux';
-import MeetingsForm from "../components/MeetingsComponents/MeetingsForm";
+import {connect} from "react-redux";
+import MeetingsForm from "../components/MeetingsComponents/MeetingsForm.js";
+import MeetingsList from "../components/MeetingsComponents/MeetingsList";
+import { createMeeting } from "../actions/meetingActions.js";
 
-const MeetingsContainer = props => {
+class MeetingsContainer extends React.Component {
+
+  render() {
   return (
-      <MeetingsForm/>
-  )
-    submitForm = e => {
-      e.preventDefault();
-
-    }
+    <div>
+      <MeetingsList/>
+      <MeetingsForm addMeeting={this.props.createMeeting} />;
+    </div>
+  );
+  }
 };
 
 export default connect(
   null,
-  {getMeetings, createMeeting}
+  {createMeeting}
 )(MeetingsContainer);

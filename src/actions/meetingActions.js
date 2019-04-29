@@ -49,11 +49,11 @@ export const updateMeeting = (id, info) => dispatch => {
   return axios
     .put(`${url}/meetings/${id}`, info)
     .then(res => {
-      console.log(res);
+      //console.log(res);
       dispatch({ type: UPDATE_MEETING_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log(err);
+      //console.log(err);
       dispatch({ type: UPDATE_MEETING_FAILURE, payload: err });
     });
 };
@@ -63,11 +63,11 @@ export const deleteMeeting = id => dispatch => {
   return axios
     .delete(`${url}/meetings/${id}`)
     .then(res => {
-      console.log(res);
+      //console.log(res);
       dispatch({ type: DELETE_MEETING_SUCCESS, payload: id });
     })
     .catch(err => {
-      console.log(err);
+      //console.log(err);
       dispatch({ type: DELETE_MEETING_FAILURE, payload: err });
     });
 };
