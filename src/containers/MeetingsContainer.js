@@ -9,7 +9,7 @@ class MeetingsContainer extends React.Component {
     return (
       <div>
         <MeetingsList />
-        <MeetingsForm addMeeting={this.props.createMeeting} />;
+        <MeetingsForm addMeeting={this.props.createMeeting} />
       </div>
     );
   }

@@ -4,9 +4,9 @@ import { getMeetings } from "../../actions/meetingActions.js";
 import MeetingCard from "./MeetingCard.js";
 
 class MeetingsList extends React.Component {
-  componentDidMount() {
-    this.props.getMeetings();
-  }
+  // componentDidMount() {
+  //   this.props.getMeetings();
+  // }
 
   render() {
     return (
