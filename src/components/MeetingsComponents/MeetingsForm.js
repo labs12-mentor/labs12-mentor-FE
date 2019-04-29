@@ -13,7 +13,7 @@ class MeetingsForm extends React.Component {
   creatingMeetingForm = e => {
     e.preventDefault();
     this.props.addMeeting(this.state);
-  }
+  };
 
   render() {
     return (
@@ -75,7 +75,6 @@ class MeetingsForm extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-
 }
 
 export default MeetingsForm;
