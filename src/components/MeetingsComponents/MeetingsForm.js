@@ -58,7 +58,7 @@ class MeetingsForm extends React.Component {
             />
           </FormGroup>
 
-          <Button>Submit</Button>
+          <Button onClick={this.props.submitForm}>Submit</Button>
         </Form>
       </div>
     );
@@ -70,6 +70,7 @@ class MeetingsForm extends React.Component {
       [e.target.name]: e.target.value
     });
   };
+
 }
 
 export default MeetingsForm;
