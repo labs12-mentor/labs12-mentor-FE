@@ -12,8 +12,10 @@ class UserRegistration extends Component {
     super(props);
     this.state = {
       organization: '', //props
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
+      username: '',
+      password: '',
       email: '',
       linkedIn: '',
       dropdownOpen: false,
@@ -38,9 +40,10 @@ class UserRegistration extends Component {
     this.props.registerUser(this.state)
     .then(() => {
       this.setState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
+        username: '',
         password: '',
         linkedIn: ''
       })
@@ -50,7 +53,7 @@ class UserRegistration extends Component {
   }
 
   render(){
-    const { firstName, lastName, email, password, linkedIn } = this.state;
+    const { firstName, lastName, email, username, password, linkedIn } = this.state;
     return(
       <div>
         {/*Org logo*/}
@@ -86,6 +89,15 @@ class UserRegistration extends Component {
               placeholder="name@email.com" 
               value={email} 
               onChange={this.handleInput} 
+            />
+
+            <Input 
+              className="" 
+              name="username" 
+              type="username" 
+              placeholder="username" 
+              value={username} 
+              onChange={this.handleInput}
             />
 
             <Input 
