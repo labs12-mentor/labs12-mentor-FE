@@ -3,6 +3,9 @@ import {
   GET_MEETINGS_START,
   GET_MEETINGS_SUCCESS,
   GET_MEETINGS_FAILURE,
+  GET_SPECIFIC_MEETING_START,
+  GET_SPECIFIC_MEETING_FAILURE,
+  GET_SPECIFIC_MEETING_SUCCESS,
   CREATE_MEETING_START,
   CREATE_MEETING_SUCCESS,
   CREATE_MEETING_FAILURE,
@@ -22,11 +25,24 @@ export const getMeetings = () => dispatch => {
   return axios
     .get(`${url}/meetings`)
     .then(res => {
-      console.log(res);
+      //console.log(res);
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
     })
     .catch(err => {
       dispatch({ type: GET_MEETINGS_FAILURE, payload: err });
+    });
+};
+
+export const getSpecificMeeting = id => dispatch => {
+  dispatch({ type: GET_SPECIFIC_MEETING_START });
+  return axios
+    .get(`${url}/meetings/${id}`)
+    .then(res => {
+      //console.log(res);
+      dispatch({ type: GET_SPECIFIC_MEETING_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_SPECIFIC_MEETING_FAILURE, payload: err });
     });
 };
 
@@ -35,11 +51,11 @@ export const createMeeting = info => dispatch => {
   return axios
     .post(`${url}/meetings`, info)
     .then(res => {
-      console.log(res);
+      //console.log(res);
       dispatch({ type: CREATE_MEETING_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      console.log(err);
+      //console.log(err);
       dispatch({ type: CREATE_MEETING_FAILURE, payload: err });
     });
 };
