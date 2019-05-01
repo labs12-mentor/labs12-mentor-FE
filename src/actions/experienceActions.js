@@ -50,7 +50,19 @@ export const updateExperience = (id, info) => dispatch => {
         dispatch({type: UPDATE_EXPERIENCE_SUCCESS, payload: res.data})
     })
     .catch(err => {
-        dispatch({type: UPDATE_EXPERIENCE_FAILURE, payload: res.data})
+        dispatch({type: UPDATE_EXPERIENCE_FAILURE, payload: err})
     })
 }
 
+
+export const deleteExperience = id => dispatch => {
+    dispatch({type: DELETE_EXPERIENCE_START})
+    return axios
+    .delete(`${url}/experiences/${id}`)
+    .then(res => {
+        dispatch({type: DELETE_EXPERIENCE_SUCCESS, payload: res.data})
+    })
+    .catch(err => {
+        dispatch({type: DELETE_EXPERIENCE_FAILURE, payload: err})
+    })
+}
