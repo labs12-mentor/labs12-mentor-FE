@@ -16,3 +16,16 @@ DELETE_EXPERIENCE_FAILURE
 
 //backend meetings url
 const url = "http://mentorbe.tfolbrecht.com";
+
+export const getExperiences = () => dispatch => {
+    dispatch({ type: GET_EXPERIENCES_START });
+    return axios
+      .get(`${url}/experiences`)
+      .then(res => {
+        //console.log(res);
+        dispatch({ type: GET_EXPERIENCE_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: GET_EXPERIENCE_FAILURE, payload: err });
+      });
+  };
