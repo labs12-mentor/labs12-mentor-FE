@@ -23,9 +23,34 @@ export const getExperiences = () => dispatch => {
       .get(`${url}/experiences`)
       .then(res => {
         //console.log(res);
-        dispatch({ type: GET_EXPERIENCE_SUCCESS, payload: res.data });
+        dispatch({ type: GET_EXPERIENCES_SUCCESS, payload: res.data });
       })
       .catch(err => {
-        dispatch({ type: GET_EXPERIENCE_FAILURE, payload: err });
+        dispatch({ type: GET_EXPERIENCES_FAILURE, payload: err });
       });
   };
+
+export const getSpecificExperience = id => dispatch => {
+    dispatch({type: GET_SPECIFIC_EXPERIENCE_START});
+    return axios
+    .get(`${url}/experiences/${id}`)
+    .then(res => {
+        dispatch({type: GET_SPECIFIC_EXPERIENCE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+        dispatch({type: GET_SPECIFIC_EXPERIENCE_FAILURE, payload: err})
+    });
+}
+
+export const updateExperience = (id, info) => dispatch => {
+    dispatch({type: UPDATE_EXPERIENCE_START})
+    return axios
+    .put(`{url}/experiences/${id}`, info)
+    .then(res => {
+        dispatch({type: UPDATE_EXPERIENCE_SUCCESS, payload: res.data})
+    })
+    .catch(err => {
+        dispatch({type: UPDATE_EXPERIENCE_FAILURE, payload: res.data})
+    })
+}
+
