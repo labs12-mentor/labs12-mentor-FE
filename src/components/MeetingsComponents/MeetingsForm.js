@@ -12,7 +12,7 @@ class MeetingsForm extends React.Component {
 
   creatingMeetingForm = e => {
     e.preventDefault();
-    console.log('hi')
+    console.log("hi");
     //this.props.addMeeting(this.state);
   };
 
@@ -67,7 +67,7 @@ class MeetingsForm extends React.Component {
           <Button type="submit">Submit</Button>
         </Form>
       </div>
-    )
+    );
   }
 
   handleChanges = e => {
