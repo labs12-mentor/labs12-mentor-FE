@@ -41,6 +41,23 @@ const meetingsReducer = (state = initialState, action) => {
         gettingMeetings: false,
         error: action.payload
       };
+      case GET_SPECIFIC_MEETING_START:
+      return {
+        ...state,
+        gettingMeetings: true
+      };
+    case GET_SPECIFIC_MEETING_SUCCESS:
+      return {
+        ...state,
+        gettingMeetings: false,
+        meetingsList: action.payload
+      };
+    case GET_SPECIFIC_MEETING_FAILURE:
+      return {
+        ...state,
+        gettingMeetings: false,
+        error: action.payload
+      };
     case CREATE_MEETING_START:
       return {
         ...state,
