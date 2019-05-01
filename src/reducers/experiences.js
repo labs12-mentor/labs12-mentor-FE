@@ -109,3 +109,5 @@ DELETE_EXPERIENCE_SUCCESS,
         };
     }
   };
+
+  export default experienceReducer;
