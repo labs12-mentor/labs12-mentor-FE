@@ -9,13 +9,23 @@ class MeetingsContainer extends React.Component {
     return (
       <div>
         <MeetingsList 
-        deleteMeeting={this.props.deleteMeeting} 
-        updateMeeting={this.props.updateMeeting}
-        getSpecificMeeting={this.props.getSpecificMeeting}
+        deleteMeeting={this.removeMeeting} 
+        updateMeeting={this.editMeeting}
+        getSpecificMeeting={this.getMeeting}
         />
         <MeetingsForm addMeeting={this.props.createMeeting} />
       </div>
     );
+  }
+  removeMeeting = id => {
+    this.props.deleteMeeting(id);
+  }
+
+  editMeeting = (id, info) => {
+    this.props.updateMeeting(id, info)
+  }
+  getMeeting = id => {
+    this.props.getSpecificMeeting(id);
   }
 }
 

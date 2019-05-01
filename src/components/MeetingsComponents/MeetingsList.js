@@ -26,13 +26,6 @@ class MeetingsList extends React.Component {
     );
   }
 
-  deleteMeeting = id => {
-    this.props.deleteMeeting(id)
-  }
-
-  updateMeeting = (id,info) => {
-    this.props.updateMeeting(id,info);
-  }
 }
 
 function mapStateToProps(state) {
