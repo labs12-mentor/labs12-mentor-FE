@@ -20,7 +20,7 @@ class MeetingsList extends React.Component {
                   removeMeeting={this.props.deleteMeeting}
                   updateMeeting={this.props.updateMeeting}
                   />;
-          
+          console.log(this.props)
         })}
 
         <h2>Past Meetings</h2>

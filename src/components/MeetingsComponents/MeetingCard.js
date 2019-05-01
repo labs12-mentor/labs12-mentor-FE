@@ -8,8 +8,8 @@ const MeetingCard = props => {
       <h4>Meeting Time</h4>
       <h4>Meeting location</h4>
       <h4>Meeting Description</h4>
-      <button onClick={props.removeMeeting}>Edit</button>
-      <button onClick={props.deleteMeeting}>Delete</button>
+      <button onClick={props.updateMeeting}>Edit</button>
+      <button onClick={props.removeMeeting}>Delete</button>
     </div>
   );
 };
