@@ -26,9 +26,13 @@ class MeetingsContainer extends React.Component {
     //this.props.updateMeeting(id, info)
     console.log("hi");
   }
-  
+
   getMeeting = id => {
     //this.props.getSpecificMeeting(id);
+  }
+
+  addMeeting = () => {
+    
   }
 }
 

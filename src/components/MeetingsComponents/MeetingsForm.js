@@ -12,15 +12,15 @@ class MeetingsForm extends React.Component {
 
   creatingMeetingForm = e => {
     e.preventDefault();
-    //console.log('hi')
-    this.props.addMeeting(this.state);
+    console.log('hi')
+    //this.props.addMeeting(this.state);
   };
 
   render() {
     return (
       <div>
         <h1> Create a Meeting Form</h1>
-        <Form>
+        <Form onSubmit={this.creatingMeetingForm}>
           <FormGroup>
             <Label>Title</Label>
             <Input
@@ -64,7 +64,7 @@ class MeetingsForm extends React.Component {
             />
           </FormGroup>
 
-          <Button onClick={this.createMeetingForm}>Submit</Button>
+          <Button type="submit">Submit</Button>
         </Form>
       </div>
     )
