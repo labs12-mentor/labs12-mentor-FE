@@ -41,7 +41,7 @@ const meetingsReducer = (state = initialState, action) => {
         gettingMeetings: false,
         error: action.payload
       };
-      case GET_SPECIFIC_MEETING_START:
+    case GET_SPECIFIC_MEETING_START:
       return {
         ...state,
         gettingMeetings: true

@@ -8,7 +8,7 @@ import OrganizationRegister from '../pages/OrganizationRegister';
 import userRegister from '../pages/UserRegistration';
 import userLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
-import AdminPanel from '../pages/AdminPanel/AdminPanel'
+import AdminPanel from '../pages/AdminPanel/AdminPanel';
 
 const Routes = (props) => {
     return (
