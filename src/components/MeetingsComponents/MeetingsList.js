@@ -4,9 +4,9 @@ import { getMeetings } from "../../actions/meetingActions.js";
 import MeetingCard from "./MeetingCard.js";
 
 class MeetingsList extends React.Component {
-  // componentDidMount() {
-  //   this.props.getMeetings();
-  // }
+  componentDidMount() {
+    this.props.getMeetings();
+  }
 
   render() {
     return (
@@ -15,12 +15,23 @@ class MeetingsList extends React.Component {
 
         <h2>Upcoming Meetings</h2>
         {this.props.meetingsList.map(meeting => {
-          return <MeetingCard />;
+          return <MeetingCard
+                  key={meeting.id} 
+                  
+                  />;
         })}
 
         <h2>Past Meetings</h2>
       </div>
     );
+  }
+
+  deleteMeeting = id => {
+    this.props.deleteMeeting(id)
+  }
+
+  updateMeeting = (id,info) => {
+    this.props.updateMeeting(id,info);
   }
 }
 
