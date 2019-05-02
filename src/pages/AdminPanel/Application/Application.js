@@ -8,6 +8,9 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
+import ProfileInfo from './ProfileInfo';
+import ApplicationRes from './ApplicationRes';
+
 class Application extends React.Component {
     state = {
         activeTab: '1'
@@ -30,7 +33,7 @@ class Application extends React.Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggleTab('1'); }} 
                         >
-                            Mentor Applications
+                            Profile Information
                         </NavLink>
                     </NavItem>
 
@@ -39,18 +42,18 @@ class Application extends React.Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggleTab('2'); }} 
                         >
-                            Mentor Assignment
+                            Application Response
                         </NavLink>
                     </NavItem>
                 </Nav>                
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        
+                        <ProfileInfo />
                     </TabPane>
 
                     <TabPane tabId="2">
-                        
+                        <ApplicationRes />
                     </TabPane>
                 </TabContent>
             </div>
