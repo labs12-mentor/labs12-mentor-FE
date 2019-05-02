@@ -16,3 +16,16 @@ import {
 
 //backend meetings url
 const url = "http://mentorbe.tfolbrecht.com";
+
+export const getNotifications = () => dispatch => {
+    dispatch({ type: GET_NOTIFICATIONS_START });
+    return axios
+      .get(`${url}/notifications`)
+      .then(res => {
+        //console.log(res);
+        dispatch({ type: GET_NOTIFICATION_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: GET_NOTIFICATION_FAILURE, payload: err });
+      });
+  };
