@@ -26,6 +26,7 @@ export const getMeetings = () => dispatch => {
     .get(`${url}/meetings`)
     .then(res => {
       //console.log(res);
+      localStorage.getItem("token");
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -39,6 +40,7 @@ export const getSpecificMeeting = id => dispatch => {
     .get(`${url}/meetings/${id}`)
     .then(res => {
       //console.log(res);
+      localStorage.getItem("token");
       dispatch({ type: GET_SPECIFIC_MEETING_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -52,6 +54,7 @@ export const createMeeting = info => dispatch => {
     .post(`${url}/meetings`, info)
     .then(res => {
       //console.log(res);
+      localStorage.getItem("token");
       dispatch({ type: CREATE_MEETING_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -66,6 +69,7 @@ export const updateMeeting = (id, info) => dispatch => {
     .put(`${url}/meetings/${id}`, info)
     .then(res => {
       //console.log(res);
+      localStorage.getItem("token");
       dispatch({ type: UPDATE_MEETING_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -80,6 +84,7 @@ export const deleteMeeting = id => dispatch => {
     .delete(`${url}/meetings/${id}`)
     .then(res => {
       //console.log(res);
+      localStorage.getItem("token");
       dispatch({ type: DELETE_MEETING_SUCCESS, payload: id });
     })
     .catch(err => {
