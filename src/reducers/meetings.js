@@ -2,6 +2,9 @@ import {
   GET_MEETINGS_START,
   GET_MEETINGS_SUCCESS,
   GET_MEETINGS_FAILURE,
+  GET_SPECIFIC_MEETING_START,
+  GET_SPECIFIC_MEETING_SUCCESS,
+  GET_SPECIFIC_MEETING_FAILURE,
   CREATE_MEETING_START,
   CREATE_MEETING_SUCCESS,
   CREATE_MEETING_FAILURE,
@@ -108,6 +111,10 @@ const meetingsReducer = (state = initialState, action) => {
         deleteMeetings: false,
         error: action.payload
       };
+    default: {
+      // need this for default case
+      return state;
+    }
   }
 };
 

@@ -110,6 +110,10 @@ const experienceReducer = (state = initialState, action) => {
         deleteExperience: false,
         error: action.payload
       };
+    default: {
+      // need this for default case
+      return state;
+    }
   }
 };
 
