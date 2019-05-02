@@ -17,7 +17,7 @@ import {
   CREATE_EXPERIENCE_FAILURE
 } from "../constants/actionTypes.js";
 
-//backend meetings url
+//backend meetings url rem
 const url = "http://mentorbe.tfolbrecht.com";
 
 export const getExperiences = () => dispatch => {
