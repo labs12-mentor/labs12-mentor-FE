@@ -8,7 +8,25 @@ import {
 } from "../../actions/experienceActions.js";
 import ExeperienceCard from "./ExperienceCard.js";
 
-class ExperienceList extends React.Component {}
+class ExperienceList extends React.Component {
+  componentDidMount() {
+    console.log("hi");
+    //getExperiences()
+  }
+  render() {
+    {
+      this.props.experienceList.map(experience => {
+        return (
+          <ExeperienceCard
+            key={experience.id}
+            removeExperience={this.props.deleteExperience}
+            updateExperience={this.props.updateExperience}
+          />
+        );
+      });
+    }
+  }
+}
 
 function mapStateToProps(state) {
   return {
@@ -21,5 +39,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getExperiences }
+  { getExperiences, deleteExperience, updateExperience, getSpecificExperience }
 )(ExperienceList);
