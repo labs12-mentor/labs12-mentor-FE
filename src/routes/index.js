@@ -7,6 +7,7 @@ import {
 import OrganizationRegister from '../pages/OrganizationRegister';
 import userRegister from '../pages/UserRegistration';
 import userLogin from '../pages/UserLogin';
+import Meetingspage from '../pages/MeetingsPage';
 
 const Routes = (props) => {
     return (
