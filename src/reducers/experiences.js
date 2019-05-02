@@ -5,6 +5,9 @@ import {
   GET_SPECIFIC_EXPERIENCE_START,
   GET_SPECIFIC_EXPERIENCE_SUCCESS,
   GET_SPECIFIC_EXPERIENCE_FAILURE,
+  CREATE_EXPERIENCE_START,
+  CREATE_EXPERIENCE_SUCCESS,
+  CREATE_EXPERIENCE_FAILURE,
   UPDATE_EXPERIENCE_START,
   UPDATE_EXPERIENCE_SUCCESS,
   UPDATE_EXPERIENCE_FAILURE,
@@ -71,7 +74,7 @@ const experienceReducer = (state = initialState, action) => {
     case CREATE_EXPERIENCE_FAILURE:
       return {
         ...state,
-        createMeetings: false,
+        createExperience: false,
         error: action.payload
       };
     case UPDATE_EXPERIENCE_START:

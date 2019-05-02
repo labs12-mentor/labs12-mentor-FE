@@ -11,7 +11,10 @@ import {
   UPDATE_EXPERIENCE_FAILURE,
   DELETE_EXPERIENCE_START,
   DELETE_EXPERIENCE_SUCCESS,
-  DELETE_EXPERIENCE_FAILURE
+  DELETE_EXPERIENCE_FAILURE,
+  CREATE_EXPERIENCE_START,
+  CREATE_EXPERIENCE_SUCCESS,
+  CREATE_EXPERIENCE_FAILURE
 } from "../constants/actionTypes.js";
 
 //backend meetings url
@@ -39,6 +42,18 @@ export const getSpecificExperience = id => dispatch => {
     })
     .catch(err => {
       dispatch({ type: GET_SPECIFIC_EXPERIENCE_FAILURE, payload: err });
+    });
+};
+
+export const createExperience = () => dispatch => {
+  dispatch({ type: CREATE_EXPERIENCE_START });
+  return axios
+    .post(`${url}/experiences/${id}`)
+    .then(res => {
+      dispatch({ type: CREATE_EXPERIENCE_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: CREATE_EXPERIENCE_FAILURE, payload: err });
     });
 };
 

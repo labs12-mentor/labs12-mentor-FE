@@ -6,6 +6,9 @@ import {
   GET_SPECIFIC_NOTIFICATION_START,
   GET_SPECIFIC_NOTIFICATION_SUCCESS,
   GET_SPECIFIC_NOTIFICATION_FAILURE,
+  CREATE_NOTIFICATION_START,
+  CREATE_NOTIFICATION_SUCCESS,
+  CREATE_NOTIFICATION_FAILURE,
   UPDATE_NOTIFICATION_START,
   UPDATE_NOTIFICATION_SUCCESS,
   UPDATE_NOTIFICATION_FAILURE,
@@ -42,6 +45,18 @@ export const getSpecificNotification = id => dispatch => {
     });
 };
 
+export const createNotification = () => dispatch => {
+  dispatch({ type: CREATE_NOTIFICATION_START });
+  return axios
+    .post(`${url}/notifications/${id}`)
+    .then(res => {
+      dispatch({ type: CREATE_NOTIFICATION_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: CREATE_NOTIFICATION_FAILURE, payload: err });
+    });
+};
+
 export const updateNotification = (id, info) => dispatch => {
   dispatch({ type: UPDATE_NOTIFICATION_START });
   return axios
@@ -57,7 +72,7 @@ export const updateNotification = (id, info) => dispatch => {
 export const deleteNotification = id => dispatch => {
   dispatch({ type: DELETE_NOTIFICATION_START });
   return axios
-    .delete(`${url}/experiences/${id}`)
+    .delete(`${url}/notifications/${id}`)
     .then(res => {
       dispatch({ type: DELETE_NOTIFICATION_SUCCESS, payload: res.data });
     })
