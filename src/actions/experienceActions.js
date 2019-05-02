@@ -54,7 +54,7 @@ export const getSpecificExperience = id => dispatch => {
 export const createExperience = () => dispatch => {
   dispatch({ type: CREATE_EXPERIENCE_START });
   return axios
-    .post(`${url}/experiences/${id}`, credentials)
+    .post(`${url}/experiences`, credentials)
     .then(res => {
       dispatch({ type: CREATE_EXPERIENCE_SUCCESS, payload: res.data });
     })
