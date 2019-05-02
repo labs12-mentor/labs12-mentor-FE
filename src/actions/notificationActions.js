@@ -54,4 +54,16 @@ export const getNotifications = () => dispatch => {
         dispatch({ type: UPDATE_NOTIFICATION_FAILURE, payload: err });
       });
   };
+
+  export const deleteNotification = id => dispatch => {
+    dispatch({ type: DELETE_NOTIFICATION_START });
+    return axios
+      .delete(`${url}/experiences/${id}`)
+      .then(res => {
+        dispatch({ type: DELETE_NOTIFICATION_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: DELETE_NOTIFICATION_FAILURE, payload: err });
+      });
+  };
   
