@@ -3,49 +3,15 @@ import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 
 class UserSettingsForm extends React.Component {
   state = {
-    firstname: "",
-    lastname: "",
-    address: "",
-    zip: "",
     linkedinuser: "",
     githubuser: "",
-    twitteruser: "",
+    twitteruser: ""
   };
 
   render() {
     return (
       <div>
-        <Form>
-          <FormGroup>
-            <Label>First Name</Label>
-            <Input
-              type="text"
-              name="firstname"
-              onChange={this.handleChanges}
-            />
-            <Label>Last Name</Label>
-            <Input
-              type="text"
-              name="lastname"
-              onChange={this.handleChanges}
-            />
-            <Label>Address</Label>
-            <Input
-              type="text"
-              name="address"
-              onChange={this.handleChanges}
-            />
-            <Label>Zip Code</Label>
-            <Input
-              type="text"
-              name="zip"
-              onChange={this.handleChanges}
-            />
-            </FormGroup>
-            <Button>Submit</Button>
-            </Form>
-            <h2>Social</h2>
-            <Form>
+      <Form>
             <FormGroup>
             <Label>GitHub</Label>
             <Input
@@ -68,9 +34,7 @@ class UserSettingsForm extends React.Component {
             <Button>Submit</Button>
           </FormGroup>
         </Form>
-
-      </div>
-    );
+        );
   }
 
   handleChanges = e => {
