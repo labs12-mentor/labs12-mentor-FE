@@ -7,24 +7,36 @@ class Notification extends Component {
       read: false,
       textChange: {
         textDecoration: "none"
-      }
+      },
+      notificationCount: 0,
     }
   }
 
+  componentDidMount(){
+    this.setState({
+      notificationCount: this.props.notificationCount,
+    })
+  }
+
   toggleRead = (e) => {
+    let count = this.state.notificationCount;
     if (!this.state.read) {
+      count--;
       this.setState({
         read: true,
         textChange: {
           textDecoration: "line-through"
-        }
+        },
+        notificationCount: count
       })
     } else {
+      count++;
       this.setState({
         read: false,
         textChange: {
           textDecoration: "none",
-        }
+        },
+        notificationCount: count
       })
     }
   }
@@ -41,7 +53,7 @@ class Notification extends Component {
 }
 
 //const mapStateToProps = state => {
-
+  //update notificationCount
 // }
 
 //connect to redux- need to count unreads
