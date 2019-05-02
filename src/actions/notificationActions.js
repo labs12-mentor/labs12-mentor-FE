@@ -18,52 +18,50 @@ import {
 const url = "http://mentorbe.tfolbrecht.com";
 
 export const getNotifications = () => dispatch => {
-    dispatch({ type: GET_NOTIFICATIONS_START });
-    return axios
-      .get(`${url}/notifications`)
-      .then(res => {
-        //console.log(res);
-        dispatch({ type: GET_NOTIFICATIONS_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: GET_NOTIFICATIONS_FAILURE, payload: err });
-      });
-  };
+  dispatch({ type: GET_NOTIFICATIONS_START });
+  return axios
+    .get(`${url}/notifications`)
+    .then(res => {
+      //console.log(res);
+      dispatch({ type: GET_NOTIFICATIONS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_NOTIFICATIONS_FAILURE, payload: err });
+    });
+};
 
-  export const getSpecificNotification = id => dispatch => {
-    dispatch({ type: GET_SPECIFIC_NOTIFICATION_START });
-    return axios
-      .get(`${url}/notifications/${id}`)
-      .then(res => {
-        dispatch({ type: GET_SPECIFIC_NOTIFICATION_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: GET_SPECIFIC_NOTIFICATION_FAILURE, payload: err });
-      });
-  };
+export const getSpecificNotification = id => dispatch => {
+  dispatch({ type: GET_SPECIFIC_NOTIFICATION_START });
+  return axios
+    .get(`${url}/notifications/${id}`)
+    .then(res => {
+      dispatch({ type: GET_SPECIFIC_NOTIFICATION_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_SPECIFIC_NOTIFICATION_FAILURE, payload: err });
+    });
+};
 
+export const updateNotification = (id, info) => dispatch => {
+  dispatch({ type: UPDATE_NOTIFICATION_START });
+  return axios
+    .put(`${url}/notifications/${id}`, info)
+    .then(res => {
+      dispatch({ type: UPDATE_NOTIFICATION_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_NOTIFICATION_FAILURE, payload: err });
+    });
+};
 
-  export const updateNotification = (id, info) => dispatch => {
-    dispatch({ type: UPDATE_NOTIFICATION_START });
-    return axios
-      .put(`${url}/notifications/${id}`, info)
-      .then(res => {
-        dispatch({ type: UPDATE_NOTIFICATION_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: UPDATE_NOTIFICATION_FAILURE, payload: err });
-      });
-  };
-
-  export const deleteNotification = id => dispatch => {
-    dispatch({ type: DELETE_NOTIFICATION_START });
-    return axios
-      .delete(`${url}/experiences/${id}`)
-      .then(res => {
-        dispatch({ type: DELETE_NOTIFICATION_SUCCESS, payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: DELETE_NOTIFICATION_FAILURE, payload: err });
-      });
-  };
-  
+export const deleteNotification = id => dispatch => {
+  dispatch({ type: DELETE_NOTIFICATION_START });
+  return axios
+    .delete(`${url}/experiences/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_NOTIFICATION_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_NOTIFICATION_FAILURE, payload: err });
+    });
+};
