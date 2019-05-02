@@ -20,18 +20,19 @@ import {
 //backend meetings url
 const url = "https://labs12-backend-dev.herokuapp.com/api/";
 
-export const getMeetings = () => dispatch => {
-  const options = {
-    headers: {
-      Authorization: localStorage.getItem("Authorization")
-    }
+const credentials = {
+  headers: {
+    Authorization: localStorage.getItem("Authorization")
   }
+};
+
+export const getMeetings = () => dispatch => {
   dispatch({ type: GET_MEETINGS_START });
   return axios
-    .get(`${url}/meetings`, options)
+    .get(`${url}/meetings`, credentials)
     .then(res => {
       //console.log(res);
-      
+
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -42,7 +43,7 @@ export const getMeetings = () => dispatch => {
 export const getSpecificMeeting = id => dispatch => {
   dispatch({ type: GET_SPECIFIC_MEETING_START });
   return axios
-    .get(`${url}/meetings/${id}`)
+    .get(`${url}/meetings/${id}`, credentials)
     .then(res => {
       //console.log(res);
       localStorage.getItem("token");
@@ -56,7 +57,7 @@ export const getSpecificMeeting = id => dispatch => {
 export const createMeeting = info => dispatch => {
   dispatch({ type: CREATE_MEETING_START });
   return axios
-    .post(`${url}/meetings`, info)
+    .post(`${url}/meetings`, info, credentials)
     .then(res => {
       //console.log(res);
       localStorage.getItem("token");
@@ -71,7 +72,7 @@ export const createMeeting = info => dispatch => {
 export const updateMeeting = (id, info) => dispatch => {
   dispatch({ type: UPDATE_MEETING_START });
   return axios
-    .put(`${url}/meetings/${id}`, info)
+    .put(`${url}/meetings/${id}`, info, credentials)
     .then(res => {
       //console.log(res);
       localStorage.getItem("token");
@@ -86,7 +87,7 @@ export const updateMeeting = (id, info) => dispatch => {
 export const deleteMeeting = id => dispatch => {
   dispatch({ type: DELETE_MEETING_START });
   return axios
-    .delete(`${url}/meetings/${id}`)
+    .delete(`${url}/meetings/${id}`, credentials)
     .then(res => {
       //console.log(res);
       localStorage.getItem("token");

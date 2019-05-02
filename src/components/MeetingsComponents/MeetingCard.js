@@ -1,6 +1,12 @@
 import React from "react";
 
-const MeetingCard = ({id, content, match_id, updateMeeting, removeMeeting}) => {
+const MeetingCard = ({
+  id,
+  content,
+  match_id,
+  updateMeeting,
+  removeMeeting
+}) => {
   return (
     <div>
       <h2>Title</h2>

@@ -3,17 +3,19 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class MeetingsForm extends React.Component {
   state = {
-    title: "",
-    startTime: "",
-    endTime: "",
-    location: "",
-    description: ""
+    // title: "",
+    // startTime: "",
+    // endTime: "",
+    // location: "",
+    // description: ""
+    content: "",
+    match_id: "",
+    deleted: false
   };
 
   creatingMeetingForm = e => {
     e.preventDefault();
-    console.log("hi");
-    //this.props.addMeeting(this.state);
+    this.props.addMeeting(this.state);
   };
 
   render() {
@@ -22,47 +24,47 @@ class MeetingsForm extends React.Component {
         <h1> Create a Meeting Form</h1>
         <Form onSubmit={this.creatingMeetingForm}>
           <FormGroup>
-            <Label>Title</Label>
+            <Label>Content</Label>
             <Input
               type="text"
-              name="title"
-              placeholder="Meeting Title"
+              name="content"
+              placeholder="content"
               onChange={this.handleChanges}
             />
           </FormGroup>
 
           <FormGroup>
-            <Label>Start Time</Label>
+            <Label>Match ID</Label>
             <Input
               type="text"
-              name="startTime"
-              placeholder="Date / Time"
+              name="match_id"
+              placeholder="match_id"
               onChange={this.handleChanges}
             />
           </FormGroup>
 
-          <FormGroup>
+          {/* <FormGroup>
             <Label>End Time</Label>
             <Input type="text" name="endTime" placeholder="Date / Time" />
-          </FormGroup>
+          </FormGroup> */}
+{/* // // 
+// //           <FormGroup>
+// //             <Label>Location</Label>
+// //             <Input
+// //               type="text"
+// //               name="location"
+// //               placeholder="Where is the meeting taking place?"
+// //             />
+// //           </FormGroup>
 
-          <FormGroup>
-            <Label>Location</Label>
-            <Input
-              type="text"
-              name="location"
-              placeholder="Where is the meeting taking place?"
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>Description</Label>
-            <Input
-              type="text"
-              name="description"
-              placeholder="What is the meeting about?"
-            />
-          </FormGroup>
+// //           <FormGroup>
+// //             <Label>Description</Label>
+// //             <Input
+// //               type="text"
+// //               name="description"
+// //               placeholder="What is the meeting about?"
+// //             />
+// //           </FormGroup> */}
 
           <Button type="submit">Submit</Button>
         </Form>

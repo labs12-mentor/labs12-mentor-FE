@@ -24,9 +24,7 @@ class MeetingsList extends React.Component {
               removeMeeting={this.props.deleteMeeting}
               updateMeeting={this.props.updateMeeting}
             />
-            
           );
-          
         })}
 
         <h2>Past Meetings</h2>
@@ -37,11 +35,10 @@ class MeetingsList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    meetingsList: state.meetingsReducer.meetingsList 
-    
+    meetingsList: state.meetingsReducer.meetingsList
 
     // this is to test if meetingsList is being mapped to MeetingCard component
-   // meetingsList: [{ id: 1 }, { id: 2 }, { id: 3 }]
+    // meetingsList: [{ id: 1 }, { id: 2 }, { id: 3 }]
   };
 }
 
