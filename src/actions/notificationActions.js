@@ -42,3 +42,16 @@ export const getNotifications = () => dispatch => {
       });
   };
 
+
+  export const updateNotification = (id, info) => dispatch => {
+    dispatch({ type: UPDATE_NOTIFICATION_START });
+    return axios
+      .put(`${url}/notifications/${id}`, info)
+      .then(res => {
+        dispatch({ type: UPDATE_NOTIFICATION_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: UPDATE_NOTIFICATION_FAILURE, payload: err });
+      });
+  };
+  

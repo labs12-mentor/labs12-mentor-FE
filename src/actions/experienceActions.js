@@ -45,7 +45,7 @@ export const getSpecificExperience = id => dispatch => {
 export const updateExperience = (id, info) => dispatch => {
   dispatch({ type: UPDATE_EXPERIENCE_START });
   return axios
-    .put(`{url}/experiences/${id}`, info)
+    .put(`${url}/experiences/${id}`, info)
     .then(res => {
       dispatch({ type: UPDATE_EXPERIENCE_SUCCESS, payload: res.data });
     })
