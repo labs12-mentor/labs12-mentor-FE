@@ -21,12 +21,17 @@ import {
 const url = "https://labs12-backend-dev.herokuapp.com/api/";
 
 export const getMeetings = () => dispatch => {
+  const options = {
+    headers: {
+      Authorization: localStorage.getItem("Authorization")
+    }
+  }
   dispatch({ type: GET_MEETINGS_START });
   return axios
-    .get(`${url}/meetings`)
+    .get(`${url}/meetings`, options)
     .then(res => {
       //console.log(res);
-      localStorage.getItem("token");
+      
       dispatch({ type: GET_MEETINGS_SUCCESS, payload: res.data });
     })
     .catch(err => {

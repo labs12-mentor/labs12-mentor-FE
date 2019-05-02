@@ -22,7 +22,8 @@ const initialState = {
   gettingMeetings: false,
   creatingMeetings: false,
   deletingMeetings: false,
-  updatingMeetings: false
+  updatingMeetings: false,
+  //token: localStorage.getItem("token")
 };
 
 const meetingsReducer = (state = initialState, action) => {
