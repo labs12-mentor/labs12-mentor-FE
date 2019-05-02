@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  GET_NOTIFCATIONS_START,
+  GET_NOTIFICATIONS_START,
   GET_NOTIFICATIONS_SUCCESS,
   GET_NOTIFICATIONS_FAILURE,
   GET_SPECIFIC_NOTIFICATION_START,
@@ -23,9 +23,22 @@ export const getNotifications = () => dispatch => {
       .get(`${url}/notifications`)
       .then(res => {
         //console.log(res);
-        dispatch({ type: GET_NOTIFICATION_SUCCESS, payload: res.data });
+        dispatch({ type: GET_NOTIFICATIONS_SUCCESS, payload: res.data });
       })
       .catch(err => {
-        dispatch({ type: GET_NOTIFICATION_FAILURE, payload: err });
+        dispatch({ type: GET_NOTIFICATIONS_FAILURE, payload: err });
       });
   };
+
+  export const getSpecificNotification = id => dispatch => {
+    dispatch({ type: GET_SPECIFIC_NOTIFICATION_START });
+    return axios
+      .get(`${url}/notifications/${id}`)
+      .then(res => {
+        dispatch({ type: GET_SPECIFIC_NOTIFICATION_SUCCESS, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: GET_SPECIFIC_NOTIFICATION_FAILURE, payload: err });
+      });
+  };
+
