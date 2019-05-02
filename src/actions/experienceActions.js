@@ -18,7 +18,7 @@ import {
 } from "../constants/actionTypes.js";
 
 //backend meetings url rem
-const url = "http://mentorbe.tfolbrecht.com";
+const url = "https://labs12-backend-dev.herokuapp.com/api/";
 
 export const getExperiences = () => dispatch => {
   dispatch({ type: GET_EXPERIENCES_START });
