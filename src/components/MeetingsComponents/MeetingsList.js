@@ -15,12 +15,16 @@ class MeetingsList extends React.Component {
 
         <h2>Upcoming Meetings</h2>
         {this.props.meetingsList.map(meeting => {
+          console.log(meeting);
           return (
             <MeetingCard
+              content={meeting.content}
+              match_id={meeting.match_id}
               key={meeting.id}
               removeMeeting={this.props.deleteMeeting}
               updateMeeting={this.props.updateMeeting}
             />
+            
           );
           
         })}
