@@ -101,7 +101,7 @@ export const deleteMeeting = id => dispatch => {
     });
 };
 
-export const removeMeeting = id => {
+export const removeMeeting = id => dispatch => {
   dispatch({ type: REMOVE_MEETING_START });
   return axios
     .delete(`${url}/meetings/${id}/remove`, credentials)
