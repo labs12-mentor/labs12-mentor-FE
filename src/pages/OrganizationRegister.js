@@ -103,6 +103,18 @@ class OrganizationRegister extends React.Component {
                         </Col>
                     </FormGroup>
 
+                    <FormGroup row>
+                        <Label for="ownerPassword" sm={2}>Owner Password</Label>
+                        <Col sm={10}>
+                            <Input 
+                                type="text" 
+                                name="ownerPassword" 
+                                id="ownerPassword"
+                                onChange={this.handleInputs}
+                            />
+                        </Col>
+                    </FormGroup>
+
                     <Button type="submit">Launch Program</Button>
                 </Form>
             </div>
