@@ -15,7 +15,7 @@ class OrganizationRegister extends React.Component {
         programName: "",
         programDescription: "",
         programUrl: "",
-        ownerName: "",
+        ownerEmail: "",
         ownerPassword: "",
         ownerFirstName: "",
         ownerLastName: ""
@@ -77,7 +77,7 @@ class OrganizationRegister extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="programUrl" sm={3}>Program Name https://mentorprogram.co/</Label>
+                        <Label for="programUrl" sm={3}>https://mentorprogram.co/</Label>
                         <Col sm={9}>
                         <Input 
                             type="text" 
@@ -88,6 +88,18 @@ class OrganizationRegister extends React.Component {
                             <FormText color="muted">
                                 Please upload a .png or .jpg for your desired logo image.
                             </FormText>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                        <Label for="ownerEmail" sm={2}>Owner Email</Label>
+                        <Col sm={10}>
+                            <Input 
+                                type="text" 
+                                name="ownerEmail" 
+                                id="ownerEmail"
+                                onChange={this.handleInputs}
+                            />
                         </Col>
                     </FormGroup>
 
