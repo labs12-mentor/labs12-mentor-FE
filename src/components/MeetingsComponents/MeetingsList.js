@@ -4,9 +4,9 @@ import { getMeetings } from "../../actions/meetingActions.js";
 import MeetingCard from "./MeetingCard.js";
 
 class MeetingsList extends React.Component {
-  // componentDidMount() {
-  //   this.props.getMeetings();
-  // }
+  componentDidMount() {
+    this.props.getMeetings();
+  }
 
   render() {
     return (
@@ -15,14 +15,16 @@ class MeetingsList extends React.Component {
 
         <h2>Upcoming Meetings</h2>
         {this.props.meetingsList.map(meeting => {
+          console.log(meeting);
           return (
             <MeetingCard
+              content={meeting.content}
+              match_id={meeting.match_id}
               key={meeting.id}
               removeMeeting={this.props.deleteMeeting}
               updateMeeting={this.props.updateMeeting}
             />
           );
-          console.log(this.props);
         })}
 
         <h2>Past Meetings</h2>
@@ -33,10 +35,10 @@ class MeetingsList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    //meetingsList: state.meetingsReducer.meetingsList (this is the real list)
+    meetingsList: state.meetingsReducer.meetingsList
 
     // this is to test if meetingsList is being mapped to MeetingCard component
-    meetingsList: [{ id: 1 }, { id: 2 }, { id: 3 }]
+    // meetingsList: [{ id: 1 }, { id: 2 }, { id: 3 }]
   };
 }
 

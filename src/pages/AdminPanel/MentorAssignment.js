@@ -87,7 +87,7 @@ class MentorAssignment extends React.Component {
                                     <th>Last Name</th>
                                     <th>First Name</th>
                                     <th>City</th>
-                                    <th>Matched Students</th>
+                                    <th>Matched Student</th>
                                 </tr>
                             </thead>
 

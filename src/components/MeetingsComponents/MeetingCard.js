@@ -1,15 +1,20 @@
 import React from "react";
 
-const MeetingCard = props => {
-  console.log(props);
+const MeetingCard = ({
+  id,
+  content,
+  match_id,
+  updateMeeting,
+  removeMeeting
+}) => {
   return (
     <div>
-      <h4>Meeting Name</h4>
-      <h4>Meeting Time</h4>
-      <h4>Meeting location</h4>
-      <h4>Meeting Description</h4>
-      <button onClick={props.updateMeeting}>Edit</button>
-      <button onClick={props.removeMeeting}>Delete</button>
+      <h2>Title</h2>
+      <h3>{content}</h3>
+      <h4>Match_id:{match_id}</h4>
+
+      <button onClick={updateMeeting}>Edit</button>
+      <button onClick={removeMeeting}>Delete</button>
     </div>
   );
 };

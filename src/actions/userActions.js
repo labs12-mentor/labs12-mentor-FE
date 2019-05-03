@@ -11,13 +11,14 @@ import {
     GET_STUDENT_INFO_FAILURE
 } from '../constants/actionTypes';
 
-const url = 'http://mentorbe.tfolbrecht.com/';
+const url = 'http://labs12-backend-dev.herokuapp.com';
 
 export const registerUser = newUser => dispatch => {
     dispatch({ type: REGISTER_USER_START });
-
+    newUser.lambda_week = 1;
+    console.log(newUser);
     return axios
-        .post(url, newUser)
+        .post(`${url}/api/register`, newUser)
         .then(res => {
             dispatch({ type: REGISTER_USER_SUCCESS, payload: res.data });
         })
