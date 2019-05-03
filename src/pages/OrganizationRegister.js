@@ -92,7 +92,7 @@ class OrganizationRegister extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="ownerEmail" sm={2}>Owner Email</Label>
+                        <Label for="ownerEmail" sm={2}>Email</Label>
                         <Col sm={10}>
                             <Input 
                                 type="text" 
@@ -104,12 +104,24 @@ class OrganizationRegister extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="ownerPassword" sm={2}>Owner Password</Label>
+                        <Label for="ownerPassword" sm={2}>Password</Label>
                         <Col sm={10}>
                             <Input 
                                 type="text" 
                                 name="ownerPassword" 
                                 id="ownerPassword"
+                                onChange={this.handleInputs}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                        <Label for="firstName" sm={2}>First Name</Label>
+                        <Col sm={10}>
+                            <Input 
+                                type="text" 
+                                name="ownerFirstName" 
+                                id="ownerFirstName"
                                 onChange={this.handleInputs}
                             />
                         </Col>
