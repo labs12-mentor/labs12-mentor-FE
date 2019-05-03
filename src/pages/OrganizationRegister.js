@@ -127,6 +127,18 @@ class OrganizationRegister extends React.Component {
                         </Col>
                     </FormGroup>
 
+                    <FormGroup row>
+                        <Label for="lastName" sm={2}>Last Name</Label>
+                        <Col sm={10}>
+                            <Input 
+                                type="text" 
+                                name="ownerLastName" 
+                                id="ownerLastName"
+                                onChange={this.handleInputs}
+                            />
+                        </Col>
+                    </FormGroup>
+
                     <Button type="submit">Launch Program</Button>
                 </Form>
             </div>
