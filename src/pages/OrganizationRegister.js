@@ -48,6 +48,7 @@ class OrganizationRegister extends React.Component {
                                 name="programName" 
                                 id="programName" 
                                 placeholder="Enter a Program name."
+                                value={this.programName}
                                 onChange={this.handleInputs}
                             />
                         </Col>
@@ -61,6 +62,7 @@ class OrganizationRegister extends React.Component {
                                 name="programDescription" 
                                 id="programDescription" 
                                 placeholder="Enter a Program Description."
+                                value={this.programDescription}
                                 onChange={this.handleInputs}
                             />
                         </Col>
@@ -82,7 +84,8 @@ class OrganizationRegister extends React.Component {
                         <Input 
                             type="text" 
                             name="programUrl" 
-                            id="programUrl" 
+                            id="programUrl"
+                            value={this.programUrl}
                             onChange={this.handleInputs}
                         />
                             <FormText color="muted">
@@ -98,6 +101,7 @@ class OrganizationRegister extends React.Component {
                                 type="text" 
                                 name="ownerEmail" 
                                 id="ownerEmail"
+                                value={this.ownerEmail}
                                 onChange={this.handleInputs}
                             />
                         </Col>
@@ -110,6 +114,7 @@ class OrganizationRegister extends React.Component {
                                 type="text" 
                                 name="ownerPassword" 
                                 id="ownerPassword"
+                                value={this.ownerPassword}
                                 onChange={this.handleInputs}
                             />
                         </Col>
@@ -122,6 +127,7 @@ class OrganizationRegister extends React.Component {
                                 type="text" 
                                 name="ownerFirstName" 
                                 id="ownerFirstName"
+                                value={this.ownerFirstName}
                                 onChange={this.handleInputs}
                             />
                         </Col>
@@ -134,6 +140,7 @@ class OrganizationRegister extends React.Component {
                                 type="text" 
                                 name="ownerLastName" 
                                 id="ownerLastName"
+                                value={this.ownerLastName}
                                 onChange={this.handleInputs}
                             />
                         </Col>
