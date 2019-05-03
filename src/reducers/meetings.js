@@ -112,6 +112,22 @@ const meetingsReducer = (state = initialState, action) => {
         deleteMeetings: false,
         error: action.payload
       };
+    case REMOVE_MEETING_START:
+      return {
+        ...state,
+        deleteMeetings: true
+      };
+    case REMOVE_MEETING_SUCCESS:
+      return {
+        ...state,
+        deleteMeetings: false
+      };
+    case REMOVE_MEETING_FAILURE:
+      return {
+        ...state,
+        deleteMeetings: false,
+        error: action.payload
+      };
     default: {
       // need this for default case
       return state;
