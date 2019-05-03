@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class MeetingsForm extends React.Component {
   state = {
@@ -10,11 +10,17 @@ class MeetingsForm extends React.Component {
     description: ""
   };
 
+  creatingMeetingForm = e => {
+    e.preventDefault();
+    console.log("hi");
+    //this.props.addMeeting(this.state);
+  };
+
   render() {
     return (
       <div>
         <h1> Create a Meeting Form</h1>
-        <Form>
+        <Form onSubmit={this.creatingMeetingForm}>
           <FormGroup>
             <Label>Title</Label>
             <Input
@@ -58,7 +64,7 @@ class MeetingsForm extends React.Component {
             />
           </FormGroup>
 
-          <Button>Submit</Button>
+          <Button type="submit">Submit</Button>
         </Form>
       </div>
     );
