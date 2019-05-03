@@ -12,6 +12,8 @@ import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import HomePage from '../pages/HomePage';
+import MeetingsPage from '../pages/MeetingsPage'
+import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 
 const Routes = (props) => {
     return (
@@ -24,6 +26,8 @@ const Routes = (props) => {
             <Route exact path="/user/admin/profile" component={AdminPanel} />
             <Route exact path="/user/mentorapplication" component={Application} />
             <Route exact path="/user/mentorassignment" component={Assignment} />
+            <Route exact path="/user/meetings" component={MeetingsPage}/>
+            <Route exact path="/user/experiences" component={ExperienceList}/>
         </Router>
     );
 }

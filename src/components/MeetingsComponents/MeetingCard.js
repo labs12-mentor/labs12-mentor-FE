@@ -1,12 +1,20 @@
 import React from "react";
 
-const MeetingCard = () => {
+const MeetingCard = ({
+  id,
+  content,
+  match_id,
+  updateMeeting,
+  removeMeeting
+}) => {
   return (
     <div>
-      <h1>Meeting Name</h1>
-      <h2>Meeting Time</h2>
-      <h3>Meeting location</h3>
-      <h3>Meeting Description</h3>
+      <h2>Title</h2>
+      <h3>{content}</h3>
+      <h4>Match_id:{match_id}</h4>
+
+      <button onClick={updateMeeting}>Edit</button>
+      <button onClick={removeMeeting}>Delete</button>
     </div>
   );
 };
