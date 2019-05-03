@@ -9,6 +9,7 @@ import {
     Input,
     Button
 } from 'reactstrap';
+import { createOrganization } from '../actions/organizationActions';
 
 class OrganizationRegister extends React.Component {
     state = {
@@ -31,6 +32,7 @@ class OrganizationRegister extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        this.props.createOrganization(this.state);
         //redux register function here
     }
 
@@ -98,7 +100,7 @@ class OrganizationRegister extends React.Component {
                         <Label for="ownerEmail" sm={2}>Email</Label>
                         <Col sm={10}>
                             <Input 
-                                type="text" 
+                                type="email" 
                                 name="ownerEmail" 
                                 id="ownerEmail"
                                 value={this.ownerEmail}
@@ -111,7 +113,7 @@ class OrganizationRegister extends React.Component {
                         <Label for="ownerPassword" sm={2}>Password</Label>
                         <Col sm={10}>
                             <Input 
-                                type="text" 
+                                type="password" 
                                 name="ownerPassword" 
                                 id="ownerPassword"
                                 value={this.ownerPassword}
@@ -153,4 +155,4 @@ class OrganizationRegister extends React.Component {
     }
 }
 
-export default OrganizationRegister;
+export default connect(null, { createOrganization })(OrganizationRegister);
