@@ -10,6 +10,7 @@ import userLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage'
+import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 
 const Routes = (props) => {
     return (
@@ -20,6 +21,8 @@ const Routes = (props) => {
             <Route exact path="/user/student/profile" component={StudentProfile} />
             <Route exact path="/user/admin/profile" component={AdminPanel} />
             <Route exact path="/user/meetings" component={MeetingsPage}/>
+            <Route exact path="/user/experiences" component={ExperienceList}/>
+            
         </Router>
     )
 }

@@ -10,30 +10,37 @@ import ExeperienceCard from "./ExperienceCard.js";
 
 class ExperienceList extends React.Component {
   componentDidMount() {
-    console.log("hi");
-    //getExperiences()
+    
+    this.props.getExperiences()
   }
   render() {
-    {
-      this.props.experienceList.map(experience => {
-        return (
-          <ExeperienceCard
-            key={experience.id}
-            removeExperience={this.props.deleteExperience}
-            updateExperience={this.props.updateExperience}
-          />
-        );
-      });
-    }
+    return (
+      <div>
+        <h1>Experiences</h1>
+      {
+        this.props.experienceList.map(experience => {
+          return (
+            <ExeperienceCard
+              key={experience.id}
+              name={experience.name}
+              removeExperience={this.props.deleteExperience}
+              updateExperience={this.props.updateExperience}
+            />
+          );
+        })
+      }
+      </div>
+    )
+
   }
 }
 
 function mapStateToProps(state) {
   return {
-    //experienceList: state.meetingsReducer.meetingsList (this is the real list)
+    experienceList: state.experienceReducer.experienceList 
 
     // this is to test if meetingsList is being mapped to MeetingCard component
-    experienceList: [{ id: 1 }, { id: 2 }, { id: 3 }]
+    //experienceList: [{ id: 1 }, { id: 2 }, { id: 3 }]
   };
 }
 
