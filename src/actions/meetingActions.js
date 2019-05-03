@@ -14,7 +14,10 @@ import {
   UPDATE_MEETING_FAILURE,
   DELETE_MEETING_START,
   DELETE_MEETING_SUCCESS,
-  DELETE_MEETING_FAILURE
+  DELETE_MEETING_FAILURE,
+  REMOVE_MEETING_START,
+  REMOVE_MEETING_SUCCESS,
+  REMOVE_MEETING_FAILURE
 } from "../constants/actionTypes.js";
 
 //backend meetings url
@@ -90,11 +93,22 @@ export const deleteMeeting = id => dispatch => {
     .delete(`${url}/meetings/${id}`, credentials)
     .then(res => {
       //console.log(res);
-      localStorage.getItem("token");
       dispatch({ type: DELETE_MEETING_SUCCESS, payload: id });
     })
     .catch(err => {
       //console.log(err);
       dispatch({ type: DELETE_MEETING_FAILURE, payload: err });
+    });
+};
+
+export const removeMeeting = id => {
+  dispatch({ type: REMOVE_MEETING_START });
+  return axios
+    .delete(`${url}/meetings/${id}/remove`, credentials)
+    .then(res => {
+      dispatch({ type: REMOVE_MEETING_SUCCESS, payload: id });
+    })
+    .catch(err => {
+      dispatch({ type: REMOVE_MEETING_FAILURE, payload: err });
     });
 };
