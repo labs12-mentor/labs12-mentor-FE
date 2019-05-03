@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { 
     Form,
     FormGroup,
@@ -27,6 +28,7 @@ class UserLogin extends Component {
 
   handleSubmit = e => {
       e.preventDefault();
+      console.log(this.state);
       this.props.loginUser(this.state);
       //add .then that redirects to the user's page
   }
@@ -58,11 +60,16 @@ class UserLogin extends Component {
                         value={this.state.password}
                     />
                 </FormGroup>
+
+                {/* <Link to='/user/login'> */}
+                    <Button type="submit">Login</Button>
+                {/* </Link> */}
             </Form>
 
-            <Button type="submit">Login</Button>
+            <a href="https://github.com/login/oauth/authorize?client_id=1b8266ab2f9698b9626c">Github Sign In</a>
+            
         </div>
-    )
+    );
   }
 }
 

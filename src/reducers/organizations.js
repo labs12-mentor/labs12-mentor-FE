@@ -16,6 +16,7 @@ import {
 
 const initialState = {
     organization: null,
+    creatingOrg: false,
     isFetching: false,
     error: null
 };
@@ -45,18 +46,21 @@ export default (state=initialState, action) => {
         case CREATE_ORGANIZATION_START:
         return {
             ...state,
+            creatingOrg: true
         }
 
         case CREATE_ORGANIZATION_SUCCESS:
         return {
             ...state,
-            organization: action.payload
+            organization: action.payload,
+            creatingOrg: false
         }
 
         case CREATE_ORGANIZATION_FAILURE:
         return {
             ...state,
-            error: action.payload
+            error: action.payload,
+            creatingOrg: false
         }
 
         case UPDATE_ORGANIZATION_START:
