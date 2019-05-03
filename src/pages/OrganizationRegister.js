@@ -13,7 +13,12 @@ import {
 class OrganizationRegister extends React.Component {
     state = {
         programName: "",
-        programUrl: ""
+        programDescription: "",
+        programUrl: "",
+        ownerName: "",
+        ownerPassword: "",
+        ownerFirstName: "",
+        ownerLastName: ""
     }
 
     handleInputs = e => {
@@ -43,6 +48,19 @@ class OrganizationRegister extends React.Component {
                                 name="programName" 
                                 id="programName" 
                                 placeholder="Enter a Program name."
+                                onChange={this.handleInputs}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                        <Label for="programDescription" sm={2}>Program Description</Label>
+                        <Col sm={10}>
+                            <Input 
+                                type="textarea" 
+                                name="programDescription" 
+                                id="programDescription" 
+                                placeholder="Enter a Program Description."
                                 onChange={this.handleInputs}
                             />
                         </Col>
