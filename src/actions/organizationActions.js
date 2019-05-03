@@ -18,7 +18,6 @@ const url = 'https://labs12-backend-dev.herokuapp.com';
 
 export const getOrganization = () => dispatch => {
     dispatch({ type: GET_ORGANIZATION_START });
-
     return axios    
         .get(`${url}/api/auth/register`)
         .then(res => {
@@ -31,7 +30,6 @@ export const getOrganization = () => dispatch => {
 
 export const createOrganization = newOrg => dispatch => {
     dispatch({ type: CREATE_ORGANIZATION_START });
-    
     return axios    
         .post(`${url}/api/auth/register`, newOrg)
         .then(res => {

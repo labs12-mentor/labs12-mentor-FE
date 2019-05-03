@@ -13,13 +13,13 @@ import { createOrganization } from '../actions/organizationActions';
 
 class OrganizationRegister extends React.Component {
     state = {
-        programName: "",
-        programDescription: "",
+        organization_name: "",
+        organization_description: "",
         programUrl: "",
-        ownerEmail: "",
-        ownerPassword: "",
-        ownerFirstName: "",
-        ownerLastName: ""
+        user_email: "",
+        user_password: "",
+        user_first_name: "",
+        user_last_name: ""
     }
 
     handleInputs = e => {
@@ -43,28 +43,28 @@ class OrganizationRegister extends React.Component {
 
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup row>
-                        <Label for="programName" sm={2}>Program Name</Label>
+                        <Label for="organization_name" sm={2}>Organization Name</Label>
                         <Col sm={10}>
                             <Input 
                                 type="text" 
-                                name="programName" 
-                                id="programName" 
+                                name="organization_name" 
+                                id="organization_name" 
                                 placeholder="Enter a Program name."
-                                value={this.programName}
+                                value={this.organization_name}
                                 onChange={this.handleInputs}
                             />
                         </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="programDescription" sm={2}>Program Description</Label>
+                        <Label for="organization_description" sm={2}>Organization Description</Label>
                         <Col sm={10}>
                             <Input 
                                 type="textarea" 
-                                name="programDescription" 
-                                id="programDescription" 
+                                name="organization_description" 
+                                id="organization_description" 
                                 placeholder="Enter a Program Description."
-                                value={this.programDescription}
+                                value={this.organization_description}
                                 onChange={this.handleInputs}
                             />
                         </Col>
@@ -97,52 +97,52 @@ class OrganizationRegister extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="ownerEmail" sm={2}>Email</Label>
+                        <Label for="user_email" sm={2}>Email</Label>
                         <Col sm={10}>
                             <Input 
                                 type="email" 
-                                name="ownerEmail" 
-                                id="ownerEmail"
-                                value={this.ownerEmail}
+                                name="user_email" 
+                                id="user_email"
+                                value={this.user_email}
                                 onChange={this.handleInputs}
                             />
                         </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="ownerPassword" sm={2}>Password</Label>
+                        <Label for="user_password" sm={2}>Password</Label>
                         <Col sm={10}>
                             <Input 
                                 type="password" 
-                                name="ownerPassword" 
-                                id="ownerPassword"
-                                value={this.ownerPassword}
+                                name="user_password" 
+                                id="user_password"
+                                value={this.user_password}
                                 onChange={this.handleInputs}
                             />
                         </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="firstName" sm={2}>First Name</Label>
+                        <Label for="user_first_name" sm={2}>First Name</Label>
                         <Col sm={10}>
                             <Input 
                                 type="text" 
-                                name="ownerFirstName" 
-                                id="ownerFirstName"
-                                value={this.ownerFirstName}
+                                name="user_first_name" 
+                                id="user_first_name"
+                                value={this.user_first_name}
                                 onChange={this.handleInputs}
                             />
                         </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="lastName" sm={2}>Last Name</Label>
+                        <Label for="user_last_name" sm={2}>Last Name</Label>
                         <Col sm={10}>
                             <Input 
                                 type="text" 
-                                name="ownerLastName" 
-                                id="ownerLastName"
-                                value={this.ownerLastName}
+                                name="user_last_name" 
+                                id="user_last_name"
+                                value={this.user_last_name}
                                 onChange={this.handleInputs}
                             />
                         </Col>
