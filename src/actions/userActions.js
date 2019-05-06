@@ -11,7 +11,7 @@ import {
     GET_STUDENT_INFO_FAILURE
 } from '../constants/actionTypes';
 
-const url = 'http://labs12-backend-dev.herokuapp.com';
+const url = 'https://labs12-backend-dev.herokuapp.com';
 
 export const registerUser = newUser => dispatch => {
     dispatch({ type: REGISTER_USER_START });
