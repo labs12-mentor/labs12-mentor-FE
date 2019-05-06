@@ -10,11 +10,8 @@ import userLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
-<<<<<<< HEAD
 import NotificationButton from '../pages/NotificationButton';
-=======
 import MeetingsPage from '../pages/MeetingsPage'
->>>>>>> 57182829e0ce39d141b4654fd54eb525993dfae5
 
 const Routes = (props) => {
     return (
