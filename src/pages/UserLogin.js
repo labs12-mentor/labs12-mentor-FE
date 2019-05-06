@@ -14,7 +14,7 @@ import {
 
 class UserLogin extends Component {
   state = {
-    username: "",
+    email: "",
     password: ""
   }
 
@@ -38,14 +38,14 @@ class UserLogin extends Component {
         <div className="UserLogin">
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
-                    <Label for="username"></Label>
+                    <Label for="email"></Label>
                     <Input 
-                        type="username" 
-                        name="username" 
-                        id="username" 
-                        placeholder="Enter a username"
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        placeholder="Enter email"
                         onChange={this.changeHandler}
-                        value={this.state.username}
+                        value={this.state.email}
                     />
                 </FormGroup>
 
@@ -55,7 +55,7 @@ class UserLogin extends Component {
                         type="password" 
                         name="password" 
                         id="password" 
-                        placeholder="Enter a password"
+                        placeholder="Enter password"
                         onChange={this.changeHandler}
                         value={this.state.password}
                     />
