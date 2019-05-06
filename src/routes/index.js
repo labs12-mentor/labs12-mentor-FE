@@ -10,28 +10,22 @@ import UserLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
-<<<<<<< HEAD
 import NotificationButton from '../pages/NotificationButton';
-=======
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import HomePage from '../pages/HomePage';
->>>>>>> ffa810e3aca5dd64e974aa7c5e8218d6b02bddbb
 import MeetingsPage from '../pages/MeetingsPage'
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-<<<<<<< HEAD
             <div>
                 <header>
                     <NotificationButton />
                 </header>
             </div>
-=======
             <Route exact path="/" component={HomePage} />
->>>>>>> ffa810e3aca5dd64e974aa7c5e8218d6b02bddbb
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
             <Route exact path="/user/login" component={UserLogin} />
