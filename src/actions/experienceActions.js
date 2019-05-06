@@ -18,12 +18,18 @@ import {
 } from "../constants/actionTypes.js";
 
 //backend meetings url rem
-const url = "http://mentorbe.tfolbrecht.com";
+const url = "https://labs12-backend-dev.herokuapp.com/api/";
+
+const credentials = {
+  headers: {
+    Authorization: localStorage.getItem("Authorization")
+  }
+};
 
 export const getExperiences = () => dispatch => {
   dispatch({ type: GET_EXPERIENCES_START });
   return axios
-    .get(`${url}/experiences`)
+    .get(`${url}/experiences`, credentials)
     .then(res => {
       //console.log(res);
       dispatch({ type: GET_EXPERIENCES_SUCCESS, payload: res.data });
@@ -36,7 +42,7 @@ export const getExperiences = () => dispatch => {
 export const getSpecificExperience = id => dispatch => {
   dispatch({ type: GET_SPECIFIC_EXPERIENCE_START });
   return axios
-    .get(`${url}/experiences/${id}`)
+    .get(`${url}/experiences/${id}`, credentials)
     .then(res => {
       dispatch({ type: GET_SPECIFIC_EXPERIENCE_SUCCESS, payload: res.data });
     })
@@ -48,7 +54,7 @@ export const getSpecificExperience = id => dispatch => {
 export const createExperience = () => dispatch => {
   dispatch({ type: CREATE_EXPERIENCE_START });
   return axios
-    .post(`${url}/experiences/${id}`)
+    .post(`${url}/experiences`, credentials)
     .then(res => {
       dispatch({ type: CREATE_EXPERIENCE_SUCCESS, payload: res.data });
     })
@@ -60,7 +66,7 @@ export const createExperience = () => dispatch => {
 export const updateExperience = (id, info) => dispatch => {
   dispatch({ type: UPDATE_EXPERIENCE_START });
   return axios
-    .put(`${url}/experiences/${id}`, info)
+    .put(`${url}/experiences/${id}`, info, credentials)
     .then(res => {
       dispatch({ type: UPDATE_EXPERIENCE_SUCCESS, payload: res.data });
     })
@@ -72,7 +78,7 @@ export const updateExperience = (id, info) => dispatch => {
 export const deleteExperience = id => dispatch => {
   dispatch({ type: DELETE_EXPERIENCE_START });
   return axios
-    .delete(`${url}/experiences/${id}`)
+    .delete(`${url}/experiences/${id}`, credentials)
     .then(res => {
       dispatch({ type: DELETE_EXPERIENCE_SUCCESS, payload: res.data });
     })

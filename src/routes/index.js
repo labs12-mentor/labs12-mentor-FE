@@ -5,31 +5,45 @@ import {
 } from 'react-router-dom';
 
 import OrganizationRegister from '../pages/OrganizationRegister';
-import userRegister from '../pages/UserRegistration';
-import userLogin from '../pages/UserLogin';
+import UserRegister from '../pages/UserRegistration';
+import UserLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
+<<<<<<< HEAD
 import NotificationButton from '../pages/NotificationButton';
+=======
+import Application from '../pages/AdminPanel/Application/Application';
+import Assignment from '../pages/AdminPanel/Assignment/Assignment';
+import HomePage from '../pages/HomePage';
+>>>>>>> ffa810e3aca5dd64e974aa7c5e8218d6b02bddbb
 import MeetingsPage from '../pages/MeetingsPage'
+import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
+<<<<<<< HEAD
             <div>
                 <header>
                     <NotificationButton />
                 </header>
             </div>
+=======
+            <Route exact path="/" component={HomePage} />
+>>>>>>> ffa810e3aca5dd64e974aa7c5e8218d6b02bddbb
             <Route exact path="/organization/register" component={OrganizationRegister} />
-            <Route exact path="/user/register" component={userRegister} />
-            <Route exact path="/user/login" component={userLogin} />
+            <Route exact path="/user/register" component={UserRegister} />
+            <Route exact path="/user/login" component={UserLogin} />
             <Route exact path="/user/student/profile" component={StudentProfile} />
             <Route exact path ="/user/notifications" component={Notifications} />
             <Route exact path="/user/admin/profile" component={AdminPanel} />
+            <Route exact path="/user/mentorapplication" component={Application} />
+            <Route exact path="/user/mentorassignment" component={Assignment} />
             <Route exact path="/user/meetings" component={MeetingsPage}/>
+            <Route exact path="/user/experiences" component={ExperienceList}/>
         </Router>
-    )
+    );
 }
 
 export default Routes;

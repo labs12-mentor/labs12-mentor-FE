@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    GET_ORGANIZATION_FAILURE,
+    GET_ORGANIZATION_START,
     GET_ORGANIZATION_SUCCESS,
     GET_ORGANIZATION_FAILURE,
     CREATE_ORGANIZATION_START,
@@ -14,13 +14,12 @@ import {
     DELETE_ORGANIZATION_FAILURE
 } from '../constants/actionTypes';
 
-const url = 'http://mentorbe.tfolbrecht.com/';
+const url = 'https://labs12-backend-dev.herokuapp.com';
 
 export const getOrganization = () => dispatch => {
     dispatch({ type: GET_ORGANIZATION_START });
-
     return axios    
-        .get(url)
+        .get(`${url}/api/auth/register`)
         .then(res => {
             dispatch({ type: GET_ORGANIZATION_SUCCESS, payload: res.data });
         })
@@ -31,9 +30,8 @@ export const getOrganization = () => dispatch => {
 
 export const createOrganization = newOrg => dispatch => {
     dispatch({ type: CREATE_ORGANIZATION_START });
-    
     return axios    
-        .post(url, newOrg)
+        .post(`${url}/api/auth/register`, newOrg)
         .then(res => {
             dispatch({ type: CREATE_ORGANIZATION_SUCCESS, payload: res.data });
         })

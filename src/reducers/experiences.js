@@ -12,7 +12,8 @@ import {
   UPDATE_EXPERIENCE_SUCCESS,
   UPDATE_EXPERIENCE_FAILURE,
   DELETE_EXPERIENCE_START,
-  DELETE_EXPERIENCE_SUCCESS
+  DELETE_EXPERIENCE_SUCCESS,
+  DELETE_EXPERIENCE_FAILURE
 } from "../constants/actionTypes.js";
 
 const initialState = {
@@ -110,6 +111,10 @@ const experienceReducer = (state = initialState, action) => {
         deleteExperience: false,
         error: action.payload
       };
+    default: {
+      // need this for default case
+      return state;
+    }
   }
 };
 

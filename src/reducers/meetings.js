@@ -2,6 +2,9 @@ import {
   GET_MEETINGS_START,
   GET_MEETINGS_SUCCESS,
   GET_MEETINGS_FAILURE,
+  GET_SPECIFIC_MEETING_START,
+  GET_SPECIFIC_MEETING_SUCCESS,
+  GET_SPECIFIC_MEETING_FAILURE,
   CREATE_MEETING_START,
   CREATE_MEETING_SUCCESS,
   CREATE_MEETING_FAILURE,
@@ -10,7 +13,10 @@ import {
   UPDATE_MEETING_FAILURE,
   DELETE_MEETING_START,
   DELETE_MEETING_SUCCESS,
-  DELETE_MEETING_FAILURE
+  DELETE_MEETING_FAILURE,
+  REMOVE_MEETING_START,
+  REMOVE_MEETING_SUCCESS,
+  REMOVE_MEETING_FAILURE
 } from "../constants/actionTypes.js";
 
 const initialState = {
@@ -20,6 +26,7 @@ const initialState = {
   creatingMeetings: false,
   deletingMeetings: false,
   updatingMeetings: false
+  //token: localStorage.getItem("token")
 };
 
 const meetingsReducer = (state = initialState, action) => {
@@ -108,6 +115,26 @@ const meetingsReducer = (state = initialState, action) => {
         deleteMeetings: false,
         error: action.payload
       };
+    case REMOVE_MEETING_START:
+      return {
+        ...state,
+        deleteMeetings: true
+      };
+    case REMOVE_MEETING_SUCCESS:
+      return {
+        ...state,
+        deleteMeetings: false
+      };
+    case REMOVE_MEETING_FAILURE:
+      return {
+        ...state,
+        deleteMeetings: false,
+        error: action.payload
+      };
+    default: {
+      // need this for default case
+      return state;
+    }
   }
 };
 

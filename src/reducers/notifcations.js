@@ -111,6 +111,10 @@ const notificationReducer = (state = initialState, action) => {
         deleteNotification: false,
         error: action.payload
       };
+      default: {
+        // need this for default case
+        return state;
+      }
   }
 };
 
