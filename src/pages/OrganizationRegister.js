@@ -32,8 +32,10 @@ class OrganizationRegister extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.createOrganization(this.state);
-        //redux register function here
+        this.props.createOrganization(this.state)
+        .then(() => {
+            this.props.history.push('/user/login');
+        });
     }
 
     render() {
