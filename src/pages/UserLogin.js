@@ -68,7 +68,7 @@ class UserLogin extends Component {
                 {/* </Link> */}
             </Form>
 
-            <a href="https://github.com/login/oauth/authorize?client_id=1b8266ab2f9698b9626c">Github Sign In</a>
+            <a href="https://labs12-backend-dev.herokuapp.com/api/auth/github">Github Sign In</a>
             
         </div>
     );
