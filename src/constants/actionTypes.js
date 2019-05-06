@@ -56,6 +56,10 @@ export const LOGIN_USER_START = "LOGIN_USER_START";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 
+//action types for mentee profiles/applications
+export const GET_MENTEE_PROFILES_START = "GET_MENTEE_PROFILES_START";
+export const GET_MENTEE_PROFILES_SUCCESS = "GET_MENTEE_PROFILES_SUCCESS";
+export const GET_MENTEE_PROFILES_FAILURE = "GET_MENTEE_PROFILES_FAILURE";
 
 //action types for student to apply to be a mentor
 
