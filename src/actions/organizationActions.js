@@ -59,9 +59,9 @@ export const deleteOrganization = id => dispatch => {
     return axios    
         .delete(`${url}orgs/${id}`)
         .then(res => {
-            dispatch({ type: GET_ORGANIZATION_SUCCESS, payload: res.data });
+            dispatch({ type: DELETE_ORGANIZATION_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: GET_ORGANIZATION_FAILURE, payload: err })
+            dispatch({ type: DELETE_ORGANIZATION_FAILURE, payload: err })
         });
 };
