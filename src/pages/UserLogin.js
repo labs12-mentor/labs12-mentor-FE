@@ -29,8 +29,10 @@ class UserLogin extends Component {
   handleSubmit = e => {
       e.preventDefault();
       console.log(this.state);
-      this.props.loginUser(this.state);
-      //add .then that redirects to the user's page
+      this.props.loginUser(this.state)
+      .then(() => {
+          this.props.history.push('/user/admin/profile')
+      })
   }
 
   render(){
