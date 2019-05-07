@@ -17,7 +17,7 @@ import {
 } from "../constants/actionTypes";
 
 const initialState = {
-  token: localStorage.getItem("token"),
+  token: localStorage.getItem("Authorization"),
   registeringUser: false,
   newUser: null,
   loggingInUser: false,

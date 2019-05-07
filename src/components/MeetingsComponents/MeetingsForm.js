@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import {createMeeting} from "../../actions/meetings.js"
+import {createMeeting, updateMeeting} from "../../actions/meetings.js"
 
 class MeetingsForm extends React.Component {
     state = {
@@ -86,6 +86,8 @@ class MeetingsForm extends React.Component {
 
                     <Button type="submit">Submit</Button>
                 </Form>
+
+                <Button onClick={this.updateMeeting}></Button>
             </div>
         );
     }

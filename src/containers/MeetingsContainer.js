@@ -15,7 +15,7 @@ class MeetingsContainer extends React.Component {
             <div>
                 <MeetingsList
                     deleteMeeting={this.deleteMeeting}
-                    updateMeeting={this.editMeeting}
+                    updateMeeting={this.goToForm}
                     getSpecificMeeting={this.getMeeting}
                 />
                 {/* <MeetingsForm addMeeting={this.props.createMeeting} /> */}
@@ -33,7 +33,7 @@ class MeetingsContainer extends React.Component {
         console.log("hi");
     };
 
-    editMeeting = (id, info) => {
+    updateMeeting = (id, info) => {
         //this.props.updateMeeting(id, info)
         console.log("hi");
     };

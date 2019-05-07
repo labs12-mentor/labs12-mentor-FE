@@ -21,7 +21,7 @@ class MeetingsList extends React.Component {
                             content={meeting.content}
                             match_id={meeting.match_id}
                             key={meeting.id}
-                            removeMeeting={this.props.deleteMeeting}
+                            deleteMeeting={this.props.deleteMeeting}
                             updateMeeting={this.props.updateMeeting}
                         />
                     );

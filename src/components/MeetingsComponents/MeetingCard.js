@@ -5,7 +5,7 @@ const MeetingCard = ({
     content,
     match_id,
     updateMeeting,
-    removeMeeting
+    deleteMeeting
 }) => {
     return (
         <div>
@@ -14,7 +14,7 @@ const MeetingCard = ({
             <h4>Match_id:{match_id}</h4>
 
             <button onClick={updateMeeting}>Edit</button>
-            <button onClick={removeMeeting}>Delete</button>
+            <button onClick={deleteMeeting}>Delete</button>
         </div>
     );
 };
