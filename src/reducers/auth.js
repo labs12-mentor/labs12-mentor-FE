@@ -17,7 +17,12 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    
+    token: localStorage.getItem('token'),
+    registeringUser: false,
+    newUser: null,
+    loggingInUser: false,
+    currentUser: false,
+    error: null
 }
 
 export default (state = initialState, action) => {
