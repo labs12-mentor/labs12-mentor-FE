@@ -7,7 +7,7 @@ import {
     deleteMeeting,
     updateMeeting,
     getSpecificMeeting
-} from "../actions/meetingActions.js";
+} from "../actions";
 
 class MeetingsContainer extends React.Component {
     render() {
