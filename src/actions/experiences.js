@@ -13,7 +13,10 @@ import {
     DELETE_EXPERIENCE_FAILURE,
     CREATE_EXPERIENCE_START,
     CREATE_EXPERIENCE_SUCCESS,
-    CREATE_EXPERIENCE_FAILURE
+    CREATE_EXPERIENCE_FAILURE,
+    REMOVE_EXPERIENCE_START,
+    REMOVE_EXPERIENCE_SUCCESS,
+    REMOVE_EXPERIENCE_FAILURE
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
@@ -190,7 +193,7 @@ export function deleteExperience(id){
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}+/experiences/${id}`, credentials)
+            .delete(`${API_URL}+/experiences/${id}`, credentials)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -220,6 +223,46 @@ export function deleteExperience(id){
     function error(err){
         return {
             type: DELETE_EXPERIENCE_FAILURE,
+            payload: err
+        }
+    }
+};
+
+export function removeExperience(id){
+    return async dispatch => {
+        await dispatch(request());
+
+        return await axios
+            .delete(`${API_URL}+/experiences/${id}/remove`, credentials)
+            .then(async res => {
+                if(res.status === 200){
+                    return await dispatch(success(res.data));
+                }else{
+                    await dispatch(error(res.data.error));
+                    return await Promise.reject(res.data);
+                }
+            })
+            .catch(async err => {
+                await dispatch(error(err));
+            });
+    }
+
+    function request(){
+        return {
+            type: REMOVE_EXPERIENCE_START
+        }
+    }
+
+    function success(data){
+        return {
+            type: REMOVE_EXPERIENCE_SUCCESS,
+            payload: data
+        }
+    }
+
+    function error(err){
+        return {
+            type: REMOVE_EXPERIENCE_FAILURE,
             payload: err
         }
     }
