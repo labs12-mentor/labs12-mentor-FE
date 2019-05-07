@@ -20,7 +20,7 @@ class ExperienceList extends React.Component {
     return (
       <div>
         <h1>Experiences</h1>
-        {isLoaded ? (
+        {this.state.isLoaded ? (
           this.props.experienceList.map(experience => {
             return (
               <ExeperienceCard
