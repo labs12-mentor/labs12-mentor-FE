@@ -9,7 +9,7 @@ const NotificationButton = props => {
           {/* make button an image */}
           <span>Notifications!</span>
           {/* display notification count */}
-          {/* this.props.notificationsCount */}
+          {/* this.props.notificationCount */}
           <span>0</span>
         </button>
       </Link>

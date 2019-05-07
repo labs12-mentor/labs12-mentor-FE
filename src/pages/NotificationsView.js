@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import  Notification from './Notification';
 
 //import actions
+import { getNotifications } from '../actions/notificationActions';
 
 //import css
 
@@ -18,23 +19,37 @@ class Notifications extends Component {
     }
   }
 
+  componentDidMount(){
+    this.props.getNotifications();
+  }
+
   render(){
-    const { notifications } = this.state;
-    // const { notifications } = this.props.notifications;
-    const notificationsCount = notifications.length;
+    // const { notifications } = this.state;
+    const { notifications } = this.props.notifications;
+    // const notificationsCount = notifications.length;
+    console.log('notifications props', this.props.notifications);
     return(
       <div>
         <h2>Hello from Notifications!</h2>
         <div>
           <h4>Your Notifications: </h4>
           <ul className="notifications-list">
-            {notifications.map(notification => {
+          {this.props.notifications ? 
+              notifications.map(notification => {
+                return (
+                  <li key={notification}>
+                    <Notification notification={notification} />
+                  </li>
+                )
+              })
+            : <p>waiting for notifications list</p>}
+            {/*notifications.map(notification => {
               return (
                 <li key={notification}>
                     <Notification notification={notification} />
                 </li>
               )
-            })}
+            })*/}
           </ul>
         </div>
       </div>
@@ -42,9 +57,12 @@ class Notifications extends Component {
   }
 }
 
-//const mapStateToProps = state => {
-
-// }
+const mapStateToProps = state => {
+  return {
+    notificationList: state.notifications.notificationList,
+    notification_error: state.notifications.error,
+  }
+}
 
 //connect to redux
-export default Notifications;
+export default connect(mapStateToProps, { getNotifications })(Notifications);

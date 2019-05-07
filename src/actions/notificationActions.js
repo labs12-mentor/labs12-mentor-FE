@@ -48,7 +48,7 @@ export const getSpecificNotification = id => dispatch => {
 export const createNotification = () => dispatch => {
   dispatch({ type: CREATE_NOTIFICATION_START });
   return axios
-    .post(`${url}/notifications/${id}`)
+    .post(`${url}/notifications/`) 
     .then(res => {
       dispatch({ type: CREATE_NOTIFICATION_SUCCESS, payload: res.data });
     })
