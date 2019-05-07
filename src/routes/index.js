@@ -18,6 +18,7 @@ import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MeetingsForm from '../components/MeetingsComponents/MeetingsForm';
 import MeetingsCard from '../components/MeetingsComponents/MeetingCard.js'
+import MentorsList from '../components/MentorComponents/MentorsList';
 
 const Routes = (props) => {
     return (
@@ -40,6 +41,7 @@ const Routes = (props) => {
             <Route exact path="/user/experiences" component={ExperienceList}/>
             <Route exact path="/user/meetings/meetingsForm" component={MeetingsForm}/>
             <Route exact path="/user/meetings/:id" component={MeetingsCard}/>
+            <Route exact path="user/mentorsList" component={MentorsList}/>
 
         </Router>
     );
