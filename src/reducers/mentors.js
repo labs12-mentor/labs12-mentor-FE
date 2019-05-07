@@ -106,7 +106,7 @@ export default (state = initialState, action) => {
     case UPDATE_MENTOR_FAILURE:
       return {
         ...state,
-        updatingMentors: false,
+        updatingMentor: false,
         error: action.payload
       };
 
