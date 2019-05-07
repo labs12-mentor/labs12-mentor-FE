@@ -22,7 +22,7 @@ import axios from 'axios';
 import { API_URL } from '../constants/config';
 import { history } from '../';
 
-const credentials = {
+const authHeader = {
     headers: {
         Authorization: localStorage.getItem("Authorization")
     }
@@ -33,7 +33,7 @@ export function getExperiences(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/experiences`, credentials)
+            .get(`${API_URL}+/experiences`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -73,7 +73,7 @@ export function getSpecificExperience(id){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/experiences/${id}`, credentials)
+            .get(`${API_URL}+/experiences/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -113,7 +113,7 @@ export function createExperience(experienceData){
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}+/experiences`, experienceData, credentials)
+            .post(`${API_URL}+/experiences`, experienceData, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -153,7 +153,7 @@ export function updateExperience(id, experienceData){
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}+/experiences/${id}`, experienceData, credentials)
+            .put(`${API_URL}+/experiences/${id}`, experienceData, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -193,7 +193,7 @@ export function deleteExperience(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/experiences/${id}`, credentials)
+            .delete(`${API_URL}+/experiences/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -233,7 +233,7 @@ export function removeExperience(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/experiences/${id}/remove`, credentials)
+            .delete(`${API_URL}+/experiences/${id}/remove`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
