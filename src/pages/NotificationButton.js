@@ -39,9 +39,6 @@ class NotificationButton extends Component {
 
 const mapStateToProps = state => {
   return {
-    gettingNotification: state.notifications.gettingNotifications,
-    notificationList: state.notifications.notificationList,
-    notification_error: state.notifications.error,
     notificationCount: state.notifications.notificationCount,
   }
 }
