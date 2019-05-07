@@ -29,14 +29,10 @@ class MeetingsContainer extends React.Component {
     }
 
     deleteMeeting = id => {
-        //this.props.deleteMeeting(id);
-        console.log("hi");
+        this.props.deleteMeeting(id);
+        
     };
 
-    updateMeeting = (id, info) => {
-        //this.props.updateMeeting(id, info)
-        console.log("hi");
-    };
 
     getMeeting = id => {
         //this.props.getSpecificMeeting(id);

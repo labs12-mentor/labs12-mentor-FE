@@ -17,6 +17,7 @@ import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MeetingsForm from '../components/MeetingsComponents/MeetingsForm';
+import MeetingsCard from '../components/MeetingsComponents/MeetingCard.js'
 
 const Routes = (props) => {
     return (
@@ -38,6 +39,8 @@ const Routes = (props) => {
             <Route exact path="/user/meetings" component={MeetingsPage}/>
             <Route exact path="/user/experiences" component={ExperienceList}/>
             <Route exact path="/user/meetings/meetingsForm" component={MeetingsForm}/>
+            <Route exact path="/user/meetings/:id" component={MeetingsCard}/>
+
         </Router>
     );
 }
