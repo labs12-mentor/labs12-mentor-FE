@@ -43,7 +43,7 @@ export function getExperiences(){
                 }
             })
             .catch(async err => {
-                await dispatch(error(err));
+                return await dispatch(error(err));
             });
     }
 
@@ -83,7 +83,7 @@ export function getSpecificExperience(id){
                 }
             })
             .catch(async err => {
-                await dispatch(error(err));
+                return await dispatch(error(err));
             });
     }
 
@@ -123,7 +123,7 @@ export function createExperience(experienceData){
                 }
             })
             .catch(async err => {
-                await dispatch(error(err));
+                return await dispatch(error(err));
             });
     }
 
@@ -163,7 +163,7 @@ export function updateExperience(id, experienceData){
                 }
             })
             .catch(async err => {
-                await dispatch(error(err));
+                return await dispatch(error(err));
             });
     }
 
@@ -203,7 +203,7 @@ export function deleteExperience(id){
                 }
             })
             .catch(async err => {
-                await dispatch(error(err));
+                return await dispatch(error(err));
             });
     }
 
@@ -243,7 +243,7 @@ export function removeExperience(id){
                 }
             })
             .catch(async err => {
-                await dispatch(error(err));
+                return await dispatch(error(err));
             });
     }
 
