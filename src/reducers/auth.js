@@ -27,6 +27,11 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch(action.type){
+      case LOGIN_USER_START:
+            return {
+                ...state,
+                loggingInUser: true,
+            }
         default:
             return state;
     }
