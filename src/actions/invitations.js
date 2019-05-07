@@ -30,7 +30,7 @@ export function getInvitations(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/invitations`, authHeader)
+            .get(`${API_URL}/invitations`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -70,7 +70,7 @@ export function getSpecificInvitation(id){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/invitations/${id}`, authHeader)
+            .get(`${API_URL}/invitations/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -110,7 +110,7 @@ export function createInvitation(invitationData){
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}+/invitations`, invitationData, authHeader)
+            .post(`${API_URL}/invitations`, invitationData, authHeader)
             .then(async res => {
                 if(res.status === 201){
                     return await dispatch(success(res.data));
@@ -150,7 +150,7 @@ export function deleteInvitation(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/invitations/${id}`, authHeader)
+            .delete(`${API_URL}/invitations/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -190,7 +190,7 @@ export function removeInvitation(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/invitations/${id}/remove`, authHeader)
+            .delete(`${API_URL}/invitations/${id}/remove`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));

@@ -30,7 +30,7 @@ export function getOrganizations(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/organizations`, authHeader)
+            .get(`${API_URL}/organizations`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -70,7 +70,7 @@ export function getSpecificOrganization(id){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/organizations/${id}`, authHeader)
+            .get(`${API_URL}/organizations/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -110,7 +110,7 @@ export function updateOrganization(id, organizationData){
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}+/organizations/${id}`, organizationData, authHeader)
+            .put(`${API_URL}/organizations/${id}`, organizationData, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -150,7 +150,7 @@ export function deleteOrganization(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/organizations/${id}`, authHeader)
+            .delete(`${API_URL}/organizations/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -190,7 +190,7 @@ export function removeOrganization(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/organizations/${id}/remove`, authHeader)
+            .delete(`${API_URL}/organizations/${id}/remove`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));

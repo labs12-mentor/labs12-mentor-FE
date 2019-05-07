@@ -33,7 +33,7 @@ export function getMatches(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/matches`, authHeader)
+            .get(`${API_URL}/matches`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -73,7 +73,7 @@ export function getSpecificMatch(id){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/matches/${id}`, authHeader)
+            .get(`${API_URL}/matches/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -113,7 +113,7 @@ export function createMatch(matchData){
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}+/matches`, matchData, authHeader)
+            .post(`${API_URL}/matches`, matchData, authHeader)
             .then(async res => {
                 if(res.status === 201){
                     return await dispatch(success(res.data));
@@ -153,7 +153,7 @@ export function updateMatch(id, matchData){
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}+/matches/${id}`, matchData, authHeader)
+            .put(`${API_URL}/matches/${id}`, matchData, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -193,7 +193,7 @@ export function deleteMatch(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/matches/${id}`, authHeader)
+            .delete(`${API_URL}/matches/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -233,7 +233,7 @@ export function removeMatch(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/matches/${id}/remove`, authHeader)
+            .delete(`${API_URL}/matches/${id}/remove`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));

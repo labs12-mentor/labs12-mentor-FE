@@ -33,7 +33,7 @@ export function getMeetings(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/meetings`, authHeader)
+            .get(`${API_URL}/meetings`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -73,7 +73,7 @@ export function getSpecificMeeting(id){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/meetings/${id}`, authHeader)
+            .get(`${API_URL}/meetings/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -113,7 +113,7 @@ export function createMeeting(meetingData){
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}+/meetings`, meetingData, authHeader)
+            .post(`${API_URL}/meetings`, meetingData, authHeader)
             .then(async res => {
                 if(res.status === 201){
                     return await dispatch(success(res.data));
@@ -153,7 +153,7 @@ export function updateMeeting(id, meetingData){
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}+/meetings/${id}`, meetingData, authHeader)
+            .put(`${API_URL}/meetings/${id}`, meetingData, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -193,7 +193,7 @@ export function deleteMeeting(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/meetings/${id}`, authHeader)
+            .delete(`${API_URL}/meetings/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -233,7 +233,7 @@ export function removeMeeting(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/meetings/${id}/remove`, authHeader)
+            .delete(`${API_URL}/meetings/${id}/remove`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));

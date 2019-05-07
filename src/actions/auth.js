@@ -30,7 +30,7 @@ export function loginUser(credentials){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/auth/login`, credentials)
+            .post(`${API_URL}/auth/login`, credentials)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -70,7 +70,7 @@ export function registerOrganization(orgData){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/auth/register`, orgData)
+            .post(`${API_URL}/auth/register`, orgData)
             .then(async res => {
                 if(res.status === 201){
                     return await dispatch(success(res.data));

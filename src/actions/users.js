@@ -33,7 +33,7 @@ export function getUsers(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/users`, authHeader)
+            .get(`${API_URL}/users`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -73,7 +73,7 @@ export function getSpecificUser(id){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/users/${id}`, authHeader)
+            .get(`${API_URL}/users/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -113,7 +113,7 @@ export function getCurrentUser(){
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}+/users/current_user`, authHeader)
+            .get(`${API_URL}/users/current_user`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -153,7 +153,7 @@ export function updateUser(id, userData){
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}+/users/${id}`, userData, authHeader)
+            .put(`${API_URL}/users/${id}`, userData, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -193,7 +193,7 @@ export function deleteUser(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/users/${id}`, authHeader)
+            .delete(`${API_URL}/users/${id}`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
@@ -233,7 +233,7 @@ export function removeUser(id){
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}+/users/${id}/remove`, authHeader)
+            .delete(`${API_URL}/users/${id}/remove`, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
