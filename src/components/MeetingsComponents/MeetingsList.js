@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getMeetings } from "../../actions/meetingActions.js";
-import MeetingCard from "./MeetingCard.js";
+import { getMeetings } from "../../actions";
+import MeetingCard from "./MeetingCard";
 
 class MeetingsList extends React.Component {
     componentDidMount() {

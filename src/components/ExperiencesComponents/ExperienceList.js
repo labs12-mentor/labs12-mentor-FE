@@ -6,7 +6,7 @@ import {
     deleteExperience,
     updateExperience
 } from "../../actions";
-import ExeperienceCard from "./ExperienceCard.js";
+import ExeperienceCard from "./ExperienceCard";
 
 class ExperienceList extends React.Component {
     componentDidMount() {

@@ -11,7 +11,7 @@ import {
     Button
 } from 'reactstrap';
 
-import { loginUser } from '../actions/userActions';
+import { loginUser } from '../actions';
 
 const API_URL = 'http://localhost:5000/api/auth/github';
 // const socket = io(API_URL);
