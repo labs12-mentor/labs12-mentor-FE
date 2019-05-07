@@ -5,7 +5,7 @@ const ExperienceCard = props => {
         <div>
             <h4>{props.name}</h4>
             <button onClick={props.updateExperience}>edit</button>
-            <button onClick={props.removeExperience}>delete</button>
+            <button onClick={() => {props.deleteExperience(props.experience.id)}}>delete</button>
         </div>
     )
 }
