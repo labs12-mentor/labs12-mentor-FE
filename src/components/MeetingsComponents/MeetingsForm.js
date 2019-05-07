@@ -1,6 +1,7 @@
 import React from "react";
+import {connect} from "react-redux";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import {addMeeting} from "../../actions/meetings.js"
+import {createMeeting} from "../../actions/meetings.js"
 
 class MeetingsForm extends React.Component {
     state = {
@@ -16,7 +17,7 @@ class MeetingsForm extends React.Component {
 
     creatingMeetingForm = e => {
         e.preventDefault();
-        this.props.addMeeting(this.state);
+        this.props.createMeeting(this.state);
     };
 
     render() {
@@ -101,6 +102,6 @@ class MeetingsForm extends React.Component {
 
 export default connect(
     null,
-    {addMeeting}
+    {createMeeting}
 )(MeetingsForm);
 
