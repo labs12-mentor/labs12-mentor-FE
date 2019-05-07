@@ -9,7 +9,7 @@ import {
     Input,
     Button
 } from 'reactstrap';
-import { createOrganization } from '../actions/organizationActions';
+import { registerOrganization } from '../actions';
 
 class OrganizationRegister extends React.Component {
     state = {
@@ -32,8 +32,10 @@ class OrganizationRegister extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.createOrganization(this.state);
-        //redux register function here
+        this.props.registerOrganization(this.state)
+        .then(() => {
+            this.props.history.push('/user/login');
+        });
     }
 
     render() {
@@ -155,4 +157,4 @@ class OrganizationRegister extends React.Component {
     }
 }
 
-export default connect(null, { createOrganization })(OrganizationRegister);
+export default connect(null, { registerOrganization })(OrganizationRegister);

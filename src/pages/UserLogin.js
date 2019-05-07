@@ -1,76 +1,83 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import io from 'socket.io-client';
+// import OAuthContainer from '../containers/OAuthContainer';
 import { 
     Form,
     FormGroup,
     Label,
     Input,
     Button
- } from 'reactstrap';
+} from 'reactstrap';
 
- import { loginUser } from '../actions/userActions';
+import { loginUser } from '../actions';
 
+const API_URL = 'http://localhost:5000/api/auth/github';
+// const socket = io(API_URL);
+const socket = "H!";
 
 class UserLogin extends Component {
-  state = {
-    username: "",
-    password: ""
-  }
+    state = {
+        email: "",
+        password: ""
+    }
 
-  changeHandler = e => {
-      e.preventDefault();
-      this.setState({
-          ...this.state,
-          [e.target.name]: e.target.value
-      });
-  }
+    changeHandler = e => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    }
 
-  handleSubmit = e => {
-      e.preventDefault();
-      console.log(this.state);
-      this.props.loginUser(this.state);
-      //add .then that redirects to the user's page
-  }
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log(this.state);
+        this.props.loginUser(this.state)
+        .then(() => {
+            this.props.history.push('/user/admin/profile')
+        })
+    }
 
-  render(){
-    return(
-        <div className="UserLogin">
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label for="username"></Label>
-                    <Input 
-                        type="username" 
-                        name="username" 
-                        id="username" 
-                        placeholder="Enter a username"
-                        onChange={this.changeHandler}
-                        value={this.state.username}
-                    />
-                </FormGroup>
+    render(){
+        return(
+            <div className="UserLogin">
+                <Form onSubmit={this.handleSubmit}>
+                    <FormGroup>
+                        <Label for="email"></Label>
+                        <Input 
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            placeholder="Enter email"
+                            onChange={this.changeHandler}
+                            value={this.state.email}
+                        />
+                    </FormGroup>
 
-                <FormGroup>
-                    <Label for="password"></Label>
-                    <Input 
-                        type="password" 
-                        name="password" 
-                        id="password" 
-                        placeholder="Enter a password"
-                        onChange={this.changeHandler}
-                        value={this.state.password}
-                    />
-                </FormGroup>
+                    <FormGroup>
+                        <Label for="password"></Label>
+                        <Input 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            placeholder="Enter password"
+                            onChange={this.changeHandler}
+                            value={this.state.password}
+                        />
+                    </FormGroup>
 
-                {/* <Link to='/user/login'> */}
-                    <Button type="submit">Login</Button>
-                {/* </Link> */}
-            </Form>
+                    {/* <Link to='/user/login'> */}
+                        <Button type="submit">Login</Button>
+                    {/* </Link> */}
+                </Form>
 
-            <a href="https://github.com/login/oauth/authorize?client_id=1b8266ab2f9698b9626c">Github Sign In</a>
-            
-        </div>
-    );
-  }
+                <a href="https://labs12-backend-dev.herokuapp.com/api/auth/github">Github Sign In</a>
+                {/* <OAuthContainer key={"socket"} socket={socket} /> */}
+            </div>
+        );
+    }
 }
 
 
