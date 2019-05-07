@@ -35,7 +35,7 @@ class MeetingsList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        meetingsList: state.meetingsReducer.meetingsList
+        meetingsList: state.meetings.meetingsList
 
         // this is to test if meetingsList is being mapped to MeetingCard component
         // meetingsList: [{ id: 1 }, { id: 2 }, { id: 3 }]
