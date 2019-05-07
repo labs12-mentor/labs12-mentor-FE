@@ -14,7 +14,7 @@ class MeetingsContainer extends React.Component {
         return (
             <div>
                 <MeetingsList
-                    deleteMeeting={this.removeMeeting}
+                    deleteMeeting={this.deleteMeeting}
                     updateMeeting={this.editMeeting}
                     getSpecificMeeting={this.getMeeting}
                 />
@@ -22,7 +22,7 @@ class MeetingsContainer extends React.Component {
             </div>
         );
     }
-    removeMeeting = id => {
+    deleteMeeting = id => {
         //this.props.deleteMeeting(id);
         console.log("hi");
     };
@@ -36,7 +36,9 @@ class MeetingsContainer extends React.Component {
         //this.props.getSpecificMeeting(id);
     };
 
-    addMeeting = () => {};
+    removeMeeting = id => {
+        console.log("hi")
+    }
 }
 
 export default connect(
