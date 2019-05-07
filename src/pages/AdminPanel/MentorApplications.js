@@ -23,6 +23,7 @@ class MentorApplications extends React.Component {
     }
 
     render() {
+        console.log(this.props.mentees[0]);
         return (
             <div className="MentorApplication">
                 <InputGroup>
@@ -54,61 +55,14 @@ class MentorApplications extends React.Component {
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
+                        {this.props.mentees.map(mentee => (
+                            <tr key={mentee.id} >
+                                <td>Doe</td>
+                                <td>Jane</td>
+                                <td>user@domain.com</td>
+                                <td>Approved</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </Table>
             </div>

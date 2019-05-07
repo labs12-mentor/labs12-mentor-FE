@@ -17,7 +17,18 @@ import ProfileForms from './ProfileForms';
 
 class AdminPanel extends React.Component {
     state = {
-        activeTab: '1'
+        activeTab: '1',
+        mentees: []
+    }
+
+    componentDidMount = () => {
+        this.props.getMentees()
+        .then(res => {
+            this.setState({
+                mentees: this.props.mentees
+            });
+        });
+        
     }
 
     toggleTab = tab => {
@@ -64,7 +75,7 @@ class AdminPanel extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <MentorApplications />
+                        <MentorApplications mentees={this.state.mentees} />
                     </TabPane>
 
                     <TabPane tabId="2">
