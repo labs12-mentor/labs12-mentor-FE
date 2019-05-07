@@ -20,11 +20,30 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    
+    fetchingMentees: false,
+    mentees: [],
+    error: null
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case GET_MENTEES_START:
+            return {
+                fetchingMentees: true
+            }
+
+        case GET_MENTEES_SUCCESS:
+            return {
+                fetchingMentees: false,
+                mentees: action.payload
+            }
+
+        case GET_MENTEES_FAILURE:
+            return {
+                fetchingMentees: false,
+                error: action.payload
+            }
+
         default:
             return state;
     }
