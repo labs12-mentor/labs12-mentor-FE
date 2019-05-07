@@ -115,7 +115,7 @@ export function createExperience(experienceData){
         return await axios
             .post(`${API_URL}+/experiences`, experienceData, authHeader)
             .then(async res => {
-                if(res.status === 200){
+                if(res.status === 201){
                     return await dispatch(success(res.data));
                 }else{
                     await dispatch(error(res.data.error));

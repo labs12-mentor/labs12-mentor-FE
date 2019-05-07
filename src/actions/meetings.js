@@ -115,7 +115,7 @@ export function createMeeting(meetingData){
         return await axios
             .post(`${API_URL}+/meetings`, meetingData, authHeader)
             .then(async res => {
-                if(res.status === 200){
+                if(res.status === 201){
                     return await dispatch(success(res.data));
                 }else{
                     await dispatch(error(res.data.error));
