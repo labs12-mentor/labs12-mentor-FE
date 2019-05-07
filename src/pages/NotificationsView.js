@@ -23,17 +23,13 @@ class Notifications extends Component {
   async componentDidMount(){
     await this.props.getNotifications();
     this.setState({ pageLoaded: true });
-    // setTimeout(()=> {
-      // console.log('props', this.props.notificationList[0]);
-    // }, 500)
   }
 
   render(){
     // const { notifications } = this.state;
     const notifications = this.props.notificationList;
-    console.log('notifications', notifications);
-    const notificationsCount = notifications.length;
-    console.log('props', this.props.notificationList[0]);
+    // console.log('notifications', notifications);
+    // console.log('props', this.props.notificationList[0]);
     return(
       <div>
         <h2>Hello from Notifications!</h2>
