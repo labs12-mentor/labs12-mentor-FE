@@ -25,6 +25,7 @@ import { history } from '../';
 const authHeader = {
     headers: {
         Authorization: localStorage.getItem("Authorization")
+        //Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMzAsImlhdCI6MTU1NzI0ODgyNiwiZXhwIjoxNTU3MzM1MjI2fQ.BHRl1WjVjkB00a-gSWYzY2nCnNzgy-1BHxQNzeVwTyA"
     }
 };
 
