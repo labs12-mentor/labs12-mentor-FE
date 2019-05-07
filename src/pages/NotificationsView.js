@@ -11,11 +11,6 @@ class Notifications extends Component {
   constructor(props){
     super(props);
     this.state = {
-      // notifications: [
-      //   'you have a new match!',
-      //   'your mentor has sent you a message',
-      //   'you have a meeting scheduled for today at 10A'
-      // ],
       pageLoaded: false,
     }
   }
@@ -26,10 +21,7 @@ class Notifications extends Component {
   }
 
   render(){
-    // const { notifications } = this.state;
     const notifications = this.props.notificationList;
-    // console.log('notifications', notifications);
-    // console.log('props', this.props.notificationList[0]);
     return(
       <div>
         <h2>Hello from Notifications!</h2>
