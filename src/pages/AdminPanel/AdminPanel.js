@@ -7,6 +7,7 @@ import {
     TabPane,
 } from 'reactstrap';
 import classnames from 'classnames';
+import { getMentees } from '../../actions/mentees';
 
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
@@ -75,6 +76,12 @@ class AdminPanel extends React.Component {
                 </TabContent>
             </div>
         );
+    }
+}
+
+const mstp = state => {
+    return {
+        ...state,
     }
 }
 
