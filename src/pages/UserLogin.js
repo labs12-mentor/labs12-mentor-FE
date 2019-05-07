@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
-// import OAuthContainer from '../containers/OAuthContainer';
+
 import { 
     Form,
     FormGroup,
@@ -13,14 +14,16 @@ import {
 
 import { loginUser } from '../actions';
 
-const API_URL = 'http://localhost:5000/api/auth/github';
-// const socket = io(API_URL);
-const socket = "H!";
+const socket = io('http://localhost:5000');
+const provider = 'github';
 
 class UserLogin extends Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        userData: {
+            email: "email"
+        }
     }
 
     changeHandler = e => {
@@ -73,8 +76,7 @@ class UserLogin extends Component {
                     {/* </Link> */}
                 </Form>
 
-                <a href="https://labs12-backend-dev.herokuapp.com/api/auth/github">Github Sign In</a>
-                {/* <OAuthContainer key={"socket"} socket={socket} /> */}
+                <OAuthContainer provider={provider} socket={socket} />
             </div>
         );
     }
