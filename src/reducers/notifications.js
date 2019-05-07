@@ -25,6 +25,7 @@ import {
 const initialState = {
     error: null,
     notificationList: [],
+    notificationCount: 0,
     gettingNotification: false,
     creatingNotification: false,
     deletingNotification: false,
@@ -43,7 +44,8 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 gettingNotifcation: false,
-                notificationList: action.payload
+                notificationList: action.payload,
+                notificationCount: action.payload.length,
             };
 
         case GET_NOTIFICATIONS_FAILURE:
