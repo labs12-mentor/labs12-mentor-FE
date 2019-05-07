@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Nav,
     NavItem,
@@ -81,8 +82,8 @@ class AdminPanel extends React.Component {
 
 const mstp = state => {
     return {
-        ...state,
+        mentees: state.mentees.mentees
     }
 }
 
-export default AdminPanel;
+export default connect(mstp, { getMentees })(AdminPanel);
