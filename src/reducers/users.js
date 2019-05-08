@@ -20,11 +20,49 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    
+    fetchingUsers: false,
+    fetchingSpecificUser: false,
+    users: [],
+    specificUser: null,
+    error: null
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case GET_USERS_START:
+            return {
+                fetchingUsers: true
+            }
+
+        case GET_USERS_SUCCESS:
+            return {
+                fetchingUsers: false,
+                users: action.payload
+            }
+
+        case GET_USERS_FAILURE:
+            return {
+                fetchingUsers: false,
+                error: action.payload
+            }
+
+        case GET_SPECIFIC_USER_START:
+            return {
+                fetchingSpecificUser: true
+            }
+
+        case GET_SPECIFIC_USER_SUCCESS:
+            return {
+                fetchingSpecificUser: false,
+                specificUser: action.payload
+            }
+
+        case GET_SPECIFIC_USER_FAILURE:
+            return {
+                fetchingSpecificUser: false,
+                error: action.payload
+            }
+
         default: {
             return state;
         }
