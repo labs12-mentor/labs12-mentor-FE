@@ -24,8 +24,8 @@ import { history } from '../';
 
 const authHeader = {
     headers: {
-       // Authorization: localStorage.getItem("Authorization")
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMjUsImlhdCI6MTU1NzMzNzM4NiwiZXhwIjoxNTU3NDIzNzg2fQ.rxAG9zFlQFr6RXQH1Sqvjk-zd9Bzni6MHKhYNcGXPf4"
+       Authorization: localStorage.getItem("Authorization")
+        //Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMjUsImlhdCI6MTU1NzMzNzM4NiwiZXhwIjoxNTU3NDIzNzg2fQ.rxAG9zFlQFr6RXQH1Sqvjk-zd9Bzni6MHKhYNcGXPf4"
     }
 };
 

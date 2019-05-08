@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-//import OAuthContainer from '../containers/OAuthContainer';
-//import io from 'socket.io-client';
+import OAuthContainer from '../containers/OAuthContainer';
+import io from 'socket.io-client';
 
 import { 
     Form,
@@ -76,7 +76,7 @@ class UserLogin extends Component {
                     {/* </Link> */}
                 </Form>
 
-                {/* <OAuthContainer provider={provider} socket={socket} /> */}
+                <OAuthContainer provider={provider} socket={socket} />
             </div>
         );
     }
