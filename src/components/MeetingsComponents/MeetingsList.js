@@ -37,6 +37,7 @@ class MeetingsList extends React.Component {
         &times;
       </button>
     );
+    console.log("list",this.props.deleteMeeting)
     return (
       <div>
         <h1>Your Meetings</h1>
@@ -46,21 +47,13 @@ class MeetingsList extends React.Component {
           this.props.meetingsList.map((meeting, index) => {
             return (
               <div key={index}>
-                <Link to={`/user/meetings/${meeting.id}`}>Title</Link>
+                <Link to={`/user/meetings/${meeting.id}`}>Link</Link>
                 <MeetingCard
                   id={meeting.id}
                   content={meeting.content}
                   match_id={meeting.match_id}
-                  // deleteMeeting={this.props.deleteMeeting}
+                  deleteMeeting={this.props.deleteMeeting}
                 />
-                <Button
-                  color="danger"
-                  onClick={() => {
-                    this.props.deleteMeeting(this.props.id);
-                  }}
-                >
-                  Delete
-                </Button>
               </div>
             );
           })

@@ -22,6 +22,7 @@ class MeetingsForm extends React.Component {
 
   updateMeetingForm = e => {
     e.preventDefault();
+    console.log(this.props.id)
     this.props.updateMeeting(this.props.id, this.state)
   };
 

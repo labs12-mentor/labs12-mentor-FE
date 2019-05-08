@@ -22,13 +22,11 @@ class MeetingsContainer extends React.Component {
         );
     }
 
-    goToForm = () => {
-        this.props.history.push("/user/meetings/meetingsForm")
-    }
 
-    deleteMeeting = id => {
+
+    deleteMeeting = (e,id) => {
+        e.preventDefault();
         this.props.deleteMeeting(id);
-        
     };
 
 

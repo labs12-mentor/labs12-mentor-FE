@@ -21,6 +21,7 @@ class MeetingCard extends React.Component {
 
 
 
+
   render() {
     const externalCloseBtn = (
       <button
@@ -31,15 +32,15 @@ class MeetingCard extends React.Component {
         &times;
       </button>
     );
-    console.log(this.props.deleteMeeting)
+    console.log(this.props)
     return (
       <div>
         <h3>{this.props.content}</h3>
         <h4>Match_id:{this.props.match_id}</h4>
 
-      {/* <Button color="danger" onClick={() => {this.props.deleteMeeting(this.props.id)}}>
+      <Button color="danger" onClick={(e) => {this.props.deleteMeeting(e,this.props.id)}}>
         Delete
-      </Button> */}
+      </Button>
         <Button color="warning" onClick={this.toggle}>
           Edit
         </Button>
