@@ -70,7 +70,6 @@ class MeetingsList extends React.Component {
           className={this.props.className}
           external={externalCloseBtn}
         >
-          <ModalHeader>Add Meeting</ModalHeader>
           <ModalBody>
             <MeetingsForm canEdit={false} />
           </ModalBody>

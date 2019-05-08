@@ -36,11 +36,10 @@ class MeetingCard extends React.Component {
         <h3>{this.props.content}</h3>
         <h4>Match_id:{this.props.match_id}</h4>
 
-        {/* <button onClick={this.props.updateMeeting}>Edit</button> */}
-      <button onClick={() => {this.props.deleteMeeting(this.props.id);}}>
+      <Button color="danger" onClick={() => {this.props.deleteMeeting(this.props.id);}}>
         Delete
-      </button>
-        <Button color="danger" onClick={this.toggle}>
+      </Button>
+        <Button color="warning" onClick={this.toggle}>
           Edit
         </Button>
         <Modal
@@ -49,17 +48,7 @@ class MeetingCard extends React.Component {
           className={this.props.className}
           external={externalCloseBtn}
         >
-          <ModalHeader>EDIT </ModalHeader>
           <ModalBody>
-            {/* <b>Look at the top right of the page/viewport!</b>
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. */}
             <MeetingsForm 
             canEdit={true}
             id={this.props.id}

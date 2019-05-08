@@ -87,7 +87,7 @@ class MeetingsForm extends React.Component {
     } else {
       return (
         <div>
-          <h1> Create a Meeting Form</h1>
+          <h1> Create a Meeting</h1>
           <Form onSubmit={this.creatingMeetingForm}>
             <FormGroup>
               <Label>Title</Label>
@@ -141,7 +141,6 @@ class MeetingsForm extends React.Component {
             <Button type="submit">Submit</Button>
           </Form>
 
-          {/* <Button onClick={() => {this.updateMeeting(id)}}></Button> */}
         </div>
       );
     }
