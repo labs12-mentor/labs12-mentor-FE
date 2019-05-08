@@ -22,8 +22,8 @@ class MeetingsForm extends React.Component {
 
   updateMeetingForm = e => {
     e.preventDefault();
-    console.log(this.props.id)
-    this.props.updateMeeting(this.props.id, this.state)
+    console.log(this.props.id);
+    this.props.updateMeeting(this.props.id, this.state);
   };
 
   render() {
@@ -141,7 +141,6 @@ class MeetingsForm extends React.Component {
 
             <Button type="submit">Submit</Button>
           </Form>
-
         </div>
       );
     }

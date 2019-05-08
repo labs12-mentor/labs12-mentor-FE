@@ -37,7 +37,7 @@ class MeetingsList extends React.Component {
         &times;
       </button>
     );
-    console.log("list",this.props.deleteMeeting)
+    console.log("list", this.props.deleteMeeting);
     return (
       <div>
         <h1>Your Meetings</h1>

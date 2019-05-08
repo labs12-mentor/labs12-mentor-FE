@@ -18,10 +18,6 @@ class MeetingCard extends React.Component {
     }));
   }
 
-
-
-
-
   render() {
     const externalCloseBtn = (
       <button
@@ -32,15 +28,20 @@ class MeetingCard extends React.Component {
         &times;
       </button>
     );
-    console.log(this.props)
+    console.log(this.props);
     return (
       <div>
         <h3>{this.props.content}</h3>
         <h4>Match_id:{this.props.match_id}</h4>
 
-      <Button color="danger" onClick={(e) => {this.props.deleteMeeting(e,this.props.id)}}>
-        Delete
-      </Button>
+        <Button
+          color="danger"
+          onClick={e => {
+            this.props.deleteMeeting(e, this.props.id);
+          }}
+        >
+          Delete
+        </Button>
         <Button color="warning" onClick={this.toggle}>
           Edit
         </Button>
@@ -51,10 +52,7 @@ class MeetingCard extends React.Component {
           external={externalCloseBtn}
         >
           <ModalBody>
-            <MeetingsForm 
-            canEdit={true}
-            id={this.props.id}
-            />
+            <MeetingsForm canEdit={true} id={this.props.id} />
           </ModalBody>
         </Modal>
       </div>
