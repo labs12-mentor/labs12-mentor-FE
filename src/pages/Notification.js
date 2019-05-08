@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+
+import { markNotification } from '../actions/notifications';
 
 class Notification extends Component {
     constructor(props){
@@ -10,12 +14,6 @@ class Notification extends Component {
             },
             notificationCount: 0,
         }
-    }
-
-    componentDidMount(){
-        this.setState({
-            notificationCount: this.props.notificationCount,
-        })
     }
 
     toggleRead = (e) => {
@@ -39,9 +37,13 @@ class Notification extends Component {
                 notificationCount: count
             })
         }
+        // console.log('count', count);
+        // console.log('state', this.state.notificationCount)
+        // this.props.markNotification();
     }
 
     render(){
+        // const notifications = this.props.notificationList;
         const { textChange } = this.state;
         return (
             <div style={textChange}
@@ -52,9 +54,13 @@ class Notification extends Component {
     }
 }
 
-//const mapStateToProps = state => {
-    //update notificationCount
-// }
+const mapStateToProps = state => {
+    return {
+        notificationCount: state.notifications.notificationsCount,
+    }
+}
+
+//connect to redux
+export default connect(mapStateToProps, { markNotification })(Notification);
 
 //connect to redux- need to count unreads
-export default Notification;

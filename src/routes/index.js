@@ -33,7 +33,7 @@ const Routes = (props) => {
             <Route exact path="/user/register" component={UserRegister} />
             <Route exact path="/user/login" component={UserLogin} />
             <Route exact path="/user/student/profile" component={StudentProfile} />
-            <Route exact path ="/user/notifications" component={Notifications} />
+            <Route exact path="/user/notifications" component={Notifications} />
             <Route exact path="/user/admin/profile" component={AdminPanel} />
             <Route exact path="/user/mentorapplication" component={Application} />
             <Route exact path="/user/mentorassignment" component={Assignment} />
