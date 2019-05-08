@@ -18,6 +18,9 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
+import MentorAssignList from './MentorAssignList';
+import StudentAssignList from './StudentAssignList';
+
 
 class MentorAssignment extends React.Component {
     state = {
@@ -81,77 +84,13 @@ class MentorAssignment extends React.Component {
                     <TabPane tabId='1'>
                         <h2>Mentors</h2>
 
-                        <Table striped>
-                            <thead>
-                                <tr>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
-                                    <th>City</th>
-                                    <th>Matched Student</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <MentorAssignList />
                     </TabPane>
 
                     <TabPane tabId='2'>
                         <h2>Students</h2>
 
-                        <Table striped>
-                            <thead>
-                                <tr>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
-                                    <th>City</th>
-                                    <th>Matched Students</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <StudentAssignList />
                     </TabPane>
                 </TabContent>
             </div>
