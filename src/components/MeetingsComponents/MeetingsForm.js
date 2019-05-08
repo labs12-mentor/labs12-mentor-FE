@@ -17,6 +17,7 @@ class MeetingsForm extends React.Component {
 
   creatingMeetingForm = e => {
     e.preventDefault();
+    console.log("meeting form ");
     this.props.createMeeting(this.state);
   };
 

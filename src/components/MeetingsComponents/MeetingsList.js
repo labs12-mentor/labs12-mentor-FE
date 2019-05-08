@@ -24,7 +24,7 @@ class MeetingsList extends React.Component {
   }
   async componentDidMount() {
     await this.props.getMeetings();
-    this.setState({ isLoaded: true });
+    this.setState({ ...this.state, isLoaded: true });
   }
 
   render() {
@@ -37,14 +37,18 @@ class MeetingsList extends React.Component {
         &times;
       </button>
     );
-    console.log("list", this.props.deleteMeeting);
+
+    const nonDeleted = this.props.meetingsList.filter(meeting => {
+      return meeting.deleted === false;
+    });
+
     return (
       <div>
         <h1>Your Meetings</h1>
 
         <h2>Upcoming Meetings</h2>
         {this.state.isLoaded ? (
-          this.props.meetingsList.map((meeting, index) => {
+          nonDeleted.map((meeting, index) => {
             return (
               <div key={index}>
                 <Link to={`/user/meetings/${meeting.id}`}>Link</Link>
