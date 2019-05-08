@@ -9,7 +9,6 @@ class MeetingsForm extends React.Component {
     startTime: "",
     endTime: "",
     location: "",
-    // description: ""
     content: "",
     match_id: "",
     deleted: false,
@@ -23,8 +22,7 @@ class MeetingsForm extends React.Component {
 
   updateMeetingForm = e => {
     e.preventDefault();
-    console.log(this.props.id);
-    //this.props.updateMeeting(this.props.id, this.state)
+    this.props.updateMeeting(this.props.id, this.state)
   };
 
   render() {

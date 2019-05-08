@@ -74,14 +74,6 @@ class MeetingsList extends React.Component {
           <ModalBody>
             <MeetingsForm canEdit={false} />
           </ModalBody>
-          {/* <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Do Something
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
-              Cancel
-            </Button>
-          </ModalFooter> */}
         </Modal>
 
         <h2>Past Meetings</h2>
@@ -93,9 +85,6 @@ class MeetingsList extends React.Component {
 function mapStateToProps(state) {
   return {
     meetingsList: state.meetings.meetingsList
-
-    // this is to test if meetingsList is being mapped to MeetingCard component
-    // meetingsList: [{ id: 1 }, { id: 2 }, { id: 3 }]
   };
 }
 
