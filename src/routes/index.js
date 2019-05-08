@@ -39,8 +39,7 @@ const Routes = (props) => {
             <Route exact path="/user/mentorassignment" component={Assignment} />
             <Route exact path="/user/meetings" component={MeetingsPage}/>
             <Route exact path="/user/experiences" component={ExperienceList}/>
-            <Route exact path="/user/meetings/meetingsForm" component={MeetingsForm}/>
-            <Route exact path="/user/meetings/:id" component={MeetingsCard}/>
+            {/* <Route exact path="/user/meetings/:id" component={MeetingsCard}/> */}
             <Route exact path="user/mentorsList" component={MentorsList}/>
 
         </Router>
