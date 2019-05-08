@@ -54,6 +54,8 @@ class AdminPanel extends React.Component {
             });
         });
 
+        console.log(this.state.mentees);
+
         return this.state.menteeUserInfo;
     }
 

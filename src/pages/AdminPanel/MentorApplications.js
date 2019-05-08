@@ -32,6 +32,18 @@ class MentorApplications extends React.Component {
         });
     }
 
+    filterBySearch = () => {
+        console.log(this.props.mentees);
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        const filteredMentees = this.props.mentees.filter(mentee => {
+            return (searchInput.includes(mentee.last_name) || searchInput.includes(mentee.first_name) || searchInput.includes(mentee.email))
+        });
+
+        console.log(filteredMentees);
+
+        return this.props.mentees
+    }
+
     render() {
         return (
             <div className="MentorApplication">
@@ -58,7 +70,7 @@ class MentorApplications extends React.Component {
 
                 <h3>Applications</h3>
                 
-                {this.props.mentees.length && <MentorAppList mentees={this.props.mentees} />}
+                {this.props.mentees.length && <MentorAppList mentees={this.filterBySearch()} />}
             </div>
         );
     }
