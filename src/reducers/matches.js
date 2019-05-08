@@ -20,11 +20,30 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    
+    fetchingMatches: false,
+    matches: [],
+    error: null
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case GET_MATCHES_START:
+            return {
+                fetchingMatches: true
+            }
+
+        case GET_MATCHES_SUCCESS:
+            return {
+                fetchingMatches: false,
+                matches: action.payload
+            }
+
+        case GET_MATCHES_FAILURE:
+            return {
+                fetchingMatches: false,
+                error: action.payload
+            }
+
         default:
             return state;
     }
