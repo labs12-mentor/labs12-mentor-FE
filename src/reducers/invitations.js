@@ -65,6 +65,63 @@ export default (state = initialState, action) => {
                 error: action.payload
             }
 
+        case CREATE_INVITATION_START:
+            return {
+                ...state,
+                isFetching: true
+            }
+        
+        case CREATE_INVITATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            }
+
+        case CREATE_INVITATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            }
+
+        case DELETE_INVITATION_START:
+            return {
+                ...state,
+                isFetching: true
+            }
+        
+        case DELETE_INVITATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            }
+
+        case DELETE_INVITATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            }
+
+        case REMOVE_INVITATION_START:
+            return {
+                ...state,
+                isFetching: true
+            }
+        
+        case REMOVE_INVITATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            }
+
+        case REMOVE_INVITATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            }
+
         default:
             return state;
     }
