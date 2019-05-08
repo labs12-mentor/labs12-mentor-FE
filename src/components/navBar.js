@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import NotificationButton from '../pages/NotificationButton';
 
 //actions
@@ -7,7 +8,7 @@ class NavBar extends Component {
   constructor(props){
     super(props);
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
     }
   }
 
@@ -18,19 +19,34 @@ class NavBar extends Component {
     //this.setState({ loggedIn: true })
   }
 
+  logOut = () => {
+    localStorage.clear();
+    //should redirect to home '/'
+  }
+
   render(){
     return(
       <div>
         <p>Hello from navbar!</p>
         {this.state.loggedIn ? 
           <div>
+            <Link to='/user/student/profile'>
+              <button>Profile</button>
+            </Link>
+            <Link to='/user/meetings'>
+              <button>Meetings</button>
+            </Link>
             <NotificationButton />
-            <button>Log Out</button>
+            <button onClick={this.logOut}>Log Out</button>
           </div>
         : 
           <div>
-            <button>Login</button>
-            <button>Register</button>
+            <Link to='/user/login'>
+              <button>Login</button>
+            </Link>
+            <Link to='/user/register'>
+              <button>Register</button>
+            </Link>
           </div>}
       </div>
     )
