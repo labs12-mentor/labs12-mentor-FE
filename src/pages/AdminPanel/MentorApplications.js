@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     InputGroup,
     Input,
@@ -6,14 +7,15 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem,
-
-    Table
+    DropdownItem
 } from 'reactstrap';
+
+import MentorAppList from './MentorAppList';
 
 class MentorApplications extends React.Component {
     state = {
-        dropdownOpen: false
+        dropdownOpen: false,
+        searchBarContents: ""
     }
 
     toggleDropdown = () => {
@@ -22,11 +24,24 @@ class MentorApplications extends React.Component {
         }));
     }
 
+    changeHandler = e => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    }
+
     render() {
         return (
             <div className="MentorApplication">
                 <InputGroup>
-                    <Input placeholder="Search by email or name" />
+                    <Input 
+                        placeholder="Search by email or name"
+                        name="searchBarContents"
+                        value={this.state.searchBarContents}
+                        onChange={this.changeHandler}
+                    />
                 </InputGroup>
 
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
@@ -42,75 +57,8 @@ class MentorApplications extends React.Component {
                 </Dropdown>
 
                 <h3>Applications</h3>
-                {/* will need to use map function to create table rows of students and mentors */}
-                <Table striped>
-                    <thead>
-                        <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-
-                        <tr>
-                            <td>Doe</td>
-                            <td>Jane</td>
-                            <td>user@domain.com</td>
-                            <td>Approved</td>
-                        </tr>
-                    </tbody>
-                </Table>
+                
+                {this.props.mentees.length && <MentorAppList mentees={this.props.mentees} />}
             </div>
         );
     }

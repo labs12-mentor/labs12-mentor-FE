@@ -18,13 +18,52 @@ import {
     REMOVE_MENTEE_SUCCESS,
     REMOVE_MENTEE_FAILURE
 } from '../constants/actionTypes';
+import { AST_False } from 'terser';
 
 const initialState = {
-    
+    fetchingMentees: false,
+    fetchingMentee: false,
+    mentees: [],
+    mentee: null,
+    error: null
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case GET_MENTEES_START:
+            return {
+                fetchingMentees: true
+            }
+
+        case GET_MENTEES_SUCCESS:
+            return {
+                fetchingMentees: false,
+                mentees: action.payload
+            }
+
+        case GET_MENTEES_FAILURE:
+            return {
+                fetchingMentees: false,
+                error: action.payload
+            }
+
+        case GET_SPECIFIC_MENTEE_START:
+            return {
+                fetchingMentee: true
+            }
+
+        case GET_SPECIFIC_MENTEE_SUCCESS:
+            return {
+                fetchingMentee: false,
+                mentee: action.payload
+            }
+
+        case GET_SPECIFIC_MENTEE_FAILURE:
+            return {
+                fetchingMentee: false,
+                error: action.payload
+            }
+
         default:
             return state;
     }
