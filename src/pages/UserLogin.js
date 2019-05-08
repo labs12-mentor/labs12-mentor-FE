@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
+import { API_URL_HOME } from '../constants/config';
 
 import { 
     Form,
@@ -14,7 +15,7 @@ import {
 
 import { loginUser } from '../actions';
 
-const socket = io('http://localhost:5000');
+const socket = io(API_URL_HOME);
 const provider = 'github';
 
 class UserLogin extends Component {
