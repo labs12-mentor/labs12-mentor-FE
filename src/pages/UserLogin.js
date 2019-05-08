@@ -14,7 +14,7 @@ import {
 
 import { loginUser } from '../actions';
 
-//const socket = io('http://localhost:5000');
+const socket = io('http://localhost:5000');
 const provider = 'github';
 
 class UserLogin extends Component {
