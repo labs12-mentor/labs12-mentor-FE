@@ -21,7 +21,7 @@ const initialState = {
   registeringUser: false,
   newUser: null,
   loggingInUser: false,
-  currentUser: false,
+  currentUser: null,
   error: null
 };
 
