@@ -20,10 +20,10 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    error: null,
     experiences: [],
     isFetching: false,
-    currentExperience: null
+    currentExperience: null,
+    error: null
 }
 
 export default (state = initialState, action) => {
