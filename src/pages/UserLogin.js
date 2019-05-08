@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import OAuthContainer from '../containers/OAuthContainer';
-import io from 'socket.io-client';
+//import OAuthContainer from '../containers/OAuthContainer';
+//import io from 'socket.io-client';
 
 import { 
     Form,
@@ -14,7 +14,7 @@ import {
 
 import { loginUser } from '../actions';
 
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
 const provider = 'github';
 
 class UserLogin extends Component {
@@ -76,7 +76,7 @@ class UserLogin extends Component {
                     {/* </Link> */}
                 </Form>
 
-                <OAuthContainer provider={provider} socket={socket} />
+                {/* <OAuthContainer provider={provider} socket={socket} /> */}
             </div>
         );
     }

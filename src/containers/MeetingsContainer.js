@@ -19,7 +19,7 @@ class MeetingsContainer extends React.Component {
                     getSpecificMeeting={this.getMeeting}
                 />
                 {/* <MeetingsForm addMeeting={this.props.createMeeting} /> */}
-                <Button onClick={this.goToForm}>Add A Meeting</Button>
+                {/* <Button onClick={this.goToForm}>Add A Meeting</Button> */}
             </div>
         );
     }
