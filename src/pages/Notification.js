@@ -7,7 +7,7 @@ class Notification extends Component {
     constructor(props){
         super(props);
         this.state = {
-            read: false,
+            read: this.props.read,
             textChange: {
                 textDecoration: "none"
             },

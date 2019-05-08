@@ -10,7 +10,7 @@ import UserLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
-import NotificationButton from '../pages/NotificationButton';
+// import NotificationButton from '../pages/NotificationButton';
 import MeetingsPage from '../pages/MeetingsPage'
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
@@ -19,13 +19,14 @@ import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MeetingsForm from '../components/MeetingsComponents/MeetingsForm';
 import MeetingsCard from '../components/MeetingsComponents/MeetingCard.js'
 import MentorsList from '../components/MentorComponents/MentorsList';
+import NavBar from '../components/navBar';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
             <div>
                 <header>
-                    <NotificationButton />
+                    <NavBar />
                 </header>
             </div>
             <Route exact path="/" component={HomePage} />
