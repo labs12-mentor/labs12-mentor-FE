@@ -34,7 +34,9 @@ class Notifications extends Component {
             {notifications.map(notification => {
               return (
                 <li key={notification.id}>
-                    <Notification notification={notification.content} />
+                    <Notification 
+                      id={notification.id} 
+                      notification={notification.content} />
                 </li>
               )
             })}
