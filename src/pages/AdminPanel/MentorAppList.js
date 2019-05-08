@@ -12,7 +12,6 @@ class ApplicationsList extends React.Component {
     }
 
     render() {
-        console.log('render', this.props.mentees);
         return (
             <Table striped>
                 <thead>

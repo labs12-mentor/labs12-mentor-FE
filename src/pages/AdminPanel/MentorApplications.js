@@ -14,7 +14,8 @@ import MentorAppList from './MentorAppList';
 
 class MentorApplications extends React.Component {
     state = {
-        dropdownOpen: false
+        dropdownOpen: false,
+        searchBarContents: ""
     }
 
     toggleDropdown = () => {
@@ -23,11 +24,24 @@ class MentorApplications extends React.Component {
         }));
     }
 
+    changeHandler = e => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    }
+
     render() {
         return (
             <div className="MentorApplication">
                 <InputGroup>
-                    <Input placeholder="Search by email or name" />
+                    <Input 
+                        placeholder="Search by email or name"
+                        name="searchBarContents"
+                        value={this.state.searchBarContents}
+                        onChange={this.changeHandler}
+                    />
                 </InputGroup>
 
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
