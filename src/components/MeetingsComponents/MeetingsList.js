@@ -51,9 +51,16 @@ class MeetingsList extends React.Component {
                   id={meeting.id}
                   content={meeting.content}
                   match_id={meeting.match_id}
-                  deleteMeeting={this.props.deleteMeeting}
-                  updateMeeting={this.props.updateMeeting}
+                  // deleteMeeting={this.props.deleteMeeting}
                 />
+                <Button
+                  color="danger"
+                  onClick={() => {
+                    this.props.deleteMeeting(this.props.id);
+                  }}
+                >
+                  Delete
+                </Button>
               </div>
             );
           })

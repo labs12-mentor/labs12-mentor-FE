@@ -18,8 +18,9 @@ class MeetingCard extends React.Component {
     }));
   }
 
-  // editMeeting = () => {this.setReducerState.isEditing to true
-  // this.props.history("/user/meetings/meetingsForm")}
+
+
+
   render() {
     const externalCloseBtn = (
       <button
@@ -30,15 +31,15 @@ class MeetingCard extends React.Component {
         &times;
       </button>
     );
-
+    console.log(this.props.deleteMeeting)
     return (
       <div>
         <h3>{this.props.content}</h3>
         <h4>Match_id:{this.props.match_id}</h4>
 
-      <Button color="danger" onClick={() => {this.props.deleteMeeting(this.props.id);}}>
+      {/* <Button color="danger" onClick={() => {this.props.deleteMeeting(this.props.id)}}>
         Delete
-      </Button>
+      </Button> */}
         <Button color="warning" onClick={this.toggle}>
           Edit
         </Button>
@@ -54,14 +55,6 @@ class MeetingCard extends React.Component {
             id={this.props.id}
             />
           </ModalBody>
-          {/* <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Do Something
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
-              Cancel
-            </Button>
-          </ModalFooter> */}
         </Modal>
       </div>
     );
