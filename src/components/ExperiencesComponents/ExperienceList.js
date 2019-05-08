@@ -43,9 +43,6 @@ class ExperienceList extends React.Component {
 function mapStateToProps(state) {
   return {
     experienceList: state.experiences.experienceList
-
-    // this is to test if meetingsList is being mapped to MeetingCard component
-    //experienceList: [{ id: 1 }, { id: 2 }, { id: 3 }]
   };
 }
 
