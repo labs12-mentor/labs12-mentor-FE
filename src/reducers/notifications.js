@@ -28,8 +28,9 @@ const initialState = {
     notificationCount: 0,
     gettingNotification: false,
     creatingNotification: false,
+    updatingNotification: false,
+    markingNotification: false,
     deletingNotification: false,
-    updatingNotification: false
 }
 
 export default (state = initialState, action) => {
@@ -98,22 +99,40 @@ export default (state = initialState, action) => {
         case UPDATE_NOTIFICATION_START:
             return {
                 ...state,
-                updateNotification: true
+                updatingNotification: true
             };
 
         case UPDATE_NOTIFICATION_SUCCESS:
             return {
                 ...state,
-                updateNotification: false,
+                updatingNotification: false,
                 notificationList: [...state.notificationList, action.payload]
             };
 
         case UPDATE_NOTIFICATION_FAILURE:
             return {
                 ...state,
-                updateNotification: false,
+                updatingNotification: false,
                 error: action.payload
             };
+        
+        case MARK_NOTIFICATION_START:
+            return {
+                ...state,
+                markingNotification: true,
+            };
+        case MARK_NOTIFICATION_SUCCESS:
+            return {
+                ...state,
+                markingNotification: false,
+                notificationList: [...state.notificationList, action.payload],
+            };
+        case MARK_NOTIFICATION_FAILURE:
+            return {
+                ...state,
+                markingNotification: false,
+                error: action.payload
+            }
 
         case DELETE_NOTIFICATION_START:
             return {

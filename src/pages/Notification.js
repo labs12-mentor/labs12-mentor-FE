@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
 import { markNotification } from '../actions/notifications';
 
 class Notification extends Component {
@@ -12,12 +11,13 @@ class Notification extends Component {
             textChange: {
                 textDecoration: "none"
             },
-            notificationCount: 0,
+            notificationCount: this.props.notificationCount,
         }
     }
 
     toggleRead = (e) => {
         let count = this.state.notificationCount;
+        let id = this.props.id;
         if (!this.state.read) {
             count--;
             this.setState({
@@ -37,18 +37,17 @@ class Notification extends Component {
                 notificationCount: count
             })
         }
-        // console.log('count', count);
-        // console.log('state', this.state.notificationCount)
-        // this.props.markNotification();
+        this.props.markNotification(id);
+        console.log('count', count);
+        console.log('state', this.state.notificationCount)
     }
 
     render(){
-        // const notifications = this.props.notificationList;
         const { textChange } = this.state;
         return (
             <div style={textChange}
                 onClick={this.toggleRead}>
-                    {this.props.notification}
+                <p>{this.props.notification}</p>
             </div>
         )
     }
@@ -56,7 +55,7 @@ class Notification extends Component {
 
 const mapStateToProps = state => {
     return {
-        notificationCount: state.notifications.notificationsCount,
+        notificationCount: state.notifications.notificationCount,
     }
 }
 
