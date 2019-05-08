@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     InputGroup,
     Input,
@@ -6,10 +7,10 @@ import {
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem,
-
-    Table
+    DropdownItem
 } from 'reactstrap';
+
+import MentorAppList from './MentorAppList';
 
 class MentorApplications extends React.Component {
     state = {
@@ -23,7 +24,6 @@ class MentorApplications extends React.Component {
     }
 
     render() {
-        console.log(this.props.mentees[0]);
         return (
             <div className="MentorApplication">
                 <InputGroup>
@@ -43,28 +43,8 @@ class MentorApplications extends React.Component {
                 </Dropdown>
 
                 <h3>Applications</h3>
-                {/* will need to use map function to create table rows of students and mentors */}
-                <Table striped>
-                    <thead>
-                        <tr>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {this.props.mentees.map(mentee => (
-                            <tr key={mentee.id} >
-                                <td>Doe</td>
-                                <td>Jane</td>
-                                <td>user@domain.com</td>
-                                <td>Approved</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </Table>
+                
+                {this.props.mentees.length && <MentorAppList mentees={this.props.mentees} />}
             </div>
         );
     }
