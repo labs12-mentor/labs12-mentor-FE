@@ -13,31 +13,19 @@ class StudentAssignList extends React.Component {
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>City</th>
-                        <th>Matched Student</th>
+                        <th>Matched Mentor</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Doe</td>
-                        <td>Jane</td>
-                        <td>Salt Lake</td>
-                        <td>John Doe</td>
-                    </tr>
-
-                    <tr>
-                        <td>Doe</td>
-                        <td>Jane</td>
-                        <td>Salt Lake</td>
-                        <td>John Doe</td>
-                    </tr>
-
-                    <tr>
-                        <td>Doe</td>
-                        <td>Jane</td>
-                        <td>Salt Lake</td>
-                        <td>John Doe</td>
-                    </tr>
+                    {this.props.matchedUsers.map(user => {
+                        return <tr key={user.id}>
+                                    <td>{user.last_name}</td>
+                                    <td>{user.first_name}</td>
+                                    <td>{user.email}</td>
+                                    <td>Mentor Name</td>
+                                </tr>
+                    })}
                 </tbody>
             </Table>
         );

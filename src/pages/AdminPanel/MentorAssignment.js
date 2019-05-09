@@ -28,6 +28,19 @@ class MentorAssignment extends React.Component {
         activeTab: '1'
     }
 
+    filterMatchedUsers = () => {
+        const matchedUsers = [];
+        this.props.users.filter(user => {
+            this.props.matches.map(match => {
+                if(user.id === match.mentor_id || user.id === match.mentee_id){
+                    matchedUsers.push(user);
+                }
+            });
+        });
+        
+        return matchedUsers;
+    }
+
     toggleDropdown = () => {
         this.setState(prevState => ({
             dropdownOpen: !prevState.dropdownOpen
@@ -84,13 +97,13 @@ class MentorAssignment extends React.Component {
                     <TabPane tabId='1'>
                         <h2>Mentors</h2>
 
-                        <MentorAssignList />
+                        <MentorAssignList matchedUsers={this.filterMatchedUsers()} matches={this.props.matches}/>
                     </TabPane>
 
                     <TabPane tabId='2'>
                         <h2>Students</h2>
 
-                        <StudentAssignList />
+                        <StudentAssignList matchedUsers={this.filterMatchedUsers()} matches={this.props.matches}/>
                     </TabPane>
                 </TabContent>
             </div>

@@ -8,7 +8,7 @@ import {
     TabPane,
 } from 'reactstrap';
 import classnames from 'classnames';
-import { getUsers, getMentees } from '../../actions';
+import { getUsers, getMentees, getMatches } from '../../actions';
 
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
@@ -19,6 +19,7 @@ class AdminPanel extends React.Component {
     state = {
         activeTab: '1',
         users: [],
+        matches: [],
         mentees: [],
         menteeUserInfo: []
     }
@@ -27,14 +28,15 @@ class AdminPanel extends React.Component {
         await this.props.getUsers()
         .then(async res => {
             await this.props.getMentees();
+            await this.props.getMatches();
         })
         .then(res => {
             this.setState({
                 users: this.props.users,
-                mentees: this.props.mentees
+                mentees: this.props.mentees,
+                matches: this.props.matches
             });
         });
-        
     }
 
     toggleTab = tab => {
@@ -53,8 +55,6 @@ class AdminPanel extends React.Component {
                 }
             });
         });
-
-        console.log(this.state.mentees);
 
         return this.state.menteeUserInfo;
     }
@@ -99,7 +99,7 @@ class AdminPanel extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="2">
-                        <MentorAssignment />
+                        <MentorAssignment users={this.state.users} matches={this.state.matches} />
                     </TabPane>
 
                     <TabPane tabId="3">
@@ -114,8 +114,9 @@ class AdminPanel extends React.Component {
 const mstp = state => {
     return {
         users: state.users.users,
-        mentees: state.mentees.mentees
+        mentees: state.mentees.mentees,
+        matches: state.matches.matches
     }
 }
 
-export default connect(mstp, { getUsers, getMentees })(AdminPanel);
+export default connect(mstp, { getUsers, getMentees, getMatches })(AdminPanel);

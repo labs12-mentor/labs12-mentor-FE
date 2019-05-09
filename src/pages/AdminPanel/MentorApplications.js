@@ -33,13 +33,10 @@ class MentorApplications extends React.Component {
     }
 
     filterBySearch = () => {
-        console.log(this.props.mentees);
         const searchInput = this.state.searchBarContents.toLowerCase();
         const filteredMentees = this.props.mentees.filter(mentee => {
             return (searchInput.includes(mentee.last_name) || searchInput.includes(mentee.first_name) || searchInput.includes(mentee.email))
         });
-
-        console.log(filteredMentees);
 
         return this.props.mentees
     }

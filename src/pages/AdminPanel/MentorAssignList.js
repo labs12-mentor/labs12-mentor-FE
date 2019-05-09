@@ -6,6 +6,7 @@ import {
 
 class MentorAssignList extends React.Component {
     render() {
+        console.log('mentorList', this.props.matchedUsers);
         return (
             <Table striped>
                 <thead>
@@ -18,26 +19,14 @@ class MentorAssignList extends React.Component {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td>Doe</td>
-                        <td>Jane</td>
-                        <td>Salt Lake</td>
-                        <td>John Doe</td>
-                    </tr>
-
-                    <tr>
-                        <td>Doe</td>
-                        <td>Jane</td>
-                        <td>Salt Lake</td>
-                        <td>John Doe</td>
-                    </tr>
-
-                    <tr>
-                        <td>Doe</td>
-                        <td>Jane</td>
-                        <td>Salt Lake</td>
-                        <td>John Doe</td>
-                    </tr>
+                    {this.props.matchedUsers.map(user => {
+                        return <tr key={user.id}>
+                                    <td>{user.last_name}</td>
+                                    <td>{user.first_name}</td>
+                                    <td>{user.email}</td>
+                                    <td>Student Name</td>
+                                </tr>
+                    })}
                 </tbody>
             </Table>
         );
