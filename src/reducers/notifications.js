@@ -23,14 +23,10 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    error: null,
-    notificationList: [],
-    notificationCount: 0,
-    gettingNotification: false,
-    creatingNotification: false,
-    updatingNotification: false,
-    markingNotification: false,
-    deletingNotification: false,
+    notifications: [],
+    isFetching: false,
+    currentNotification: null,
+    error: null
 }
 
 export default (state = initialState, action) => {
@@ -38,123 +34,154 @@ export default (state = initialState, action) => {
         case GET_NOTIFICATIONS_START:
             return {
                 ...state,
-                gettingNotification: true
+                isFetching: true
             };
 
         case GET_NOTIFICATIONS_SUCCESS:
             return {
                 ...state,
-                gettingNotifcation: false,
-                notificationList: action.payload,
-                notificationCount: action.payload.length,
+                isFetching: false,
+                notifications: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case GET_NOTIFICATIONS_FAILURE:
             return {
                 ...state,
-                gettingNotification: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case GET_SPECIFIC_NOTIFICATION_START:
             return {
                 ...state,
-                gettingNotifcation: true
+                isFetching: true
             };
 
         case GET_SPECIFIC_NOTIFICATION_SUCCESS:
             return {
                 ...state,
-                gettingNotifcation: false,
-                notificationList: action.payload
+                isFetching: false,
+                currentNotification: action.payload
             };
 
         case GET_SPECIFIC_NOTIFICATION_FAILURE:
             return {
                 ...state,
-                gettingNotifcation: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case CREATE_NOTIFICATION_START:
             return {
                 ...state,
-                creatingNotification: true
+                isFetching: true
             };
 
         case CREATE_NOTIFICATION_SUCCESS:
             return {
                 ...state,
-                creatingNotification: false,
-                notificationList: [...state.notificationList, action.payload]
+                isFetching: false,
+                notifications: [...state.notifications, action.payload]
             };
 
         case CREATE_NOTIFICATION_FAILURE:
             return {
                 ...state,
-                creatingNotification: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case UPDATE_NOTIFICATION_START:
             return {
                 ...state,
-                updatingNotification: true
+                isFetching: true
             };
 
         case UPDATE_NOTIFICATION_SUCCESS:
             return {
                 ...state,
-                updatingNotification: false,
-                notificationList: [...state.notificationList, action.payload]
+                isFetching: false,
+                notifications: [...state.notifications.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case UPDATE_NOTIFICATION_FAILURE:
             return {
                 ...state,
-                updatingNotification: false,
+                isFetching: false,
                 error: action.payload
             };
         
         case MARK_NOTIFICATION_START:
             return {
                 ...state,
-                markingNotification: true,
+                isFetching: true,
             };
         case MARK_NOTIFICATION_SUCCESS:
             return {
                 ...state,
-                markingNotification: false,
-                notificationList: [...state.notificationList, action.payload],
+                isFetching: false,
+                notifications: [...state.notifications.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
         case MARK_NOTIFICATION_FAILURE:
             return {
                 ...state,
-                markingNotification: false,
+                isFetching: false,
                 error: action.payload
             }
 
         case DELETE_NOTIFICATION_START:
             return {
                 ...state,
-                deleteNotification: true
+                isFetching: true
             };
 
         case DELETE_NOTIFICATION_SUCCESS:
             return {
                 ...state,
-                deleteNotification: false
+                isFetching: false,
+                notifications: state.notifications.filter(elem => elem.id !== action.payload)
             };
 
         case DELETE_NOTIFICATION_FAILURE:
             return {
                 ...state,
-                deleteNotification: false,
+                isFetching: false,
+                error: action.payload
+            };
+        
+        case REMOVE_NOTIFICATION_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case REMOVE_NOTIFICATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                notifications: state.notifications.filter(elem => elem.id !== action.payload)
+            };
+
+        case REMOVE_NOTIFICATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
                 error: action.payload
             };
 
-        default: {
+        default:
             return state;
-        }
     }
 }

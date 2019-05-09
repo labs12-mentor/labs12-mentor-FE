@@ -17,14 +17,38 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    organization: null,
-    creatingOrg: false,
+    organizations: [],
     isFetching: false,
+    currentOrganization: null,
     error: null
 }
 
 export default (state = initialState, action) => {
     switch(action.type){
+        case GET_ORGANIZATIONS_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case GET_ORGANIZATIONS_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                organizations: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
+            };
+
+        case GET_ORGANIZATIONS_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
         case GET_SPECIFIC_ORGANIZATION_START:
             return {
                 ...state,
@@ -34,53 +58,82 @@ export default (state = initialState, action) => {
         case GET_SPECIFIC_ORGANIZATION_SUCCESS:
             return {
                 ...state,
-                organization: action.payload,
-                isFetching: false
+                isFetching: false,
+                currentOrganization: action.payload
             };
 
         case GET_SPECIFIC_ORGANIZATION_FAILURE:
             return {
                 ...state,
-                error: action.payload,
-                isFetching: false
+                isFetching: false,
+                error: action.payload
             };
 
         case UPDATE_ORGANIZATION_START:
             return {
                 ...state,
+                isFetching: true
             };
 
         case UPDATE_ORGANIZATION_SUCCESS:
             return {
                 ...state,
-                organization: action.payload
+                isFetching: false,
+                organizations: [...state.organizations.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case UPDATE_ORGANIZATION_FAILURE:
             return {
                 ...state,
+                isFetching: false,
                 error: action.payload
             };
 
         case DELETE_ORGANIZATION_START:
             return {
                 ...state,
+                isFetching: true
             };
 
         case DELETE_ORGANIZATION_SUCCESS:
             return {
                 ...state,
-                organization: action.payload
+                isFetching: false,
+                organizations: state.organizations.filter(elem => elem.id !== action.payload)
             };
 
         case DELETE_ORGANIZATION_FAILURE:
             return {
                 ...state,
+                isFetching: false,
+                error: action.payload
+            };
+        
+        case REMOVE_ORGANIZATION_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case REMOVE_ORGANIZATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                organizations: state.organizations.filter(elem => elem.id !== action.payload)
+            };
+
+        case REMOVE_ORGANIZATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
                 error: action.payload
             };
 
-        default: {
+        default:
             return state;
-        }
     }
 }

@@ -15,7 +15,7 @@ class MentorsList extends React.Component {
     return (
       <div>
         {this.state.isLoading ? (
-          this.props.mentorsList.map(mentor => {
+          this.props.mentors.map(mentor => {
             return mentor;
           })
         ) : (
@@ -28,7 +28,7 @@ class MentorsList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    mentorsList: state.mentors.mentorsList
+    mentors: state.mentors.mentors
   };
 }
 export default connect(

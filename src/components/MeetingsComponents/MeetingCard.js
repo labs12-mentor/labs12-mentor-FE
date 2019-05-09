@@ -1,6 +1,6 @@
 import React from "react";
 import MeetingsForm from "./MeetingsForm.js";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 
 class MeetingCard extends React.Component {
   constructor(props) {
@@ -28,7 +28,6 @@ class MeetingCard extends React.Component {
         &times;
       </button>
     );
-    console.log(this.props);
     return (
       <div>
         <h3>{this.props.content}</h3>

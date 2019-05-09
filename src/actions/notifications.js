@@ -23,12 +23,10 @@ import {
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
-import { history } from '../';
 
 const authHeader = {
     headers: {
-        // Authorization: localStorage.getItem("Authorization")
-        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJpYXQiOjE1NTczNDU3OTcsImV4cCI6MTU1NzQzMjE5N30.B7zDlkR5boHEUb6npy0tpDB_HxywNm3SjONHY6jtHeA"
+        Authorization: localStorage.getItem("Authorization")
     }
 };
 
@@ -195,9 +193,8 @@ export function updateNotification(id, notificationData){
 export function markNotification(id){
     return async dispatch => {
         await dispatch(request());
-
         return await axios
-            .patch(`${API_URL}/notifications/${id}`, authHeader)
+            .patch(`${API_URL}/notifications/${id}`, {}, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));

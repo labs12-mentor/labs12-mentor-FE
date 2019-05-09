@@ -13,14 +13,15 @@ import {
     REGISTER_WITH_INVITATION_FAILURE,
     GITHUB_REGISTER_WITH_INVITATION_START,
     GITHUB_REGISTER_WITH_INVITATION_SUCCESS,
-    GITHUB_REGISTER_WITH_INVITATION_FAILURE
+    GITHUB_REGISTER_WITH_INVITATION_FAILURE,
+    GET_CURRENT_USER_START,
+    GET_CURRENT_USER_SUCCESS,
+    GET_CURRENT_USER_FAILURE
 } from "../constants/actionTypes";
 
 const initialState = {
     token: localStorage.getItem("Authorization"),
-    registeringUser: false,
-    newUser: null,
-    loggingInUser: false,
+    isFetching: false,
     currentUser: null,
     error: null
 };
@@ -30,94 +31,117 @@ export default (state = initialState, action) => {
         case LOGIN_USER_START:
             return {
                 ...state,
-                loggingInUser: true
+                isFetching: true
             };
 
         case LOGIN_USER_SUCCESS:
             localStorage.setItem('Authorization', action.payload.token);
             return {
                 ...state,
-                loggingInUser: false,
+                isFetching: false,
                 token: action.payload.token
             };
 
         case LOGIN_USER_FAILURE:
             return {
                 ...state,
-                loggingInUser: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case LOGIN_USER_WITH_GITHUB_START:
             return {
                 ...state,
-                loggingInUser: true
+                isFetching: true
             };
 
         case LOGIN_USER_WITH_GITHUB_SUCCESS:
+            localStorage.setItem('Authorization', action.payload.token);
+            let {message: messageGithub, token: tokenGithub, ...userGithub} = action.payload;
             return {
                 ...state,
-                loggingInUser: false
+                isFetching: false,
+                token: tokenGithub,
+                currentUser: userGithub
             };
 
         case LOGIN_USER_WITH_GITHUB_FAILURE:
             return {
                 ...state,
-                loggingInUser: false
+                isFetching: false
             };
 
         case REGISTER_ORGANIZATION_START:
             return {
                 ...state,
-                registeringUser: true
+                isFetching: true
             };
 
         case REGISTER_ORGANIZATION_SUCCESS:
             return {
                 ...state,
-                registeringUser: false
+                isFetching: false
             };
 
         case REGISTER_ORGANIZATION_FAILURE:
             return {
                 ...state,
-                registeringUser: false
+                isFetching: false
             };
 
         case REGISTER_WITH_INVITATION_START:
             return {
                 ...state,
-                registeringUser: true
+                isFetching: true
             };
 
         case REGISTER_WITH_INVITATION_SUCCESS:
             return {
                 ...state,
-                registeringUser: false
+                isFetching: false
             };
 
         case REGISTER_WITH_INVITATION_FAILURE:
             return {
                 ...state,
-                registeringUser: false
+                isFetching: false
             };
 
         case GITHUB_REGISTER_WITH_INVITATION_START:
             return {
-                state,
-                registeringUser: true
+                ...state,
+                isFetching: true
             };
 
         case GITHUB_REGISTER_WITH_INVITATION_SUCCESS:
             return {
                 ...state,
-                registeringUser: false
+                isFetching: false
             };
 
         case GITHUB_REGISTER_WITH_INVITATION_FAILURE:
             return {
                 ...state,
-                registeringUser: false
+                isFetching: false
+            };
+
+        case GET_CURRENT_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case GET_CURRENT_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                currentUser: action.payload
+            };
+
+        case GET_CURRENT_USER_FAILURE:
+            return {
+                ...state,
+                isFetching: false
             };
 
         default:
