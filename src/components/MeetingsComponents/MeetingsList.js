@@ -41,7 +41,7 @@ class MeetingsList extends React.Component {
     const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
     });
-
+    
     return (
       <div>
         <h1>Your Meetings</h1>

@@ -46,7 +46,7 @@ class StudentProfile extends React.Component {
                                     name="firstName"
                                     id="firstName"
                                     value={this.state.firstName}
-
+                                    onChange={this.changeHandler}
                                 />
                             </FormGroup>
                         </Col>
@@ -59,6 +59,7 @@ class StudentProfile extends React.Component {
                                     name="lastName"
                                     id="lastName"
                                     value={this.state.lastName}
+                                    onChange={this.changeHandler}
                                 />
                             </FormGroup>
                         </Col>
@@ -74,6 +75,7 @@ class StudentProfile extends React.Component {
                                     name="address"
                                     id="address"
                                     value={this.state.address}
+                                    onChange={this.changeHandler}
                                 />
                             </FormGroup>
                         </Col>
@@ -86,6 +88,7 @@ class StudentProfile extends React.Component {
                                     name="zipCode"
                                     id="zipCode"
                                     value={this.state.zipCode}
+                                    onChange={this.changeHandler}
                                 />
                             </FormGroup>
                         </Col>
@@ -100,6 +103,7 @@ class StudentProfile extends React.Component {
                                     name="github"
                                     id="github"
                                     value={this.state.github}
+                                    onChange={this.changeHandler}
                                 />
                             </FormGroup>
                         </Col>
@@ -112,6 +116,7 @@ class StudentProfile extends React.Component {
                                     name="linkedIn"
                                     id="linkedIn"
                                     value={this.state.linkedIn}
+                                    onChange={this.changeHandler}
                                 />
                             </FormGroup>
                         </Col>
