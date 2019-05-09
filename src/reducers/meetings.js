@@ -156,8 +156,7 @@ export default (state = initialState, action) => {
                 error: action.payload
             };
 
-        default: {
+        default:
             return state;
-        }
     }
 };
