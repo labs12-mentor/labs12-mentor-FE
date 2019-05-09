@@ -18,13 +18,11 @@ import {
     REMOVE_MENTEE_SUCCESS,
     REMOVE_MENTEE_FAILURE
 } from '../constants/actionTypes';
-import { AST_False } from 'terser';
 
 const initialState = {
-    fetchingMentees: false,
-    fetchingMentee: false,
     mentees: [],
-    mentee: null,
+    isFetching: false,
+    currentMentee: null,
     error: null
 }
 
