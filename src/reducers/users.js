@@ -20,10 +20,9 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    fetchingUsers: false,
-    fetchingSpecificUser: false,
     users: [],
-    specificUser: null,
+    isFetching: false,
+    currentUser: null,
     error: null
 }
 
