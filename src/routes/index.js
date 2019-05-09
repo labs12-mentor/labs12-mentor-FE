@@ -7,7 +7,7 @@ import {
 import OrganizationRegister from '../pages/OrganizationRegister';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
-import StudentProfile from '../pages/StudentProfile';
+import StudentProfile from '../pages/RegistrationDetails';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage'
@@ -17,6 +17,7 @@ import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import NavBar from '../components/navBar';
+import RegDetails from '../pages/RegistrationDetails';
 
 const Routes = (props) => {
     return (
@@ -29,6 +30,7 @@ const Routes = (props) => {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
+            <Route exact path="/user/register/2" component={RegDetails} />
             <Route exact path="/user/login" component={UserLogin} />
             <Route exact path="/user/student/profile" component={StudentProfile} />
             <Route exact path="/user/notifications" component={Notifications} />
