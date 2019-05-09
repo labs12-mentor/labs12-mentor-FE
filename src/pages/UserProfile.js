@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
 
   submitHandler = e => {
     e.preventDefault();
-    //add submit fxn to props and pass in state
+    
   };
 
   render() {
