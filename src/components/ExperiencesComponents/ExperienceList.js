@@ -21,7 +21,7 @@ class ExperienceList extends React.Component {
       <div>
         <h1>Experiences</h1>
         {this.state.isLoaded ? (
-          this.props.experienceList.map(experience => {
+          this.props.experiences.map(experience => {
             return (
               <ExeperienceCard
                 id={experience.id}
@@ -42,7 +42,7 @@ class ExperienceList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    experienceList: state.experiences.experienceList
+    experiences: state.experiences.experiences
   };
 }
 

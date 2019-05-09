@@ -38,7 +38,7 @@ class MeetingsList extends React.Component {
       </button>
     );
 
-    const nonDeleted = this.props.meetingsList.filter(meeting => {
+    const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
     });
 
@@ -87,7 +87,7 @@ class MeetingsList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    meetingsList: state.meetings.meetingsList
+    meetings: state.meetings.meetings
   };
 }
 
