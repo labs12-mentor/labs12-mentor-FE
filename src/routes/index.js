@@ -25,7 +25,7 @@ const Routes = (props) => {
                     <NotificationButton />
                 </header>
             </div>
-            <Route exact path="/" component={HomePage} />
+            {/* <Route exact path="/" component={HomePage} /> */}
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
             <Route exact path="/user/login" component={UserLogin} />
