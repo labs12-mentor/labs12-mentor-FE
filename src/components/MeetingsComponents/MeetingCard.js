@@ -28,10 +28,6 @@ class MeetingCard extends React.Component {
         &times;
       </button>
     );
-<<<<<<< HEAD
-   
-=======
->>>>>>> f8a65bdafecde1931d9f26cf0e42a3eb772f09d7
     return (
       <div>
         <h3>{this.props.content}</h3>
