@@ -1,11 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createExperience } from "../../actions/experiences.js";
+import {
+  createExperience,
+  updateExperience
+} from "../../actions/experiences.js";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 
 class ExperienceForm extends React.Component {
   state = {
-    name: ""
+    name: "",
+    canEdit: false
   };
 
   handleChanges = e => {
@@ -16,10 +20,30 @@ class ExperienceForm extends React.Component {
   };
 
   createAnExperience = e => {
+    e.preventDefault();
     this.props.createExperience(this.state);
   };
 
+  updateAnExperience = e => {
+    e.preventDefault();
+    this.props.updateExperience(this.props.id, this.state);
+  };
+
   render() {
+    if (this.props.canEdit === true) {
+      return (
+        <Form onSubmit={this.createAnExperience}>
+          <FormGroup>
+            <Input
+              type="text"
+              name="name"
+              placeholder={this.props.name}
+              onChange={this.handleChanges}
+            />
+          </FormGroup>
+        </Form>
+      );
+    }
     return (
       <Form onSubmit={this.createAnExperience}>
         <FormGroup>
@@ -37,5 +61,5 @@ class ExperienceForm extends React.Component {
 
 export default connect(
   null,
-  { createExperience }
+  { createExperience, updateExperience }
 )(ExperienceForm);

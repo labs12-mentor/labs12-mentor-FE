@@ -42,7 +42,7 @@ class MeetingsForm extends React.Component {
             </FormGroup>
 
             <FormGroup>
-              <Label>Content</Label>
+              <Label>{this.props.content}</Label>
               <Input
                 type="text"
                 name="content"
