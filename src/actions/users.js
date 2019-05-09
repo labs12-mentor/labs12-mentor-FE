@@ -20,7 +20,8 @@ import { API_URL } from '../constants/config';
 
 const authHeader = {
     headers: {
-        Authorization: localStorage.getItem("Authorization")
+        //Authorization: localStorage.getItem("Authorization")
+        Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxMjMsImlhdCI6MTU1NzQzNjAxNCwiZXhwIjoxNTU3NTIyNDE0fQ.uvved0mkHMRhCgfz658RJWCneGr_uW7k9brrqJ9VxhA"
     }
 };
 

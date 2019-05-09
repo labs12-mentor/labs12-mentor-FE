@@ -7,7 +7,7 @@ import {
 import OrganizationRegister from '../pages/OrganizationRegister';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
-import StudentProfile from '../pages/StudentProfile';
+import UserProfile from '../pages/UserProfile';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 // import NotificationButton from '../pages/NotificationButton';
@@ -33,7 +33,7 @@ const Routes = (props) => {
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
             <Route exact path="/user/login" component={UserLogin} />
-            <Route exact path="/user/student/profile" component={StudentProfile} />
+            <Route exact path="/user/profile" component={UserProfile} />
             <Route exact path="/user/notifications" component={Notifications} />
             <Route exact path="/user/admin/profile" component={AdminPanel} />
             <Route exact path="/user/admin/mentorapplication" component={Application} />
