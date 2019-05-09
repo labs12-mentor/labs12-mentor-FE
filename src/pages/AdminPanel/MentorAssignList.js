@@ -1,12 +1,17 @@
 import React from 'react';
+import history from '../../history';
 import {
     Table
 } from 'reactstrap';
 
 
 class MentorAssignList extends React.Component {
+
+    routeToAssignments() {
+        history.push('/user/admin/mentorassignment');
+    }
+
     render() {
-        console.log('mentorList', this.props.matchedUsers);
         return (
             <Table striped>
                 <thead>
@@ -20,7 +25,7 @@ class MentorAssignList extends React.Component {
 
                 <tbody>
                     {this.props.matchedUsers.map(user => {
-                        return <tr key={user.id}>
+                        return <tr key={user.id} onClick={() => this.routeToAssignments()}>
                                     <td>{user.last_name}</td>
                                     <td>{user.first_name}</td>
                                     <td>{user.email}</td>

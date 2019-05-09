@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import history from '../../history';
 import {
     Table
@@ -36,7 +35,7 @@ class ApplicationsList extends React.Component {
                                 <td>{mentee.first_name}</td>
                                 <td>{mentee.last_name}</td>
                                 <td>{mentee.email}</td>
-                                <td>Approved</td>
+                                <td>Undecided</td>
                             </tr>
                         )
                     })}
