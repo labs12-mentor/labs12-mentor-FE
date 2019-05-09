@@ -59,6 +59,19 @@ class AdminPanel extends React.Component {
         return this.state.menteeUserInfo;
     }
 
+    filterMatchedUsers() {
+        const matchedUsers = [];
+        this.state.users.filter(user => {
+            this.state.matches.map(match => {
+                if(user.id === match.mentor_id || user.id === match.mentee_id){
+                    matchedUsers.push(user);
+                }
+            });
+        });
+        
+        return matchedUsers;
+    }
+
     render() {
         return (
             <div className="AdminPanel">
@@ -99,7 +112,7 @@ class AdminPanel extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="2">
-                        <MentorAssignment users={this.state.users} matches={this.state.matches} />
+                        <MentorAssignment matchedUsers={this.filterMatchedUsers()} matches={this.state.matches} />
                     </TabPane>
 
                     <TabPane tabId="3">

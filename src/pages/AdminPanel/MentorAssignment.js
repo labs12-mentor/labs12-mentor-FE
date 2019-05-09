@@ -25,20 +25,27 @@ import StudentAssignList from './StudentAssignList';
 class MentorAssignment extends React.Component {
     state = {
         dropdownOpen: false,
-        activeTab: '1'
+        activeTab: '1',
+        searchBarContents: ""
     }
 
-    filterMatchedUsers = () => {
-        const matchedUsers = [];
-        this.props.users.filter(user => {
-            this.props.matches.map(match => {
-                if(user.id === match.mentor_id || user.id === match.mentee_id){
-                    matchedUsers.push(user);
-                }
-            });
+    changeHandler = e => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    filterBySearch = () => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        const filteredMentees = this.props.matchedUsers.filter(user => {
+            return (user.last_name.toLowerCase().includes(searchInput)
+                || user.first_name.toLowerCase().includes(searchInput) 
+                || user.email.toLowerCase().includes(searchInput));
         });
         
-        return matchedUsers;
+        return filteredMentees;
     }
 
     toggleDropdown = () => {
@@ -56,10 +63,16 @@ class MentorAssignment extends React.Component {
     }
 
     render() {
+        console.log(this.filterBySearch());
         return (
             <div className="MentorAssignment">
                 <InputGroup>
-                    <Input placeholder="Search by email or name" />
+                    <Input 
+                        placeholder="Search by email or name"
+                        name="searchBarContents"
+                        value={this.state.searchBarContents}
+                        onChange={this.changeHandler}
+                    />
                 </InputGroup>
 
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
@@ -97,13 +110,13 @@ class MentorAssignment extends React.Component {
                     <TabPane tabId='1'>
                         <h2>Mentors</h2>
 
-                        <MentorAssignList matchedUsers={this.filterMatchedUsers()} matches={this.props.matches}/>
+                        <MentorAssignList matchedUsers={this.filterBySearch()} matches={this.props.matches}/>
                     </TabPane>
 
                     <TabPane tabId='2'>
                         <h2>Students</h2>
 
-                        <StudentAssignList matchedUsers={this.filterMatchedUsers()} matches={this.props.matches}/>
+                        <StudentAssignList matchedUsers={this.filterBySearch()} matches={this.props.matches}/>
                     </TabPane>
                 </TabContent>
             </div>
