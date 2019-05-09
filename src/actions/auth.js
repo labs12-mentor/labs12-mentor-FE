@@ -186,3 +186,79 @@ export function getCurrentUser(){
         }
     }
 };
+
+export function githubAuthStart(){
+    return async dispatch => {
+        await dispatch(request());
+    }
+
+    function request(){
+        return {
+            type: LOGIN_USER_WITH_GITHUB_START,
+        }
+    }
+}
+
+export function githubAuthSuccess(data){
+    return async dispatch => {
+        await dispatch(success(data));
+    }
+
+    function success(data){
+        return {
+            type: LOGIN_USER_WITH_GITHUB_SUCCESS,
+            payload: data
+        }
+    }
+}
+
+export function githubAuthFailure(err){
+    return async dispatch => {
+        await dispatch(error(err));
+    }
+
+    function error(err){
+        return {
+            type: LOGIN_USER_WITH_GITHUB_FAILURE,
+            payload: err
+        }
+    }
+}
+
+export function githubRegisterWithInvitationStart(){
+    return async dispatch => {
+        await dispatch(request());
+    }
+
+    function request(){
+        return {
+            type: GITHUB_REGISTER_WITH_INVITATION_START,
+        }
+    }
+}
+
+export function githubRegisterWithInvitationSuccess(data){
+    return async dispatch => {
+        await dispatch(success(data));
+    }
+
+    function success(data){
+        return {
+            type: GITHUB_REGISTER_WITH_INVITATION_SUCCESS,
+            payload: data
+        }
+    }
+}
+
+export function githubRegisterWithInvitationFailure(err){
+    return async dispatch => {
+        await dispatch(error(err));
+    }
+
+    function error(err){
+        return {
+            type: GITHUB_REGISTER_WITH_INVITATION_FAILURE,
+            payload: err
+        }
+    }
+}
