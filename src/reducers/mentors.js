@@ -31,123 +31,132 @@ export default (state = initialState, action) => {
         case GET_MENTORS_START:
             return {
                 ...state,
-                gettingMentors: true
+                isFetching: true
             };
 
         case GET_MENTORS_SUCCESS:
             return {
                 ...state,
-                gettingMentors: false,
-                mentorsList: action.payload
+                isFetching: false,
+                mentors: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case GET_MENTORS_FAILURE:
             return {
                 ...state,
-                gettingMentors: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case GET_SPECIFIC_MENTOR_START:
             return {
                 ...state,
-                gettingMentors: true
+                isFetching: true
             };
 
         case GET_SPECIFIC_MENTOR_SUCCESS:
             return {
                 ...state,
-                gettingMentors: false,
-                mentorsList: action.payload
+                isFetching: false,
+                currentMentor: action.payload
             };
 
         case GET_SPECIFIC_MENTOR_FAILURE:
             return {
                 ...state,
-                gettingMentors: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case CREATE_MENTOR_START:
             return {
                 ...state,
-                creatingMentor: true
+                isFetching: true
             };
 
         case CREATE_MENTOR_SUCCESS:
             return {
                 ...state,
-                creatingMentor: false,
-                mentorsList: [...state.mentorsList, action.payload]
+                isFetching: false,
+                mentors: [...state.mentors, action.payload]
             };
 
         case CREATE_MENTOR_FAILURE:
             return {
                 ...state,
-                creatingMentor: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case UPDATE_MENTOR_START:
             return {
                 ...state,
-                updatingMentor: true
+                isFetching: true
             };
 
         case UPDATE_MENTOR_SUCCESS:
             return {
                 ...state,
-                updatingMentor: false,
-                mentorsList: [...state.mentorsList, action.payload]
+                isFetching: false,
+                mentors: [...state.mentors.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case UPDATE_MENTOR_FAILURE:
             return {
                 ...state,
-                updatingMentor: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case DELETE_MENTOR_START:
             return {
                 ...state,
-                deletingMentor: true
+                isFetching: true
             };
 
         case DELETE_MENTOR_SUCCESS:
             return {
                 ...state,
-                deletingMentor: false
+                isFetching: false,
+                mentors: state.mentors.filter(elem => elem.id !== action.payload)
             };
 
         case DELETE_MENTOR_FAILURE:
             return {
                 ...state,
-                deletingMentor: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case REMOVE_MENTOR_START:
             return {
                 ...state,
-                deletingMentors: true
+                isFetching: true
             };
 
         case REMOVE_MENTOR_SUCCESS:
             return {
                 ...state,
-                deletingMentors: false
+                isFetching: false,
+                mentors: state.mentors.filter(elem => elem.id !== action.payload)
             };
 
         case REMOVE_MENTOR_FAILURE:
             return {
                 ...state,
-                deletingMentors: false,
+                isFetching: false,
                 error: action.payload
             };
 
-        default: {
+        default:
             return state;
-        }
     }
 };
