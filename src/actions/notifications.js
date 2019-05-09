@@ -193,9 +193,8 @@ export function updateNotification(id, notificationData){
 export function markNotification(id){
     return async dispatch => {
         await dispatch(request());
-
         return await axios
-            .patch(`${API_URL}/notifications/${id}`, authHeader)
+            .patch(`${API_URL}/notifications/${id}`, {}, authHeader)
             .then(async res => {
                 if(res.status === 200){
                     return await dispatch(success(res.data));
