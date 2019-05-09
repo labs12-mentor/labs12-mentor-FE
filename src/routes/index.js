@@ -35,8 +35,8 @@ const Routes = (props) => {
             <Route exact path="/user/student/profile" component={StudentProfile} />
             <Route exact path="/user/notifications" component={Notifications} />
             <Route exact path="/user/admin/profile" component={AdminPanel} />
-            <Route exact path="/user/mentorapplication" component={Application} />
-            <Route exact path="/user/mentorassignment" component={Assignment} />
+            <Route exact path="/user/admin/mentorapplication" component={Application} />
+            <Route exact path="/user/admin/mentorassignment" component={Assignment} />
             <Route exact path="/user/meetings" component={MeetingsPage}/>
             <Route exact path="/user/experiences" component={ExperienceList}/>
             <Route exact path="/user/meetings/meetingsForm" component={MeetingsForm}/>
