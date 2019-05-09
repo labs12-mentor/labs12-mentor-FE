@@ -17,9 +17,9 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    organization: null,
-    creatingOrg: false,
+    organizations: [],
     isFetching: false,
+    currentOrganization: null,
     error: null
 }
 
