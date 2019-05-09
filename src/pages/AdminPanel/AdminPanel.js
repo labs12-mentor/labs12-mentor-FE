@@ -8,7 +8,7 @@ import {
     TabPane,
 } from 'reactstrap';
 import classnames from 'classnames';
-import { getUsers, getMentees } from '../../actions';
+import { getUsers, getMentees, getMatches } from '../../actions';
 
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
@@ -19,6 +19,7 @@ class AdminPanel extends React.Component {
     state = {
         activeTab: '1',
         users: [],
+        matches: [],
         mentees: [],
         menteeUserInfo: []
     }
@@ -27,14 +28,15 @@ class AdminPanel extends React.Component {
         await this.props.getUsers()
         .then(async res => {
             await this.props.getMentees();
+            await this.props.getMatches();
         })
         .then(res => {
             this.setState({
                 users: this.props.users,
-                mentees: this.props.mentees
+                mentees: this.props.mentees,
+                matches: this.props.matches
             });
         });
-        
     }
 
     toggleTab = tab => {
@@ -55,6 +57,19 @@ class AdminPanel extends React.Component {
         });
 
         return this.state.menteeUserInfo;
+    }
+
+    filterMatchedUsers() {
+        const matchedUsers = [];
+        this.state.users.filter(user => {
+            this.state.matches.map(match => {
+                if(user.id === match.mentor_id || user.id === match.mentee_id){
+                    matchedUsers.push(user);
+                }
+            });
+        });
+        
+        return matchedUsers;
     }
 
     render() {
@@ -97,7 +112,7 @@ class AdminPanel extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="2">
-                        <MentorAssignment />
+                        <MentorAssignment matchedUsers={this.filterMatchedUsers()} matches={this.state.matches} />
                     </TabPane>
 
                     <TabPane tabId="3">
@@ -112,8 +127,9 @@ class AdminPanel extends React.Component {
 const mstp = state => {
     return {
         users: state.users.users,
-        mentees: state.mentees.mentees
+        mentees: state.mentees.mentees,
+        matches: state.matches.matches
     }
 }
 
-export default connect(mstp, { getUsers, getMentees })(AdminPanel);
+export default connect(mstp, { getUsers, getMentees, getMatches })(AdminPanel);
