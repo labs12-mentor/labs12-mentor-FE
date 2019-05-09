@@ -26,7 +26,7 @@ class MatchForm extends React.Component {
   };
 
   render() {
-    if (canEdit === true) {
+    if (this.props.canEdit === true) {
       return (
         <Form onSubmit={this.updateMatchForm}>
           <FormGroup>
@@ -147,7 +147,7 @@ class MatchForm extends React.Component {
           <FormGroup>
             <Label>End Date</Label>
             <Input
-              type="text"
+              type="date"
               name="end_date"
               placeholder="End Date"
               onChange={this.handleChanges}

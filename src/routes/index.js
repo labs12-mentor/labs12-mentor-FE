@@ -18,7 +18,8 @@ import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import NavBar from '../components/navBar';
-import MentorForm from '../components/MentorComponents/MentorForm';
+
+
 
 const Routes = (props) => {
     return (
@@ -39,7 +40,7 @@ const Routes = (props) => {
             <Route exact path="/user/admin/mentorassignment" component={Assignment} />
             <Route exact path="/user/meetings" component={MeetingsPage}/>
             <Route exact path="/user/experiences" component={ExperienceList}/>
-            <Route exact path="user/mentorsList" component={MentorsList}/>
+            <Route exact path="/user/mentorsList" component={MentorsList}/>
 
 
         </Router>
