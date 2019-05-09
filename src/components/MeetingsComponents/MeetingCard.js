@@ -1,6 +1,6 @@
 import React from "react";
 import MeetingsForm from "./MeetingsForm.js";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 
 class MeetingCard extends React.Component {
   constructor(props) {

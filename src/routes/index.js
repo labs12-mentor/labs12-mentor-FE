@@ -16,8 +16,6 @@ import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
-import MeetingsForm from '../components/MeetingsComponents/MeetingsForm';
-import MeetingsCard from '../components/MeetingsComponents/MeetingCard.js'
 import MentorsList from '../components/MentorComponents/MentorsList';
 
 const Routes = (props) => {

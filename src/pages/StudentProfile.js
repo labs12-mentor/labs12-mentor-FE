@@ -6,11 +6,9 @@ import {
     Input,
     Col,
     Row,
-
     Card,
     CardBody,
-    CardTitle,
-    CardText
+    CardTitle
 } from 'reactstrap';
 
 class StudentProfile extends React.Component {
