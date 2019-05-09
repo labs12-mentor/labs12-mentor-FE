@@ -60,7 +60,6 @@ class MeetingsList extends React.Component {
     return (
       <div>
         <h1>Your Meetings</h1>
-
           <ContainerDiv>
           <Sidebar />
           <MeetingContainer>
