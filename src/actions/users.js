@@ -21,6 +21,7 @@ import { API_URL } from '../constants/config';
 const authHeader = {
     headers: {
         Authorization: localStorage.getItem("Authorization")
+
     }
 };
 

@@ -26,7 +26,7 @@ const ProfileContainer = styled.div`
     margin: auto;
 `;
 
-class StudentProfile extends React.Component {
+class RegistrationDetails extends React.Component {
     state = {
         firstName: "",
         lastName: "",
@@ -267,4 +267,4 @@ class StudentProfile extends React.Component {
     }
 }
 
-export default StudentProfile;
+export default RegistrationDetails;

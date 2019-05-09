@@ -21,7 +21,7 @@ class NavBar extends Component {
           <NavbarBrand>Org Logo Here</NavbarBrand>
           <Nav>
             <NavItem>
-              <NavLink href="/user/student/profile">Profile</NavLink>
+              <NavLink href="/user/profile">Profile</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/user/meetings">Meetings</NavLink>

@@ -8,4 +8,4 @@ const MentorCard = (props) => {
     )
 }
 
-export default Ment
+export default MentorCard
