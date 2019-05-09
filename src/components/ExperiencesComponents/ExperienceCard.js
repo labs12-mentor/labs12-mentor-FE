@@ -30,14 +30,17 @@ class ExperienceCard extends React.Component {
     return (
       <div>
         <h4>{this.props.name}</h4>
-        <button onClick={this.props.updateExperience}>Edit</button>
+
         <button
-          onClick={() => {
-            props.deleteExperience(props.experience.id);
+          onClick={(e) => {
+            this.props.deleteExperience(e,this.props.experience.id);
           }}
         >
           delete
         </button>
+        <Button color="warning" onClick={this.toggle}>
+          Edit
+        </Button>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -45,7 +48,11 @@ class ExperienceCard extends React.Component {
           external={externalCloseBtn}
         >
           <ModalBody>
-            <ExperienceForm canEdit={true} id={this.props.id} />
+            <ExperienceForm
+              canEdit={true}
+              id={this.props.id}
+              name={this.props.name}
+            />
           </ModalBody>
         </Modal>
       </div>

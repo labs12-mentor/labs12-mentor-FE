@@ -51,7 +51,11 @@ class MeetingCard extends React.Component {
           external={externalCloseBtn}
         >
           <ModalBody>
-            <MeetingsForm canEdit={true} id={this.props.id} />
+            <MeetingsForm 
+              canEdit={true} 
+              id={this.props.id} 
+              content={this.props.content}
+              />
           </ModalBody>
         </Modal>
       </div>
