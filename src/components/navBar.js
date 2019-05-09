@@ -3,18 +3,11 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import NotificationButton from '../pages/NotificationButton';
 import history from '../history';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
 
 class NavBar extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      loggedIn: false,
-    }
-  }
-
   logOut = () => {
     localStorage.removeItem("Authorization");
-    // this.setState({ loggedIn: false });
     history.push('/');
   }
   
@@ -22,27 +15,33 @@ class NavBar extends Component {
     console.log('logout props', this.props);
     return(
       <div>
-        <p>Hello from navbar!</p>
-        {this.props.loggedIn ? 
-          <div>
-            <Link to='/user/student/profile'>
-              <button>Profile</button>
-            </Link>
-            <Link to='/user/meetings'>
-              <button>Meetings</button>
-            </Link>
+      {this.props.loggedIn ? 
+        <Navbar>
+          {/* get the user's org logo*/}
+          <NavbarBrand>Org Logo Here</NavbarBrand>
+          <Nav>
+            <NavItem>
+              <NavLink href="/user/student/profile">Profile</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/user/meetings">Meetings</NavLink>
+            </NavItem>
             <NotificationButton />
-            <button onClick={this.logOut}>Log Out</button>
-          </div>
+            <Button onClick={this.logOut} color="info">Log Out</Button>
+          </Nav>
+        </Navbar>
         : 
-          <div>
+        <Navbar>
+          <NavbarBrand>Mentor Match Logo</NavbarBrand>
+          <Nav>
             <Link to='/user/login'>
-              <button>Login</button>
+              <Button color="primary">Login</Button>
             </Link>
             <Link to='/user/register'>
-              <button>Register</button>
+              <Button color="info">Register</Button>
             </Link>
-          </div>}
+          </Nav>
+        </Navbar>}
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
 
 import { getNotifications } from '../actions/notifications';
 
@@ -21,7 +22,7 @@ class NotificationButton extends Component {
     return (
       <div>
         <Link to='/user/notifications'>
-          <button>
+          <Button>
             {/* make button an image */}
             <span>Notifications!</span>
 
@@ -29,7 +30,7 @@ class NotificationButton extends Component {
             {this.state.pageLoaded ? 
               <span>{this.props.notificationsCount}</span>
             : null}
-          </button>
+          </Button>
         </Link>
       </div>
     )
