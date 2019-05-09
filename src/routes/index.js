@@ -20,12 +20,12 @@ import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 const Routes = (props) => {
     return (
         <Router history={props.history}>
+            <Route exact path="/" component={HomePage} />
             <div>
                 <header>
                     <NotificationButton />
                 </header>
             </div>
-            <Route exact path="/" component={HomePage} />
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
             <Route exact path="/user/login" component={UserLogin} />

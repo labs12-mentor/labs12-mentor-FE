@@ -1,12 +1,9 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class HomePage extends React.Component {
     render () {
-        return (
-            <div className="Home">
-                <h1>Working</h1>
-            </div>
-        );
+        return <Redirect to='/home/' />
     }
 }
 
