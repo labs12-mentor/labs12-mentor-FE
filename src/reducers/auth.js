@@ -36,12 +36,10 @@ export default (state = initialState, action) => {
 
         case LOGIN_USER_SUCCESS:
             localStorage.setItem('Authorization', action.payload.token);
-            let {message, token, ...user} = action.payload;
             return {
                 ...state,
                 isFetching: false,
-                token: token,
-                currentUser: user
+                token: action.payload.token
             };
 
         case LOGIN_USER_FAILURE:
@@ -111,7 +109,7 @@ export default (state = initialState, action) => {
 
         case GITHUB_REGISTER_WITH_INVITATION_START:
             return {
-                state,
+                ...state,
                 isFetching: true
             };
 
@@ -122,6 +120,25 @@ export default (state = initialState, action) => {
             };
 
         case GITHUB_REGISTER_WITH_INVITATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case GET_CURRENT_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case GET_CURRENT_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                currentUser: action.payload
+            };
+
+        case GET_CURRENT_USER_FAILURE:
             return {
                 ...state,
                 isFetching: false
