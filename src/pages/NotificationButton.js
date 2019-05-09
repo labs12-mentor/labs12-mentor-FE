@@ -18,7 +18,6 @@ class NotificationButton extends Component {
   }
 
   render(){
-  console.log('button props', this.props);
     return (
       <div>
         <Link to='/user/notifications'>
@@ -39,7 +38,7 @@ class NotificationButton extends Component {
 
 const mapStateToProps = state => {
   return {
-    notificationsCount: state.notifications.notifications.length,
+    notificationsCount: state.notifications.notifications.filter(elem => elem.watched === false).length,
   }
 }
 
