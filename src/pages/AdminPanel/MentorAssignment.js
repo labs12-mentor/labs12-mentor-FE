@@ -63,7 +63,6 @@ class MentorAssignment extends React.Component {
     }
 
     render() {
-        console.log(this.filterBySearch());
         return (
             <div className="MentorAssignment">
                 <InputGroup>
