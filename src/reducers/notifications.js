@@ -23,14 +23,11 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    error: null,
-    notificationList: [],
-    notificationCount: 0,
-    gettingNotification: false,
-    creatingNotification: false,
-    updatingNotification: false,
-    markingNotification: false,
-    deletingNotification: false,
+    notifications: [],
+    notificationsCount: 0,
+    isFetching: false,
+    currentNotification: null,
+    error: null
 }
 
 export default (state = initialState, action) => {
