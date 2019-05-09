@@ -10,6 +10,21 @@ import {
     CardBody,
     CardTitle
 } from 'reactstrap';
+import styled from 'styled-components';
+import Sidebar from '../components/Sidebar';
+
+const ContainerDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+`;
+
+const ProfileContainer = styled.div`
+    width: 70%;
+    margin: auto;
+`;
 
 class StudentProfile extends React.Component {
     state = {
@@ -35,216 +50,219 @@ class StudentProfile extends React.Component {
 
     render() {
         return (
-            <div className="StudentProfile">
-                <Form>
-                    <Row>
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="firstName">First Name</Label>
-                                <Input
-                                    type="text"
-                                    name="firstName"
-                                    id="firstName"
-                                    value={this.state.firstName}
-                                    onChange={this.changeHandler}
-                                />
-                            </FormGroup>
-                        </Col>
+            <ContainerDiv>
+                <Sidebar />
+                <ProfileContainer>
+                    <Form>
+                        <Row>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="firstName">First Name</Label>
+                                    <Input
+                                        type="text"
+                                        name="firstName"
+                                        id="firstName"
+                                        value={this.state.firstName}
+                                        onChange={this.changeHandler}
+                                    />
+                                </FormGroup>
+                            </Col>
+                            
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="lastName">Last Name</Label>
+                                    <Input
+                                        type="text"
+                                        name="lastName"
+                                        id="lastName"
+                                        value={this.state.lastName}
+                                        onChange={this.changeHandler}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
                         
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="lastName">Last Name</Label>
-                                <Input
-                                    type="text"
-                                    name="lastName"
-                                    id="lastName"
-                                    value={this.state.lastName}
-                                    onChange={this.changeHandler}
-                                />
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    
-                    
-                    <Row>
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="address">Address</Label>
-                                <Input
-                                    type="text"
-                                    name="address"
-                                    id="address"
-                                    value={this.state.address}
-                                    onChange={this.changeHandler}
-                                />
-                            </FormGroup>
-                        </Col>
-                            
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="zipCode">Zip Code</Label>
-                                <Input
-                                    type="text"
-                                    name="zipCode"
-                                    id="zipCode"
-                                    value={this.state.zipCode}
-                                    onChange={this.changeHandler}
-                                />
-                            </FormGroup>
-                        </Col>
-                    </Row>
+                        
+                        <Row>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="address">Address</Label>
+                                    <Input
+                                        type="text"
+                                        name="address"
+                                        id="address"
+                                        value={this.state.address}
+                                        onChange={this.changeHandler}
+                                    />
+                                </FormGroup>
+                            </Col>
+                                
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="zipCode">Zip Code</Label>
+                                    <Input
+                                        type="text"
+                                        name="zipCode"
+                                        id="zipCode"
+                                        value={this.state.zipCode}
+                                        onChange={this.changeHandler}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
 
-                    <Row>
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="github">Github</Label>
-                                <Input
-                                    type="text"
-                                    name="github"
-                                    id="github"
-                                    value={this.state.github}
-                                    onChange={this.changeHandler}
-                                />
-                            </FormGroup>
-                        </Col>
-                            
-                        <Col md={6}>
-                            <FormGroup>
-                                <Label for="linkedIn">linkedIn</Label>
-                                <Input
-                                    type="text"
-                                    name="linkedIn"
-                                    id="linkedIn"
-                                    value={this.state.linkedIn}
-                                    onChange={this.changeHandler}
-                                />
-                            </FormGroup>
-                        </Col>
-                    </Row>
+                        <Row>
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="github">Github</Label>
+                                    <Input
+                                        type="text"
+                                        name="github"
+                                        id="github"
+                                        value={this.state.github}
+                                        onChange={this.changeHandler}
+                                    />
+                                </FormGroup>
+                            </Col>
+                                
+                            <Col md={6}>
+                                <FormGroup>
+                                    <Label for="linkedIn">linkedIn</Label>
+                                    <Input
+                                        type="text"
+                                        name="linkedIn"
+                                        id="linkedIn"
+                                        value={this.state.linkedIn}
+                                        onChange={this.changeHandler}
+                                    />
+                                </FormGroup>
+                            </Col>
+                        </Row>
 
-                    <Card>
-                        <CardBody>
-                            <CardTitle>Interests</CardTitle>
+                        <Card>
+                            <CardBody>
+                                <CardTitle>Interests</CardTitle>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Check me out
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Check me out
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Check me out
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Check me out
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Check me out
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Check me out
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Check me out
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Check me out
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup>
-                                <Label for="addMore">Add More</Label>
-                                <Input 
-                                    type="text"
-                                    name="addMore"
-                                />
-                            </FormGroup>
+                                <FormGroup>
+                                    <Label for="addMore">Add More</Label>
+                                    <Input 
+                                        type="text"
+                                        name="addMore"
+                                    />
+                                </FormGroup>
 
-                        </CardBody>
-                    </Card>
+                            </CardBody>
+                        </Card>
 
-                    <Card>
-                        <CardBody>
-                            <CardTitle>Experience</CardTitle>
+                        <Card>
+                            <CardBody>
+                                <CardTitle>Experience</CardTitle>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Software Development
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Software Development
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    UI/UX Design
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        UI/UX Design
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Engineering Management
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Engineering Management
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Product Development
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Product Development
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Executive Management
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Executive Management
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    Quality Assurance Testing
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        Quality Assurance Testing
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup check>
-                                <Label check>
-                                    <Input type="checkbox" id="checkbox" />
-                                    technology Educator
-                                </Label>
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input type="checkbox" id="checkbox" />
+                                        technology Educator
+                                    </Label>
+                                </FormGroup>
 
-                            <FormGroup>
-                                <Label for="addMore">Other</Label>
-                                <Input 
-                                    type="text"
-                                    name="addMore"
-                                />
-                            </FormGroup>
+                                <FormGroup>
+                                    <Label for="addMore">Other</Label>
+                                    <Input 
+                                        type="text"
+                                        name="addMore"
+                                    />
+                                </FormGroup>
 
-                        </CardBody>
-                    </Card>
+                            </CardBody>
+                        </Card>
 
-                    <Card>
-                        <CardBody>
-                            <CardTitle>I would like to be mentored so I can</CardTitle>
+                        <Card>
+                            <CardBody>
+                                <CardTitle>I would like to be mentored so I can</CardTitle>
 
-                            <FormGroup check>
-                                <Input 
-                                    type="textarea"
-                                    name="mentorshipJustification"
-                                />
-                            </FormGroup>
+                                <FormGroup check>
+                                    <Input 
+                                        type="textarea"
+                                        name="mentorshipJustification"
+                                    />
+                                </FormGroup>
 
-                        </CardBody>
-                    </Card>
-                    
-                </Form>
-            </div>
+                            </CardBody>
+                        </Card>
+                        
+                    </Form>
+                </ProfileContainer>
+            </ContainerDiv>
         );
     }
 }
