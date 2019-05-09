@@ -8,10 +8,6 @@ import {
 import { getSpecificUser } from '../../actions';
 
 class ApplicationsList extends React.Component {
-    state = {
-        menteeApplications: this.props.mentees
-    }
-
     routeToApplication() {
         history.push('/user/admin/mentorapplication');
     }
@@ -29,11 +25,11 @@ class ApplicationsList extends React.Component {
                 </thead>
 
                 <tbody>
-                    {this.state.menteeApplications.map((mentee, index) => {
+                    {this.props.mentees.map((mentee, index) => {
                         return (
                             <tr key={index} onClick={() => this.routeToApplication()}>
-                                <td>{mentee.first_name}</td>
                                 <td>{mentee.last_name}</td>
+                                <td>{mentee.first_name}</td>
                                 <td>{mentee.email}</td>
                                 <td>Undecided</td>
                             </tr>
