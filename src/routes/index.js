@@ -4,20 +4,21 @@ import {
     Route 
 } from 'react-router-dom';
 
+import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
-import UserProfile from '../pages/UserProfile';
+import RegistrationDetails from '../pages/RegistrationDetails';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
-// import NotificationButton from '../pages/NotificationButton';
 import MeetingsPage from '../pages/MeetingsPage'
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
-import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import NavBar from '../components/navBar';
+import RegDetails from '../pages/RegistrationDetails';
+import UserProfile from '../pages/UserProfile';
 
 
 
@@ -32,6 +33,7 @@ const Routes = (props) => {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
+            <Route exact path="/user/register/2" component={RegDetails} />
             <Route exact path="/user/login" component={UserLogin} />
             <Route exact path="/user/profile" component={UserProfile} />
             <Route exact path="/user/notifications" component={Notifications} />
