@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import NotificationButton from '../pages/NotificationButton';
-
-//actions
+import history from '../history';
 
 class NavBar extends Component {
   constructor(props){
@@ -12,23 +12,18 @@ class NavBar extends Component {
     }
   }
 
-  componentDidMount(){
-    //check loggedin status
-
-    //if logged in:
-    //this.setState({ loggedIn: true })
-  }
-
   logOut = () => {
-    localStorage.clear();
-    //should redirect to home '/'
+    localStorage.removeItem("Authorization");
+    // this.setState({ loggedIn: false });
+    history.push('/');
   }
-
+  
   render(){
+    console.log('logout props', this.props);
     return(
       <div>
         <p>Hello from navbar!</p>
-        {this.state.loggedIn ? 
+        {this.props.loggedIn ? 
           <div>
             <Link to='/user/student/profile'>
               <button>Profile</button>
@@ -53,4 +48,10 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.auth.token,
+  }
+}
+
+export default connect(mapStateToProps, {})(NavBar);

@@ -10,7 +10,6 @@ import UserLogin from '../pages/UserLogin';
 import StudentProfile from '../pages/StudentProfile';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
-// import NotificationButton from '../pages/NotificationButton';
 import MeetingsPage from '../pages/MeetingsPage'
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
