@@ -7,45 +7,25 @@ class Notification extends Component {
     constructor(props){
         super(props);
         this.state = {
-            read: false,
             textChange: {
-                textDecoration: "none"
+                
             },
-            notificationCount: this.props.notificationCount,
         }
     }
 
     toggleRead = (e) => {
-        let count = this.state.notificationCount;
+        e.preventDefault();
+        let count = this.props.notifications.filter(elem => elem.watched !== false).length;
         let id = this.props.id;
-        if (!this.state.read) {
-            count--;
-            this.setState({
-                read: true,
-                textChange: {
-                    textDecoration: "line-through"
-                },
-                notificationCount: count
-            })
-        } else {
-            count++;
-            this.setState({
-                read: false,
-                textChange: {
-                    textDecoration: "none",
-                },
-                notificationCount: count
-            })
-        }
         this.props.markNotification(id);
         console.log('count', count);
-        console.log('state', this.state.notificationCount)
+        console.log('state', this.props.notifications.length)
     }
 
     render(){
         const { textChange } = this.state;
         return (
-            <div style={textChange}
+            <div style={{textDecoration: this.props.watched? "line-through" : "none"}}
                 onClick={this.toggleRead}>
                 <p>{this.props.notification}</p>
             </div>
@@ -55,7 +35,7 @@ class Notification extends Component {
 
 const mapStateToProps = state => {
     return {
-        notificationCount: state.notifications.notificationCount,
+        notifications: state.notifications.notifications,
     }
 }
 

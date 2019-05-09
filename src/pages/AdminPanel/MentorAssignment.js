@@ -2,18 +2,15 @@ import React from 'react';
 import {
     InputGroup,
     Input,
-
     Dropdown,
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-
     Nav,
     NavItem,
     NavLink,
     TabContent,
     TabPane,
-
     Table
 } from 'reactstrap';
 import classnames from 'classnames';

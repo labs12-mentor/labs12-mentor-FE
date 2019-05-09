@@ -28,7 +28,7 @@ class NotificationButton extends Component {
 
             {/* display notification count */}
             {this.state.pageLoaded ? 
-              <span>{this.props.notificationCount}</span>
+              <span>{this.props.notificationsCount}</span>
             : null}
           </button>
         </Link>
@@ -39,7 +39,7 @@ class NotificationButton extends Component {
 
 const mapStateToProps = state => {
   return {
-    notificationCount: state.notifications.notificationCount,
+    notificationsCount: state.notifications.notifications.length,
   }
 }
 
