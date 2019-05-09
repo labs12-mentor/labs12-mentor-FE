@@ -5,9 +5,6 @@ import {
     GET_SPECIFIC_USER_START,
     GET_SPECIFIC_USER_FAILURE,
     GET_SPECIFIC_USER_SUCCESS,
-    GET_CURRENT_USER_START,
-    GET_CURRENT_USER_SUCCESS,
-    GET_CURRENT_USER_FAILURE,
     UPDATE_USER_START,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_FAILURE,
@@ -102,46 +99,6 @@ export function getSpecificUser(id){
     function error(err){
         return {
             type: GET_SPECIFIC_USER_FAILURE,
-            payload: err
-        }
-    }
-};
-
-export function getCurrentUser(){
-    return async dispatch => {
-        await dispatch(request());
-
-        return await axios
-            .get(`${API_URL}/users/current_user`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
-                    return await dispatch(success(res.data));
-                }else{
-                    await dispatch(error(res.data.error));
-                    return await Promise.reject(res.data);
-                }
-            })
-            .catch(async err => {
-                return await dispatch(error(err));
-            });
-    }
-
-    function request(){
-        return {
-            type: GET_CURRENT_USER_START
-        }
-    }
-
-    function success(data){
-        return {
-            type: GET_CURRENT_USER_SUCCESS,
-            payload: data
-        }
-    }
-
-    function error(err){
-        return {
-            type: GET_CURRENT_USER_FAILURE,
             payload: err
         }
     }
