@@ -35,6 +35,20 @@ class ExperienceList extends React.Component {
         ) : (
           <h2>Loading</h2>
         )}
+
+<Button color="primary" onClick={this.toggle}>
+          Create New Meeting
+        </Button>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+          external={externalCloseBtn}
+        >
+          <ModalBody>
+            <MeetingsForm canEdit={false} />
+          </ModalBody>
+        </Modal>
       </div>
     );
   }
