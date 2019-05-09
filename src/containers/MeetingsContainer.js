@@ -1,7 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "reactstrap";
-//import MeetingsForm from "../components/MeetingsComponents/MeetingsForm.js";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
 import { deleteMeeting, updateMeeting, getSpecificMeeting } from "../actions";
 

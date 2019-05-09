@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import history from '../../history';
 import {
     Table
 } from 'reactstrap';
@@ -7,8 +8,8 @@ import {
 import { getSpecificUser } from '../../actions';
 
 class ApplicationsList extends React.Component {
-    state = {
-        menteeApplications: this.props.mentees
+    routeToApplication() {
+        history.push('/user/admin/mentorapplication');
     }
 
     render() {
@@ -24,13 +25,13 @@ class ApplicationsList extends React.Component {
                 </thead>
 
                 <tbody>
-                    {this.state.menteeApplications.map((mentee, index) => {
+                    {this.props.mentees.map((mentee, index) => {
                         return (
-                            <tr key={index} >
-                                <td>{mentee.first_name}</td>
+                            <tr key={index} onClick={() => this.routeToApplication()}>
                                 <td>{mentee.last_name}</td>
+                                <td>{mentee.first_name}</td>
                                 <td>{mentee.email}</td>
-                                <td>Approved</td>
+                                <td>Undecided</td>
                             </tr>
                         )
                     })}

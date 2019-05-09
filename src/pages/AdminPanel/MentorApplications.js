@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
 import {
     InputGroup,
     Input,
@@ -32,6 +32,17 @@ class MentorApplications extends React.Component {
         });
     }
 
+    filterBySearch = () => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        const filteredMentees = this.props.mentees.filter(mentee => {
+            return (mentee.last_name.toLowerCase().includes(searchInput)
+                || mentee.first_name.toLowerCase().includes(searchInput) 
+                || mentee.email.toLowerCase().includes(searchInput));
+        });
+        
+        return filteredMentees;
+    }
+
     render() {
         return (
             <div className="MentorApplication">
@@ -58,7 +69,7 @@ class MentorApplications extends React.Component {
 
                 <h3>Applications</h3>
                 
-                {this.props.mentees.length && <MentorAppList mentees={this.props.mentees} />}
+                {this.props.mentees.length && <MentorAppList mentees={this.filterBySearch()} />}
             </div>
         );
     }

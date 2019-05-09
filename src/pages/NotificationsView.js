@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import  Notification from './Notification';
 
 //import actions
-import { getNotifications } from '../actions/notifications';
+import { getNotifications } from '../actions';
 
 //import css
 
@@ -21,7 +21,6 @@ class Notifications extends Component {
   }
 
   render(){
-    const notifications = this.props.notificationList;
     return(
       <div>
         <h2>Hello from Notifications!</h2>
@@ -29,14 +28,16 @@ class Notifications extends Component {
         <div>
           <h4>Your Notifications: </h4>
           <ul className="notifications-list">
-            {this.props.gettingNotification ? <p>waiting for notifications list</p> : null} 
+            {this.props.isFetching ? <p>waiting for notifications list</p> : null} 
             {this.props.notification_error ? <p>cannot get notifications at this time</p> : null}
-            {notifications.map(notification => {
+            {this.props.notifications.map(notification => {
               return (
                 <li key={notification.id}>
                     <Notification 
                       id={notification.id} 
-                      notification={notification.content} />
+                      notification={notification.content}
+                      watched={notification.watched}
+                    />
                 </li>
               )
             })}
@@ -50,8 +51,8 @@ class Notifications extends Component {
 
 const mapStateToProps = state => {
   return {
-    gettingNotification: state.notifications.gettingNotifications,
-    notificationList: state.notifications.notificationList,
+    isFetching: state.notifications.isFetching,
+    notifications: state.notifications.notifications,
     notification_error: state.notifications.error,
   }
 }

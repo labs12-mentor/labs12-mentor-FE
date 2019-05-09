@@ -34,8 +34,12 @@ export default (state = initialState, action) => {
         case GET_INVITATIONS_SUCCESS:
             return {
                 ...state,
-                invitations: action.payload,
-                isFetching: false
+                isFetching: false,
+                invitations: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             }
 
         case GET_INVITATIONS_FAILURE:
@@ -54,8 +58,8 @@ export default (state = initialState, action) => {
         case GET_SPECIFIC_INVITATION_SUCCESS:
             return {
                 ...state,
-                currentInvitation: action.payload,
-                isFetching: false
+                isFetching: false,
+                currentInvitation: action.payload
             }
 
         case GET_SPECIFIC_INVITATION_FAILURE:
@@ -74,7 +78,8 @@ export default (state = initialState, action) => {
         case CREATE_INVITATION_SUCCESS:
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                invitations: [...state.invitations, action.payload]
             }
 
         case CREATE_INVITATION_FAILURE:
@@ -93,7 +98,8 @@ export default (state = initialState, action) => {
         case DELETE_INVITATION_SUCCESS:
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                invitations: state.invitations.filter(elem => elem.id !== action.payload)
             }
 
         case DELETE_INVITATION_FAILURE:
@@ -112,7 +118,8 @@ export default (state = initialState, action) => {
         case REMOVE_INVITATION_SUCCESS:
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                invitations: state.invitations.filter(elem => elem.id !== action.payload)
             }
 
         case REMOVE_INVITATION_FAILURE:

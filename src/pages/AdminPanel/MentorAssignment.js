@@ -2,27 +2,47 @@ import React from 'react';
 import {
     InputGroup,
     Input,
-
     Dropdown,
     DropdownToggle,
     DropdownMenu,
     DropdownItem,
-
     Nav,
     NavItem,
     NavLink,
     TabContent,
     TabPane,
-
     Table
 } from 'reactstrap';
 import classnames from 'classnames';
+
+import MentorAssignList from './MentorAssignList';
+import StudentAssignList from './StudentAssignList';
 
 
 class MentorAssignment extends React.Component {
     state = {
         dropdownOpen: false,
-        activeTab: '1'
+        activeTab: '1',
+        searchBarContents: ""
+    }
+
+    changeHandler = e => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    filterBySearch = () => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        const filteredMentees = this.props.matchedUsers.filter(user => {
+            return (user.last_name.toLowerCase().includes(searchInput)
+                || user.first_name.toLowerCase().includes(searchInput) 
+                || user.email.toLowerCase().includes(searchInput));
+        });
+        
+        return filteredMentees;
     }
 
     toggleDropdown = () => {
@@ -43,7 +63,12 @@ class MentorAssignment extends React.Component {
         return (
             <div className="MentorAssignment">
                 <InputGroup>
-                    <Input placeholder="Search by email or name" />
+                    <Input 
+                        placeholder="Search by email or name"
+                        name="searchBarContents"
+                        value={this.state.searchBarContents}
+                        onChange={this.changeHandler}
+                    />
                 </InputGroup>
 
                 <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
@@ -81,77 +106,13 @@ class MentorAssignment extends React.Component {
                     <TabPane tabId='1'>
                         <h2>Mentors</h2>
 
-                        <Table striped>
-                            <thead>
-                                <tr>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
-                                    <th>City</th>
-                                    <th>Matched Student</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <MentorAssignList matchedUsers={this.filterBySearch()} matches={this.props.matches}/>
                     </TabPane>
 
                     <TabPane tabId='2'>
                         <h2>Students</h2>
 
-                        <Table striped>
-                            <thead>
-                                <tr>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
-                                    <th>City</th>
-                                    <th>Matched Students</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-
-                                <tr>
-                                    <td>Doe</td>
-                                    <td>Jane</td>
-                                    <td>Salt Lake</td>
-                                    <td>John Doe</td>
-                                </tr>
-                            </tbody>
-                        </Table>
+                        <StudentAssignList matchedUsers={this.filterBySearch()} matches={this.props.matches}/>
                     </TabPane>
                 </TabContent>
             </div>

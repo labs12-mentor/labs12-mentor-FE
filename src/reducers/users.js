@@ -5,9 +5,6 @@ import {
     GET_SPECIFIC_USER_START,
     GET_SPECIFIC_USER_SUCCESS,
     GET_SPECIFIC_USER_FAILURE,
-    GET_CURRENT_USER_START,
-    GET_CURRENT_USER_SUCCESS,
-    GET_CURRENT_USER_FAILURE,
     UPDATE_USER_START,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_FAILURE,
@@ -20,10 +17,9 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    fetchingUsers: false,
-    fetchingSpecificUser: false,
     users: [],
-    specificUser: null,
+    isFetching: false,
+    currentUser: null,
     error: null
 }
 
@@ -31,40 +27,113 @@ export default (state = initialState, action) => {
     switch(action.type){
         case GET_USERS_START:
             return {
-                fetchingUsers: true
-            }
+                ...state,
+                isFetching: true
+            };
 
         case GET_USERS_SUCCESS:
             return {
-                fetchingUsers: false,
-                users: action.payload
-            }
+                ...state,
+                isFetching: false,
+                users: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
+            };
 
         case GET_USERS_FAILURE:
             return {
-                fetchingUsers: false,
+                ...state,
+                isFetching: false,
                 error: action.payload
-            }
+            };
 
         case GET_SPECIFIC_USER_START:
             return {
-                fetchingSpecificUser: true
-            }
+                ...state,
+                isFetching: true
+            };
 
         case GET_SPECIFIC_USER_SUCCESS:
             return {
-                fetchingSpecificUser: false,
-                specificUser: action.payload
-            }
+                ...state,
+                isFetching: false,
+                currentUser: action.payload
+            };
 
         case GET_SPECIFIC_USER_FAILURE:
             return {
-                fetchingSpecificUser: false,
+                ...state,
+                isFetching: false,
                 error: action.payload
-            }
+            };
+        
+        case UPDATE_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
 
-        default: {
+        case UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                users: [...state.users.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
+            };
+
+        case UPDATE_USER_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
+        case DELETE_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case DELETE_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                users: state.users.filter(elem => elem.id !== action.payload)
+            };
+
+        case DELETE_USER_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
+        case REMOVE_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case REMOVE_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                users: state.users.filter(elem => elem.id !== action.payload)
+            };
+
+        case REMOVE_USER_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
+        default:
             return state;
-        }
     }
 }

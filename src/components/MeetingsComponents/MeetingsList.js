@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMeetings } from "../../actions";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 
@@ -38,10 +38,10 @@ class MeetingsList extends React.Component {
       </button>
     );
 
-    const nonDeleted = this.props.meetingsList.filter(meeting => {
+    const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
     });
-
+    
     return (
       <div>
         <h1>Your Meetings</h1>
@@ -87,7 +87,7 @@ class MeetingsList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    meetingsList: state.meetings.meetingsList
+    meetings: state.meetings.meetings
   };
 }
 
