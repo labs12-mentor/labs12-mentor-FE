@@ -31,118 +31,128 @@ export default (state = initialState, action) => {
         case GET_MEETINGS_START:
             return {
                 ...state,
-                gettingMeetings: true
+                isFetching: true
             };
 
         case GET_MEETINGS_SUCCESS:
             return {
                 ...state,
-                gettingMeetings: false,
-                meetingsList: action.payload
+                isFetching: false,
+                meetings: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case GET_MEETINGS_FAILURE:
             return {
                 ...state,
-                gettingMeetings: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case GET_SPECIFIC_MEETING_START:
             return {
                 ...state,
-                gettingMeetings: true
+                isFetching: true
             };
 
         case GET_SPECIFIC_MEETING_SUCCESS:
             return {
                 ...state,
-                gettingMeetings: false,
-                meetingsList: action.payload
+                isFetching: false,
+                currentMeeting: action.payload
             };
 
         case GET_SPECIFIC_MEETING_FAILURE:
             return {
                 ...state,
-                gettingMeetings: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case CREATE_MEETING_START:
             return {
                 ...state,
-                creatingMeetings: true
+                isFetching: true
             };
 
         case CREATE_MEETING_SUCCESS:
             return {
                 ...state,
-                createMeetings: false,
-                meetingsList: [...state.meetingsList, action.payload]
+                isFetching: false,
+                meetings: [...state.meetings, action.payload]
             };
 
         case CREATE_MEETING_FAILURE:
             return {
                 ...state,
-                createMeetings: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case UPDATE_MEETING_START:
             return {
                 ...state,
-                updateMeetings: true
+                isFetching: true
             };
 
         case UPDATE_MEETING_SUCCESS:
             return {
                 ...state,
-                updateMeetings: false,
-                meetingsList: [...state.meetingsList, action.payload]
+                isFetching: false,
+                meetings: [...state.meetings.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case UPDATE_MEETING_FAILURE:
             return {
                 ...state,
-                updateMeetings: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case DELETE_MEETING_START:
             return {
                 ...state,
-                deleteMeetings: true
+                isFetching: true
             };
 
         case DELETE_MEETING_SUCCESS:
             return {
                 ...state,
-                deleteMeetings: false
+                isFetching: false,
+                meetings: state.meetings.filter(elem => elem.id !== action.payload)
             };
 
         case DELETE_MEETING_FAILURE:
             return {
                 ...state,
-                deleteMeetings: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case REMOVE_MEETING_START:
             return {
                 ...state,
-                deleteMeetings: true
+                isFetching: true
             };
 
         case REMOVE_MEETING_SUCCESS:
             return {
                 ...state,
-                deleteMeetings: false
+                isFetching: false,
+                meetings: state.meetings.filter(elem => elem.id !== action.payload)
             };
 
         case REMOVE_MEETING_FAILURE:
             return {
                 ...state,
-                deleteMeetings: false,
+                isFetching: false,
                 error: action.payload
             };
 
