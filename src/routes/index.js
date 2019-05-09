@@ -4,6 +4,7 @@ import {
     Route 
 } from 'react-router-dom';
 
+import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
@@ -13,7 +14,6 @@ import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage'
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
-import HomePage from '../pages/HomePage';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import NavBar from '../components/navBar';
