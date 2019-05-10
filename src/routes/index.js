@@ -8,7 +8,6 @@ import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
-import RegistrationDetails from '../pages/RegistrationDetails';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage'
@@ -19,6 +18,7 @@ import MentorsList from '../components/MentorComponents/MentorsList';
 import NavBar from '../components/navBar';
 import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
+import MentorForm from '../components/MentorComponents/MentorForm';
 
 
 
@@ -43,6 +43,7 @@ const Routes = (props) => {
             <Route exact path="/user/meetings" component={MeetingsPage}/>
             <Route exact path="/user/experiences" component={ExperienceList}/>
             <Route exact path="/user/mentorsList" component={MentorsList}/>
+            <Route exact path ="/user/mentorform" component={MentorForm}/>
 
 
         </Router>

@@ -17,9 +17,11 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
+import history from '../history';
 import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
+
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -53,8 +55,9 @@ class UserProfile extends React.Component {
     });
   };
 
-  submitHandler = e => {
+  toForm = e => {
     e.preventDefault();
+    history.push("/user/mentorform")
   };
 
   render() {
@@ -87,6 +90,9 @@ class UserProfile extends React.Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
+              <Button onClick={this.toForm}>    
+          Apply to be a mentor
+        </Button>
                 <div className="StudentProfile">
                   <Form>
                     <FormGroup check>
