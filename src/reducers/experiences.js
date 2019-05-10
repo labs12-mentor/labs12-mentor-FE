@@ -24,10 +24,10 @@ const initialState = {
     isFetching: false,
     currentExperience: null,
     error: null
-}
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case GET_EXPERIENCES_START:
             return {
                 ...state,
@@ -102,7 +102,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                experiences: [...state.experiences.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                experiences: [
+                    ...state.experiences.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -126,7 +129,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                experiences: state.experiences.filter(elem => elem.id !== action.payload)
+                experiences: state.experiences.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_EXPERIENCE_FAILURE:
@@ -135,7 +138,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case REMOVE_EXPERIENCE_START:
             return {
                 ...state,
@@ -146,7 +149,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                experiences: state.experiences.filter(elem => elem.id !== action.payload)
+                experiences: state.experiences.filter((elem) => elem.id !== action.payload)
             };
 
         case REMOVE_EXPERIENCE_FAILURE:
@@ -155,8 +158,8 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-            
+
         default:
             return state;
     }
-}
+};
