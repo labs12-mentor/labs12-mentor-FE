@@ -32,7 +32,7 @@ const Routes = (props) => {
                 path='/organization/register'
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
-            <Route exact path='/user/register' component={RouteNoAuthNeeded(UserRegister)} />
+            <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
             <Route exact path='/user/profile' component={RouteAuthNeeded(UserProfile)} />

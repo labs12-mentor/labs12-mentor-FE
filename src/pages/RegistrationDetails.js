@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Col,
-    Row,
-    Card,
-    CardBody,
-    CardTitle
-} from 'reactstrap';
+import { Form, FormGroup, Label, Input, Col, Row, Card, CardBody, CardTitle } from 'reactstrap';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
 
@@ -28,25 +18,25 @@ const ProfileContainer = styled.div`
 
 class RegistrationDetails extends React.Component {
     state = {
-        firstName: "",
-        lastName: "",
-        address: "",
-        zipCode: "",
-        github: "",
-        linkedIn: ""
-    }
+        firstName: '',
+        lastName: '',
+        address: '',
+        zipCode: '',
+        github: '',
+        linkedIn: ''
+    };
 
-    changeHandler = e => {
+    changeHandler = (e) => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         });
-    }
+    };
 
-    submitHandler = e => {
+    submitHandler = (e) => {
         e.preventDefault();
         //add submit fxn to props and pass in state
-    }
+    };
 
     render() {
         return (
@@ -57,53 +47,52 @@ class RegistrationDetails extends React.Component {
                         <Row>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="firstName">First Name</Label>
+                                    <Label for='firstName'>First Name</Label>
                                     <Input
-                                        type="text"
-                                        name="firstName"
-                                        id="firstName"
+                                        type='text'
+                                        name='firstName'
+                                        id='firstName'
                                         value={this.state.firstName}
                                         onChange={this.changeHandler}
                                     />
                                 </FormGroup>
                             </Col>
-                            
+
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="lastName">Last Name</Label>
+                                    <Label for='lastName'>Last Name</Label>
                                     <Input
-                                        type="text"
-                                        name="lastName"
-                                        id="lastName"
+                                        type='text'
+                                        name='lastName'
+                                        id='lastName'
                                         value={this.state.lastName}
                                         onChange={this.changeHandler}
                                     />
                                 </FormGroup>
                             </Col>
                         </Row>
-                        
-                        
+
                         <Row>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="address">Address</Label>
+                                    <Label for='address'>Address</Label>
                                     <Input
-                                        type="text"
-                                        name="address"
-                                        id="address"
+                                        type='text'
+                                        name='address'
+                                        id='address'
                                         value={this.state.address}
                                         onChange={this.changeHandler}
                                     />
                                 </FormGroup>
                             </Col>
-                                
+
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="zipCode">Zip Code</Label>
+                                    <Label for='zipCode'>Zip Code</Label>
                                     <Input
-                                        type="text"
-                                        name="zipCode"
-                                        id="zipCode"
+                                        type='text'
+                                        name='zipCode'
+                                        id='zipCode'
                                         value={this.state.zipCode}
                                         onChange={this.changeHandler}
                                     />
@@ -114,24 +103,24 @@ class RegistrationDetails extends React.Component {
                         <Row>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="github">Github</Label>
+                                    <Label for='github'>Github</Label>
                                     <Input
-                                        type="text"
-                                        name="github"
-                                        id="github"
+                                        type='text'
+                                        name='github'
+                                        id='github'
                                         value={this.state.github}
                                         onChange={this.changeHandler}
                                     />
                                 </FormGroup>
                             </Col>
-                                
+
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="linkedIn">linkedIn</Label>
+                                    <Label for='linkedIn'>linkedIn</Label>
                                     <Input
-                                        type="text"
-                                        name="linkedIn"
-                                        id="linkedIn"
+                                        type='text'
+                                        name='linkedIn'
+                                        id='linkedIn'
                                         value={this.state.linkedIn}
                                         onChange={this.changeHandler}
                                     />
@@ -145,40 +134,36 @@ class RegistrationDetails extends React.Component {
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Check me out
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Check me out
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Check me out
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Check me out
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Label for="addMore">Add More</Label>
-                                    <Input 
-                                        type="text"
-                                        name="addMore"
-                                    />
+                                    <Label for='addMore'>Add More</Label>
+                                    <Input type='text' name='addMore' />
                                 </FormGroup>
-
                             </CardBody>
                         </Card>
 
@@ -188,61 +173,57 @@ class RegistrationDetails extends React.Component {
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Software Development
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         UI/UX Design
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Engineering Management
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Product Development
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Executive Management
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         Quality Assurance Testing
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup check>
                                     <Label check>
-                                        <Input type="checkbox" id="checkbox" />
+                                        <Input type='checkbox' id='checkbox' />
                                         technology Educator
                                     </Label>
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Label for="addMore">Other</Label>
-                                    <Input 
-                                        type="text"
-                                        name="addMore"
-                                    />
+                                    <Label for='addMore'>Other</Label>
+                                    <Input type='text' name='addMore' />
                                 </FormGroup>
-
                             </CardBody>
                         </Card>
 
@@ -251,15 +232,10 @@ class RegistrationDetails extends React.Component {
                                 <CardTitle>I would like to be mentored so I can</CardTitle>
 
                                 <FormGroup check>
-                                    <Input 
-                                        type="textarea"
-                                        name="mentorshipJustification"
-                                    />
+                                    <Input type='textarea' name='mentorshipJustification' />
                                 </FormGroup>
-
                             </CardBody>
                         </Card>
-                        
                     </Form>
                 </ProfileContainer>
             </ContainerDiv>
