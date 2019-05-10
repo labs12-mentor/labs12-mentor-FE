@@ -45,6 +45,15 @@ class MenteeForm extends React.Component {
       return (
         <Form onSubmit={this.createMentee}>
           <FormGroup>
+            <Label>User Id</Label>
+            <Input
+              type="text"
+              name="user_id"
+              placeholder="user id"
+              onChange={this.handleChanges}
+            />
+          </FormGroup>
+          <FormGroup>
             <Label>Wanted Mentor Id</Label>
             <Input
               type="text"
