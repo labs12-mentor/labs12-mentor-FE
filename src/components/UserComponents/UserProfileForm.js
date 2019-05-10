@@ -20,33 +20,113 @@ class UserProfileForm extends React.Component {
         github_token: "",
         organization_id: "",
         deleted: false,
-        user: []
+        
 
     }
 
     async componentDidMount() {
         await this.props.getCurrentUser();
-        this.setState({user: this.props.user})
-
+        this.setState({
+            ...this.state,
+            id: this.props.user.id,
+            email: this.props.user.email,
+            password: this.props.user.password,
+            first_name: this.props.user.first_name,
+            last_name: this.props.user.last_name,
+            street: this.props.user.street,
+            city: this.props.user.city,
+            state: this.props.user.state,
+            zipcode: this.props.user.zipcode,
+            country: this.props.user.country,
+            role: this.props.user.role,
+            github_id: this.props.user.github_id,
+            github_token: this.props.user.github_token,
+            organization_id: this.props.user.organization_id,
+        })
+        
     }
 
     updateUser = e => {
         e.preventDefault();
-        this.props.updateUser();
+        this.props.updateUser(this.state.id, this.state);
     }
 
     render() {
         return (
-            <Form>
+            <Form onSubmit={this.updateUser}>
                 <FormGroup>
-              <Label>Hi</Label>
+              <Label>{this.state.email}</Label>
               <Input
                 type="text"
-                name="content"
-                placeholder="content"
+                name="email"
+                placeholder="New email"
                 onChange={this.handleChanges}
               />
             </FormGroup>
+            <FormGroup>
+              <Label>{this.state.first_name}</Label>
+              <Input
+                type="text"
+                name="first_name"
+                placeholder="New First Name"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>{this.state.last_name}</Label>
+              <Input
+                type="text"
+                name="last_name"
+                placeholder="New Last Name"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>{this.state.street}</Label>
+              <Input
+                type="text"
+                name="street"
+                placeholder="street"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>{this.state.city}</Label>
+              <Input
+                type="text"
+                name="city"
+                placeholder="New city"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>{this.state.state}</Label>
+              <Input
+                type="text"
+                name="state"
+                placeholder="New state"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>{this.state.zipcode}</Label>
+              <Input
+                type="text"
+                name="zipcode"
+                placeholder="New zipcode"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label>{this.state.country}</Label>
+              <Input
+                type="text"
+                name="country"
+                placeholder="New country"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
+            <Button onClick={this.updateUser}>Update</Button>
             </Form>
         )
     }
@@ -65,8 +145,8 @@ const mapStateToProps = state => {
     };
 }
 
-const mapDispatchToProps = state => {
-    updateUser
+const mapDispatchToProps = {
+    updateUser,
     getCurrentUser
 }
 
