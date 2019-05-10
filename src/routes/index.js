@@ -5,6 +5,7 @@ import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
 
 import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
+import OrganizationDetails from '../pages/OrganizationDetails';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
 import Notifications from '../pages/NotificationsView';
@@ -54,6 +55,7 @@ const Routes = (props) => {
             <Route exact path='/user/mentorform' component={RouteAuthNeeded(MentorForm)} />
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
+            <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
         </Router>
     );
 };
