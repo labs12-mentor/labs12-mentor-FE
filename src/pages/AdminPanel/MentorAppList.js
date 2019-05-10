@@ -5,11 +5,9 @@ import {
     Table
 } from 'reactstrap';
 
-import { getSpecificUser } from '../../actions';
-
 class ApplicationsList extends React.Component {
-    routeToApplication() {
-        history.push('/user/admin/mentorapplication');
+    routeToApplication(id) {
+        history.push(`/user/admin/mentorapplication/${id}`);
     }
 
     render() {
@@ -27,7 +25,7 @@ class ApplicationsList extends React.Component {
                 <tbody>
                     {this.props.mentees.map((mentee, index) => {
                         return (
-                            <tr key={index} onClick={() => this.routeToApplication()}>
+                            <tr key={index} onClick={() => this.routeToApplication(mentee.id)}>
                                 <td>{mentee.last_name}</td>
                                 <td>{mentee.first_name}</td>
                                 <td>{mentee.email}</td>
@@ -41,4 +39,4 @@ class ApplicationsList extends React.Component {
     }
 }
 
-export default connect(null, { getSpecificUser })(ApplicationsList);
+export default ApplicationsList;
