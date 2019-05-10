@@ -10,8 +10,6 @@ class MenteeForm extends React.Component {
     canEdit: false
   };
 
-
-
   createMentee = e => {
     e.preventDefault();
     this.props.createMentee(this.state);
@@ -54,7 +52,6 @@ class MenteeForm extends React.Component {
               placeholder="Mentor Id"
               onChange={this.handleChanges}
             />
-
           </FormGroup>
           <Button onClick={this.createMentee}>Add Mentee</Button>
         </Form>
@@ -69,8 +66,6 @@ class MenteeForm extends React.Component {
     });
   };
 }
-
-
 
 export default connect(
   null,
