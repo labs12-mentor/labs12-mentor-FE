@@ -24,10 +24,10 @@ const initialState = {
     isFetching: false,
     currentMatch: null,
     error: null
-}
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case GET_MATCHES_START:
             return {
                 ...state,
@@ -99,7 +99,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                matches: [...state.matches.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                matches: [
+                    ...state.matches.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -111,7 +114,7 @@ export default (state = initialState, action) => {
                 ...state,
                 error: action.payload
             };
-        
+
         case DELETE_MATCH_START:
             return {
                 ...state,
@@ -122,7 +125,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                matches: state.matches.filter(elem => elem.id !== action.payload)
+                matches: state.matches.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_MATCH_FAILURE:
@@ -141,7 +144,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                matches: state.matches.filter(elem => elem.id !== action.payload)
+                matches: state.matches.filter((elem) => elem.id !== action.payload)
             };
 
         case REMOVE_MATCH_FAILURE:
@@ -150,8 +153,7 @@ export default (state = initialState, action) => {
                 error: action.payload
             };
 
-        
         default:
             return state;
     }
-}
+};
