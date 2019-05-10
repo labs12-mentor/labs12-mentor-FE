@@ -30,5 +30,8 @@ export default (ComposedComponent) => {
         return { authenticated: state.auth.token !== null };
     }
 
-    return connect(mapStateToProps)(Authentication);
+    return connect(
+        mapStateToProps,
+        {}
+    )(Authentication);
 };
