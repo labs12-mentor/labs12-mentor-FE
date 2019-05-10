@@ -21,6 +21,7 @@ import history from '../history';
 import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
+import UserProfileForm from "../components/UserComponents/UserProfileForm";
 import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
 
@@ -202,6 +203,7 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
         </TabContent>
+        {/* <UserProfileForm/> */}
       </div>
     );
   }
