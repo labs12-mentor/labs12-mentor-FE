@@ -10,13 +10,13 @@ import {
     NavItem,
     NavLink,
     TabContent,
-    TabPane,
-    Table
+    TabPane
 } from 'reactstrap';
 import classnames from 'classnames';
 
 import MentorAssignList from './MentorAssignList';
 import StudentAssignList from './StudentAssignList';
+import { assignmentExpression } from '@babel/types';
 
 
 class MentorAssignment extends React.Component {
@@ -106,13 +106,21 @@ class MentorAssignment extends React.Component {
                     <TabPane tabId='1'>
                         <h2>Mentors</h2>
 
-                        <MentorAssignList matchedUsers={this.filterBySearch()} matches={this.props.matches}/>
+                        <MentorAssignList 
+                            matchedUsers={this.filterBySearch()}
+                            users={this.props.users}
+                            matches={this.props.matches}
+                        />
                     </TabPane>
 
                     <TabPane tabId='2'>
                         <h2>Students</h2>
 
-                        <StudentAssignList matchedUsers={this.filterBySearch()} matches={this.props.matches}/>
+                        <StudentAssignList 
+                            matchedUsers={this.filterBySearch()}
+                            users={this.props.users}
+                            matches={this.props.matches}
+                        />
                     </TabPane>
                 </TabContent>
             </div>

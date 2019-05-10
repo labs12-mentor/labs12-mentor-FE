@@ -8,7 +8,7 @@ import {
     TabPane,
 } from 'reactstrap';
 import classnames from 'classnames';
-import { getUsers, getMentees, getMatches } from '../../actions';
+import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
@@ -112,7 +112,11 @@ class AdminPanel extends React.Component {
                     </TabPane>
 
                     <TabPane tabId="2">
-                        <MentorAssignment matchedUsers={this.filterMatchedUsers()} matches={this.state.matches} />
+                        <MentorAssignment 
+                            matchedUsers={this.filterMatchedUsers()} 
+                            users={this.state.users}
+                            matches={this.state.matches} 
+                        />
                     </TabPane>
 
                     <TabPane tabId="3">
