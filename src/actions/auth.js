@@ -73,7 +73,13 @@ export function registerOrganization(orgData) {
             .post(`${API_URL}/auth/register`, orgData)
             .then(async (res) => {
                 if (res.status === 201) {
-                    return await dispatch(success(res.data));
+                    await dispatch(success(res.data));
+                    return await dispatch(
+                        loginUser({
+                            email: orgData.user_email,
+                            password: orgData.user_password
+                        })
+                    );
                 } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
