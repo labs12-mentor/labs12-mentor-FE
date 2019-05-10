@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-
 import {createInvitation} from '../../actions/invitations';
 
 class InviteForm extends Component {
