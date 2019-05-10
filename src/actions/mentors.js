@@ -21,18 +21,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getMentors() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/mentors`, authHeader)
+            .get(`${API_URL}/mentors`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -72,7 +68,9 @@ export function getSpecificMentor(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/mentors/${id}`, authHeader)
+            .get(`${API_URL}/mentors/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -112,7 +110,9 @@ export function createMentor(mentorData) {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/mentors`, mentorData, authHeader)
+            .post(`${API_URL}/mentors`, mentorData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 201) {
                     return await dispatch(success(res.data));
@@ -152,7 +152,9 @@ export function updateMentor(id, mentorData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/mentors/${id}`, mentorData, authHeader)
+            .put(`${API_URL}/mentors/${id}`, mentorData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -192,7 +194,9 @@ export function deleteMentor(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/mentors/${id}`, authHeader)
+            .delete(`${API_URL}/mentors/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -232,7 +236,9 @@ export function removeMentor(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/mentors/${id}/remove`, authHeader)
+            .delete(`${API_URL}/mentors/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

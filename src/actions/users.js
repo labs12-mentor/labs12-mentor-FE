@@ -18,18 +18,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getUsers() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/users`, authHeader)
+            .get(`${API_URL}/users`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -69,7 +65,9 @@ export function getSpecificUser(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/users/${id}`, authHeader)
+            .get(`${API_URL}/users/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -109,7 +107,9 @@ export function updateUser(id, userData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/users/${id}`, userData, authHeader)
+            .put(`${API_URL}/users/${id}`, userData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -149,7 +149,9 @@ export function deleteUser(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/users/${id}`, authHeader)
+            .delete(`${API_URL}/users/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -189,7 +191,9 @@ export function removeUser(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/users/${id}/remove`, authHeader)
+            .delete(`${API_URL}/users/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

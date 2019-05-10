@@ -21,18 +21,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getMentees() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/mentees`, authHeader)
+            .get(`${API_URL}/mentees`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -72,7 +68,9 @@ export function getSpecificMentee(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/mentees/${id}`, authHeader)
+            .get(`${API_URL}/mentees/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -112,7 +110,9 @@ export function createMentee(menteeData) {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/mentees`, menteeData, authHeader)
+            .post(`${API_URL}/mentees`, menteeData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 201) {
                     return await dispatch(success(res.data));
@@ -152,7 +152,9 @@ export function updateMentee(id, menteeData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/mentees/${id}`, menteeData, authHeader)
+            .put(`${API_URL}/mentees/${id}`, menteeData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -192,7 +194,9 @@ export function deleteMentee(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/mentees/${id}`, authHeader)
+            .delete(`${API_URL}/mentees/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -232,7 +236,9 @@ export function removeMentee(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/mentees/${id}/remove`, authHeader)
+            .delete(`${API_URL}/mentees/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

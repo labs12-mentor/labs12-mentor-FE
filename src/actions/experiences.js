@@ -21,18 +21,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getExperiences() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/experiences`, authHeader)
+            .get(`${API_URL}/experiences`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -72,7 +68,9 @@ export function getSpecificExperience(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/experiences/${id}`, authHeader)
+            .get(`${API_URL}/experiences/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -112,7 +110,9 @@ export function createExperience(experienceData) {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/experiences`, experienceData, authHeader)
+            .post(`${API_URL}/experiences`, experienceData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 201) {
                     return await dispatch(success(res.data));
@@ -152,7 +152,9 @@ export function updateExperience(id, experienceData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/experiences/${id}`, experienceData, authHeader)
+            .put(`${API_URL}/experiences/${id}`, experienceData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -192,7 +194,9 @@ export function deleteExperience(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/experiences/${id}`, authHeader)
+            .delete(`${API_URL}/experiences/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -232,7 +236,9 @@ export function removeExperience(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/experiences/${id}/remove`, authHeader)
+            .delete(`${API_URL}/experiences/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

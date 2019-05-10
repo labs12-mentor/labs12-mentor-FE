@@ -25,12 +25,6 @@ import axios from 'axios';
 import { API_URL } from '../constants/config';
 import history from '../history';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function loginUser(credentials) {
     return async (dispatch) => {
         await dispatch(request());
@@ -156,7 +150,11 @@ export function getCurrentUser() {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/users/current_user`, authHeader)
+            .get(`${API_URL}/users/current_user`, {
+                headers: {
+                    Authorization: localStorage.getItem('Authorization')
+                }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

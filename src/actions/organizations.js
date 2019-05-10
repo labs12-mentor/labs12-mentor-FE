@@ -18,18 +18,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getOrganizations() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/organizations`, authHeader)
+            .get(`${API_URL}/organizations`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -69,7 +65,9 @@ export function getSpecificOrganization(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/organizations/${id}`, authHeader)
+            .get(`${API_URL}/organizations/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -109,7 +107,9 @@ export function updateOrganization(id, organizationData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/organizations/${id}`, organizationData, authHeader)
+            .put(`${API_URL}/organizations/${id}`, organizationData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -149,7 +149,9 @@ export function deleteOrganization(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/organizations/${id}`, authHeader)
+            .delete(`${API_URL}/organizations/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -189,7 +191,9 @@ export function removeOrganization(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/organizations/${id}/remove`, authHeader)
+            .delete(`${API_URL}/organizations/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

@@ -21,18 +21,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getMeetings() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/meetings`, authHeader)
+            .get(`${API_URL}/meetings`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -72,7 +68,9 @@ export function getSpecificMeeting(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/meetings/${id}`, authHeader)
+            .get(`${API_URL}/meetings/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -112,7 +110,9 @@ export function createMeeting(meetingData) {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/meetings`, meetingData, authHeader)
+            .post(`${API_URL}/meetings`, meetingData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 201) {
                     return await dispatch(success(res.data));
@@ -152,7 +152,9 @@ export function updateMeeting(id, meetingData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/meetings/${id}`, meetingData, authHeader)
+            .put(`${API_URL}/meetings/${id}`, meetingData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -192,7 +194,9 @@ export function deleteMeeting(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/meetings/${id}`, authHeader)
+            .delete(`${API_URL}/meetings/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -232,7 +236,9 @@ export function removeMeeting(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/meetings/${id}/remove`, authHeader)
+            .delete(`${API_URL}/meetings/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));

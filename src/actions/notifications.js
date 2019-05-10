@@ -24,18 +24,14 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem('Authorization')
-    }
-};
-
 export function getNotifications() {
     return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/notifications`, authHeader)
+            .get(`${API_URL}/notifications`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -75,7 +71,9 @@ export function getSpecificNotification(id) {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/notifications/${id}`, authHeader)
+            .get(`${API_URL}/notifications/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -115,7 +113,9 @@ export function createNotification(notificationData) {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/notifications`, notificationData, authHeader)
+            .post(`${API_URL}/notifications`, notificationData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 201) {
                     return await dispatch(success(res.data));
@@ -155,7 +155,9 @@ export function updateNotification(id, notificationData) {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/notifications/${id}`, notificationData, authHeader)
+            .put(`${API_URL}/notifications/${id}`, notificationData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -194,7 +196,11 @@ export function markNotification(id) {
     return async (dispatch) => {
         await dispatch(request());
         return await axios
-            .patch(`${API_URL}/notifications/${id}`, {}, authHeader)
+            .patch(
+                `${API_URL}/notifications/${id}`,
+                {},
+                { headers: { Authorization: localStorage.getItem('Authorization') } }
+            )
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -234,7 +240,9 @@ export function deleteNotification(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/notifications/${id}`, authHeader)
+            .delete(`${API_URL}/notifications/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -274,7 +282,9 @@ export function removeNotification(id) {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/notifications/${id}/remove`, authHeader)
+            .delete(`${API_URL}/notifications/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
