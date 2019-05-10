@@ -19,7 +19,7 @@ import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
-import MatchesList from '../components/MatchesComponents/MatchesList'
+import MatchesList from '../components/MatchesComponents/MatchesList';
 
 const Routes = (props) => {
     return (
@@ -51,9 +51,9 @@ const Routes = (props) => {
             <Route exact path='/user/experiences' component={RouteAuthNeeded(ExperienceList)} />
             <Route exact path='/user/mentorsList' component={RouteAuthNeeded(MentorsList)} />
             {/* <Route exact path="/user/admin/invite" component={Invite} /> */}
-            <Route exact path ="/user/mentorform" component={MentorForm}/>
-            <Route exact path ="/user/inviteform" component={InviteForm}/>
-            <Route exact path="/user/matchlist" component={MatchesList}/>
+            <Route exact path='/user/mentorform' component={RouteAuthNeeded(MentorForm)} />
+            <Route exact path='/user/inviteform' component={InviteForm} />
+            <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
         </Router>
     );
 };
