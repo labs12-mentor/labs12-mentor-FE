@@ -24,10 +24,10 @@ const initialState = {
     isFetching: false,
     currentMentee: null,
     error: null
-}
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case GET_MENTEES_START:
             return {
                 ...state,
@@ -71,7 +71,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case CREATE_MENTEE_START:
             return {
                 ...state,
@@ -91,7 +91,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case UPDATE_MENTEE_START:
             return {
                 ...state,
@@ -102,7 +102,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                mentees: [...state.mentees.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                mentees: [
+                    ...state.mentees.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -115,7 +118,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case DELETE_MENTEE_START:
             return {
                 ...state,
@@ -126,7 +129,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                mentees: state.mentees.filter(elem => elem.id !== action.payload)
+                mentees: state.mentees.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_MENTEE_FAILURE:
@@ -135,7 +138,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case REMOVE_MENTEE_START:
             return {
                 ...state,
@@ -146,7 +149,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                mentees: state.mentees.filter(elem => elem.id !== action.payload)
+                mentees: state.mentees.filter((elem) => elem.id !== action.payload)
             };
 
         case REMOVE_MENTEE_FAILURE:
@@ -159,4 +162,4 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};

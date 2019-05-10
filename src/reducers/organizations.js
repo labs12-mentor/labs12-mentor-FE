@@ -21,10 +21,10 @@ const initialState = {
     isFetching: false,
     currentOrganization: null,
     error: null
-}
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case GET_ORGANIZATIONS_START:
             return {
                 ...state,
@@ -79,7 +79,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                organizations: [...state.organizations.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                organizations: [
+                    ...state.organizations.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -103,7 +106,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                organizations: state.organizations.filter(elem => elem.id !== action.payload)
+                organizations: state.organizations.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_ORGANIZATION_FAILURE:
@@ -112,7 +115,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case REMOVE_ORGANIZATION_START:
             return {
                 ...state,
@@ -123,7 +126,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                organizations: state.organizations.filter(elem => elem.id !== action.payload)
+                organizations: state.organizations.filter((elem) => elem.id !== action.payload)
             };
 
         case REMOVE_ORGANIZATION_FAILURE:
@@ -136,4 +139,4 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};
