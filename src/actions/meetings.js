@@ -21,19 +21,15 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
-const authHeader = {
-        headers: {
-                Authorization: localStorage.getItem("Authorization")
-        }
-};
-
 export function getMeetings() {
-    return async dispatch => {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/meetings`, authHeader)
-            .then(async res => {
+            .get(`${API_URL}/meetings`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
                 } else {
@@ -41,7 +37,7 @@ export function getMeetings() {
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
     };
@@ -68,12 +64,14 @@ export function getMeetings() {
 }
 
 export function getSpecificMeeting(id) {
-    return async dispatch => {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/meetings/${id}`, authHeader)
-            .then(async res => {
+            .get(`${API_URL}/meetings/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
                 } else {
@@ -81,7 +79,7 @@ export function getSpecificMeeting(id) {
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
     };
@@ -108,12 +106,14 @@ export function getSpecificMeeting(id) {
 }
 
 export function createMeeting(meetingData) {
-    return async dispatch => {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/meetings`, meetingData, authHeader)
-            .then(async res => {
+            .post(`${API_URL}/meetings`, meetingData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
                 if (res.status === 201) {
                     return await dispatch(success(res.data));
                 } else {
@@ -121,7 +121,7 @@ export function createMeeting(meetingData) {
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
     };
@@ -148,12 +148,14 @@ export function createMeeting(meetingData) {
 }
 
 export function updateMeeting(id, meetingData) {
-    return async dispatch => {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/meetings/${id}`, meetingData, authHeader)
-            .then(async res => {
+            .put(`${API_URL}/meetings/${id}`, meetingData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
                 } else {
@@ -161,7 +163,7 @@ export function updateMeeting(id, meetingData) {
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
     };
@@ -188,12 +190,14 @@ export function updateMeeting(id, meetingData) {
 }
 
 export function deleteMeeting(id) {
-    return async dispatch => {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/meetings/${id}`, authHeader)
-            .then(async res => {
+            .delete(`${API_URL}/meetings/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
                 } else {
@@ -201,7 +205,7 @@ export function deleteMeeting(id) {
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
     };
@@ -228,12 +232,14 @@ export function deleteMeeting(id) {
 }
 
 export function removeMeeting(id) {
-    return async dispatch => {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/meetings/${id}/remove`, authHeader)
-            .then(async res => {
+            .delete(`${API_URL}/meetings/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
                 } else {
@@ -241,7 +247,7 @@ export function removeMeeting(id) {
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
     };

@@ -102,7 +102,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                mentors: [...state.mentors.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                mentors: [
+                    ...state.mentors.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -126,7 +129,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                mentors: state.mentors.filter(elem => elem.id !== action.payload)
+                mentors: state.mentors.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_MENTOR_FAILURE:
@@ -146,7 +149,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                mentors: state.mentors.filter(elem => elem.id !== action.payload)
+                mentors: state.mentors.filter((elem) => elem.id !== action.payload)
             };
 
         case REMOVE_MENTOR_FAILURE:

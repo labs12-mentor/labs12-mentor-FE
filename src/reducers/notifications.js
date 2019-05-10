@@ -27,10 +27,10 @@ const initialState = {
     isFetching: false,
     currentNotification: null,
     error: null
-}
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case GET_NOTIFICATIONS_START:
             return {
                 ...state,
@@ -105,7 +105,10 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                notifications: [...state.notifications.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                notifications: [
+                    ...state.notifications.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -118,17 +121,20 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case MARK_NOTIFICATION_START:
             return {
                 ...state,
-                isFetching: true,
+                isFetching: true
             };
         case MARK_NOTIFICATION_SUCCESS:
             return {
                 ...state,
                 isFetching: false,
-                notifications: [...state.notifications.filter(elem => elem.id !== action.payload.id), action.payload].sort((a, b) => {
+                notifications: [
+                    ...state.notifications.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
                     if (a.id < b.id) return -1;
                     if (a.id > b.id) return 1;
                     return 0;
@@ -139,7 +145,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isFetching: false,
                 error: action.payload
-            }
+            };
 
         case DELETE_NOTIFICATION_START:
             return {
@@ -151,7 +157,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                notifications: state.notifications.filter(elem => elem.id !== action.payload)
+                notifications: state.notifications.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_NOTIFICATION_FAILURE:
@@ -160,7 +166,7 @@ export default (state = initialState, action) => {
                 isFetching: false,
                 error: action.payload
             };
-        
+
         case REMOVE_NOTIFICATION_START:
             return {
                 ...state,
@@ -171,7 +177,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                notifications: state.notifications.filter(elem => elem.id !== action.payload)
+                notifications: state.notifications.filter((elem) => elem.id !== action.payload)
             };
 
         case REMOVE_NOTIFICATION_FAILURE:
@@ -184,4 +190,4 @@ export default (state = initialState, action) => {
         default:
             return state;
     }
-}
+};

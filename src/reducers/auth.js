@@ -16,11 +16,14 @@ import {
     GITHUB_REGISTER_WITH_INVITATION_FAILURE,
     GET_CURRENT_USER_START,
     GET_CURRENT_USER_SUCCESS,
-    GET_CURRENT_USER_FAILURE
-} from "../constants/actionTypes";
+    GET_CURRENT_USER_FAILURE,
+    LOGOUT_USER_START,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_FAILURE
+} from '../constants/actionTypes';
 
 const initialState = {
-    token: localStorage.getItem("Authorization"),
+    token: localStorage.getItem('Authorization'),
     isFetching: false,
     currentUser: null,
     error: null
@@ -39,7 +42,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false,
-                token: action.payload.token
+                token: localStorage.getItem('Authorization') || null
             };
 
         case LOGIN_USER_FAILURE:
@@ -57,11 +60,11 @@ export default (state = initialState, action) => {
 
         case LOGIN_USER_WITH_GITHUB_SUCCESS:
             localStorage.setItem('Authorization', action.payload.token);
-            let {message: messageGithub, token: tokenGithub, ...userGithub} = action.payload;
+            let { message: messageGithub, token: tokenGithub, ...userGithub } = action.payload;
             return {
                 ...state,
                 isFetching: false,
-                token: tokenGithub,
+                token: localStorage.getItem('Authorization') || null,
                 currentUser: userGithub
             };
 
@@ -142,6 +145,24 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: false
+            };
+
+        case LOGOUT_USER_START:
+            return {
+                ...state
+            };
+
+        case LOGOUT_USER_SUCCESS:
+            localStorage.removeItem('Authorization');
+            return {
+                ...state,
+                token: localStorage.getItem('Authorization') || null
+            };
+
+        case LOGOUT_USER_FAILURE:
+            return {
+                ...state,
+                error: action.payload
             };
 
         default:
