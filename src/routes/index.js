@@ -5,6 +5,7 @@ import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
 
 import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
+import OrganizationDetails from '../pages/OrganizationDetails';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
 import Notifications from '../pages/NotificationsView';
@@ -19,7 +20,7 @@ import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
-import MatchesList from '../components/MatchesComponents/MatchesList'
+import MatchesList from '../components/MatchesComponents/MatchesList';
 
 const Routes = (props) => {
     return (
@@ -31,7 +32,7 @@ const Routes = (props) => {
                 path='/organization/register'
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
-            <Route exact path='/user/register' component={RouteNoAuthNeeded(UserRegister)} />
+            <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
             <Route exact path='/user/profile' component={RouteAuthNeeded(UserProfile)} />
@@ -51,9 +52,10 @@ const Routes = (props) => {
             <Route exact path='/user/experiences' component={RouteAuthNeeded(ExperienceList)} />
             <Route exact path='/user/mentorsList' component={RouteAuthNeeded(MentorsList)} />
             {/* <Route exact path="/user/admin/invite" component={Invite} /> */}
-            <Route exact path ="/user/mentorform" component={MentorForm}/>
-            <Route exact path ="/user/inviteform" component={InviteForm}/>
-            <Route exact path="/user/matchlist" component={MatchesList}/>
+            <Route exact path='/user/mentorform' component={RouteAuthNeeded(MentorForm)} />
+            <Route exact path='/user/inviteform' component={InviteForm} />
+            <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
+            <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
         </Router>
     );
 };

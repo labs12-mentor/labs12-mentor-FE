@@ -38,6 +38,10 @@ class NavbarComponent extends Component {
             {
                 linkTo: '/user/profile',
                 text: 'Profile'
+            },
+            {
+                linkTo: '/organization',
+                text: 'Organization'
             }
         ];
 

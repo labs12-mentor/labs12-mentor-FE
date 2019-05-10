@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { API_URL } from '../constants/config';
+import { connect } from 'react-redux';
+import { githubAuthStart, githubAuthSuccess, githubAuthFailure } from '../actions';
 
 class OAuth extends Component {
     constructor(props) {
@@ -7,7 +9,7 @@ class OAuth extends Component {
         this.state = {
             user: {},
             disabled: false
-        }
+        };
 
         this.startAuth = this.startAuth.bind(this);
         this.closeCard = this.closeCard.bind(this);
@@ -15,10 +17,11 @@ class OAuth extends Component {
 
     componentDidMount() {
         const { socket, provider } = this.props;
+        this.props.githubAuthStart();
 
-        socket.on(provider, user => {
+        socket.on(provider, (user) => {
             this.popup.close();
-            this.setState({user});
+            this.setState({ user });
         });
     }
 
@@ -36,12 +39,15 @@ class OAuth extends Component {
 
     openPopup() {
         const { provider, socket } = this.props;
-        const width = 600, height = 600;
-        const left = (window.innerWidth / 2) - (width / 2);
-        const top = (window.innerHeight / 2) - (height / 2);
+        const width = 600,
+            height = 600;
+        const left = window.innerWidth / 2 - width / 2;
+        const top = window.innerHeight / 2 - height / 2;
         const url = `${API_URL}/auth/${provider}?socketId=${socket.id}`;
 
-        return window.open(url, '',             
+        return window.open(
+            url,
+            '',
             `toolbar=no, location=no, directories=no, status=no, menubar=no, 
             scrollbars=no, resizable=no, copyhistory=no, width=${width}, 
             height=${height}, top=${top}, left=${left}`
@@ -49,7 +55,7 @@ class OAuth extends Component {
     }
 
     startAuth() {
-        if(!this.state.disabled){
+        if (!this.state.disabled) {
             this.popup = this.openPopup();
             this.checkPopup();
             this.setState({
@@ -66,33 +72,30 @@ class OAuth extends Component {
 
     render() {
         const { socket, provider } = this.props;
-        socket.on(provider, user => {
+        socket.on(provider, (user) => {
+            if (user.token !== undefined || user.token !== null) {
+                this.props.githubAuthSuccess({ token: user.token });
+            } else {
+                this.props.githubAuthFailure({ err: null });
+            }
             this.popup.close();
-            this.setState({user});
+            this.setState({ user });
         });
-        const { email } = this.state.user;
-        
-        return (
-            <div>
-                {email ?
-                    <div> 
-                        <p onClick={this.closeCard}>
-                            X
-                        </p>
-                        <h4>
-                            {`${email}`}
-                        </h4>
-                    </div>
-                    :
-                    <div>
-                        <button onClick={this.startAuth}>
-                            {provider}
-                        </button>
-                    </div>
-                }
-            </div>
-        )
+
+        return <button onClick={this.startAuth}>{provider}</button>;
     }
 }
+const mapStateToProps = (state) => {
+    return {};
+};
 
-export default OAuth;
+const mapDispatchToProps = {
+    githubAuthStart,
+    githubAuthSuccess,
+    githubAuthFailure
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(OAuth);
