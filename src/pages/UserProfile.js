@@ -205,7 +205,7 @@ class UserProfile extends React.Component {
           </TabPane>
         </TabContent>
         {/* <UserProfileForm/> */}
-        <MenteeForm/>
+        {/* <MenteeForm/> */}
       </div>
     );
   }
