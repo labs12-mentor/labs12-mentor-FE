@@ -1,5 +1,7 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
+import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
+import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
 
 import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
@@ -22,19 +24,31 @@ const Routes = (props) => {
     return (
         <Router history={props.history}>
             <Navbar />
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/organization/register' component={OrganizationRegister} />
-            <Route exact path='/user/register' component={UserRegister} />
+            <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
+            <Route
+                exact
+                path='/organization/register'
+                component={RouteNoAuthNeeded(OrganizationRegister)}
+            />
+            <Route exact path='/user/register' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RegDetails} />
-            <Route exact path='/user/login' component={UserLogin} />
-            <Route exact path='/user/profile' component={UserProfile} />
-            <Route exact path='/user/notifications' component={Notifications} />
-            <Route exact path='/user/admin/profile' component={AdminPanel} />
-            <Route exact path='/user/admin/mentorapplication' component={Application} />
-            <Route exact path='/user/admin/mentorassignment' component={Assignment} />
-            <Route exact path='/user/meetings' component={MeetingsPage} />
-            <Route exact path='/user/experiences' component={ExperienceList} />
-            <Route exact path='/user/mentorsList' component={MentorsList} />
+            <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
+            <Route exact path='/user/profile' component={RouteAuthNeeded(UserProfile)} />
+            <Route exact path='/user/notifications' component={RouteAuthNeeded(Notifications)} />
+            <Route exact path='/user/admin/profile' component={RouteAuthNeeded(AdminPanel)} />
+            <Route
+                exact
+                path='/user/admin/mentorapplication'
+                component={RouteAuthNeeded(Application)}
+            />
+            <Route
+                exact
+                path='/user/admin/mentorassignment'
+                component={RouteAuthNeeded(Assignment)}
+            />
+            <Route exact path='/user/meetings' component={RouteAuthNeeded(MeetingsPage)} />
+            <Route exact path='/user/experiences' component={RouteAuthNeeded(ExperienceList)} />
+            <Route exact path='/user/mentorsList' component={RouteAuthNeeded(MentorsList)} />
         </Router>
     );
 };
