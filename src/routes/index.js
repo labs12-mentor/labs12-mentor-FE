@@ -16,6 +16,7 @@ import MeetingsPage from '../pages/MeetingsPage'
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
+import Mapbox from '../components/MapboxMap/MapboxMap';
 
 const Routes = (props) => {
     return (
@@ -26,6 +27,7 @@ const Routes = (props) => {
                 </header>
             </div>
             <Route exact path="/" component={HomePage} />
+            <Route exact path="/map" component={Mapbox} />
             <Route exact path="/organization/register" component={OrganizationRegister} />
             <Route exact path="/user/register" component={UserRegister} />
             <Route exact path="/user/login" component={UserLogin} />
