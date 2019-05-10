@@ -64,9 +64,7 @@ class UserLogin extends Component {
                         />
                     </FormGroup>
 
-                    {/* <Link to='/user/login'> */}
                     <Button type='submit'>Login</Button>
-                    {/* </Link> */}
                 </Form>
 
                 <OAuthContainer provider={provider} socket={socket} />
@@ -75,7 +73,14 @@ class UserLogin extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {};
+};
+const mapDispatchToProps = {
+    loginUser
+};
+
 export default connect(
-    null,
-    { loginUser }
+    mapStateToProps,
+    mapDispatchToProps
 )(UserLogin);
