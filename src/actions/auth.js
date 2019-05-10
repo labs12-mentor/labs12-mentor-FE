@@ -16,10 +16,14 @@ import {
     GITHUB_REGISTER_WITH_INVITATION_FAILURE,
     GET_CURRENT_USER_START,
     GET_CURRENT_USER_SUCCESS,
-    GET_CURRENT_USER_FAILURE
+    GET_CURRENT_USER_FAILURE,
+    LOGOUT_USER_START,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_FAILURE
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
+import history from '../history';
 
 const authHeader = {
     headers: {
@@ -258,6 +262,38 @@ export function githubRegisterWithInvitationFailure(err) {
     function error(err) {
         return {
             type: GITHUB_REGISTER_WITH_INVITATION_FAILURE,
+            payload: err
+        };
+    }
+}
+
+export function logoutUser() {
+    return async (dispatch) => {
+        await dispatch(request());
+
+        try {
+            await dispatch(success());
+            return await history.push('/');
+        } catch (err) {
+            return await dispatch(error(err));
+        }
+    };
+
+    function request() {
+        return {
+            type: LOGOUT_USER_START
+        };
+    }
+
+    function success(data) {
+        return {
+            type: LOGOUT_USER_SUCCESS
+        };
+    }
+
+    function error(err) {
+        return {
+            type: LOGOUT_USER_FAILURE,
             payload: err
         };
     }
