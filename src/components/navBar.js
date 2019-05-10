@@ -23,9 +23,6 @@ class NavBar extends Component {
             <NavItem>
               <NavLink href="/user/profile">Profile</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/user/meetings">Meetings</NavLink>
-            </NavItem>
             <NotificationButton />
             <Button onClick={this.logOut} color="info">Log Out</Button>
           </Nav>
