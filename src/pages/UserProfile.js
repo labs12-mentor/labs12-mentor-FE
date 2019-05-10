@@ -20,6 +20,22 @@ import { connect } from "react-redux";
 import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
+import Sidebar from '../components/Sidebar';
+import styled from 'styled-components';
+
+const ContainerDiv = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+`;
+
+const ProfileContainer = styled.div`
+    width: 70%;
+    margin: auto;
+`;
+
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -87,7 +103,10 @@ class UserProfile extends React.Component {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <div className="StudentProfile">
+
+                <ContainerDiv>
+                <Sidebar />
+                <ProfileContainer>
                   <Form>
                     <FormGroup check>
                       <Label check>
@@ -171,7 +190,8 @@ class UserProfile extends React.Component {
                       </CardBody>
                     </Card>
                   </Form>
-                </div>
+                </ProfileContainer>
+                </ContainerDiv>
               </Col>
             </Row>
           </TabPane>
