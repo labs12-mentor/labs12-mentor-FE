@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getMatches } from "../../actions/matches";
+import { getMatches, deleteMatch } from "../../actions/matches";
+import MatchForm from "./MatchForm";
 
 class MatchesList extends React.Component {
   state = {
@@ -20,11 +21,18 @@ class MatchesList extends React.Component {
         <h2>MatchesList</h2>
         {this.state.isLoaded ? (
           nonDeleted.map(match => {
-            return match;
+            return <MatchCard
+            match={match}
+            deleteMatch={this.props.deleteMatch}
+            />;
           })
         ) : (
           <h3>Loading</h3>
         )}
+
+        <MatchForm
+        canEdit={false}
+        />
       </div>
     );
   }
@@ -38,5 +46,5 @@ const mstp = state => {
 
 export default connect(
   mstp,
-  { getMatches }
+  { getMatches, deleteMatch }
 )(MatchesList);
