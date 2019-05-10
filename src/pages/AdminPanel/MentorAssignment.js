@@ -16,7 +16,6 @@ import classnames from 'classnames';
 
 import MentorAssignList from './MentorAssignList';
 import StudentAssignList from './StudentAssignList';
-import { assignmentExpression } from '@babel/types';
 
 
 class MentorAssignment extends React.Component {

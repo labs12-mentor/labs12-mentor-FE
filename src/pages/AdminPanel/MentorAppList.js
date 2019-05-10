@@ -5,8 +5,6 @@ import {
     Table
 } from 'reactstrap';
 
-import { getSpecificUser } from '../../actions';
-
 class ApplicationsList extends React.Component {
     routeToApplication(id) {
         history.push(`/user/admin/mentorapplication/${id}`);
@@ -41,4 +39,4 @@ class ApplicationsList extends React.Component {
     }
 }
 
-export default connect(null, { getSpecificUser })(ApplicationsList);
+export default ApplicationsList;

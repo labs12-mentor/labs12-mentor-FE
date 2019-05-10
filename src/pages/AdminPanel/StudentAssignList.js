@@ -7,7 +7,7 @@ import {
 
 class StudentAssignList extends React.Component {
     routeToAssignments(id) {
-        history.push(`/user/admin/mentorassignment/${id}`);
+        history.push(`/user/admin/mentorassignment/${id}/mentee`);
     }
 
     render() {

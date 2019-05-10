@@ -8,7 +8,7 @@ import {
 class MentorAssignList extends React.Component {
 
     routeToAssignments(id) {
-        history.push(`/user/admin/mentorassignment/${id}`);
+        history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
 
     render() {
@@ -30,7 +30,7 @@ class MentorAssignList extends React.Component {
             });
             pairs.push(pair);
         });
-        console.log(pairs);
+        
         return (
             <Table striped>
                 <thead>
