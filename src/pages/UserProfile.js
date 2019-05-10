@@ -24,6 +24,7 @@ import MeetingsList from "../components/MeetingsComponents/MeetingsList";
 import UserProfileForm from "../components/UserComponents/UserProfileForm";
 import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
+import MenteeForm from "../components/MenteesComponents/MenteeForm";
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -204,6 +205,7 @@ class UserProfile extends React.Component {
           </TabPane>
         </TabContent>
         {/* <UserProfileForm/> */}
+        {/* <MenteeForm/> */}
       </div>
     );
   }
