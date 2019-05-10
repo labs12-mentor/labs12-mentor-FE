@@ -1,16 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { createMatch, updateMatch } from "../../actions/matches";
+
 
 class MatchForm extends React.Component {
   state = {
+    status: "",
     mentor_id: "",
     mentee_id: "",
-    match_score: "",
-    status: "",
-    start_date: "",
-    end_date: "",
     deleted: false,
     canEdit: false
   };
@@ -22,143 +20,89 @@ class MatchForm extends React.Component {
 
   updateMatchForm = e => {
     e.preventDefault();
-    this.props.updateMatch(this.props.id, this.state);
+    this.props.updateMatch();
   };
-
   render() {
-    if (this.props.canEdit === true) {
+    if (this.state.canEdit === true) {
       return (
-        <Form onSubmit={this.updateMatchForm}>
-          <FormGroup>
-            <Label>Mentor Id</Label>
-            <Input
-              type="text"
-              name="mentor_id"
-              placeholder="id"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
+        <div>
+          <h1>Edit Match</h1>
+          <Form onSubmit={this.updateMatchForm}>
+            <FormGroup>
+              <Label>Status</Label>
+              <Input
+                type="text"
+                name="status"
+                placeholder="status"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label>Mentee Id</Label>
-            <Input
-              type="text"
-              name="mentee_id"
-              placeholder="id"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
+            <FormGroup>
+              <Label>Mentor Id</Label>
+              <Input
+                type="text"
+                name="mentor_id"
+                placeholder="mentor id"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label>Match Score</Label>
-            <Input
-              type="text"
-              name="match_score"
-              placeholder="title"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
+            <FormGroup>
+              <Label>Mentee id</Label>
+              <Input
+                type="text"
+                name="mentee_id"
+                placeholder="mentee id"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label>Status</Label>
-            <Input
-              type="text"
-              name="status"
-              placeholder="status"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>Start Date</Label>
-            <Input
-              type="date"
-              name="start_date"
-              placeholder="Start Date"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>End Date</Label>
-            <Input
-              type="text"
-              name="end_date"
-              placeholder="End Date"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
-          <Button onClick={this.updateMatchForm}>Update Matches</Button>
-        </Form>
+            <Button onClick={this.updateMatchForm}>Update</Button>
+          </Form>
+        </div>
       );
     } else {
       return (
-        <Form onSubmit={this.createMatchForm}>
-          <FormGroup>
-            <Label>Mentor Id</Label>
-            <Input
-              type="text"
-              name="mentor_id"
-              placeholder="id"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
+        <div>
+          <h2>Add a Match</h2>
+          <Form onSubmit={this.createMatchForm}>
+            <FormGroup>
+              <Label>Status</Label>
+              <Input
+                type="text"
+                name="status"
+                placeholder="status"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label>Mentee Id</Label>
-            <Input
-              type="text"
-              name="mentee_id"
-              placeholder="id"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
+            <FormGroup>
+              <Label>Mentor Id</Label>
+              <Input
+                type="text"
+                name="mentor_id"
+                placeholder="mentor id"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label>Match Score</Label>
-            <Input
-              type="text"
-              name="match_score"
-              placeholder="title"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
+            <FormGroup>
+              <Label>Mentee id</Label>
+              <Input
+                type="text"
+                name="mentee_id"
+                placeholder="mentee id"
+                onChange={this.handleChanges}
+              />
+            </FormGroup>
 
-          <FormGroup>
-            <Label>Status</Label>
-            <Input
-              type="text"
-              name="status"
-              placeholder="status"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>Start Date</Label>
-            <Input
-              type="date"
-              name="start_date"
-              placeholder="Start Date"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label>End Date</Label>
-            <Input
-              type="date"
-              name="end_date"
-              placeholder="End Date"
-              onChange={this.handleChanges}
-            />
-          </FormGroup>
-          <Button onClick={this.createMatchForm}>Create Match</Button>
-        </Form>
+            <Button onClick={this.createMatchForm}>Create Match</Button>
+          </Form>
+        </div>
       );
     }
   }
-
   handleChanges = e => {
     this.setState({
       ...this.state,

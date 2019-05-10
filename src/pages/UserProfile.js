@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
+import history from '../history';
 import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
@@ -35,6 +36,7 @@ const ProfileContainer = styled.div`
     width: 70%;
     margin: auto;
 `;
+
 
 
 class UserProfile extends React.Component {
@@ -69,8 +71,9 @@ class UserProfile extends React.Component {
     });
   };
 
-  submitHandler = e => {
+  toForm = e => {
     e.preventDefault();
+    history.push("/user/mentorform")
   };
 
   render() {
