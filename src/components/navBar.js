@@ -34,7 +34,6 @@ class NavbarComponent extends Component {
                 text: 'Register organization'
             }
         ];
-
         const navlinksPrivate = [
             {
                 linkTo: '/user/profile',

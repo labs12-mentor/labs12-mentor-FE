@@ -13,14 +13,15 @@ import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
-import NavBar from '../components/Navbar';
+import Navbar from '../components/Navbar';
 import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
+import Invite from '../pages/InviteForm';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-            <NavBar />
+            <Navbar />
             <Route exact path='/' component={HomePage} />
             <Route exact path='/organization/register' component={OrganizationRegister} />
             <Route exact path='/user/register' component={UserRegister} />
