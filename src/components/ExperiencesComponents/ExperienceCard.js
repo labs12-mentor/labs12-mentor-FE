@@ -33,13 +33,13 @@ class ExperienceCard extends React.Component {
             <div>
                 <h4>{this.props.name}</h4>
 
-                <button
+                <Button
                     onClick={() => {
                         this.props.deleteExperience(this.props.experience.id);
                     }}
                 >
                     delete
-                </button>
+                </Button>
                 <Button color='warning' onClick={this.toggle}>
                     Edit
                 </Button>
