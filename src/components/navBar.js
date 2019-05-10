@@ -1,56 +1,100 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions';
 import NotificationButton from '../pages/NotificationButton';
-import history from '../history';
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Button } from 'reactstrap';
+import { Collapse, NavbarToggler, Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap';
 
-class NavBar extends Component {
-  logOut = () => {
-    localStorage.removeItem("Authorization");
-    history.push('/');
-  }
-  
-  render(){
-    console.log('logout props', this.props);
-    return(
-      <div>
-      {this.props.loggedIn ? 
-        <Navbar>
-          {/* get the user's org logo*/}
-          <NavbarBrand>Org Logo Here</NavbarBrand>
-          <Nav>
-            <NavItem>
-              <NavLink href="/user/profile">Profile</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/user/meetings">Meetings</NavLink>
-            </NavItem>
-            <NotificationButton />
-            <Button onClick={this.logOut} color="info">Log Out</Button>
-          </Nav>
-        </Navbar>
-        : 
-        <Navbar>
-          <NavbarBrand>Mentor Match Logo</NavbarBrand>
-          <Nav>
-            <Link to='/user/login'>
-              <Button color="primary">Login</Button>
-            </Link>
-            <Link to='/user/register'>
-              <Button color="info">Register</Button>
-            </Link>
-          </Nav>
-        </Navbar>}
-      </div>
-    )
-  }
+class NavbarComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState({
+            ...this.state,
+            isOpen: !this.state.isOpen
+        });
+    }
+
+    render() {
+        const navlinksPublic = [
+            {
+                linkTo: '/user/login',
+                text: 'Login'
+            },
+            {
+                linkTo: '/organization/register',
+                text: 'Register organization'
+            }
+        ];
+
+        const navlinksPrivate = [
+            {
+                linkTo: '/user/profile',
+                text: 'Profile'
+            }
+        ];
+
+        return (
+            <Navbar light expand='md'>
+                <NavbarBrand href='/'>MentorMatch</NavbarBrand>
+                <NavbarToggler onClick={this.toggle} />
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav className='ml-auto' navbar>
+                        {!this.props.authenticated &&
+                            navlinksPublic.map((elem, i) => (
+                                <NavItem key={i}>
+                                    <Link to={elem.linkTo} className='nav-link'>
+                                        {elem.text}
+                                    </Link>
+                                </NavItem>
+                            ))}
+                        {this.props.authenticated &&
+                            navlinksPrivate.map((elem, i) => (
+                                <NavItem key={i}>
+                                    <Link to={elem.linkTo} className='nav-link'>
+                                        {elem.text}
+                                    </Link>
+                                </NavItem>
+                            ))}
+                        {this.props.authenticated && <NotificationButton />}
+                        {this.props.authenticated && (
+                            <NavItem>
+                                <Link to='/' onClick={this.props.logoutUser} className='nav-link'>
+                                    Log out
+                                </Link>
+                            </NavItem>
+                        )}
+                    </Nav>
+                </Collapse>
+            </Navbar>
+        );
+    }
 }
 
-const mapStateToProps = state => {
-  return {
-    loggedIn: state.auth.token,
-  }
-}
+NavbarComponent.propTypes = {
+    authenticated: PropTypes.bool.isRequired,
+    logoutUser: PropTypes.func.isRequired
+};
 
-export default connect(mapStateToProps, {})(NavBar);
+const mapStateToProps = (state) => {
+    return {
+        authenticated: state.auth.token !== null
+    };
+};
+
+const mapDispatchToProps = {
+    logoutUser
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NavbarComponent);
