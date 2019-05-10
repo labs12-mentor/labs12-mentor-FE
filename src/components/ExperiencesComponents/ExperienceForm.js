@@ -4,7 +4,7 @@ import {
   createExperience,
   updateExperience
 } from "../../actions/experiences.js";
-import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 class ExperienceForm extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class ExperienceForm extends React.Component {
   render() {
     if (this.props.canEdit === true) {
       return (
-        <Form onSubmit={this.createAnExperience}>
+        <Form onSubmit={this.updateAnExperience}>
           <FormGroup>
             <Input
               type="text"
@@ -41,9 +41,10 @@ class ExperienceForm extends React.Component {
               onChange={this.handleChanges}
             />
           </FormGroup>
+          <Button onClick={this.updateAnExperience}>Update</Button>
         </Form>
       );
-    }
+    } else {
     return (
       <Form onSubmit={this.createAnExperience}>
         <FormGroup>
@@ -54,8 +55,11 @@ class ExperienceForm extends React.Component {
             onChange={this.handleChanges}
           />
         </FormGroup>
+        <Button onClick={this.createAnExperience}>Add</Button>
       </Form>
+    
     );
+    }
   }
 }
 

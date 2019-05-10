@@ -63,12 +63,22 @@ class MeetingsForm extends React.Component {
 
             <FormGroup>
               <Label>Start Time</Label>
-              <Input type="text" name="startTime" placeholder="Date / Time" />
+              <Input
+                type="text"
+                name="startTime"
+                placeholder="Date / Time"
+                onChange={this.handleChanges}
+              />
             </FormGroup>
 
             <FormGroup>
               <Label>End Time</Label>
-              <Input type="text" name="endTime" placeholder="End Time" />
+              <Input
+                type="text"
+                name="endTime"
+                placeholder="End Time"
+                onChange={this.handleChanges}
+              />
             </FormGroup>
 
             <FormGroup>
@@ -77,6 +87,7 @@ class MeetingsForm extends React.Component {
                 type="text"
                 name="location"
                 placeholder="Where is the meeting taking place?"
+                onChange={this.handleChanges}
               />
             </FormGroup>
 
@@ -121,12 +132,22 @@ class MeetingsForm extends React.Component {
 
             <FormGroup>
               <Label>Start Time</Label>
-              <Input type="text" name="startTime" placeholder="Date / Time" />
+              <Input
+                type="text"
+                name="startTime"
+                placeholder="Date / Time"
+                onChange={this.handleChanges}
+              />
             </FormGroup>
 
             <FormGroup>
               <Label>End Time</Label>
-              <Input type="text" name="endTime" placeholder="End Time" />
+              <Input
+                type="text"
+                name="endTime"
+                placeholder="End Time"
+                onChange={this.handleChanges}
+              />
             </FormGroup>
 
             <FormGroup>
@@ -135,6 +156,7 @@ class MeetingsForm extends React.Component {
                 type="text"
                 name="location"
                 placeholder="Where is the meeting taking place?"
+                onChange={this.handleChanges}
               />
             </FormGroup>
 
