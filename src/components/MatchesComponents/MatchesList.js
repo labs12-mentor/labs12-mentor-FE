@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getMatches, deleteMatch } from "../../actions/matches";
 import MatchForm from "./MatchForm";
+import MatchesCard from "./MatchesCard";
 
 class MatchesList extends React.Component {
   state = {
@@ -13,15 +14,16 @@ class MatchesList extends React.Component {
     this.setState({ isLoaded: true });
   }
   render() {
-    const nonDeleted = this.props.meetings.filter(meeting => {
-      return meeting.deleted === false;
+    const nonDeleted = this.props.matches.filter(match => {
+      return match.deleted === false;
     });
     return (
       <div>
         <h2>MatchesList</h2>
         {this.state.isLoaded ? (
           nonDeleted.map(match => {
-            return <MatchCard
+            return <MatchesCard
+            key={match.id}
             match={match}
             deleteMatch={this.props.deleteMatch}
             />;

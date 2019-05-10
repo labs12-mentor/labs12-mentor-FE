@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getInvitations } from "../../actions/invitations";
+import InvitationCard from "./InvitationCard"
 
 class InvitationList extends React.Component {
   state = {
@@ -9,11 +10,11 @@ class InvitationList extends React.Component {
 
   async componentDidMount() {
     await this.props.getInvitations();
-    this.setState({ ...this.state, isLoaded: true });
+    this.setState({ isLoaded: true });
   }
 
   render() {
-    const nonDeleted = this.props.inviations.filter(invitation => {
+    const nonDeleted = this.props.invitations.filter(invitation => {
       return invitation.deleted === false;
     });
 
@@ -21,7 +22,10 @@ class InvitationList extends React.Component {
       <div>
         {this.state.isLoaded ? (
           nonDeleted.map(invitation => {
-            return invitation;
+            return <InvitationCard
+            key={invitation.id} 
+            invitation={invitation}
+            />
           })
         ) : (
           <h3>Loading</h3>
@@ -33,7 +37,7 @@ class InvitationList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    invitations: state.inviations.invitations
+    invitations: state.invitations.invitations
   };
 }
 

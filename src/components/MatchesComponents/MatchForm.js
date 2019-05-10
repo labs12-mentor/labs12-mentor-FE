@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { createMatch, updateMatch } from "../../actions/matches";
 
+
 class MatchForm extends React.Component {
   state = {
     status: "",
@@ -19,10 +20,10 @@ class MatchForm extends React.Component {
 
   updateMatchForm = e => {
     e.preventDefault();
-    this.props.updateMatch;
+    this.props.updateMatch();
   };
   render() {
-    if (canEdit === true) {
+    if (this.state.canEdit === true) {
       return (
         <div>
           <h1>Edit Match</h1>

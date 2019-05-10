@@ -19,7 +19,8 @@ import NavBar from '../components/navBar';
 import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
-import MentorForm from '../components/MentorComponents/MentorForm'
+import MentorForm from '../components/MentorComponents/MentorForm';
+import MatchesList from '../components/MatchesComponents/MatchesList'
 
 
 const Routes = (props) => {
@@ -46,6 +47,7 @@ const Routes = (props) => {
             <Route exact path="/user/mentorsList" component={MentorsList}/>
             <Route exact path ="/user/mentorform" component={MentorForm}/>
             <Route exact path ="/user/inviteform" component={InviteForm}/>
+            <Route exact path="/user/matchlist" component={MatchesList}/>
 
 
 
