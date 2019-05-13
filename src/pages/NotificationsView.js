@@ -1,50 +1,61 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Notification from './Notification';
+import {connect} from 'react-redux';
+import  Notification from './Notification';
 
 //import actions
+import { getNotifications } from '../actions';
 
 //import css
 
 class Notifications extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            notifications: [
-                'you have a new match!',
-                'your mentor has sent you a message',
-                'you have a meeting scheduled for today at 10A'
-            ],
-        }
+  constructor(props){
+    super(props);
+    this.state = {
+      pageLoaded: false,
     }
+  }
 
-    render(){
-        const { notifications } = this.state;
-        // const { notifications } = this.props.notifications;
-        const notificationsCount = notifications.length;
-        return(
-            <div>
-                <h2>Hello from Notifications!</h2>
-                <div>
-                    <h4>Your Notifications: </h4>
-                    <ul className="notifications-list">
-                        {notifications.map(notification => {
-                            return (
-                                <li key={notification}>
-                                        <Notification notification={notification} />
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </div>
-            </div>
-        )
-    }
+  async componentDidMount(){
+    await this.props.getNotifications();
+    this.setState({ pageLoaded: true });
+  }
+
+  render(){
+    return(
+      <div>
+        <h2>Hello from Notifications!</h2>
+        {this.state.pageLoaded ?
+        <div>
+          <h4>Your Notifications: </h4>
+          <ul className="notifications-list">
+            {this.props.isFetching ? <p>waiting for notifications list</p> : null} 
+            {this.props.notification_error ? <p>cannot get notifications at this time</p> : null}
+            {this.props.notifications.map(notification => {
+              return (
+                <li key={notification.id}>
+                    <Notification 
+                      id={notification.id} 
+                      notification={notification.content}
+                      watched={notification.watched}
+                    />
+                </li>
+              )
+            })}
+          </ul>
+        </div>
+        : null }
+      </div>
+    )
+  }
 }
 
-//const mapStateToProps = state => {
-
-// }
+const mapStateToProps = state => {
+  return {
+    isFetching: state.notifications.isFetching,
+    notifications: state.notifications.notifications,
+    notification_error: state.notifications.error,
+  }
+}
 
 //connect to redux
-export default Notifications;
+export default connect(mapStateToProps, { getNotifications })(Notifications);

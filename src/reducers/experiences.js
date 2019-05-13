@@ -20,117 +20,146 @@ import {
 } from '../constants/actionTypes';
 
 const initialState = {
-    error: null,
-    experienceList: [],
-    gettingExperiences: false,
-    creatingExperience: false,
-    deletingExperience: false,
-    updatingExperience: false
-}
+    experiences: [],
+    isFetching: false,
+    currentExperience: null,
+    error: null
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
         case GET_EXPERIENCES_START:
             return {
                 ...state,
-                gettingExperiences: true
+                isFetching: true
             };
 
         case GET_EXPERIENCES_SUCCESS:
             return {
                 ...state,
-                gettingExperiences: false,
-                experienceList: action.payload
+                isFetching: false,
+                experiences: action.payload.sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case GET_EXPERIENCES_FAILURE:
             return {
                 ...state,
-                gettingExperiences: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case GET_SPECIFIC_EXPERIENCE_START:
             return {
                 ...state,
-                gettingExperiences: true
+                isFetching: true
             };
 
         case GET_SPECIFIC_EXPERIENCE_SUCCESS:
             return {
                 ...state,
-                gettingExperiences: false,
-                experienceList: action.payload
+                isFetching: false,
+                currentExperience: action.payload
             };
 
         case GET_SPECIFIC_EXPERIENCE_FAILURE:
             return {
                 ...state,
-                gettingExperiences: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case CREATE_EXPERIENCE_START:
             return {
                 ...state,
-                creatingExperience: true
+                isFetching: true
             };
 
         case CREATE_EXPERIENCE_SUCCESS:
             return {
                 ...state,
-                creatingExperience: false,
-                experienceList: [...state.experienceList, action.payload]
+                isFetching: false,
+                experiences: [...state.experiences, action.payload]
             };
 
         case CREATE_EXPERIENCE_FAILURE:
             return {
                 ...state,
-                createExperience: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case UPDATE_EXPERIENCE_START:
             return {
                 ...state,
-                updateExperience: true
+                isFetching: true
             };
 
         case UPDATE_EXPERIENCE_SUCCESS:
             return {
                 ...state,
-                updateExperience: false,
-                experienceList: [...state.experienceList, action.payload]
+                isFetching: false,
+                experiences: [
+                    ...state.experiences.filter((elem) => elem.id !== action.payload.id),
+                    action.payload
+                ].sort((a, b) => {
+                    if (a.id < b.id) return -1;
+                    if (a.id > b.id) return 1;
+                    return 0;
+                })
             };
 
         case UPDATE_EXPERIENCE_FAILURE:
             return {
                 ...state,
-                updateExperience: false,
+                isFetching: false,
                 error: action.payload
             };
 
         case DELETE_EXPERIENCE_START:
             return {
                 ...state,
-                deleteExperience: true
+                isFetching: true
             };
 
         case DELETE_EXPERIENCE_SUCCESS:
             return {
                 ...state,
-                deleteExperience: false
+                isFetching: false,
+                experiences: state.experiences.filter((elem) => elem.id !== action.payload)
             };
 
         case DELETE_EXPERIENCE_FAILURE:
             return {
                 ...state,
-                deleteExperience: false,
+                isFetching: false,
                 error: action.payload
             };
-            
-        default: {
+
+        case REMOVE_EXPERIENCE_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case REMOVE_EXPERIENCE_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                experiences: state.experiences.filter((elem) => elem.id !== action.payload)
+            };
+
+        case REMOVE_EXPERIENCE_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
+        default:
             return state;
-        }
     }
-}
+};

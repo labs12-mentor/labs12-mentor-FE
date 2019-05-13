@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Nav,
     NavItem,
@@ -8,12 +9,22 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
+import { getSpecificUser } from '../../../actions';
+
 import ProfileInfo from './ProfileInfo';
 import ApplicationRes from './ApplicationRes';
 
 class Application extends React.Component {
     state = {
-        activeTab: '1'
+        activeTab: '1',
+        currentUser: {}
+    }
+
+    async componentDidMount() {
+        let user = await this.props.getSpecificUser(this.props.match.params.id);
+        await this.setState({
+            currentUser: user.payload
+        });
     }
 
     toggleTab = tab => {
@@ -49,7 +60,7 @@ class Application extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <ProfileInfo />
+                        <ProfileInfo menteeId={this.props.match.params.id} currentUser={this.state.currentUser} />
                     </TabPane>
 
                     <TabPane tabId="2">
@@ -61,4 +72,4 @@ class Application extends React.Component {
     }
 }
 
-export default Application;
+export default connect(null, { getSpecificUser })(Application);

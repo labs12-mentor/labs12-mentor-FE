@@ -1,45 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
-import MeetingsForm from "../components/MeetingsComponents/MeetingsForm.js";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
-import {
-    createMeeting,
-    deleteMeeting,
-    updateMeeting,
-    getSpecificMeeting
-} from "../actions";
+import { deleteMeeting, updateMeeting, getSpecificMeeting } from "../actions";
 
 class MeetingsContainer extends React.Component {
-    render() {
-        return (
-            <div>
-                <MeetingsList
-                    deleteMeeting={this.removeMeeting}
-                    updateMeeting={this.editMeeting}
-                    getSpecificMeeting={this.getMeeting}
-                />
-                <MeetingsForm addMeeting={this.props.createMeeting} />
-            </div>
-        );
-    }
-    removeMeeting = id => {
-        //this.props.deleteMeeting(id);
-        console.log("hi");
-    };
+  render() {
+    return (
+      <div>
+        <MeetingsList
+          deleteMeeting={this.deleteMeeting}
+          updateMeeting={this.goToForm}
+          getSpecificMeeting={this.getMeeting}
+        />
+      </div>
+    );
+  }
 
-    editMeeting = (id, info) => {
-        //this.props.updateMeeting(id, info)
-        console.log("hi");
-    };
+  deleteMeeting = (e, id) => {
+    e.preventDefault();
+    this.props.deleteMeeting(id);
+  };
 
-    getMeeting = id => {
-        //this.props.getSpecificMeeting(id);
-    };
+  getMeeting = id => {
+    //this.props.getSpecificMeeting(id);
+  };
 
-    addMeeting = () => {};
+  removeMeeting = id => {
+    console.log("hi");
+  };
 }
 
 export default connect(
-    null,
-    { createMeeting, deleteMeeting, updateMeeting, getSpecificMeeting }
+  null,
+  { deleteMeeting, updateMeeting, getSpecificMeeting }
 )(MeetingsContainer);

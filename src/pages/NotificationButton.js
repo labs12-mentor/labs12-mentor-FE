@@ -1,20 +1,49 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Button } from 'reactstrap';
 
-const NotificationButton = props => {
+import { getNotifications } from '../actions/notifications';
+
+class NotificationButton extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pageLoaded: false,
+    }
+  }
+
+  async componentDidMount() {
+    await this.props.getNotifications();
+    this.setState({ pageLoaded: true });
+  }
+
+  render(){
     return (
-        <div>
-            <Link to='/user/notifications'>
-                <button>
-                    {/* make button an image */}
-                    <span>Notifications!</span>
-                    {/* display notification count */}
-                    {/* this.props.notificationsCount */}
-                    <span>0</span>
-                </button>
-            </Link>
-        </div>
+      <div>
+        <Link to='/user/notifications'>
+          <Button>
+            {/* make button an image */}
+            <span>Notifications!</span>
+
+            {/* display notification count */}
+            {this.state.pageLoaded ? 
+              <span>{this.props.notificationsCount}</span>
+            : null}
+          </Button>
+        </Link>
+      </div>
     )
+  }
 }
 
-export default NotificationButton;
+const mapStateToProps = state => {
+  return {
+    notificationsCount: state.notifications.notifications.filter(elem => elem.watched === false).length,
+  }
+}
+
+//connect to redux
+export default connect(mapStateToProps, { getNotifications })(NotificationButton);
+
+// export default NotificationButton;

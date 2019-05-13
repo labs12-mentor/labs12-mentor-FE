@@ -17,210 +17,213 @@ import {
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
-import { history } from '../';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem("Authorization")
-    }
-};
-
-export function getInvitations(){
-    return async dispatch => {
+export function getInvitations() {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/invitations`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .get(`${API_URL}/invitations`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: GET_INVITATIONS_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: GET_INVITATIONS_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: GET_INVITATIONS_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function getSpecificInvitation(id){
-    return async dispatch => {
+export function getSpecificInvitation(id) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/invitations/${id}`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .get(`${API_URL}/invitations/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: GET_SPECIFIC_INVITATION_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: GET_SPECIFIC_INVITATION_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: GET_SPECIFIC_INVITATION_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function createInvitation(invitationData){
-    return async dispatch => {
+export function createInvitation(invitationData) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/invitations`, invitationData, authHeader)
-            .then(async res => {
-                if(res.status === 201){
+            .post(`${API_URL}/invitations`, invitationData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 201) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: CREATE_INVITATION_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: CREATE_INVITATION_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: CREATE_INVITATION_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function deleteInvitation(id){
-    return async dispatch => {
+export function deleteInvitation(id) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/invitations/${id}`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .delete(`${API_URL}/invitations/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: DELETE_INVITATION_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: DELETE_INVITATION_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: DELETE_INVITATION_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function removeInvitation(id){
-    return async dispatch => {
+export function removeInvitation(id) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/invitations/${id}/remove`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .delete(`${API_URL}/invitations/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: REMOVE_INVITATION_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: REMOVE_INVITATION_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: REMOVE_INVITATION_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}

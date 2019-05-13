@@ -1,84 +1,86 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
-// import OAuthContainer from '../containers/OAuthContainer';
-import { 
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    Button
-} from 'reactstrap';
+import { API_URL_HOME } from '../constants/config';
+
+import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import { loginUser } from '../actions';
 
-const API_URL = 'http://localhost:5000/api/auth/github';
-// const socket = io(API_URL);
-const socket = "H!";
+const socket = io(API_URL_HOME);
+const provider = 'github';
 
 class UserLogin extends Component {
-    state = {
-        email: "",
-        password: ""
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            userData: {
+                email: 'email'
+            }
+        };
     }
 
-    changeHandler = e => {
+    changeHandler = (e) => {
         e.preventDefault();
         this.setState({
             ...this.state,
             [e.target.name]: e.target.value
         });
-    }
+    };
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.props.loginUser(this.state)
-        .then(() => {
-            this.props.history.push('/user/admin/profile')
-        })
-    }
+        this.props.loginUser(this.state);
+    };
 
-    render(){
-        return(
-            <div className="UserLogin">
+    render() {
+        return (
+            <div className='UserLogin'>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label for="email"></Label>
-                        <Input 
-                            type="email" 
-                            name="email" 
-                            id="email" 
-                            placeholder="Enter email"
+                        <Label for='email' />
+                        <Input
+                            type='email'
+                            name='email'
+                            id='email'
+                            placeholder='Enter email'
                             onChange={this.changeHandler}
                             value={this.state.email}
                         />
                     </FormGroup>
 
                     <FormGroup>
-                        <Label for="password"></Label>
-                        <Input 
-                            type="password" 
-                            name="password" 
-                            id="password" 
-                            placeholder="Enter password"
+                        <Label for='password' />
+                        <Input
+                            type='password'
+                            name='password'
+                            id='password'
+                            placeholder='Enter password'
                             onChange={this.changeHandler}
                             value={this.state.password}
                         />
                     </FormGroup>
 
-                    {/* <Link to='/user/login'> */}
-                        <Button type="submit">Login</Button>
-                    {/* </Link> */}
+                    <Button type='submit'>Login</Button>
                 </Form>
 
-                <a href="https://labs12-backend-dev.herokuapp.com/api/auth/github">Github Sign In</a>
-                {/* <OAuthContainer key={"socket"} socket={socket} /> */}
+                <OAuthContainer provider={provider} socket={socket} />
             </div>
         );
     }
 }
 
+const mapStateToProps = (state) => {
+    return {};
+};
+const mapDispatchToProps = {
+    loginUser
+};
 
-export default connect(null, { loginUser })(UserLogin);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(UserLogin);

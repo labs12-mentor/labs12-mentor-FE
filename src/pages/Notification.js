@@ -1,60 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { markNotification } from '../actions/notifications';
 
 class Notification extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            read: false,
-            textChange: {
-                textDecoration: "none"
-            },
-            notificationCount: 0,
-        }
-    }
-
-    componentDidMount(){
-        this.setState({
-            notificationCount: this.props.notificationCount,
-        })
     }
 
     toggleRead = (e) => {
-        let count = this.state.notificationCount;
-        if (!this.state.read) {
-            count--;
-            this.setState({
-                read: true,
-                textChange: {
-                    textDecoration: "line-through"
-                },
-                notificationCount: count
-            })
-        } else {
-            count++;
-            this.setState({
-                read: false,
-                textChange: {
-                    textDecoration: "none",
-                },
-                notificationCount: count
-            })
-        }
+        e.preventDefault();
+        let id = this.props.id;
+        this.props.markNotification(id);
     }
 
     render(){
-        const { textChange } = this.state;
         return (
-            <div style={textChange}
+            <div style={{textDecoration: this.props.watched ? "line-through" : "none"}}
                 onClick={this.toggleRead}>
-                    {this.props.notification}
+                <p>{this.props.notification}</p>
             </div>
         )
     }
 }
 
-//const mapStateToProps = state => {
-    //update notificationCount
-// }
+const mapStateToProps = state => {
+    return {
+        notifications: state.notifications.notifications,
+    }
+}
+
+//connect to redux
+export default connect(mapStateToProps, { markNotification })(Notification);
 
 //connect to redux- need to count unreads
-export default Notification;

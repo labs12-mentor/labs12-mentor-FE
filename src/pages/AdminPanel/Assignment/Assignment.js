@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Nav,
     NavItem,
@@ -8,12 +9,20 @@ import {
 } from 'reactstrap';
 import classnames from 'classnames';
 
+import { getSpecificMatch, getUsers } from '../../../actions';
+
 import Recommended from './Recommended';
 import MapView from './MapView';
 
-class Application extends React.Component {
+class Assignment extends React.Component {
     state = {
-        activeTab: '1'
+        activeTab: '1',
+        currentMatch: {}
+    }
+
+    async componentDidMount() {
+        await this.props.getSpecificMatch(this.props.match.params.id);
+        await this.props.getUsers();        
     }
 
     toggleTab = tab => {
@@ -25,13 +34,28 @@ class Application extends React.Component {
     }
 
     render() {
+        let mentorMatch = {};
+        let menteeMatch = {};
+        if(this.props.match.params.role === 'mentor'){
+            this.props.users.forEach(user => {
+                if(user.id === this.props.currentMatch.mentor_id){
+                    mentorMatch = user;
+                }
+            });
+        } else if (this.props.match.params.role === 'mentee'){
+            this.props.users.forEach(user => {
+                if(user.id === this.props.currentMatch.mentee_id){
+                    menteeMatch = user;
+                }
+            });
+        }
         return (
-            <div className="Application">
+            <div className="Assignment">
                 <Nav tabs>
                     <NavItem>
                         <NavLink 
                             className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => { this.toggleTab('1'); }} 
+                            onClick={() => { this.toggleTab('1'); }}
                         >
                             Recommended
                         </NavLink>
@@ -49,11 +73,18 @@ class Application extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId="1">
-                        <Recommended />
+                        <Recommended 
+                            currentMatch={this.state.currentMatch} 
+                            mentorMatch={mentorMatch}
+                            menteeMatch={menteeMatch}
+                        />
                     </TabPane>
 
                     <TabPane tabId="2">
-                        <MapView />
+                        <MapView 
+                            mentorMatch={mentorMatch}
+                            menteeMatch={menteeMatch}
+                        />
                     </TabPane>
                 </TabContent>
             </div>
@@ -61,4 +92,11 @@ class Application extends React.Component {
     }
 }
 
-export default Application;
+const mstp = state => {
+    return {
+        currentMatch: state.matches.currentMatch,
+        users: state.users.users
+    }
+}
+
+export default connect(mstp, { getSpecificMatch, getUsers })(Assignment);

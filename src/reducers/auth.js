@@ -13,21 +13,159 @@ import {
     REGISTER_WITH_INVITATION_FAILURE,
     GITHUB_REGISTER_WITH_INVITATION_START,
     GITHUB_REGISTER_WITH_INVITATION_SUCCESS,
-    GITHUB_REGISTER_WITH_INVITATION_FAILURE
+    GITHUB_REGISTER_WITH_INVITATION_FAILURE,
+    GET_CURRENT_USER_START,
+    GET_CURRENT_USER_SUCCESS,
+    GET_CURRENT_USER_FAILURE,
+    LOGOUT_USER_START,
+    LOGOUT_USER_SUCCESS,
+    LOGOUT_USER_FAILURE
 } from '../constants/actionTypes';
 
 const initialState = {
-    token: localStorage.getItem('token'),
-    registeringUser: false,
-    newUser: null,
-    loggingInUser: false,
-    currentUser: false,
+    token: localStorage.getItem('Authorization'),
+    isFetching: false,
+    currentUser: null,
     error: null
-}
+};
 
 export default (state = initialState, action) => {
-    switch(action.type){
+    switch (action.type) {
+        case LOGIN_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case LOGIN_USER_SUCCESS:
+            localStorage.setItem('Authorization', action.payload.token);
+            return {
+                ...state,
+                isFetching: false,
+                token: localStorage.getItem('Authorization') || null
+            };
+
+        case LOGIN_USER_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
+        case LOGIN_USER_WITH_GITHUB_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case LOGIN_USER_WITH_GITHUB_SUCCESS:
+            localStorage.setItem('Authorization', action.payload.token);
+            let { message: messageGithub, token: tokenGithub, ...userGithub } = action.payload;
+            return {
+                ...state,
+                isFetching: false,
+                token: localStorage.getItem('Authorization') || null,
+                currentUser: userGithub
+            };
+
+        case LOGIN_USER_WITH_GITHUB_FAILURE:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case REGISTER_ORGANIZATION_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case REGISTER_ORGANIZATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case REGISTER_ORGANIZATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case REGISTER_WITH_INVITATION_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case REGISTER_WITH_INVITATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case REGISTER_WITH_INVITATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case GITHUB_REGISTER_WITH_INVITATION_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case GITHUB_REGISTER_WITH_INVITATION_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case GITHUB_REGISTER_WITH_INVITATION_FAILURE:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case GET_CURRENT_USER_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case GET_CURRENT_USER_SUCCESS:
+            return {
+                ...state,
+                isFetching: false,
+                currentUser: action.payload
+            };
+
+        case GET_CURRENT_USER_FAILURE:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case LOGOUT_USER_START:
+            return {
+                ...state
+            };
+
+        case LOGOUT_USER_SUCCESS:
+            localStorage.removeItem('Authorization');
+            return {
+                ...state,
+                token: localStorage.getItem('Authorization') || null
+            };
+
+        case LOGOUT_USER_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            };
+
         default:
             return state;
     }
-}
+};

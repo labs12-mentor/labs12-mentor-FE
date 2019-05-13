@@ -20,250 +20,255 @@ import {
 } from '../constants/actionTypes';
 import axios from 'axios';
 import { API_URL } from '../constants/config';
-import { history } from '../';
 
-const authHeader = {
-    headers: {
-        Authorization: localStorage.getItem("Authorization")
-    }
-};
-
-export function getMatches(){
-    return async dispatch => {
+export function getMatches() {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/matches`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .get(`${API_URL}/matches`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: GET_MATCHES_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: GET_MATCHES_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: GET_MATCHES_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function getSpecificMatch(id){
-    return async dispatch => {
+export function getSpecificMatch(id) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .get(`${API_URL}/matches/${id}`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .get(`${API_URL}/matches/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: GET_SPECIFIC_MATCH_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: GET_SPECIFIC_MATCH_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: GET_SPECIFIC_MATCH_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function createMatch(matchData){
-    return async dispatch => {
+export function createMatch(matchData) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .post(`${API_URL}/matches`, matchData, authHeader)
-            .then(async res => {
-                if(res.status === 201){
+            .post(`${API_URL}/matches`, matchData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 201) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: CREATE_MATCH_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: CREATE_MATCH_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: CREATE_MATCH_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function updateMatch(id, matchData){
-    return async dispatch => {
+export function updateMatch(id, matchData) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .put(`${API_URL}/matches/${id}`, matchData, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .put(`${API_URL}/matches/${id}`, matchData, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: UPDATE_MATCH_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: UPDATE_MATCH_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: UPDATE_MATCH_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function deleteMatch(id){
-    return async dispatch => {
+export function deleteMatch(id) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/matches/${id}`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .delete(`${API_URL}/matches/${id}`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: DELETE_MATCH_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: DELETE_MATCH_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: DELETE_MATCH_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
 
-export function removeMatch(id){
-    return async dispatch => {
+export function removeMatch(id) {
+    return async (dispatch) => {
         await dispatch(request());
 
         return await axios
-            .delete(`${API_URL}/matches/${id}/remove`, authHeader)
-            .then(async res => {
-                if(res.status === 200){
+            .delete(`${API_URL}/matches/${id}/remove`, {
+                headers: { Authorization: localStorage.getItem('Authorization') }
+            })
+            .then(async (res) => {
+                if (res.status === 200) {
                     return await dispatch(success(res.data));
-                }else{
+                } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
                 }
             })
-            .catch(async err => {
+            .catch(async (err) => {
                 return await dispatch(error(err));
             });
-    }
+    };
 
-    function request(){
+    function request() {
         return {
             type: REMOVE_MATCH_START
-        }
+        };
     }
 
-    function success(data){
+    function success(data) {
         return {
             type: REMOVE_MATCH_SUCCESS,
             payload: data
-        }
+        };
     }
 
-    function error(err){
+    function error(err) {
         return {
             type: REMOVE_MATCH_FAILURE,
             payload: err
-        }
+        };
     }
-};
+}
