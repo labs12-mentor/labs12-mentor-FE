@@ -34,6 +34,7 @@ class Assignment extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         let mentorMatch = {};
         let menteeMatch = {};
         if(this.props.match.params.role === 'mentor'){

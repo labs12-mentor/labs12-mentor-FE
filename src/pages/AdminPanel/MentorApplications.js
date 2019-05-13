@@ -1,20 +1,25 @@
 import React from 'react';
-
 import {
     InputGroup,
     Input,
-
     Dropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem
+    DropdownItem,
+    Nav,
+    NavItem,
+    NavLink,
+    TabContent,
+    TabPane
 } from 'reactstrap';
+import classnames from 'classnames';
 
 import MentorAppList from './MentorAppList';
 
 class MentorApplications extends React.Component {
     state = {
         dropdownOpen: false,
+        activeTab: '1',
         searchBarContents: ""
     }
 
@@ -30,6 +35,14 @@ class MentorApplications extends React.Component {
             ...this.state,
             [e.target.name]: e.target.value
         });
+    }
+
+    toggleTab = tab => {
+        if(this.state.activeTab !== tab){
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
 
     filterBySearch = () => {
@@ -66,10 +79,41 @@ class MentorApplications extends React.Component {
                         <DropdownItem>Denied</DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
-
-                <h3>Applications</h3>
                 
-                {this.props.mentees.length && <MentorAppList mentees={this.filterBySearch()} />}
+                <Nav>
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '1' })}
+                            onClick={() => { this.toggleTab('1'); }}
+                        >
+                            Become a Mentor
+                        </NavLink>
+                    </NavItem>
+
+                    <NavItem>
+                        <NavLink
+                            className={classnames({ active: this.state.activeTab === '2' })}
+                            onClick={() => { this.toggleTab('2'); }}
+                        >
+                            Get a Mentor
+                        </NavLink>
+                    </NavItem>
+                </Nav>
+                
+                <TabContent activeTab={this.state.activeTab}>
+                    <TabPane tabId='1'>
+                        <h2>Become a Mentor</h2>
+
+                        {this.props.mentees.length && <MentorAppList mentees={this.filterBySearch()} />}
+                    </TabPane>
+
+                    <TabPane tabId='2'>
+                        <h2>Get a Mentor</h2>
+
+                        
+                    </TabPane>
+                </TabContent>
+                
             </div>
         );
     }
