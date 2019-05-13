@@ -26,7 +26,7 @@ import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
 import MenteeForm from "../components/MenteesComponents/MenteeForm";
-import { createMentee } from "../actions/mentees";
+import { createMentee, getMentees } from "../actions/mentees";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -48,7 +48,9 @@ class UserProfile extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: "1",
-      user: []
+      applied: false,
+      user: [],
+      menteed: []
     };
   }
 
@@ -63,9 +65,14 @@ class UserProfile extends React.Component {
   async componentDidMount() {
     //should be the id of the user logged in.
     await this.props.getCurrentUser();
-    this.setState({ user: this.props.user });
-    console.log(this.state.user);
+    await this.props.getMentees();
+    this.setState({ user: this.props.user, menteed: this.props.mentees})
+   
   }
+
+  toggleApply() {
+    this.setState({ ...this.state, applied: true });
+    }
 
   changeHandler = e => {
     e.preventDefault();
@@ -79,16 +86,13 @@ class UserProfile extends React.Component {
     history.push("/user/mentorform");
   };
 
-  beMentored = e => {
-    this.props.createMentee({
-      user_id: this.state.user.id,
-      wanted_mentor_id: 1,
-      deleted: false
-    });
-  };
 
   render() {
-    console.log(this.props.user);
+    //console.log(this.props.user);
+    //console.log(this.props.menteed)
+    const applied = this.state.menteed.filter(id => {
+      return id.user_id === this.state.user.id
+    })
     return (
       <div>
         <Nav tabs>
@@ -220,10 +224,10 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
           <TabPane tabId="3">
-            <FormGroup check>
-              <Button onClick={this.beMentored}>Be Mentored</Button>
-            </FormGroup>
-            <MentorsList />
+            {applied.length === 1 ? <h2>Applied</h2> : 
+            <MentorsList
+            toggleApplied={()=> this.toggleApply()}
+            />}
           </TabPane>
         </TabContent>
         {/* <UserProfileForm/> */}
@@ -235,11 +239,12 @@ class UserProfile extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.currentUser
+    user: state.auth.currentUser,
+    mentees: state.mentees.mentees
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getCurrentUser, createMentee }
+  { getCurrentUser, createMentee, getMentees }
 )(UserProfile);
