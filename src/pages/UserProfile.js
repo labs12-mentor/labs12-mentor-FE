@@ -201,12 +201,6 @@ class UserProfile extends React.Component {
                             />
                           </FormGroup>
                         </Col>
-                        <Col md={6}>
-                          <FormGroup>
-                            <h3>User Id</h3>
-                            <Label for="User_id">{this.state.user.id}</Label>
-                          </FormGroup>
-                        </Col>
                       </Row>
 
                       <Card>
