@@ -6,17 +6,17 @@ import { getCurrentUser } from "../../actions";
 class MentorCard extends React.Component {
   state = {
     user: [],
-    mentees: [],
+    mentees: []
   };
 
   async componentDidMount() {
     await this.props.getCurrentUser();
-    this.setState({user:this.props.user})
+    this.setState({ user: this.props.user });
   }
 
   apply = e => {
     e.preventDefault();
-    console.log({
+    this.props.createMentee({
       user_id: this.state.user.id,
       wanted_mentor_id: this.props.id,
       deleted: false
