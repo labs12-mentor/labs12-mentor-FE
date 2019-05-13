@@ -33,7 +33,7 @@ class MentorCard extends React.Component {
         return id.user_id === this.state.user.id;
       })
     });
-    console.log(this.state);
+    //console.log(this.state.connect_id[0].id);
   }
 
   apply = e => {
@@ -41,6 +41,7 @@ class MentorCard extends React.Component {
     //const connect = this.state.mentees.filter(id => {return id === this.state.user.id});
     // console.log(connect)
     const number = this.state.connect_id[0].id;
+    //console.log(number)
     e.preventDefault();
     this.props.createMatch({
       status: "undecided",
