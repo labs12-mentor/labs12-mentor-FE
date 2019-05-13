@@ -24,6 +24,7 @@ import MeetingsList from "../components/MeetingsComponents/MeetingsList";
 import UserProfileForm from "../components/UserComponents/UserProfileForm";
 import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
+import MentorsList from '../components/MentorComponents/MentorsList.js'
 import MenteeForm from "../components/MenteesComponents/MenteeForm";
 
 const ContainerDiv = styled.div`
@@ -64,6 +65,7 @@ class UserProfile extends React.Component {
     //should be the id of the user logged in.
     await this.props.getCurrentUser();
     this.setState({ user: this.props.user });
+    console.log(this.state.user)
   }
 
   changeHandler = e => {
@@ -103,6 +105,16 @@ class UserProfile extends React.Component {
               Meetings
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === "3" })}
+              onClick={() => {
+                this.toggle("3");
+              }}
+            >
+              Mentors
+            </NavLink>
+          </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
@@ -114,10 +126,10 @@ class UserProfile extends React.Component {
                 <ProfileContainer>
                   <Form>
                     <FormGroup check>
-                      <Label check>
-                        <Input type="checkbox" id="checkbox" />I would liked to
-                        be mentored
-                      </Label>
+                        <Button>
+                           Be Mentored
+                          <MenteeForm/>
+                        </Button>
                     </FormGroup>
                     <Row>
                       <Col md={6}>
@@ -187,6 +199,14 @@ class UserProfile extends React.Component {
                           />
                         </FormGroup>
                       </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>User Id</h3>
+                          <Label for="User_id">
+                          {this.state.user.id}
+                          </Label>
+                        </FormGroup>
+                      </Col>
                     </Row>
 
                     <Card>
@@ -202,6 +222,9 @@ class UserProfile extends React.Component {
           </TabPane>
           <TabPane tabId="2">
             <MeetingsList />
+          </TabPane>
+          <TabPane tabId="3">
+            <MentorsList />
           </TabPane>
         </TabContent>
         {/* <UserProfileForm/> */}

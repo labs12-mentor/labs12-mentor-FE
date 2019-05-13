@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getMentors } from "../../actions/mentors.js";
+import MentorCard from "./MentorCard.js";
 
 class MentorsList extends React.Component {
   state = {
@@ -16,7 +17,11 @@ class MentorsList extends React.Component {
       <div>
         {this.state.isLoading ? (
           this.props.mentors.map(mentor => {
-            return mentor;
+            return (
+              <MentorCard
+                id={mentor.id}
+              />
+            );
           })
         ) : (
           <h3>Loading</h3>

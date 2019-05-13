@@ -3,7 +3,7 @@ import React from "react";
 const MentorCard = (props) => {
     return(
         <div>
-            <h1>Mentor</h1>
+            <h2>{props.id}</h2>
         </div>
     )
 }
