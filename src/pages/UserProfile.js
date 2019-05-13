@@ -26,6 +26,7 @@ import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
 import MentorsList from '../components/MentorComponents/MentorsList.js'
 import MenteeForm from "../components/MenteesComponents/MenteeForm";
+import {createMentee} from "../actions/mentees"
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -80,6 +81,14 @@ class UserProfile extends React.Component {
     history.push("/user/mentorform")
   };
 
+  beMentored = e => {
+    this.props.createMentee({
+      user_id: this.state.user.id,
+      wanted_mentor_id: 1,
+      deleted: false
+    })
+  }
+
   render() {
     console.log(this.props.user);
     return (
@@ -125,12 +134,7 @@ class UserProfile extends React.Component {
                 <Sidebar />
                 <ProfileContainer>
                   <Form>
-                    <FormGroup check>
-                        <Button>
-                           Be Mentored
-                          <MenteeForm/>
-                        </Button>
-                    </FormGroup>
+
                     <Row>
                       <Col md={6}>
                         <FormGroup>
@@ -224,6 +228,9 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
           <TabPane tabId="3">
+          <FormGroup check>
+                    <Button onClick={this.beMentored}>Be Mentored</Button>
+                    </FormGroup>
             <MentorsList />
           </TabPane>
         </TabContent>
@@ -242,7 +249,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getCurrentUser }
+  { getCurrentUser, createMentee }
 )(UserProfile);
 
 

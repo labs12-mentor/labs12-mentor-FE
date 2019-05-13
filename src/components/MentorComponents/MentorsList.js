@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getMentors } from "../../actions/mentors.js";
+import { createMentee, deleteMentee } from "../../actions/mentees"
 import MentorCard from "./MentorCard.js";
 
 class MentorsList extends React.Component {
@@ -16,10 +17,13 @@ class MentorsList extends React.Component {
     return (
       <div>
         {this.state.isLoading ? (
-          this.props.mentors.map(mentor => {
+          this.props.mentors.map((mentor,index) => {
             return (
               <MentorCard
+               key={index}
                 id={mentor.id}
+                createMentee={this.props.createMentee}
+                deleteMentee={this.props.deleteMentee}
               />
             );
           })
@@ -38,5 +42,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getMentors }
+  { getMentors, createMentee, deleteMentee }
 )(MentorsList);
