@@ -58,13 +58,34 @@ class AdminPanel extends React.Component {
 
     filterMatchedUsers() {
         const matchedUsers = [];
-        this.state.users.filter((user) => {
-            this.state.matches.map((match) => {
-                if (user.id === match.mentor_id || user.id === match.mentee_id) {
-                    matchedUsers.push(user);
-                }
-            });
-        });
+        this.state.matches.forEach(match => {
+            let userMatchInfo = {
+                mentor: {},
+                mentee: {},
+                id: match.id,
+                status: "undecided"
+            }
+            this.state.users.forEach(user => {
+                if(user.id === match.mentor_id){
+                    userMatchInfo.mentor = user;
+                    userMatchInfo.mentee = user;//delete according to below
+                    matchedUsers.push(userMatchInfo);
+                } 
+                //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
+                // else if(user.id === match.mentee_id){
+                //     userMatchInfo.mentee = user;
+                //     matchedUsers.push(userMatchInfo);
+                // }
+            })
+        })
+
+        // this.state.users.filter((user) => {
+        //     this.state.matches.map((match) => {
+        //         if (user.id === match.mentor_id || user.id === match.mentee_id) {
+        //             matchedUsers.push(user);
+        //         }
+        //     });
+        // });
 
         return matchedUsers;
     }
