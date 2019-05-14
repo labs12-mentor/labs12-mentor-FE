@@ -126,6 +126,16 @@ class UserProfile extends React.Component {
               Mentors
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === "4" })}
+              onClick={() => {
+                this.toggle("4");
+              }}
+            >
+              Update User
+            </NavLink>
+          </NavItem>
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
@@ -222,6 +232,9 @@ class UserProfile extends React.Component {
             <MentorsList
             toggleApplied={()=> this.toggleApply()}
             />}
+          </TabPane>
+          <TabPane tabId="4">
+          <UserProfileForm/>
           </TabPane>
         </TabContent>
         {/* <UserProfileForm/> */}
