@@ -9,7 +9,8 @@ class MentorProfile extends React.Component {
     menteed: [],
     matches: [],
     wanted_mentor: [],
-    mentor: []
+    mentor: [],
+    profile: []
   };
 
   async componentDidMount() {
@@ -28,13 +29,14 @@ class MentorProfile extends React.Component {
       return id.user_id === this.state.user.id;
     });
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
-    await getSpecficMentor(wanted_mentor.wanted_mentor_id)
-    this.setState({mentor: this.props.mentor})
-    //getSPecificUser(mentor_id.user_id === user_id)
+    await this.props.getSpecificMentor(this.state.wanted_mentor.wanted_mentor_id)
+    await this.setState({...this.state, mentor: this.props.mentor})
+    await this.props.getSpecificUser(this.state.mentor.user_id)
+    await this.setState({...this.state, profile: this.props.profile})
+
   }
 
   render() {
-    //console.log(this.props.mentor);
     return (
       <div>
         {this.state.isLoaded ? (
@@ -55,14 +57,15 @@ const mstp = state => {
     user: state.auth.currentUser,
     mentees: state.mentees.mentees,
     matches: state.matches.matches,
-    mentor: state.mentors.currentMentor
+    mentor: state.mentors.currentMentor,
+    profile: state.users.currentUser
   };
 };
 
 const mdtp = {
     getSpecificUser,
     getMatches,
-    getSpecficMentor,
+    getSpecificMentor,
     getCurrentUser,
     getMentees
 }

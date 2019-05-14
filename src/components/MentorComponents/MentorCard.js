@@ -26,6 +26,7 @@ class MentorCard extends React.Component {
   };
 
   render() {
+    //console.log(this.props.id)
     return (
       <div>
         <h2>{this.props.id}</h2>

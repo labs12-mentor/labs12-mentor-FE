@@ -57,7 +57,7 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
-            <Route exact path='/mentorprofile' component={MentorProfile}/>
+            <Route exact path='/user/mentorprofile' component={MentorProfile}/>
         </Router>
     );
 };

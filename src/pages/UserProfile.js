@@ -47,6 +47,7 @@ class UserProfile extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
+      isLoaded: false,
       activeTab: "1",
       applied: false,
       user: [],
@@ -68,16 +69,20 @@ class UserProfile extends React.Component {
     await this.props.getCurrentUser();
     await this.props.getMentees();
     await this.props.getMatches();
-    this.setState({
+    await this.setState({
       user: this.props.user,
       menteed: this.props.mentees,
       matches: this.props.matches
     });
-    const applied = await this.state.menteed.filter(id => {
+    const applied = this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
-    await this.setState({ ...this.state, wanted_mentor: applied[0] });
-    console.log(this.state.wanted_mentor.status);
+     this.setState({
+      ...this.state,
+      wanted_mentor: applied[0],
+      isLoaded: true
+    });
+    console.log(applied);
   }
 
   toggleApply() {
@@ -98,156 +103,162 @@ class UserProfile extends React.Component {
 
   render() {
     //console.log(this.state.wanted_mentor)
-    return (
-      <div>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "1" })}
-              onClick={() => {
-                this.toggle("1");
-              }}
-            >
-              Profile Information
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "2" })}
-              onClick={() => {
-                this.toggle("2");
-              }}
-            >
-              Meetings
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "3" })}
-              onClick={() => {
-                this.toggle("3");
-              }}
-            >
-              Mentors
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "4" })}
-              onClick={() => {
-                this.toggle("4");
-              }}
-            >
-              Update User
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Row>
-              <Col sm="12">
-                <ContainerDiv>
-                  <Sidebar />
-                  {/* <MentorProfile 
+    if (this.state.isLoaded === false) {
+      return <h1>Loading</h1>;
+    } else {
+      return (
+        <div>
+          <Nav tabs>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === "1" })}
+                onClick={() => {
+                  this.toggle("1");
+                }}
+              >
+                Profile Information
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === "2" })}
+                onClick={() => {
+                  this.toggle("2");
+                }}
+              >
+                Meetings
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === "3" })}
+                onClick={() => {
+                  this.toggle("3");
+                }}
+              >
+                Mentors
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === "4" })}
+                onClick={() => {
+                  this.toggle("4");
+                }}
+              >
+                Update User
+              </NavLink>
+            </NavItem>
+          </Nav>
+          <TabContent activeTab={this.state.activeTab}>
+            <TabPane tabId="1">
+              <Row>
+                <Col sm="12">
+                  <ContainerDiv>
+                    <Sidebar />
+                    {/* <MentorProfile 
                   mentorId={this.state.wanted_mentor.wanted_mentor_id}
                   /> */}
-                  <ProfileContainer>
-                    <Form>
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <h3>First Name</h3>
-                            <Label for="lastName">
-                              {this.state.user.first_name}
-                            </Label>
-                          </FormGroup>
-                        </Col>
+                    <ProfileContainer>
+                      <Form>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <h3>First Name</h3>
+                              <Label for="lastName">
+                                {this.state.user.first_name}
+                              </Label>
+                            </FormGroup>
+                          </Col>
 
-                        <Col md={6}>
-                          <FormGroup>
-                            <h3>Last Name</h3>
-                            <Label for="lastName">
-                              {this.state.user.last_name}
-                            </Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <h3>Last Name</h3>
+                              <Label for="lastName">
+                                {this.state.user.last_name}
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                        </Row>
 
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <h3>State</h3>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <h3>State</h3>
 
-                            <Label for="address">{this.state.user.state}</Label>
-                          </FormGroup>
-                        </Col>
+                              <Label for="address">
+                                {this.state.user.state}
+                              </Label>
+                            </FormGroup>
+                          </Col>
 
-                        <Col md={6}>
-                          <FormGroup>
-                            <h3>Street</h3>
+                          <Col md={6}>
+                            <FormGroup>
+                              <h3>Street</h3>
 
-                            <Label for="zipCode">
-                              {this.state.user.street}
-                            </Label>
-                          </FormGroup>
-                        </Col>
-                      </Row>
+                              <Label for="zipCode">
+                                {this.state.user.street}
+                              </Label>
+                            </FormGroup>
+                          </Col>
+                        </Row>
 
-                      <Row>
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label for="github">Github</Label>
-                            <Input
-                              type="text"
-                              name="github"
-                              id="github"
-                              value={this.state.github}
-                              onChange={this.changeHandler}
-                            />
-                          </FormGroup>
-                        </Col>
+                        <Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label for="github">Github</Label>
+                              <Input
+                                type="text"
+                                name="github"
+                                id="github"
+                                value={this.state.github}
+                                onChange={this.changeHandler}
+                              />
+                            </FormGroup>
+                          </Col>
 
-                        <Col md={6}>
-                          <FormGroup>
-                            <Label for="linkedIn">linkedIn</Label>
-                            <Input
-                              type="text"
-                              name="linkedIn"
-                              id="linkedIn"
-                              value={this.state.linkedIn}
-                              onChange={this.changeHandler}
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label for="linkedIn">linkedIn</Label>
+                              <Input
+                                type="text"
+                                name="linkedIn"
+                                id="linkedIn"
+                                value={this.state.linkedIn}
+                                onChange={this.changeHandler}
+                              />
+                            </FormGroup>
+                          </Col>
+                        </Row>
 
-                      <Card>
-                        <CardBody>
-                          <ExperienceList />
-                        </CardBody>
-                      </Card>
-                    </Form>
-                  </ProfileContainer>
-                </ContainerDiv>
-              </Col>
-            </Row>
-          </TabPane>
-          <TabPane tabId="2">
-            <MeetingsList />
-          </TabPane>
-          <TabPane tabId="3">
-            {this.state.wanted_mentor.length === 1 ? (
-              <h2>Applied</h2>
-            ) : (
-              <MentorsList userId={this.state.user.id} />
-            )}
-          </TabPane>
-          <TabPane tabId="4">
-            <UserProfileForm />
-          </TabPane>
-        </TabContent>
-      </div>
-    );
+                        <Card>
+                          <CardBody>
+                            <ExperienceList />
+                          </CardBody>
+                        </Card>
+                      </Form>
+                    </ProfileContainer>
+                  </ContainerDiv>
+                </Col>
+              </Row>
+            </TabPane>
+            <TabPane tabId="2">
+              <MeetingsList />
+            </TabPane>
+            <TabPane tabId="3">
+              {this.state.wanted_mentor.status ? (
+                <h2>Applied</h2>
+              ) : (
+                <MentorsList userId={this.state.user.id} />
+              )}
+            </TabPane>
+            <TabPane tabId="4">
+              <UserProfileForm />
+            </TabPane>
+          </TabContent>
+        </div>
+      );
+    }
   }
 }
 
