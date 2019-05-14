@@ -68,13 +68,16 @@ class UserProfile extends React.Component {
     await this.props.getCurrentUser();
     await this.props.getMentees();
     await this.props.getMatches();
-    this.setState({ user: this.props.user, menteed: this.props.mentees, matches: this.props.matches});
+    this.setState({
+      user: this.props.user,
+      menteed: this.props.mentees,
+      matches: this.props.matches
+    });
     const applied = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
-    await this.setState({...this.state, wanted_mentor: applied[0]})
-    console.log(this.state.wanted_mentor.status )
-
+    await this.setState({ ...this.state, wanted_mentor: applied[0] });
+    console.log(this.state.wanted_mentor.status);
   }
 
   toggleApply() {
@@ -92,8 +95,6 @@ class UserProfile extends React.Component {
     e.preventDefault();
     history.push("/user/mentorform");
   };
-
-  
 
   render() {
     //console.log(this.state.wanted_mentor)
@@ -148,7 +149,7 @@ class UserProfile extends React.Component {
                 <ContainerDiv>
                   <Sidebar />
                   {/* <MentorProfile 
-                  mentorId={this.props.mentorId}
+                  mentorId={this.state.wanted_mentor.wanted_mentor_id}
                   /> */}
                   <ProfileContainer>
                     <Form>
@@ -235,10 +236,11 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
           <TabPane tabId="3">
-            {this.state.wanted_mentor.length === 1 ? <h2>Applied</h2> : 
-            <MentorsList 
-            userId={this.state.user.id}
-            />}
+            {this.state.wanted_mentor.length === 1 ? (
+              <h2>Applied</h2>
+            ) : (
+              <MentorsList userId={this.state.user.id} />
+            )}
           </TabPane>
           <TabPane tabId="4">
             <UserProfileForm />
