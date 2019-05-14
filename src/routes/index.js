@@ -14,9 +14,7 @@ import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
-<<<<<<< HEAD
-import Mapbox from '../components/MapboxMap/MapboxMap';
-=======
+import Mapbox from '../components/MapboxMap/UserMapboxMap';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import Navbar from '../components/Navbar';
 import RegDetails from '../pages/RegistrationDetails';
@@ -24,30 +22,10 @@ import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
->>>>>>> 33df9aacdf41bd43723c7895a78bd16e4e0bd0d7
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-<<<<<<< HEAD
-            <div>
-                <header>
-                    <NotificationButton />
-                </header>
-            </div>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/map" component={Mapbox} />
-            <Route exact path="/organization/register" component={OrganizationRegister} />
-            <Route exact path="/user/register" component={UserRegister} />
-            <Route exact path="/user/login" component={UserLogin} />
-            <Route exact path="/user/student/profile" component={StudentProfile} />
-            <Route exact path="/user/notifications" component={Notifications} />
-            <Route exact path="/user/admin/profile" component={AdminPanel} />
-            <Route exact path="/user/mentorapplication" component={Application} />
-            <Route exact path="/user/mentorassignment" component={Assignment} />
-            <Route exact path="/user/meetings" component={MeetingsPage}/>
-            <Route exact path="/user/experiences" component={ExperienceList}/>
-=======
             <Navbar />
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route
@@ -79,7 +57,7 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
->>>>>>> 33df9aacdf41bd43723c7895a78bd16e4e0bd0d7
+            <Route exact path='/map' component={Mapbox} />
         </Router>
     );
 };

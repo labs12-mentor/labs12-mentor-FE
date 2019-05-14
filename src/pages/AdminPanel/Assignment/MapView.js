@@ -3,6 +3,7 @@ import {
     Button
 } from 'reactstrap';
 
+
 class MapView extends React.Component {
     render() {
         const mentor = this.props.mentorMatch;
