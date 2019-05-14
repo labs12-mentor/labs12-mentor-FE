@@ -68,8 +68,6 @@ class MentorApplications extends React.Component {
     }
 
     render() {
-        console.log('mentees', this.props.mentees);
-        console.log('mentors', this.props.mentors);
         return (
             <div className="MentorApplication">
                 <InputGroup>
@@ -123,7 +121,12 @@ class MentorApplications extends React.Component {
                     <TabPane tabId='2'>
                         <h2>Get a Mentor</h2>
                         
-                        {this.props.mentees.length && <GetMentorApplication users={this.props.users} mentees={this.filterBySearch("mentee")} />}
+                        {this.props.mentees.length && 
+                            <GetMentorApplication 
+                                users={this.props.users} 
+                                mentees={this.filterBySearch("mentee")}
+                                mentors={this.props.mentors}
+                            />}
                     </TabPane>
                 </TabContent>
                 

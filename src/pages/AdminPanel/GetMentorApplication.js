@@ -1,19 +1,58 @@
 import React from 'react';
 import history from '../../history';
 import {
-    Table,
-    ButtonGroup,
-    Button
+    Table
 } from 'reactstrap';
 
 import GetMentorApplicationCard from './GetMentorApplicationCard';
 
 class GetMentorApplication extends React.Component {
+    state = {
+        mentees: [],
+        mentorIds: []
+    }
+
+    componentDidMount() {
+        this.setState({
+            ...this.state,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors
+        });
+    }
+
     routeToApplication(id) {
         history.push(`/user/admin/mentorapplication/${id}`);
     }
 
+    // evaluateMatch = (e, mentorId, menteeId) => {
+    //     e.preventDefault();
+    //     console.log(this.state.mentees);
+    //     let menteeApplications = [];
+    //     this.state.mentees.forEach(mentee => {
+    //         this.state.mentors.forEach(mentor => {
+    //             if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
+    //                 menteeApplications.push(mentee);
+    //             }
+    //         });
+    //     });
+    //     console.log(menteeApplications);
+    //     this.setState({
+    //         ...this.state,
+    //         mentees: menteeApplications
+    //     });
+    // }
+
     render() {
+        console.log(this.state.mentees);
+        let menteeApplications = [];
+        this.state.mentees.forEach(mentee => {
+            this.state.mentors.forEach(mentor => {
+                if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
+                    menteeApplications.push(mentee);
+                }
+            });
+        });
+        console.log(menteeApplications);
         return (
             <Table striped>
                 <thead>
@@ -27,8 +66,12 @@ class GetMentorApplication extends React.Component {
                 </thead>
 
                 <tbody>
-                {this.props.mentees.map((mentee, index) => {
-                        return ( <GetMentorApplicationCard key={index} mentee={mentee} users={this.props.users} /> )
+                {menteeApplications.map((mentee, index) => {
+                        return ( <GetMentorApplicationCard key={index} 
+                                    mentee={mentee} 
+                                    users={this.props.users} 
+                                    evaluateMatch={this.evaluateMatch}
+                                /> )
                     })}
                 </tbody>
             </Table>
