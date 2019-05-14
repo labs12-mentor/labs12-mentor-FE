@@ -25,8 +25,8 @@ import UserProfileForm from "../components/UserComponents/UserProfileForm";
 import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
-import MenteeForm from "../components/MenteesComponents/MenteeForm";
-import { createMentee, getMentees } from "../actions/mentees";
+import { createMentee, getMentees, getMatches } from "../actions";
+import MentorProfile from "../components/MentorComponents/MentorProfile";
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -50,7 +50,9 @@ class UserProfile extends React.Component {
       activeTab: "1",
       applied: false,
       user: [],
-      menteed: []
+      menteed: [],
+      matches: [],
+      wanted_mentor: []
     };
   }
 
@@ -63,10 +65,16 @@ class UserProfile extends React.Component {
   }
 
   async componentDidMount() {
-    //should be the id of the user logged in.
     await this.props.getCurrentUser();
     await this.props.getMentees();
-    this.setState({ user: this.props.user, menteed: this.props.mentees });
+    await this.props.getMatches();
+    this.setState({ user: this.props.user, menteed: this.props.mentees, matches: this.props.matches});
+    const applied = await this.state.menteed.filter(id => {
+      return id.user_id === this.state.user.id;
+    });
+    await this.setState({...this.state, wanted_mentor: applied[0]})
+    console.log(this.state.wanted_mentor.status )
+
   }
 
   toggleApply() {
@@ -85,12 +93,10 @@ class UserProfile extends React.Component {
     history.push("/user/mentorform");
   };
 
+  
+
   render() {
-    //console.log(this.props.user);
-    //console.log(this.props.menteed)
-    const applied = this.state.menteed.filter(id => {
-      return id.user_id === this.state.user.id;
-    });
+    //console.log(this.state.wanted_mentor)
     return (
       <div>
         <Nav tabs>
@@ -141,6 +147,9 @@ class UserProfile extends React.Component {
               <Col sm="12">
                 <ContainerDiv>
                   <Sidebar />
+                  {/* <MentorProfile 
+                  mentorId={this.props.mentorId}
+                  /> */}
                   <ProfileContainer>
                     <Form>
                       <Row>
@@ -226,7 +235,7 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
           <TabPane tabId="3">
-            {applied.length === 1 ? <h2>Applied</h2> : 
+            {this.state.wanted_mentor.length === 1 ? <h2>Applied</h2> : 
             <MentorsList 
             userId={this.state.user.id}
             />}
@@ -235,8 +244,6 @@ class UserProfile extends React.Component {
             <UserProfileForm />
           </TabPane>
         </TabContent>
-        {/* <UserProfileForm/> */}
-        {/* <MenteeForm/> */}
       </div>
     );
   }
@@ -245,11 +252,12 @@ class UserProfile extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.auth.currentUser,
-    mentees: state.mentees.mentees
+    mentees: state.mentees.mentees,
+    matches: state.matches.matches
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getCurrentUser, createMentee, getMentees }
+  { getCurrentUser, createMentee, getMentees, getMatches }
 )(UserProfile);
