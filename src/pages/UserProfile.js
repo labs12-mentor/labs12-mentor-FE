@@ -66,13 +66,12 @@ class UserProfile extends React.Component {
     //should be the id of the user logged in.
     await this.props.getCurrentUser();
     await this.props.getMentees();
-    this.setState({ user: this.props.user, menteed: this.props.mentees})
-   
+    this.setState({ user: this.props.user, menteed: this.props.mentees });
   }
 
   toggleApply() {
     this.setState({ ...this.state, applied: true });
-    }
+  }
 
   changeHandler = e => {
     e.preventDefault();
@@ -86,13 +85,12 @@ class UserProfile extends React.Component {
     history.push("/user/mentorform");
   };
 
-
   render() {
     //console.log(this.props.user);
     //console.log(this.props.menteed)
     const applied = this.state.menteed.filter(id => {
-      return id.user_id === this.state.user.id
-    })
+      return id.user_id === this.state.user.id;
+    });
     return (
       <div>
         <Nav tabs>
@@ -228,13 +226,10 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
           <TabPane tabId="3">
-            {applied.length === 1 ? <h2>Applied</h2> : 
-            <MentorsList
-            toggleApplied={()=> this.toggleApply()}
-            />}
+            {applied.length === 1 ? <h2>Applied</h2> : <MentorsList />}
           </TabPane>
           <TabPane tabId="4">
-          <UserProfileForm/>
+            <UserProfileForm />
           </TabPane>
         </TabContent>
         {/* <UserProfileForm/> */}
