@@ -226,7 +226,10 @@ class UserProfile extends React.Component {
             <MeetingsList />
           </TabPane>
           <TabPane tabId="3">
-            {applied.length === 1 ? <h2>Applied</h2> : <MentorsList />}
+            {applied.length === 1 ? <h2>Applied</h2> : 
+            <MentorsList 
+            userId={this.state.user.id}
+            />}
           </TabPane>
           <TabPane tabId="4">
             <UserProfileForm />

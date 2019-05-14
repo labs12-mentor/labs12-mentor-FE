@@ -4,6 +4,7 @@ import { getMentors } from "../../actions/mentors.js";
 import { createMentee } from "../../actions/mentees";
 import MentorCard from "./MentorCard.js";
 import MentorForm from "./MentorForm.js";
+import { Button, Modal, ModalBody } from "reactstrap";
 
 class MentorsList extends React.Component {
   constructor(props) {
@@ -27,6 +28,16 @@ class MentorsList extends React.Component {
   }
 
   render() {
+    const externalCloseBtn = (
+      <button
+        className="close"
+        style={{ position: "absolute", top: "15px", right: "15px" }}
+        onClick={this.toggle}
+      >
+        &times;
+      </button>
+    );
+
     if (this.state.applied === true) {
       return <h2>You have applied</h2>;
     } else {
@@ -57,7 +68,9 @@ class MentorsList extends React.Component {
             external={externalCloseBtn}
           >
             <ModalBody>
-              <MentorForm />
+              <MentorForm 
+              userId={this.props.userId}
+              />
             </ModalBody>
           </Modal>
         </div>
