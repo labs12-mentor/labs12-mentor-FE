@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getSpecificUser } from "../../actions";
+import { getSpecificUser, getMatches, getMentees, getCurrentUser, getSpecificMentor } from "../../actions";
 
 class MentorProfile extends React.Component {
   state = {
@@ -8,7 +8,8 @@ class MentorProfile extends React.Component {
     user: [],
     menteed: [],
     matches: [],
-    wanted_mentor: []
+    wanted_mentor: [],
+    mentor: []
   };
 
   async componentDidMount() {
@@ -27,12 +28,13 @@ class MentorProfile extends React.Component {
       return id.user_id === this.state.user.id;
     });
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
-    //getSpecficMentor(applied[0].wanted_mentor_id)
+    await getSpecficMentor(wanted_mentor.wanted_mentor_id)
+    this.setState({mentor: this.props.mentor})
     //getSPecificUser(mentor_id.user_id === user_id)
   }
 
   render() {
-    console.log(this.props.mentor);
+    //console.log(this.props.mentor);
     return (
       <div>
         {this.state.isLoaded ? (
@@ -50,11 +52,22 @@ class MentorProfile extends React.Component {
 
 const mstp = state => {
   return {
-    mentor: state.users.currentUser
+    user: state.auth.currentUser,
+    mentees: state.mentees.mentees,
+    matches: state.matches.matches,
+    mentor: state.mentors.currentMentor
   };
 };
 
+const mdtp = {
+    getSpecificUser,
+    getMatches,
+    getSpecficMentor,
+    getCurrentUser,
+    getMentees
+}
+
 export default connect(
   mstp,
-  { getSpecificUser }
+  mdtp
 )(MentorProfile);
