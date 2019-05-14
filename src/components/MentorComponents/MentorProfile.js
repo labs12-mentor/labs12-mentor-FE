@@ -27,6 +27,8 @@ class MentorProfile extends React.Component {
       return id.user_id === this.state.user.id;
     });
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
+    //getSpecficMentor(applied[0].wanted_mentor_id)
+    //getSPecificUser(mentor_id.user_id === user_id)
   }
 
   render() {
