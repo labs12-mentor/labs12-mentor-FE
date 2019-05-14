@@ -15,6 +15,7 @@ import {
 import classnames from 'classnames';
 
 import MentorAppList from './MentorAppList';
+import GetMentorApplication from './GetMentorApplication';
 
 class MentorApplications extends React.Component {
     state = {
@@ -45,18 +46,30 @@ class MentorApplications extends React.Component {
         }
     }
 
-    filterBySearch = () => {
+    filterBySearch = role => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        const filteredMentees = this.props.mentees.filter(mentee => {
-            return (mentee.last_name.toLowerCase().includes(searchInput)
-                || mentee.first_name.toLowerCase().includes(searchInput) 
-                || mentee.email.toLowerCase().includes(searchInput));
-        });
+        let filteredUsers = [];
+
+        if(role === "mentee"){
+            filteredUsers = this.props.mentees.filter(mentee => {
+                return (mentee.last_name.toLowerCase().includes(searchInput)
+                    || mentee.first_name.toLowerCase().includes(searchInput) 
+                    || mentee.email.toLowerCase().includes(searchInput));
+            });
+        } else if(role === "mentor"){
+            filteredUsers = this.props.mentors.filter(mentor => {
+                return (mentor.last_name.toLowerCase().includes(searchInput)
+                    || mentor.first_name.toLowerCase().includes(searchInput) 
+                    || mentor.email.toLowerCase().includes(searchInput));        
+            });
+        }
         
-        return filteredMentees;
+        return filteredUsers;
     }
 
     render() {
+        console.log('mentees', this.props.mentees);
+        console.log('mentors', this.props.mentors);
         return (
             <div className="MentorApplication">
                 <InputGroup>
@@ -104,13 +117,13 @@ class MentorApplications extends React.Component {
                     <TabPane tabId='1'>
                         <h2>Become a Mentor</h2>
 
-                        {this.props.mentees.length && <MentorAppList mentees={this.filterBySearch()} />}
+                        {this.props.mentors.length && <MentorAppList mentors={this.filterBySearch("mentor")} />}
                     </TabPane>
 
                     <TabPane tabId='2'>
                         <h2>Get a Mentor</h2>
-
                         
+                        {this.props.mentees.length && <GetMentorApplication users={this.props.users} mentees={this.filterBySearch("mentee")} />}
                     </TabPane>
                 </TabContent>
                 
