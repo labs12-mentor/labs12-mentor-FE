@@ -33,12 +33,12 @@ class MentorAssignment extends React.Component {
         });
     }
 
-    filterBySearch = () => {
+    filterBySearch = role => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        const filteredMentees = this.props.matchedUsers.filter(user => {
-            return (user.last_name.toLowerCase().includes(searchInput)
-                || user.first_name.toLowerCase().includes(searchInput) 
-                || user.email.toLowerCase().includes(searchInput));
+        const filteredMentees = this.props.matchedUsers.filter(match => {
+            return (match[role].last_name.toLowerCase().includes(searchInput)
+                || match[role].first_name.toLowerCase().includes(searchInput) 
+                || match[role].email.toLowerCase().includes(searchInput));
         });
         
         return filteredMentees;
@@ -106,9 +106,7 @@ class MentorAssignment extends React.Component {
                         <h2>Mentors</h2>
 
                         <MentorAssignList 
-                            matchedUsers={this.filterBySearch()}
-                            users={this.props.users}
-                            matches={this.props.matches}
+                            matchedUsers={this.filterBySearch("mentor")}
                         />
                     </TabPane>
 
@@ -116,9 +114,7 @@ class MentorAssignment extends React.Component {
                         <h2>Students</h2>
 
                         <StudentAssignList 
-                            matchedUsers={this.filterBySearch()}
-                            users={this.props.users}
-                            matches={this.props.matches}
+                            matchedUsers={this.filterBySearch("mentee")}
                         />
                     </TabPane>
                 </TabContent>

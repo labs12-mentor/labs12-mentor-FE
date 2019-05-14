@@ -7,6 +7,7 @@ import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
 import ProfileForms from './ProfileForms';
+import { thisExpression } from '@babel/types';
 
 class AdminPanel extends React.Component {
     constructor(props) {
@@ -16,7 +17,9 @@ class AdminPanel extends React.Component {
             users: [],
             matches: [],
             mentees: [],
-            menteeUserInfo: []
+            mentors: [],
+            menteeUserInfo: [],
+            mentorUserInfo: []
         };
     }
 
@@ -25,12 +28,14 @@ class AdminPanel extends React.Component {
             .getUsers()
             .then(async (res) => {
                 await this.props.getMentees();
+                await this.props.getMentors();
                 await this.props.getMatches();
             })
             .then((res) => {
                 this.setState({
                     users: this.props.users,
                     mentees: this.props.mentees,
+                    mentors: this.props.mentors,
                     matches: this.props.matches
                 });
             });
@@ -48,6 +53,7 @@ class AdminPanel extends React.Component {
         this.state.users.filter((user) => {
             this.state.mentees.map((mentee) => {
                 if (user.id === mentee.user_id) {
+                    user.wanted_mentor_id = mentee.wanted_mentor_id;
                     this.state.menteeUserInfo.push(user);
                 }
             });
@@ -56,20 +62,50 @@ class AdminPanel extends React.Component {
         return this.state.menteeUserInfo;
     };
 
-    filterMatchedUsers() {
-        const matchedUsers = [];
+    filterMentors = () => {
         this.state.users.filter((user) => {
-            this.state.matches.map((match) => {
-                if (user.id === match.mentor_id || user.id === match.mentee_id) {
-                    matchedUsers.push(user);
+            this.state.mentors.map((mentor) => {
+                if (user.id === mentor.user_id) {
+                    this.state.mentorUserInfo.push(user);
                 }
             });
         });
+
+        return this.state.mentorUserInfo;
+    };
+
+    filterMatchedUsers() {
+        const matchedUsers = [];
+        this.state.matches.forEach(match => {
+            let userMatchInfo = {
+                mentor: {},
+                mentee: {},
+                id: match.id,
+                status: "undecided"
+            }
+            this.state.users.forEach(user => {
+                if(user.id === match.mentor_id){
+                    userMatchInfo.mentor = user;
+                    userMatchInfo.mentee = user;//delete according to below
+                    matchedUsers.push(userMatchInfo);
+                } 
+                //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
+                // else if(user.id === match.mentee_id){
+                //     userMatchInfo.mentee = user;
+                //     matchedUsers.push(userMatchInfo);
+                // }
+            })
+        })
 
         return matchedUsers;
     }
 
     render() {
+        console.log('a mentors', this.props.mentors);
+        console.log('a mentees', this.props.mentees);
+        console.log('a matches', this.props.matches);
+        console.log('a users', this.props.user);
+        
         return (
             <div className='AdminPanel'>
                 <h1> Administrator Panel </h1>
@@ -111,7 +147,11 @@ class AdminPanel extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                        <MentorApplications mentees={this.filterMentees()} />
+                        <MentorApplications 
+                            users={this.state.users}
+                            mentees={this.filterMentees()} 
+                            mentors={this.filterMentors()}
+                        />
                     </TabPane>
                     <TabPane tabId='2'>
                         <MentorAssignment 
@@ -134,11 +174,12 @@ const mstp = (state) => {
     return {
         users: state.users.users,
         mentees: state.mentees.mentees,
-        matches: state.matches.matches
+        matches: state.matches.matches,
+        mentors: state.mentors.mentors
     };
 };
 
 export default connect(
     mstp,
-    { getUsers, getMentees, getMatches }
+    { getUsers, getMentees, getMentors, getMatches }
 )(AdminPanel);

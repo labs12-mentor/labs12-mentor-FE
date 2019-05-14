@@ -1,10 +1,14 @@
 import React from 'react';
 import history from '../../history';
 import {
-    Table
+    Table,
+    ButtonGroup,
+    Button
 } from 'reactstrap';
 
-class ApplicationsList extends React.Component {
+import GetMentorApplicationCard from './GetMentorApplicationCard';
+
+class GetMentorApplication extends React.Component {
     routeToApplication(id) {
         history.push(`/user/admin/mentorapplication/${id}`);
     }
@@ -17,20 +21,14 @@ class ApplicationsList extends React.Component {
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Email</th>
+                        <th>Desired Mentor</th>
                         <th>Status</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {this.props.mentors.map((mentor, index) => {
-                        return (
-                            <tr key={index} onClick={() => this.routeToApplication(mentor.id)}>
-                                <td>{mentor.last_name}</td>
-                                <td>{mentor.first_name}</td>
-                                <td>{mentor.email}</td>
-                                <td>Undecided</td>
-                            </tr>
-                        )
+                {this.props.mentees.map((mentee, index) => {
+                        return ( <GetMentorApplicationCard key={index} mentee={mentee} users={this.props.users} /> )
                     })}
                 </tbody>
             </Table>
@@ -38,4 +36,4 @@ class ApplicationsList extends React.Component {
     }
 }
 
-export default ApplicationsList;
+export default GetMentorApplication;
