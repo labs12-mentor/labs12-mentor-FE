@@ -7,7 +7,6 @@ import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
 import ProfileForms from './ProfileForms';
-import { thisExpression } from '@babel/types';
 
 class AdminPanel extends React.Component {
     constructor(props) {
@@ -105,7 +104,7 @@ class AdminPanel extends React.Component {
         console.log('a mentees', this.props.mentees);
         console.log('a matches', this.props.matches);
         console.log('a users', this.props.user);
-        
+
         return (
             <div className='AdminPanel'>
                 <h1> Administrator Panel </h1>
