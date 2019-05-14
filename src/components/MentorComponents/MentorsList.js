@@ -1,20 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getMentors } from "../../actions/mentors.js";
-import { createMentee, deleteMentee } from "../../actions/mentees";
+import { createMentee } from "../../actions/mentees";
 import MentorCard from "./MentorCard.js";
+import MentorForm from "./MentorForm.js";
 
 class MentorsList extends React.Component {
-  state = {
-    isLoading: false,
-    
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      isLoading: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
   componentDidMount() {
     this.props.getMentors();
     this.setState({ isLoading: true });
   }
-
-
 
   render() {
     if (this.state.applied === true) {
@@ -30,13 +40,26 @@ class MentorsList extends React.Component {
                   key={index}
                   id={mentor.id}
                   createMentee={this.props.createMentee}
-                  
                 />
               );
             })
           ) : (
             <h3>Loading</h3>
           )}
+
+          <Button color="primary" onClick={this.toggle}>
+            Apply to be a Mentor
+          </Button>
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+            external={externalCloseBtn}
+          >
+            <ModalBody>
+              <MentorForm />
+            </ModalBody>
+          </Modal>
         </div>
       );
     }
@@ -50,5 +73,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getMentors, createMentee}
+  { getMentors, createMentee }
 )(MentorsList);
