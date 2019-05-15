@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../history';
-import { Table } from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
-class ApplicationsList extends React.Component {
+import GetMentorApplicationCard from './GetMentorApplicationCard';
+
+class GetMentorApplication extends React.Component {
     routeToApplication(id) {
         history.push(`/user/admin/mentorapplication/${id}`);
     }
@@ -16,19 +18,19 @@ class ApplicationsList extends React.Component {
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Email</th>
+                        <th>Desired Mentor</th>
                         <th>Status</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {this.props.mentors.map((mentor, index) => {
+                    {this.props.mentees.map((mentee, index) => {
                         return (
-                            <tr key={index} onClick={() => this.routeToApplication(mentor.id)}>
-                                <td>{mentor.last_name}</td>
-                                <td>{mentor.first_name}</td>
-                                <td>{mentor.email}</td>
-                                <td>Undecided</td>
-                            </tr>
+                            <GetMentorApplicationCard
+                                key={index}
+                                mentee={mentee}
+                                users={this.props.users}
+                            />
                         );
                     })}
                 </tbody>
@@ -37,8 +39,9 @@ class ApplicationsList extends React.Component {
     }
 }
 
-ApplicationsList.propTypes = {
-    mentors: PropTypes.array.isRequired
+GetMentorApplication.propTypes = {
+    mentees: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired
 };
 
-export default ApplicationsList;
+export default GetMentorApplication;

@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Form,
   FormGroup,
@@ -29,16 +30,16 @@ import { createMentee, getMentees, getMatches } from "../actions";
 import MentorProfile from "../components/MentorComponents/MentorProfile";
 
 const ContainerDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  padding: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
 `;
 
 const ProfileContainer = styled.div`
-  width: 70%;
-  margin: auto;
+    width: 70%;
+    margin: auto;
 `;
 
 class UserProfile extends React.Component {
@@ -57,13 +58,13 @@ class UserProfile extends React.Component {
     };
   }
 
-  toggle(tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        activeTab: tab
-      });
+    toggle(tab) {
+        if (this.state.activeTab !== tab) {
+            this.setState({
+                activeTab: tab
+            });
+        }
     }
-  }
 
   async componentDidMount() {
     await this.props.getCurrentUser();
@@ -110,7 +111,6 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    //console.log(this.state.menteed)
     if (this.state.isLoaded === false) {
       return <h1>Loading</h1>;
     } else {
@@ -267,6 +267,11 @@ class UserProfile extends React.Component {
   }
 }
 
+UserProfile.propTypes = {
+    user: PropTypes.object.isRequired,
+    mentees: PropTypes.array.isRequired
+};
+
 const mapStateToProps = state => {
   return {
     user: state.auth.currentUser,
@@ -275,7 +280,14 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = {
+  getCurrentUser,
+  createMentee,
+  getMentees,
+  getMatches
+};
+
 export default connect(
   mapStateToProps,
-  { getCurrentUser, createMentee, getMentees, getMatches }
+  mapDispatchToProps
 )(UserProfile);
