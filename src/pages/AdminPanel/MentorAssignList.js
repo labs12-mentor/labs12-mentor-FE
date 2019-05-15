@@ -46,6 +46,8 @@ class MentorAssignList extends React.Component {
     }
 }
 
-MentorAssignList.propTypes = {};
+MentorAssignList.propTypes = {
+    matchedUsers: PropTypes.array.isRequired
+};
 
 export default MentorAssignList;
