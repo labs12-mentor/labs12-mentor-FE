@@ -22,6 +22,7 @@ import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
+import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 const Routes = (props) => {
     return (
@@ -41,12 +42,12 @@ const Routes = (props) => {
             <Route exact path='/user/admin/profile' component={RouteAuthNeeded(AdminPanel)} />
             <Route
                 exact
-                path='/user/admin/mentorapplication'
+                path='/user/admin/mentorapplication/:id'
                 component={RouteAuthNeeded(Application)}
             />
             <Route
                 exact
-                path='/user/admin/mentorassignment'
+                path='/user/admin/mentorassignment/:id/:role'
                 component={RouteAuthNeeded(Assignment)}
             />
             <Route exact path='/user/meetings' component={RouteAuthNeeded(MeetingsPage)} />
@@ -57,7 +58,11 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
+<<<<<<< HEAD
             <Route exact path='/map' component={Mapbox} />
+=======
+            <Route exact path='/user/mentorprofile' component={MentorProfile}/>
+>>>>>>> master
         </Router>
     );
 };

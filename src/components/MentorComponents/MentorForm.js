@@ -15,6 +15,10 @@ class MentorForm extends React.Component {
     canEdit: false
   };
 
+  async componentDidMount() {
+    await this.setState({...this.state, user_id: this.props.userId})
+  }
+
   apply = e => {
     e.preventDefault();
     this.props.createMentor(this.state);
@@ -30,13 +34,13 @@ class MentorForm extends React.Component {
         <Form>
           <FormGroup>
             <Label>Available Start Date</Label>
-            <Input type="datetime" name="datetime" placeholder="Start Date">
+            <Input type="datetime" name="datetime" placeholder="Start Date" onChange={this.handleChanges}>
               {this.props.startDate}
             </Input>
           </FormGroup>
           <FormGroup>
             <Label for="exampleDate">Days Availiable</Label>
-            <Input name="days" placeholder="Monday-Friday">
+            <Input name="days" placeholder="Monday-Friday" onChange={this.handleChanges}>
               {this.props.days}
             </Input>
           </FormGroup>
@@ -47,13 +51,14 @@ class MentorForm extends React.Component {
               name="date"
               id="exampleDate"
               placeholder="8am - 5pm Lambda Time"
+              onChange={this.handleChanges}
             >
               {this.props.date}
             </Input>
           </FormGroup>
           <FormGroup>
             <Label for="exampleDate">Location</Label>
-            <Input name="location" placeholder="ZipCode">
+            <Input name="location" placeholder="ZipCode" onChange={this.handleChanges}>
               {this.props.location}
             </Input>
           </FormGroup>
@@ -67,7 +72,7 @@ class MentorForm extends React.Component {
 
           <FormGroup>
             <Label for="exampleText">Why Do You Want To Be A Mentor?</Label>
-            <Input type="textarea" name="text">
+            <Input type="textarea" name="text" onChange={this.handleChanges}>
               {this.props.text}
             </Input>
           </FormGroup>

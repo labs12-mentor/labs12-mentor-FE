@@ -1,40 +1,33 @@
 import React from 'react';
-import {
-    Button,
-    Form,
-    FormGroup,
-    Label,
-    Input
-} from 'reactstrap';
+import PropTypes from 'prop-types';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class ApplicationRes extends React.Component {
     render() {
         return (
-            <div className="ProfileInfo">
+            <div className='ProfileInfo'>
                 <Button>Undecided</Button>
                 <Button>Decline</Button>
                 <Button>Approve</Button>
 
                 <Form>
                     <FormGroup>
-                        <Label for="startDate">Application Start Date</Label>
-                        <Input 
-                            type="date" 
-                            name="name" 
-                            placeholder="date placeholder"
-                        />
+                        <Label for='startDate'>Application Start Date</Label>
+                        <Input type='date' name='name' placeholder='date placeholder' />
                     </FormGroup>
 
                     <FormGroup check>
                         <Label check>
-                            <Input type="checkbox" /> Willing to meet students in person.
+                            <Input type='checkbox' /> Willing to meet students in person.
                         </Label>
                     </FormGroup>
 
                     <FormGroup>
                         <Label>Location</Label>
-                        <Input type="text" />Work or School Zip Code
-                        <Input type="text" />Home Zip Code
+                        <Input type='text' />
+                        Work or School Zip Code
+                        <Input type='text' />
+                        Home Zip Code
                     </FormGroup>
 
                     <FormGroup>
@@ -55,10 +48,11 @@ class ApplicationRes extends React.Component {
                         </FormGroup>
 
                         <FormGroup>
-                            <Label for="participationReason">
-                                In a few sentences, tell us what makes you want to participate in the Mentor Program.
+                            <Label for='participationReason'>
+                                In a few sentences, tell us what makes you want to participate in
+                                the Mentor Program.
                             </Label>
-                            <Input type="textbox" name="participationReason" />
+                            <Input type='textbox' name='participationReason' />
                         </FormGroup>
                     </FormGroup>
                 </Form>
@@ -66,5 +60,7 @@ class ApplicationRes extends React.Component {
         );
     }
 }
+
+ApplicationRes.propTypes = {};
 
 export default ApplicationRes;

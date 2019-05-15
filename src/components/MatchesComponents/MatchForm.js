@@ -20,7 +20,7 @@ class MatchForm extends React.Component {
 
   updateMatchForm = e => {
     e.preventDefault();
-    this.props.updateMatch();
+    this.props.updateMatch(this.state);
   };
   render() {
     if (this.state.canEdit === true) {

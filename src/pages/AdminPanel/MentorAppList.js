@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table
-} from 'reactstrap';
+import { Table } from 'reactstrap';
+
+import MentorAppListCard from './MentorAppListCard';
 
 class ApplicationsList extends React.Component {
     routeToApplication(id) {
@@ -11,6 +11,9 @@ class ApplicationsList extends React.Component {
     }
 
     render() {
+        let mentorApplications = [];
+        console.log(this.props.mentors);
+
         return (
             <Table striped>
                 <thead>
@@ -23,14 +26,12 @@ class ApplicationsList extends React.Component {
                 </thead>
 
                 <tbody>
-                    {this.props.mentees.map((mentee, index) => {
+                    {this.props.mentors.map((mentor, index) => {
                         return (
-                            <tr key={index} onClick={() => this.routeToApplication(mentee.id)}>
-                                <td>{mentee.last_name}</td>
-                                <td>{mentee.first_name}</td>
-                                <td>{mentee.email}</td>
-                                <td>Undecided</td>
-                            </tr>
+                            <MentorAppListCard 
+                                key={index} 
+                                mentor={mentor}
+                            />
                         )
                     })}
                 </tbody>
@@ -38,5 +39,9 @@ class ApplicationsList extends React.Component {
         );
     }
 }
+
+ApplicationsList.propTypes = {
+    mentors: PropTypes.array.isRequired
+};
 
 export default ApplicationsList;

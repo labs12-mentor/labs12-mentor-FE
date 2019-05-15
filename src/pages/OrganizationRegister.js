@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Form, FormGroup, Col, FormText, Label, Input, Button } from 'reactstrap';
 import { registerOrganization } from '../actions';
@@ -161,6 +162,8 @@ class OrganizationRegister extends React.Component {
         );
     }
 }
+
+OrganizationRegister.propTypes = {};
 
 const mapStateToProps = (state) => {
     return {};

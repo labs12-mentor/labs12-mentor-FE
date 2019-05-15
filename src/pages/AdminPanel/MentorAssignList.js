@@ -1,36 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 class MentorAssignList extends React.Component {
-
     routeToAssignments(id) {
         history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
 
     render() {
-        let pairs = [];
-
-        this.props.matches.forEach(match => {
-            let pair = {
-                id: match.id,
-                mentor: {},
-                mentee: { first_name: "No", last_name: " Matches"}
-            };
-
-            this.props.users.forEach(user => {
-                if(user.id === match.mentor_id){
-                    pair.mentor = user;
-                } else if(user.id === match.mentee_id){
-                    pair.mentee = user;
-                }
-            });
-            pairs.push(pair);
-        });
-        
         return (
             <Table striped>
                 <thead>
@@ -39,16 +17,18 @@ class MentorAssignList extends React.Component {
                         <th>First Name</th>
                         <th>City</th>
                         <th>Matched Student</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    {pairs.map(pair => {
-                        return <tr key={pair.id} onClick={() => this.routeToAssignments(pair.id)}>
-                                   <td>{pair.mentor.last_name}</td>
-                                   <td>{pair.mentor.first_name}</td>
-                                   <td>{pair.mentor.email}</td>
-                                   <td>{pair.mentee.first_name + pair.mentee.last_name}</td>
+                    {this.props.matchedUsers.map(match => {
+                        return <tr key={match.id} onClick={() => this.routeToAssignments(match.id)}>
+                                   <td>{match.mentor.last_name}</td>
+                                   <td>{match.mentor.first_name}</td>
+                                   <td>{match.mentor.email}</td>
+                                   <td>{match.mentee.first_name + " " + match.mentee.last_name}</td>
+                                   <td>{match.status}</td>
                                 </tr>
                     })}
                 </tbody>
@@ -56,5 +36,9 @@ class MentorAssignList extends React.Component {
         );
     }
 }
+
+MentorAssignList.propTypes = {
+    matchedUsers: PropTypes.array.isRequired
+};
 
 export default MentorAssignList;
