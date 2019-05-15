@@ -1,15 +1,23 @@
 import React from 'react';
 import history from '../../history';
+import { connect } from 'react-redux';
 import {
     Table,
     ButtonGroup,
     Button
 } from 'reactstrap';
 
+import { deleteMatch } from '../../actions';
+
 class MentorAssignList extends React.Component {
 
     routeToAssignments(id) {
-        history.push(`/user/admin/mentorassignment/${id}/mentor`);
+        // history.push(`/user/admin/mentorassignment/${id}/mentor`);
+    }
+
+    deleteMatch = (e, matchId) => {
+        e.preventDefault();
+        this.props.deleteMatch(matchId);
     }
 
     render() {        
@@ -33,7 +41,12 @@ class MentorAssignList extends React.Component {
                                    <td>{match.mentor.email}</td>
                                    <td>{match.mentee.first_name + " " + match.mentee.last_name}</td>
                                    <td>
-                                       <Button color="danger">Delete</Button>
+                                       <Button 
+                                            color="danger" 
+                                            onClick={e => this.deleteMatch(e, match.id)}
+                                        >
+                                            Delete
+                                        </Button>
                                    </td>
                                 </tr>
                     })}
@@ -43,4 +56,4 @@ class MentorAssignList extends React.Component {
     }
 }
 
-export default MentorAssignList;
+export default connect(null, { deleteMatch })(MentorAssignList);

@@ -13,7 +13,6 @@ class ApplicationsList extends React.Component {
 
     render() {
         let mentorApplications = [];
-        console.log(this.props.mentors);
 
         return (
             <Table striped>
