@@ -9,6 +9,7 @@ import {
   CardLink
 } from 'reactstrap';
 import styled from 'styled-components';
+import history from '../history';
 
 const SidebarCont = styled.div`
     width: 100%
@@ -24,7 +25,7 @@ const Sidebar = props => {
           <CardHeader></CardHeader>
           <CardBody>
             <CardTitle>Mentor Match</CardTitle>
-            <CardLink href="#">link to mentor profile</CardLink>
+            <CardLink href="/user/mentorprofile">link to mentor profile</CardLink>
           </CardBody>
           <CardFooter></CardFooter>
         </Card>
