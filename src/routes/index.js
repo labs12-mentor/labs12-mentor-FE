@@ -22,10 +22,17 @@ import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
 
+import styled from 'styled-components';
+const AppCont = styled.div`
+    padding: 100px 20px;
+`;
+
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-            <Navbar />
+        <div id="wrapper" >
+        <Navbar />
+            <div id="main">
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route
                 exact
@@ -56,7 +63,40 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
-        </Router>
+            </div>
+                        
+
+                <footer id="footer">
+                    <section>
+                        <h2>Aliquam sed mauris</h2>
+                        <p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+                        <ul className="actions">
+                            <li><a href="generic.html" className="button">Learn More</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>Etiam feugiat</h2>
+                        <dl className="alt">
+                            <dt>Address</dt>
+                            <dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+                            <dt>Phone</dt>
+                            <dd>(000) 000-0000 x 0000</dd>
+                            <dt>Email</dt>
+                            <dd><a href="#">information@untitled.tld</a></dd>
+                        </dl>
+                        <ul className="icons">
+                            <li><a href="#" className="icon fa-twitter alt"><span className="label">Twitter</span></a></li>
+                            <li><a href="#" className="icon fa-facebook alt"><span className="label">Facebook</span></a></li>
+                            <li><a href="#" className="icon fa-instagram alt"><span className="label">Instagram</span></a></li>
+                            <li><a href="#" className="icon fa-github alt"><span className="label">GitHub</span></a></li>
+                            <li><a href="#" className="icon fa-dribbble alt"><span className="label">Dribbble</span></a></li>
+                        </ul>
+                    </section>
+                    <p className="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+                </footer>
+
+            </div>
+            </Router>
     );
 };
 

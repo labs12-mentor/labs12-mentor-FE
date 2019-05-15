@@ -38,7 +38,11 @@ class UserLogin extends Component {
 
     render() {
         return (
+            <section id="intro" className="main">
             <div className='UserLogin'>
+                <header className="major">
+                    <h2>Please Log In</h2>
+                </header>
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for='email' />
@@ -69,6 +73,7 @@ class UserLogin extends Component {
 
                 <OAuthContainer provider={provider} socket={socket} />
             </div>
+            </section>
         );
     }
 }
