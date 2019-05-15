@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Form, FormGroup, Label, Input, Col, Row, Card, CardBody, CardTitle } from 'reactstrap';
 import styled from 'styled-components';
 import Sidebar from '../components/Sidebar';
@@ -242,5 +243,7 @@ class RegistrationDetails extends React.Component {
         );
     }
 }
+
+RegistrationDetails.propTypes = {};
 
 export default RegistrationDetails;
