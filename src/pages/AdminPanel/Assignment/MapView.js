@@ -1,18 +1,18 @@
 import React from 'react';
-import {
-    Button
-} from 'reactstrap';
+import PropTypes from 'prop-types';
+import { Button } from 'reactstrap';
 
 class MapView extends React.Component {
     render() {
         const mentor = this.props.mentorMatch;
         const mentee = this.props.menteeMatch;
         return (
-            <div className="MapView">
-                {(Object.keys(mentee).length === 0) ? (
+            <div className='MapView'>
+                {Object.keys(mentee).length === 0 ? (
                     <div>
                         <p>
-                            Address: {`${mentor.street}, ${mentor.city}, 
+                            Address:{' '}
+                            {`${mentor.street}, ${mentor.city}, 
                             ${mentor.state}, ${mentor.zipcode} ${mentor.country}`}
                         </p>
 
@@ -22,7 +22,8 @@ class MapView extends React.Component {
                 ) : (
                     <div>
                         <p>
-                            Address: {`${mentee.street}, ${mentee.city}, 
+                            Address:{' '}
+                            {`${mentee.street}, ${mentee.city}, 
                             ${mentee.state}, ${mentee.zipcode} ${mentee.country}`}
                         </p>
 
@@ -34,5 +35,10 @@ class MapView extends React.Component {
         );
     }
 }
+
+MapView.propTypes = {
+    mentorMatch: PropTypes.object.isRequired,
+    menteeMatch: PropTypes.object.isRequired
+};
 
 export default MapView;
