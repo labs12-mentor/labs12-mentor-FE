@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
@@ -143,9 +144,9 @@ class AdminPanel extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                        <MentorApplications 
+                        <MentorApplications
                             users={this.state.users}
-                            mentees={this.filterMentees()} 
+                            mentees={this.filterMentees()}
                             mentors={this.filterMentors()}
                         />
                     </TabPane>
@@ -153,7 +154,7 @@ class AdminPanel extends React.Component {
                         <MentorAssignment 
                             matchedUsers={matchedUsers} 
                             users={this.state.users}
-                            matches={this.state.matches} 
+                            matches={this.state.matches}
                         />
                     </TabPane>
 
@@ -166,7 +167,14 @@ class AdminPanel extends React.Component {
     }
 }
 
-const mstp = (state) => {
+AdminPanel.propTypes = {
+    users: PropTypes.array.isRequired,
+    mentees: PropTypes.array.isRequired,
+    matches: PropTypes.array.isRequired,
+    mentors: PropTypes.array.isRequired
+};
+
+const mapStateToProps = (state) => {
     return {
         users: state.users.users,
         mentees: state.mentees.mentees,
@@ -175,7 +183,14 @@ const mstp = (state) => {
     };
 };
 
+const mapDispatchToProps = {
+    getUsers,
+    getMentees,
+    getMentors,
+    getMatches
+};
+
 export default connect(
-    mstp,
-    { getUsers, getMentees, getMentors, getMatches }
+    mapStateToProps,
+    mapDispatchToProps
 )(AdminPanel);

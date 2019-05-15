@@ -1,16 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
 import { connect } from 'react-redux';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 import { deleteMatch } from '../../actions';
 
 class MentorAssignList extends React.Component {
-
     routeToAssignments(id) {
         // history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
@@ -20,7 +16,7 @@ class MentorAssignList extends React.Component {
         this.props.deleteMatch(matchId);
     }
 
-    render() {        
+    render() {
         return (
             <Table striped>
                 <thead>
@@ -55,5 +51,9 @@ class MentorAssignList extends React.Component {
         );
     }
 }
+
+MentorAssignList.propTypes = {
+    matchedUsers: PropTypes.array.isRequired
+};
 
 export default connect(null, { deleteMatch })(MentorAssignList);

@@ -11,7 +11,9 @@ class MentorCard extends React.Component {
 
   async componentDidMount() {
     await this.props.getCurrentUser();
+  
     this.setState({ user: this.props.user });
+    
   }
 
   apply = e => {

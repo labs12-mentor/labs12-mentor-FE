@@ -1,11 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
 import { connect } from 'react-redux';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 import { deleteMatch } from '../../actions';
 
@@ -28,7 +25,8 @@ class StudentAssignList extends React.Component {
                         <th>First Name</th>
                         <th>City</th>
                         <th>Matched Mentor</th>
-                        <th></th>
+                        <th>Status</th>
+                        <th />
                     </tr>
                 </thead>
 
@@ -55,4 +53,6 @@ class StudentAssignList extends React.Component {
     }
 }
 
-export default connect(null, { deleteMatch })(StudentAssignList);
+StudentAssignList.propTypes = {};
+
+export default  connect(null, { deleteMatch })(StudentAssignList);

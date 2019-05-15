@@ -1,8 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table
-} from 'reactstrap';
+import { Table } from 'reactstrap';
 
 import MentorAppListCard from './MentorAppListCard';
 
@@ -39,5 +38,9 @@ class ApplicationsList extends React.Component {
         );
     }
 }
+
+ApplicationsList.propTypes = {
+    mentors: PropTypes.array.isRequired
+};
 
 export default ApplicationsList;

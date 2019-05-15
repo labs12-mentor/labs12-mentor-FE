@@ -1,11 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
 import { connect } from 'react-redux';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 import { createMatch } from '../../actions';
 
@@ -13,7 +10,7 @@ class GetMentorApplication extends React.Component {
     state = {
         approve: false,
         deny: false
-    }
+    };
 
     routeToApplication(id) {
         // history.push(`/user/admin/mentorapplication/${id}`);
@@ -80,4 +77,11 @@ class GetMentorApplication extends React.Component {
     }
 }
 
-export default connect(null, { createMatch })(GetMentorApplication);
+GetMentorApplication.propTypes = {
+    mentee: PropTypes.object.isRequired
+};
+
+export default connect(
+    null,
+    { createMatch }
+)(GetMentorApplication);
