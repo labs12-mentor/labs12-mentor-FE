@@ -21,7 +21,7 @@ class MentorAssignList extends React.Component {
                         <th>First Name</th>
                         <th>City</th>
                         <th>Matched Student</th>
-                        <th>Status</th>
+                        <th></th>
                     </tr>
                 </thead>
 
@@ -32,7 +32,9 @@ class MentorAssignList extends React.Component {
                                    <td>{match.mentor.first_name}</td>
                                    <td>{match.mentor.email}</td>
                                    <td>{match.mentee.first_name + " " + match.mentee.last_name}</td>
-                                   <td>{match.status}</td>
+                                   <td>
+                                       <Button color="danger">Delete</Button>
+                                   </td>
                                 </tr>
                     })}
                 </tbody>
