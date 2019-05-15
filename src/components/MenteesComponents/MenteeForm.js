@@ -62,7 +62,7 @@ class MenteeForm extends React.Component {
               onChange={this.handleChanges}
             />
           </FormGroup>
-          <Button onClick={this.createMentee}>Add Mentee</Button>
+          <Button onClick={this.createMentee}>Add Request</Button>
         </Form>
       );
     }
