@@ -73,8 +73,6 @@ class MentorApplications extends React.Component {
     };
 
     render() {
-        console.log('mentees', this.props.mentees);
-        console.log('mentors', this.props.mentors);
         return (
             <div className='MentorApplication'>
                 <InputGroup>
@@ -104,7 +102,7 @@ class MentorApplications extends React.Component {
                                 this.toggleTab('1');
                             }}
                         >
-                            Become a Mentor
+                            Mentor Applications
                         </NavLink>
                     </NavItem>
 
@@ -115,14 +113,13 @@ class MentorApplications extends React.Component {
                                 this.toggleTab('2');
                             }}
                         >
-                            Get a Mentor
+                            Student Applications
                         </NavLink>
                     </NavItem>
                 </Nav>
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                        <h2>Become a Mentor</h2>
 
                         {this.props.mentors.length && (
                             <MentorAppList mentors={this.filterBySearch('mentor')} />
@@ -130,14 +127,12 @@ class MentorApplications extends React.Component {
                     </TabPane>
 
                     <TabPane tabId='2'>
-                        <h2>Get a Mentor</h2>
-
-                        {this.props.mentees.length && (
-                            <GetMentorApplication
-                                users={this.props.users}
-                                mentees={this.filterBySearch('mentee')}
-                            />
-                        )}
+                        {this.props.mentees.length && 
+                            <GetMentorApplication 
+                                users={this.props.users} 
+                                mentees={this.filterBySearch("mentee")}
+                                mentors={this.props.mentors}
+                            />}
                     </TabPane>
                 </TabContent>
             </div>

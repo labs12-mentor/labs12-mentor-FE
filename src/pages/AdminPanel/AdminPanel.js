@@ -8,7 +8,6 @@ import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
 import ProfileForms from './ProfileForms';
-import { thisExpression } from '@babel/types';
 
 class AdminPanel extends React.Component {
     constructor(props) {
@@ -67,10 +66,14 @@ class AdminPanel extends React.Component {
         this.state.users.filter((user) => {
             this.state.mentors.map((mentor) => {
                 if (user.id === mentor.user_id) {
+                    user.status = mentor.status;
+                    user.mentor_id = mentor.id;
                     this.state.mentorUserInfo.push(user);
                 }
             });
         });
+
+
 
         return this.state.mentorUserInfo;
     };
@@ -102,11 +105,6 @@ class AdminPanel extends React.Component {
     }
 
     render() {
-        console.log('a mentors', this.props.mentors);
-        console.log('a mentees', this.props.mentees);
-        console.log('a matches', this.props.matches);
-        console.log('a users', this.props.user);
-
         return (
             <div className='AdminPanel'>
                 <h1> Administrator Panel </h1>
@@ -119,7 +117,7 @@ class AdminPanel extends React.Component {
                                 this.toggleTab('1');
                             }}
                         >
-                            Mentor Applications
+                            Applications
                         </NavLink>
                     </NavItem>
 
@@ -130,7 +128,7 @@ class AdminPanel extends React.Component {
                                 this.toggleTab('2');
                             }}
                         >
-                            Mentor Assignment
+                            Match Assignments
                         </NavLink>
                     </NavItem>
 

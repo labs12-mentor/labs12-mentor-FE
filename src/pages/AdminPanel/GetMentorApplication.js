@@ -6,11 +6,33 @@ import { Table, ButtonGroup, Button } from 'reactstrap';
 import GetMentorApplicationCard from './GetMentorApplicationCard';
 
 class GetMentorApplication extends React.Component {
+    state = {
+        mentees: [],
+        mentorIds: []
+    }
+
+    componentDidMount() {
+        this.setState({
+            ...this.state,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors
+        });
+    }
+
     routeToApplication(id) {
         history.push(`/user/admin/mentorapplication/${id}`);
     }
 
     render() {
+        let menteeApplications = [];
+        this.state.mentees.forEach(mentee => {
+            this.state.mentors.forEach(mentor => {
+                if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
+                    menteeApplications.push(mentee);
+                }
+            });
+        });
+        
         return (
             <Table striped>
                 <thead>
@@ -24,14 +46,12 @@ class GetMentorApplication extends React.Component {
                 </thead>
 
                 <tbody>
-                    {this.props.mentees.map((mentee, index) => {
-                        return (
-                            <GetMentorApplicationCard
-                                key={index}
-                                mentee={mentee}
-                                users={this.props.users}
-                            />
-                        );
+                {menteeApplications.map((mentee, index) => {
+                        return ( <GetMentorApplicationCard key={index} 
+                                    mentee={mentee} 
+                                    users={this.props.users} 
+                                    evaluateMatch={this.evaluateMatch}
+                                /> )
                     })}
                 </tbody>
             </Table>

@@ -107,13 +107,11 @@ class MentorAssignment extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                        <h2>Mentors</h2>
 
                         <MentorAssignList matchedUsers={this.filterBySearch('mentor')} />
                     </TabPane>
 
                     <TabPane tabId='2'>
-                        <h2>Students</h2>
 
                         <StudentAssignList matchedUsers={this.filterBySearch('mentee')} />
                     </TabPane>
