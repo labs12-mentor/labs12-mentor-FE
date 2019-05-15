@@ -77,22 +77,20 @@ class UserProfile extends React.Component {
     let matched = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
+    await this.setState({ ...this.state, wanted_mentor: matched[0] });
 
-    if (matched.length > 1) {
-     await this.setState({
-      ...this.state,
-      wanted_mentor: matched[0],
-      isLoaded: true,
-      applied: true
-    });
-  } else {
-     await this.setState({
-      ...this.state,
-      isLoaded: true
-    })
-  }
-    console.log(matched)
-    console.log(this.state.wanted_mentor)
+    if (this.state.wanted_mentor !== undefined) {
+      await this.setState({
+        ...this.state,
+        isLoaded: true,
+        applied: true
+      });
+    } else {
+      await this.setState({
+        ...this.state,
+        isLoaded: true
+      });
+    }
   }
 
   toggleApply() {
