@@ -5,9 +5,20 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
 import ProfileForms from './ProfileForms';
+
+const styles = {
+    root: {
+      flexGrow: 1,
+    },
+  };
 
 class AdminPanel extends React.Component {
     constructor(props) {
@@ -19,7 +30,8 @@ class AdminPanel extends React.Component {
             mentees: [],
             mentors: [],
             menteeUserInfo: [],
-            mentorUserInfo: []
+            mentorUserInfo: [],
+            value: 0
         };
     }
 
@@ -48,6 +60,10 @@ class AdminPanel extends React.Component {
             });
         }
     };
+
+    handleChange = (event, value) => {
+        this.setState({ value });
+      };
 
     filterMentees = () => {
         this.state.users.filter((user) => {
@@ -102,10 +118,26 @@ class AdminPanel extends React.Component {
                 });
             }
         });
+
+        const { classes } = this.props;
         
         return (
             <div className='AdminPanel'>
                 <h1> Administrator Panel </h1>
+
+                <Paper className={classes.root}>
+                    <Tabs
+                    value={this.state.value}
+                    onChange={this.handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    centered
+                    >
+                    <Tab label="Applications" />
+                    <Tab label="Match Assignments" />
+                    <Tab label="Profile Forms" />
+                    </Tabs>
+                </Paper>
 
                 <Nav tabs>
                     <NavItem>
@@ -193,4 +225,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminPanel);
+)(withStyles(styles)(AdminPanel));
