@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../actions';
 
 import { theme } from '../themes.js';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -7,6 +9,7 @@ import PropTypes from 'prop-types';
 import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
@@ -166,6 +169,27 @@ class PrimarySearchAppBar extends React.Component {
       </Menu>
     );
 
+    const navlinksPublic = [
+      {
+        linkTo: '/user/login',
+        text: 'Login'
+      },
+      {
+        linkTo: '/organization/register',
+        text: 'Register organization'
+      }
+    ];
+    const navlinksPrivate = [
+      {
+        linkTo: '/user/profile',
+        text: 'Profile'
+      },
+      {
+        linkTo: '/organization',
+        text: 'Organization'
+      }
+    ];
+
     return (
       <div className={classes.root}>
 
@@ -181,27 +205,40 @@ class PrimarySearchAppBar extends React.Component {
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={4} color="secondary">
-                  <MailIcon />
-                </Badge>
-              </IconButton>
-              <Link component={RouterLink} to="/user/login" color="white">
-                <p>Login</p>
-              </Link>
-              <IconButton color="inherit">
-                <Badge badgeContent={17} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
-              <IconButton
-                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
+
+            {/*switch based on loggedin status*/}
+            {!this.props.authenticated && 
+              navlinksPublic.map((elem, i) => (
+                <Button key={i} component={RouterLink} to={elem.linkTo}>
+                  {elem.text}
+                </Button>
+              ))
+            }
+            {this.props.authenticated && (
+              <div>
+                <IconButton color="inherit">
+                  <Badge badgeContent={4} color="secondary">
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton color="inherit">
+                  <Badge badgeContent={17} color="secondary">
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleProfileMenuOpen}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                    <Button component={RouterLink} to="/" onClick={this.props.logoutUser} color="inherit">
+                  Logout
+                </Button>
+              </div>
+            )}
             </div>
             <div className={classes.sectionMobile}>
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
@@ -221,6 +258,21 @@ class PrimarySearchAppBar extends React.Component {
 
 PrimarySearchAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  logoutUser: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(PrimarySearchAppBar);
+const mapStateToProps = (state) => {
+  return {
+    authenticated: state.auth.token !== null
+  };
+};
+
+const mapDispatchToProps = {
+  logoutUser
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(PrimarySearchAppBar));
