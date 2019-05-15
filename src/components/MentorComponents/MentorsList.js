@@ -1,22 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getMentors } from "../../actions/mentors.js";
-import { createMentee, deleteMentee } from "../../actions/mentees";
+import { createMentee } from "../../actions/mentees";
 import MentorCard from "./MentorCard.js";
+import MentorForm from "./MentorForm.js";
+import { Button, Modal, ModalBody } from "reactstrap";
 
 class MentorsList extends React.Component {
-  state = {
-    isLoading: false,
-    
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false,
+      isLoading: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
   componentDidMount() {
     this.props.getMentors();
     this.setState({ isLoading: true });
   }
 
-
-
   render() {
+    const externalCloseBtn = (
+      <button
+        className="close"
+        style={{ position: "absolute", top: "15px", right: "15px" }}
+        onClick={this.toggle}
+      >
+        &times;
+      </button>
+    );
+
     if (this.state.applied === true) {
       return <h2>You have applied</h2>;
     } else {
@@ -30,13 +51,28 @@ class MentorsList extends React.Component {
                   key={index}
                   id={mentor.id}
                   createMentee={this.props.createMentee}
-                  
                 />
               );
             })
           ) : (
             <h3>Loading</h3>
           )}
+
+          <Button color="primary" onClick={this.toggle}>
+            Apply to be a Mentor
+          </Button>
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+            external={externalCloseBtn}
+          >
+            <ModalBody>
+              <MentorForm 
+              userId={this.props.userId}
+              />
+            </ModalBody>
+          </Modal>
         </div>
       );
     }
@@ -50,5 +86,5 @@ function mapStateToProps(state) {
 }
 export default connect(
   mapStateToProps,
-  { getMentors, createMentee}
+  { getMentors, createMentee }
 )(MentorsList);

@@ -22,6 +22,7 @@ import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
 import PrimarySearchAppBar from '../components/MaterialNavBar';
+import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 const Routes = (props) => {
     return (
@@ -59,6 +60,7 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
+            <Route exact path='/user/mentorprofile' component={MentorProfile}/>
         </Router>
     );
 };

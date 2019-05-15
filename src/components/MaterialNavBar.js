@@ -1,5 +1,10 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
+import { theme } from '../themes.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,7 +16,6 @@ import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -164,13 +168,16 @@ class PrimarySearchAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+
+      <MuiThemeProvider theme={theme}>
+
+        <AppBar position="static" color="primary">
           <Toolbar>
-            <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
+            {/*<IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon />
-            </IconButton>
+    </IconButton>*/}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              Material-UI
+              MentorMatch
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
@@ -179,6 +186,9 @@ class PrimarySearchAppBar extends React.Component {
                   <MailIcon />
                 </Badge>
               </IconButton>
+              <Link component={RouterLink} to="/user/login" color="white">
+                <p>Login</p>
+              </Link>
               <IconButton color="inherit">
                 <Badge badgeContent={17} color="secondary">
                   <NotificationsIcon />
@@ -200,6 +210,8 @@ class PrimarySearchAppBar extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
+        </MuiThemeProvider>
+
         {renderMenu}
         {renderMobileMenu}
       </div>

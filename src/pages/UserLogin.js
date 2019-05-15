@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
@@ -72,6 +73,8 @@ class UserLogin extends Component {
         );
     }
 }
+
+UserLogin.propTypes = {};
 
 const mapStateToProps = (state) => {
     return {};

@@ -15,6 +15,10 @@ class MentorForm extends React.Component {
     canEdit: false
   };
 
+  async componentDidMount() {
+    await this.setState({...this.state, user_id: this.props.userId})
+  }
+
   apply = e => {
     e.preventDefault();
     this.props.createMentor(this.state);

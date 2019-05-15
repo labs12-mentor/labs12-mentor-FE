@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
     Form,
     FormGroup,
@@ -74,6 +75,11 @@ class OrganizationDetails extends React.Component {
         );
     }
 }
+
+OrganizationDetails.propTypes = {
+    user: PropTypes.object.isRequired,
+    organization: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => {
     return {

@@ -1,10 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 class StudentAssignList extends React.Component {
     routeToAssignments(id) {
@@ -21,7 +18,7 @@ class StudentAssignList extends React.Component {
                         <th>City</th>
                         <th>Matched Mentor</th>
                         <th>Status</th>
-                        <th></th>
+                        <th />
                     </tr>
                 </thead>
 
@@ -33,12 +30,6 @@ class StudentAssignList extends React.Component {
                                     <td>{match.mentee.email}</td>
                                     <td>{match.mentor.first_name + " " + match.mentor.last_name}</td>
                                     <td>{match.status}</td>
-                                    <td>
-                                        <ButtonGroup>
-                                            <Button color="success">Approve</Button>
-                                            <Button color="danger">Deny</Button>
-                                        </ButtonGroup>
-                                    </td>
                                 </tr>
                     })}
                 </tbody>
@@ -46,5 +37,7 @@ class StudentAssignList extends React.Component {
         );
     }
 }
+
+StudentAssignList.propTypes = {};
 
 export default StudentAssignList;

@@ -1,5 +1,6 @@
 // Form to create a new user under a specific Organization
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 //add Reactstrap
@@ -126,6 +127,11 @@ class UserRegistration extends Component {
         );
     }
 }
+
+UserRegistration.propTypes = {
+    invitation: PropTypes.object.isRequired,
+    organization: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => {
     return {
