@@ -3,6 +3,13 @@ import ExperienceForm from './ExperienceForm';
 import { deleteExperience } from '../../actions';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 class ExperienceCard extends React.Component {
     constructor(props) {
@@ -31,9 +38,11 @@ class ExperienceCard extends React.Component {
         );
         //console.log(this.props)
         return (
-            <div>
+            <ExpansionPanel>
+                <ExpansionPanelSummary>
                 <h4>{this.props.name}</h4>
-
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
                 <Button
                     onClick={() => {
                         this.props.deleteExperience(this.props.id);
@@ -54,7 +63,9 @@ class ExperienceCard extends React.Component {
                         <ExperienceForm canEdit={true} id={this.props.id} name={this.props.name} />
                     </ModalBody>
                 </Modal>
-            </div>
+                </ExpansionPanelDetails>
+                
+            </ExpansionPanel>
         );
     }
 }

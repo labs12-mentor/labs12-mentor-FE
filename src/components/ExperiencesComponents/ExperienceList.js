@@ -4,6 +4,23 @@ import { getExperiences, getSpecificExperience, updateExperience } from '../../a
 import { Button, Modal, ModalBody } from 'reactstrap';
 import ExperienceForm from './ExperienceForm';
 import ExeperienceCard from './ExperienceCard';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
+    },
+  });
 
 class ExperienceList extends React.Component {
     constructor(props) {
@@ -24,6 +41,7 @@ class ExperienceList extends React.Component {
     async componentDidMount() {
         await this.props.getExperiences();
         this.setState({ isLoaded: true });
+        
     }
     render() {
         const externalCloseBtn = (
@@ -35,6 +53,8 @@ class ExperienceList extends React.Component {
                 &times;
             </button>
         );
+
+        //const { classes } = props;
 
         const nonDeleted = this.props.experiences.filter((experience) => {
             return experience.deleted === false;
@@ -50,6 +70,7 @@ class ExperienceList extends React.Component {
                                 key={experience.id}
                                 name={experience.name}
                             />
+                            
                         );
                     })
                 ) : (
@@ -73,6 +94,11 @@ class ExperienceList extends React.Component {
         );
     }
 }
+
+
+// ExperienceList.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//   };
 
 function mapStateToProps(state) {
     return {
