@@ -24,26 +24,7 @@ class GetMentorApplication extends React.Component {
         history.push(`/user/admin/mentorapplication/${id}`);
     }
 
-    // evaluateMatch = (e, mentorId, menteeId) => {
-    //     e.preventDefault();
-    //     console.log(this.state.mentees);
-    //     let menteeApplications = [];
-    //     this.state.mentees.forEach(mentee => {
-    //         this.state.mentors.forEach(mentor => {
-    //             if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
-    //                 menteeApplications.push(mentee);
-    //             }
-    //         });
-    //     });
-    //     console.log(menteeApplications);
-    //     this.setState({
-    //         ...this.state,
-    //         mentees: menteeApplications
-    //     });
-    // }
-
     render() {
-        console.log(this.state.mentees);
         let menteeApplications = [];
         this.state.mentees.forEach(mentee => {
             this.state.mentors.forEach(mentor => {
@@ -52,7 +33,7 @@ class GetMentorApplication extends React.Component {
                 }
             });
         });
-        console.log(menteeApplications);
+        
         return (
             <Table striped>
                 <thead>

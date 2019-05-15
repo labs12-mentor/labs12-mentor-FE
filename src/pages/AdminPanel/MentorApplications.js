@@ -97,7 +97,7 @@ class MentorApplications extends React.Component {
                             className={classnames({ active: this.state.activeTab === '1' })}
                             onClick={() => { this.toggleTab('1'); }}
                         >
-                            Become a Mentor
+                            Mentor Applications
                         </NavLink>
                     </NavItem>
 
@@ -106,20 +106,18 @@ class MentorApplications extends React.Component {
                             className={classnames({ active: this.state.activeTab === '2' })}
                             onClick={() => { this.toggleTab('2'); }}
                         >
-                            Get a Mentor
+                            Student Applications
                         </NavLink>
                     </NavItem>
                 </Nav>
                 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                        <h2>Become a Mentor</h2>
 
                         {this.props.mentors.length && <MentorAppList mentors={this.filterBySearch("mentor")} />}
                     </TabPane>
 
                     <TabPane tabId='2'>
-                        <h2>Get a Mentor</h2>
                         
                         {this.props.mentees.length && 
                             <GetMentorApplication 

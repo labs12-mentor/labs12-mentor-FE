@@ -12,6 +12,9 @@ class ApplicationsList extends React.Component {
     }
 
     render() {
+        let mentorApplications = [];
+        console.log(this.props.mentors);
+
         return (
             <Table striped>
                 <thead>
@@ -26,7 +29,10 @@ class ApplicationsList extends React.Component {
                 <tbody>
                     {this.props.mentors.map((mentor, index) => {
                         return (
-                            <MentorAppListCard key={index} mentor={mentor} />
+                            <MentorAppListCard 
+                                key={index} 
+                                mentor={mentor}
+                            />
                         )
                     })}
                 </tbody>

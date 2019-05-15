@@ -116,7 +116,7 @@ class AdminPanel extends React.Component {
                                 this.toggleTab('1');
                             }}
                         >
-                            Mentor Applications
+                            Applications
                         </NavLink>
                     </NavItem>
 
@@ -127,7 +127,7 @@ class AdminPanel extends React.Component {
                                 this.toggleTab('2');
                             }}
                         >
-                            Mentor Assignment
+                            Match Assignments
                         </NavLink>
                     </NavItem>
 
