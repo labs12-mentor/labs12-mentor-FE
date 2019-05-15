@@ -1,18 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 class MentorAssignList extends React.Component {
-
     routeToAssignments(id) {
         history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
 
-    render() {        
+    render() {
         return (
             <Table striped>
                 <thead>
@@ -40,5 +36,9 @@ class MentorAssignList extends React.Component {
         );
     }
 }
+
+MentorAssignList.propTypes = {
+    matchedUsers: PropTypes.array.isRequired
+};
 
 export default MentorAssignList;

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { markNotification } from '../actions/notifications';
 
 class Notification extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
@@ -12,25 +13,34 @@ class Notification extends Component {
         e.preventDefault();
         let id = this.props.id;
         this.props.markNotification(id);
-    }
+    };
 
-    render(){
+    render() {
         return (
-            <div style={{textDecoration: this.props.watched ? "line-through" : "none"}}
-                onClick={this.toggleRead}>
+            <div
+                style={{ textDecoration: this.props.watched ? 'line-through' : 'none' }}
+                onClick={this.toggleRead}
+            >
                 <p>{this.props.notification}</p>
             </div>
-        )
+        );
     }
 }
 
-const mapStateToProps = state => {
+Notification.propTypes = {
+    notifications: PropTypes.array.isRequired
+};
+
+const mapStateToProps = (state) => {
     return {
-        notifications: state.notifications.notifications,
-    }
-}
+        notifications: state.notifications.notifications
+    };
+};
 
 //connect to redux
-export default connect(mapStateToProps, { markNotification })(Notification);
+export default connect(
+    mapStateToProps,
+    { markNotification }
+)(Notification);
 
 //connect to redux- need to count unreads
