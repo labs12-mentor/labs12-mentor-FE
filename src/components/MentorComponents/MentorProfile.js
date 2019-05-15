@@ -14,8 +14,6 @@ class MentorProfile extends React.Component {
   };
 
   async componentDidMount() {
-    // await getSpecificUser(this.props.mentorId);
-    // this.setState({ ...this.state, isLoaded: true });
     await this.props.getCurrentUser();
     await this.props.getMentees();
     await this.props.getMatches();
@@ -42,7 +40,9 @@ class MentorProfile extends React.Component {
         {this.state.isLoaded ? (
           <div>
             <h1>Mentor Profile</h1>
-            {/* <h2>{this.props.mentor.name}</h2> */}
+            <h2>{this.state.profile.first_name}</h2>
+            <h2>{this.state.profile.last_name}</h2>
+            <h2>{this.state.profile.email}</h2>
           </div>
         ) : (
           <h2>Loading</h2>
