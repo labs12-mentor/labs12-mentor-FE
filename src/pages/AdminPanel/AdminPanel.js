@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
@@ -76,26 +77,26 @@ class AdminPanel extends React.Component {
 
     filterMatchedUsers() {
         const matchedUsers = [];
-        this.state.matches.forEach(match => {
+        this.state.matches.forEach((match) => {
             let userMatchInfo = {
                 mentor: {},
                 mentee: {},
                 id: match.id,
-                status: "undecided"
-            }
-            this.state.users.forEach(user => {
-                if(user.id === match.mentor_id){
+                status: 'undecided'
+            };
+            this.state.users.forEach((user) => {
+                if (user.id === match.mentor_id) {
                     userMatchInfo.mentor = user;
-                    userMatchInfo.mentee = user;//delete according to below
+                    userMatchInfo.mentee = user; //delete according to below
                     matchedUsers.push(userMatchInfo);
-                } 
+                }
                 //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
                 // else if(user.id === match.mentee_id){
                 //     userMatchInfo.mentee = user;
                 //     matchedUsers.push(userMatchInfo);
                 // }
-            })
-        })
+            });
+        });
 
         return matchedUsers;
     }
@@ -105,7 +106,7 @@ class AdminPanel extends React.Component {
         console.log('a mentees', this.props.mentees);
         console.log('a matches', this.props.matches);
         console.log('a users', this.props.user);
-        
+
         return (
             <div className='AdminPanel'>
                 <h1> Administrator Panel </h1>
@@ -147,17 +148,17 @@ class AdminPanel extends React.Component {
 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
-                        <MentorApplications 
+                        <MentorApplications
                             users={this.state.users}
-                            mentees={this.filterMentees()} 
+                            mentees={this.filterMentees()}
                             mentors={this.filterMentors()}
                         />
                     </TabPane>
                     <TabPane tabId='2'>
-                        <MentorAssignment 
-                            matchedUsers={this.filterMatchedUsers()} 
+                        <MentorAssignment
+                            matchedUsers={this.filterMatchedUsers()}
                             users={this.state.users}
-                            matches={this.state.matches} 
+                            matches={this.state.matches}
                         />
                     </TabPane>
 
@@ -170,7 +171,14 @@ class AdminPanel extends React.Component {
     }
 }
 
-const mstp = (state) => {
+AdminPanel.propTypes = {
+    users: PropTypes.array.isRequired,
+    mentees: PropTypes.array.isRequired,
+    matches: PropTypes.array.isRequired,
+    mentors: PropTypes.array.isRequired
+};
+
+const mapStateToProps = (state) => {
     return {
         users: state.users.users,
         mentees: state.mentees.mentees,
@@ -179,7 +187,14 @@ const mstp = (state) => {
     };
 };
 
+const mapDispatchToProps = {
+    getUsers,
+    getMentees,
+    getMentors,
+    getMatches
+};
+
 export default connect(
-    mstp,
-    { getUsers, getMentees, getMentors, getMatches }
+    mapStateToProps,
+    mapDispatchToProps
 )(AdminPanel);

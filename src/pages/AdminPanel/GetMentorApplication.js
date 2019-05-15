@@ -1,10 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 import GetMentorApplicationCard from './GetMentorApplicationCard';
 
@@ -27,13 +24,24 @@ class GetMentorApplication extends React.Component {
                 </thead>
 
                 <tbody>
-                {this.props.mentees.map((mentee, index) => {
-                        return ( <GetMentorApplicationCard key={index} mentee={mentee} users={this.props.users} /> )
+                    {this.props.mentees.map((mentee, index) => {
+                        return (
+                            <GetMentorApplicationCard
+                                key={index}
+                                mentee={mentee}
+                                users={this.props.users}
+                            />
+                        );
                     })}
                 </tbody>
             </Table>
         );
     }
 }
+
+GetMentorApplication.propTypes = {
+    mentees: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired
+};
 
 export default GetMentorApplication;

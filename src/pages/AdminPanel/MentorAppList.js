@@ -1,8 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table
-} from 'reactstrap';
+import { Table } from 'reactstrap';
 
 class ApplicationsList extends React.Component {
     routeToApplication(id) {
@@ -30,12 +29,16 @@ class ApplicationsList extends React.Component {
                                 <td>{mentor.email}</td>
                                 <td>Undecided</td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </Table>
         );
     }
 }
+
+ApplicationsList.propTypes = {
+    mentors: PropTypes.array.isRequired
+};
 
 export default ApplicationsList;
