@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
 import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
-
 import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import OrganizationDetails from '../pages/OrganizationDetails';
@@ -14,7 +13,7 @@ import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
-import Mapbox from '../components/MapboxMap/UserMapboxMap';
+import Mapbox from '../components/MapboxMap/ListAvailableMap';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import Navbar from '../components/Navbar';
 import RegDetails from '../pages/RegistrationDetails';
@@ -58,11 +57,8 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
-<<<<<<< HEAD
             <Route exact path='/map' component={Mapbox} />
-=======
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
->>>>>>> master
         </Router>
     );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import zipcodes from "zipcodes";
 import ReactMapboxGl, { ZoomControl, Layer, Feature } from "react-mapbox-gl";
 import { API_URL } from "../../constants/config";
@@ -12,12 +11,20 @@ const zoom = [9];
 
 // add all element pairs in object together, divide by total number of element pair
 const getAvailable = () => {
-  return fetch(`${API_URL}/availablementees`)
-  .then(res => res.json())
-  .then(res => console.log(res));
-}
+  return fetch(`${API_URL}/matches/availablementees`, {
+    method: "GET",
+    withCredentials: true,
+    credentials: "include",
+    headers: {
+      Authorization: localStorage.getItem("Authorization"),
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(res => console.log(res));
+};
 
-getAvailable()
+getAvailable();
 
 var mentor = "34945";
 var mentee = "32960";
@@ -41,23 +48,49 @@ function centerify(a, b) {
 }
 
 class Mapbox extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: null
+    };
+  }
+
+  componentDidMount() {
+    fetch(`${API_URL}/matches/availablementees`, {
+      method: "GET",
+      withCredentials: true,
+      credentials: "include",
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => this.setState({ hits: data.hits }));
+  }
+
   render() {
+    console.log("test");
     return (
-      <Map
-        center={centerify(mentor, mentee)}
-        zoom={zoom}
-        style="mapbox://styles/mapbox/streets-v8"
-        containerStyle={{
-          height: "50vh",
-          width: "50vw"
-        }}
-      >
-        <ZoomControl />
-        <Layer type="symbol" id="marker" layout={{ "icon-image": "marker-15" }}>
-          <Feature coordinates={longlatrand(longlatify(mentor))} />
-          <Feature coordinates={longlatrand(longlatify(mentee))} />
-        </Layer>
-      </Map>
+      <div>
+        <h1>Check the log</h1>
+      </div>
+      //   <Map
+      //     center={centerify(mentor, mentee)}
+      //     zoom={zoom}
+      //     style="mapbox://styles/mapbox/streets-v8"
+      //     containerStyle={{
+      //       height: "50vh",
+      //       width: "50vw"
+      //     }}
+      //   >
+      //     <ZoomControl />
+      //     <Layer type="symbol" id="marker" layout={{ "icon-image": "marker-15" }}>
+      //       <Feature coordinates={longlatrand(longlatify(mentor))} />
+      //       <Feature coordinates={longlatrand(longlatify(mentee))} />
+      //     </Layer>
+      //   </Map>
     );
   }
 }
