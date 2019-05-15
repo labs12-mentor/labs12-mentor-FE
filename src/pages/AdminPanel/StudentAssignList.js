@@ -1,10 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import history from '../../history';
-import {
-    Table,
-    ButtonGroup,
-    Button
-} from 'reactstrap';
+import { Table, ButtonGroup, Button } from 'reactstrap';
 
 class StudentAssignList extends React.Component {
     routeToAssignments(id) {
@@ -21,30 +18,34 @@ class StudentAssignList extends React.Component {
                         <th>City</th>
                         <th>Matched Mentor</th>
                         <th>Status</th>
-                        <th></th>
+                        <th />
                     </tr>
                 </thead>
 
                 <tbody>
-                    {this.props.matchedUsers.map(match => {
-                        return <tr key={match.id} onClick={() => this.routeToAssignments(match.id)}>
-                                    <td>{match.mentee.last_name}</td>
-                                    <td>{match.mentee.first_name}</td>
-                                    <td>{match.mentee.email}</td>
-                                    <td>{match.mentor.first_name + " " + match.mentor.last_name}</td>
-                                    <td>{match.status}</td>
-                                    <td>
-                                        <ButtonGroup>
-                                            <Button color="success">Approve</Button>
-                                            <Button color="danger">Deny</Button>
-                                        </ButtonGroup>
-                                    </td>
-                                </tr>
+                    {this.props.matchedUsers.map((match) => {
+                        return (
+                            <tr key={match.id} onClick={() => this.routeToAssignments(match.id)}>
+                                <td>{match.mentee.last_name}</td>
+                                <td>{match.mentee.first_name}</td>
+                                <td>{match.mentee.email}</td>
+                                <td>{match.mentor.first_name + ' ' + match.mentor.last_name}</td>
+                                <td>{match.status}</td>
+                                <td>
+                                    <ButtonGroup>
+                                        <Button color='success'>Approve</Button>
+                                        <Button color='danger'>Deny</Button>
+                                    </ButtonGroup>
+                                </td>
+                            </tr>
+                        );
                     })}
                 </tbody>
             </Table>
         );
     }
 }
+
+StudentAssignList.propTypes = {};
 
 export default StudentAssignList;
