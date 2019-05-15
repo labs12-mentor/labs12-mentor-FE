@@ -27,7 +27,7 @@ import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
 import { createMentee, getMentees, getMatches } from "../actions";
-import MentorProfile from "../components/MentorComponents/MentorProfile";
+// import MentorProfile from "../components/MentorComponents/MentorProfile";
 
 const ContainerDiv = styled.div`
     display: flex;
