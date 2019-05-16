@@ -23,6 +23,7 @@ import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
 import UserProfileForm from "../components/UserComponents/UserProfileForm";
 import Sidebar from "../components/Sidebar";
+import MaterialSideBar from "../components/MaterialSideBar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
 import { createMentee, getMentees, getMatches } from "../actions";
@@ -156,7 +157,7 @@ class UserProfile extends React.Component {
           {value === 0 && (
             <TabContainer>
               <ContainerDiv>
-                <Sidebar />
+                <MaterialSideBar />
                 <ProfileContainer>
                   <Form>
                     <Row>

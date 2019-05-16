@@ -7,6 +7,7 @@ import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 import styled from 'styled-components';
 import Sidebar from '../Sidebar';
+import MaterialSideBar from "../MaterialSideBar";
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -70,7 +71,7 @@ class MeetingsList extends React.Component {
       <div>
         <h1>Your Meetings</h1>
           <ContainerDiv>
-          <Sidebar />
+          <MaterialSideBar />
           <MeetingContainer>
           <h2>Upcoming Meetings</h2>
           <Button color="primary" onClick={this.toggle}>
