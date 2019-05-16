@@ -12,9 +12,10 @@ import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
-import MentorApplications from './MentorApplications';
-import MentorAssignment from './MentorAssignment';
-import ProfileForms from './ProfileForms';
+import Applications from './Applications/Applications';
+import Assignments from './Assignments/Assignments';
+// import MentorAssignment from './MentorAssignment';
+// import ProfileForms from './ProfileForms';
 
 function TabContainer(props) {
     return (
@@ -154,47 +155,18 @@ class AdminPanel extends React.Component {
                             <LinkTab label="Profile Forms" href="page3" />
                         </Tabs>
                         </AppBar>
-                        {value === 0 && <TabContainer>Page One</TabContainer>}
-                        {value === 1 && <TabContainer>Page Two</TabContainer>}
+                        {value === 0 && 
+                            <Applications
+                                users={this.state.users}
+                                mentees={this.filterMentees()}
+                                mentors={this.filterMentors()} 
+                            />}
+                        {value === 1 && <Assignments />}
                         {value === 2 && <TabContainer>Page Three</TabContainer>}
                     </div>
                 </NoSsr>
 
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => {
-                                this.toggleTab('1');
-                            }}
-                        >
-                            Applications
-                        </NavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => {
-                                this.toggleTab('2');
-                            }}
-                        >
-                            Match Assignments
-                        </NavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '3' })}
-                            onClick={() => {
-                                this.toggleTab('3');
-                            }}
-                        >
-                            Profile Forms
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-
+                {/* 
                 <TabContent activeTab={this.state.activeTab}>
                     <TabPane tabId='1'>
                         <MentorApplications
@@ -214,7 +186,7 @@ class AdminPanel extends React.Component {
                     <TabPane tabId='3'>
                         <ProfileForms />
                     </TabPane>
-                </TabContent>
+                </TabContent> */}
             </div>
         );
     }
