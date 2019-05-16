@@ -2,6 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "reactstrap";
 import { getCurrentUser } from "../../actions";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 class MentorCard extends React.Component {
   state = {
@@ -27,8 +34,12 @@ class MentorCard extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>{this.props.id}</h2>
+      <ExpansionPanel>
+      
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} >
+          <h4>{this.props.id}</h4>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
         <Button
           onClick={e => {
             this.apply(e);
@@ -36,7 +47,8 @@ class MentorCard extends React.Component {
         >
           Apply to This Mentor
         </Button>
-      </div>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
     );
   }
 }
