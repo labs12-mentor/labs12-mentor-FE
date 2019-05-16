@@ -5,16 +5,24 @@ import {
   getSpecificExperience,
   updateExperience
 } from "../../actions";
-import { Button, Modal, ModalBody } from "reactstrap";
+import {  Modal, ModalBody } from "reactstrap";
 import ExperienceForm from "./ExperienceForm";
 import ExeperienceCard from "./ExperienceCard";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 class ExperienceList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      isLoaded: false
+      isLoaded: false,
+      open: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -29,6 +37,15 @@ class ExperienceList extends React.Component {
     await this.props.getExperiences();
     this.setState({ isLoaded: true });
   }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const externalCloseBtn = (
       <button
@@ -46,9 +63,25 @@ class ExperienceList extends React.Component {
     return (
       <div>
         <h1>Experiences</h1>
-        <Button color="primary" onClick={this.toggle}>
+        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Create New Experience
         </Button>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogContent>
+          <ExperienceForm canEdit={false} />
+
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
         {this.state.isLoaded ? (
           nonDeleted.map(experience => {
             return (
@@ -62,18 +95,6 @@ class ExperienceList extends React.Component {
         ) : (
           <h2>Loading</h2>
         )}
-
-
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-          className={this.props.className}
-          external={externalCloseBtn}
-        >
-          <ModalBody>
-            <ExperienceForm canEdit={false} />
-          </ModalBody>
-        </Modal>
       </div>
     );
   }
