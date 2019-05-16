@@ -3,24 +3,24 @@ import { connect } from "react-redux";
 import { getMeetings } from "../../actions";
 import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
-import styled from 'styled-components';
+import styled from "styled-components";
 import MaterialSideBar from "../MaterialSideBar";
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 
 const ContainerDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 `;
 
 const MeetingContainer = styled.div`
-    width: 70%;
-    margin: auto;
+  width: 70%;
+  margin: auto;
 `;
 
 class MeetingsList extends React.Component {
@@ -53,61 +53,58 @@ class MeetingsList extends React.Component {
   };
 
   render() {
-
-
     const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
     });
-    
+
     return (
       <div>
         <h1>Your Meetings</h1>
-          <ContainerDiv>
+        <ContainerDiv>
           <MaterialSideBar />
           <MeetingContainer>
-          <h2>Upcoming Meetings</h2>
-          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Create New Meeting
-        </Button>
-
-          <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogContent>
-          <MeetingsForm canEdit={false} />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
+            <h2>Upcoming Meetings</h2>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={this.handleClickOpen}
+            >
+              Create New Meeting
             </Button>
-          </DialogActions>
-        </Dialog>
 
-          {this.state.isLoaded ? (
-            nonDeleted.map((meeting, index) => {
-              return (
-                <div key={index}>
-                  
-                  <MeetingCard
-                    id={meeting.id}
-                    content={meeting.content}
-                    match_id={meeting.match_id}
-                    deleteMeeting={this.props.deleteMeeting}
-                  />
-                </div>
-              );
-            })
-          ) : (
-            <h3>Loading</h3>
-          )}
+            <Dialog
+              open={this.state.open}
+              onClose={this.handleClose}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogContent>
+                <MeetingsForm canEdit={false} />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  Cancel
+                </Button>
+              </DialogActions>
+            </Dialog>
 
+            {this.state.isLoaded ? (
+              nonDeleted.map((meeting, index) => {
+                return (
+                  <div key={index}>
+                    <MeetingCard
+                      id={meeting.id}
+                      content={meeting.content}
+                      match_id={meeting.match_id}
+                      deleteMeeting={this.props.deleteMeeting}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <h3>Loading</h3>
+            )}
 
-
-
-          <h2>Past Meetings</h2>
-          
+            <h2>Past Meetings</h2>
           </MeetingContainer>
         </ContainerDiv>
       </div>

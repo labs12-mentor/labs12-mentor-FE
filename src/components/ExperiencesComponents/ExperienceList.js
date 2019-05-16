@@ -7,10 +7,10 @@ import {
 } from "../../actions";
 import ExperienceForm from "./ExperienceForm";
 import ExeperienceCard from "./ExperienceCard";
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 
 class ExperienceList extends React.Component {
   constructor(props) {
@@ -48,7 +48,11 @@ class ExperienceList extends React.Component {
     return (
       <div>
         <h1>Experiences</h1>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={this.handleClickOpen}
+        >
           Create New Experience
         </Button>
         <Dialog
@@ -57,8 +61,7 @@ class ExperienceList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-          <ExperienceForm canEdit={false} />
-
+            <ExperienceForm canEdit={false} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
