@@ -7,11 +7,8 @@ import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 import styled from 'styled-components';
 import Sidebar from '../Sidebar';
-<<<<<<< HEAD
 import Mapbox from '../MapboxMap/UserMapboxMap';
-=======
 import MaterialSideBar from "../MaterialSideBar";
->>>>>>> master
 
 const ContainerDiv = styled.div`
     display: flex;
