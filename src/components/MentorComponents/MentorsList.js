@@ -44,6 +44,9 @@ class MentorsList extends React.Component {
       return (
         <div>
           <h1>You Can Only Apply To One Mentor</h1>
+          <Button color="primary" onClick={this.toggle}>
+            Apply to be a Mentor Instead
+          </Button>
           {this.state.isLoading ? (
             this.props.mentors.map((mentor, index) => {
               return (
@@ -58,9 +61,7 @@ class MentorsList extends React.Component {
             <h3>Loading</h3>
           )}
 
-          <Button color="primary" onClick={this.toggle}>
-            Apply to be a Mentor
-          </Button>
+
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}

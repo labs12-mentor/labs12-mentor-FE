@@ -46,6 +46,9 @@ class ExperienceList extends React.Component {
     return (
       <div>
         <h1>Experiences</h1>
+        <Button color="primary" onClick={this.toggle}>
+          Create New Experience
+        </Button>
         {this.state.isLoaded ? (
           nonDeleted.map(experience => {
             return (
@@ -60,9 +63,7 @@ class ExperienceList extends React.Component {
           <h2>Loading</h2>
         )}
 
-        <Button color="primary" onClick={this.toggle}>
-          Create New Experience
-        </Button>
+
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
