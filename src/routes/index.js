@@ -21,12 +21,15 @@ import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
+import PrimarySearchAppBar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
+            <PrimarySearchAppBar />
             <Navbar />
+
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route
                 exact
