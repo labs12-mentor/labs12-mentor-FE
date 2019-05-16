@@ -1,13 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getMeetings } from "../../actions";
-import { Button, Modal, ModalBody } from "reactstrap";
 import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 import styled from 'styled-components';
-import Sidebar from '../Sidebar';
 import MaterialSideBar from "../MaterialSideBar";
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -26,7 +27,6 @@ class MeetingsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
       isLoaded: false,
       open: false
     };
@@ -53,15 +53,7 @@ class MeetingsList extends React.Component {
   };
 
   render() {
-    const externalCloseBtn = (
-      <button
-        className="close"
-        style={{ position: "absolute", top: "15px", right: "15px" }}
-        onClick={this.toggle}
-      >
-        &times;
-      </button>
-    );
+
 
     const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
@@ -74,9 +66,25 @@ class MeetingsList extends React.Component {
           <MaterialSideBar />
           <MeetingContainer>
           <h2>Upcoming Meetings</h2>
-          <Button color="primary" onClick={this.toggle}>
-            Create New Meeting
-          </Button>
+          <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
+          Create New Meeting
+        </Button>
+
+          <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogContent>
+          <MeetingsForm canEdit={false} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
           {this.state.isLoaded ? (
             nonDeleted.map((meeting, index) => {
               return (
@@ -96,16 +104,7 @@ class MeetingsList extends React.Component {
           )}
 
 
-          <Modal
-            isOpen={this.state.modal}
-            toggle={this.toggle}
-            className={this.props.className}
-            external={externalCloseBtn}
-          >
-            <ModalBody>
-              <MeetingsForm canEdit={false} />
-            </ModalBody>
-          </Modal>
+
 
           <h2>Past Meetings</h2>
           

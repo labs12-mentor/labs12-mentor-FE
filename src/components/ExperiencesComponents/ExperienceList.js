@@ -42,16 +42,6 @@ class ExperienceList extends React.Component {
   };
 
   render() {
-    const externalCloseBtn = (
-      <button
-        className="close"
-        style={{ position: "absolute", top: "15px", right: "15px" }}
-        onClick={this.toggle}
-      >
-        &times;
-      </button>
-    );
-
     const nonDeleted = this.props.experiences.filter(experience => {
       return experience.deleted === false;
     });
