@@ -73,12 +73,9 @@ class MeetingsList extends React.Component {
             nonDeleted.map((meeting, index) => {
               return (
                 <div key={index}>
-<<<<<<< HEAD
                   <Link to={`/user/meetings/${meeting.id}`}>Link</Link>
                   <Mapbox/>
-=======
                   
->>>>>>> master
                   <MeetingCard
                     id={meeting.id}
                     content={meeting.content}
