@@ -11,7 +11,6 @@ import UserLogin from '../pages/UserLogin';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
-
 import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
@@ -25,11 +24,19 @@ import MatchesList from '../components/MatchesComponents/MatchesList';
 import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
+import styled from 'styled-components';
+
+const AppCont = styled.div`
+    margin: 70px auto;
+    width: 80%;
+
+`;
+
 const Routes = (props) => {
     return (
         <Router history={props.history}>
             <MaterialNavbar />
-
+            <AppCont>
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route
                 exact
@@ -62,6 +69,7 @@ const Routes = (props) => {
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
+            </AppCont>
         </Router>
     );
 };
