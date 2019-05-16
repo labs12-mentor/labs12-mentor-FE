@@ -50,7 +50,7 @@ class MeetingCard extends React.Component {
         return (
             <div>
                 <ExpansionPanel>
-                    <ExpansionPanelSummary>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <h3>{this.props.content}</h3>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>

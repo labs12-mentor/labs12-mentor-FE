@@ -49,7 +49,7 @@ class ExperienceCard extends React.Component {
     
     return (
       <ExpansionPanel>
-        <ExpansionPanelSummary>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} >
           <h4>{this.props.name}</h4>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
