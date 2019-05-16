@@ -95,7 +95,7 @@ const styles = theme => ({
   },
 });
 
-class PrimarySearchAppBar extends React.Component {
+class MaterialNavbar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
@@ -247,7 +247,7 @@ class PrimarySearchAppBar extends React.Component {
   }
 }
 
-PrimarySearchAppBar.propTypes = {
+MaterialNavbar.propTypes = {
   classes: PropTypes.object.isRequired,
   authenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired
@@ -266,4 +266,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(PrimarySearchAppBar));
+)(withStyles(styles)(MaterialNavbar));
