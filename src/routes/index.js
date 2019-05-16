@@ -6,7 +6,7 @@ import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import OrganizationDetails from '../pages/OrganizationDetails';
 import UserRegister from '../pages/UserRegistration';
-import UserLogin from '../pages/UserLogin';
+// import UserLogin from '../pages/UserLogin';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage';
@@ -23,6 +23,7 @@ import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
 import PrimarySearchAppBar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
+import UserLogin from '../pages/MaterialUserLogin';
 
 const Routes = (props) => {
     return (
@@ -60,7 +61,7 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
-            <Route exact path='/map' component={Mapbox} />
+            {/* <Route exact path='/map' component={Mapbox} /> */}
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
         </Router>
     );
