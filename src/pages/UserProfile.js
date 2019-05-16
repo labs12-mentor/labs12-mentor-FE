@@ -133,6 +133,10 @@ class UserProfile extends React.Component {
     history.push("/user/mentorform");
   };
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
     const { value } = this.state;
 
@@ -142,14 +146,20 @@ class UserProfile extends React.Component {
       return (
         <div>
         <AppBar position="static">
-          <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
+          <Tabs 
+          value={value} 
+          onChange={this.handleChange}
+          centered
+          >
+            <Tab label="PROFILE" />
+            <Tab label="MEETINGS" />
+            <Tab label="MENTORS" />
+            <Tab label="USER UPDATE" />
+
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>
-                     <ContainerDiv>
+          <ContainerDiv>
                      <Sidebar />
                        <ProfileContainer>
                        <Form>
@@ -208,14 +218,9 @@ class UserProfile extends React.Component {
 
                           <Col md={6}>
                             <FormGroup>
-                              <Label for="linkedIn">linkedIn</Label>
-                              <Input
-                                type="text"
-                                name="linkedIn"
-                                id="linkedIn"
-                                value={this.state.linkedIn}
-                                onChange={this.changeHandler}
-                              />
+                              <h3>Linkedin</h3>
+                              <Label for="linkedIn">{this.state.user.linkedin}</Label>
+
                             </FormGroup>
                           </Col>
                         </Row>
@@ -229,7 +234,9 @@ class UserProfile extends React.Component {
                     </ProfileContainer>
                     </ContainerDiv>
         </TabContainer>}
-        {value === 1 && <TabContainer>Item Two</TabContainer>}
+        {value === 1 && <TabContainer>
+          <MeetingsList/>
+        </TabContainer>}
         {value === 2 && <TabContainer>Item Three</TabContainer>}
       </div>
         // <div>
