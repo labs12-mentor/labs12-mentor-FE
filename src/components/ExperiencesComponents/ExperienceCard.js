@@ -28,18 +28,12 @@ class ExperienceCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
       open: false
     };
 
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
+
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -50,15 +44,7 @@ class ExperienceCard extends React.Component {
   };
 
   render() {
-    const externalCloseBtn = (
-      <button
-        className="close"
-        style={{ position: "absolute", top: "15px", right: "15px" }}
-        onClick={this.toggle}
-      >
-        &times;
-      </button>
-    );
+
 
     return (
       <ExpansionPanel>
