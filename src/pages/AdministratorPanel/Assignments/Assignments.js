@@ -81,6 +81,7 @@ class Assignments extends React.Component {
     render() {
         const { classes } = this.props;
         const { value } = this.state;
+
         return (
             <div className={classes.root}>
               <AppBar position="static">
@@ -89,8 +90,8 @@ class Assignments extends React.Component {
                   <Tab label="Students" />
                 </Tabs>
               </AppBar>
-              {value === 0 && <MentorAssignments />}
-              {value === 1 && <StudentAssignments />}
+              {value === 0 && <MentorAssignments matchedUsers={this.filterBySearch('mentor')} />}
+              {value === 1 && <StudentAssignments matchedUsers={this.filterBySearch('mentee')} />}
             </div>
             // <div className='MentorAssignment'>
             //     <InputGroup>

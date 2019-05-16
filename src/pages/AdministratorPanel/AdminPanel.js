@@ -161,7 +161,12 @@ class AdminPanel extends React.Component {
                                 mentees={this.filterMentees()}
                                 mentors={this.filterMentors()} 
                             />}
-                        {value === 1 && <Assignments />}
+                        {value === 1 && 
+                            <Assignments 
+                                matchedUsers={matchedUsers} 
+                                users={this.state.users}
+                                matches={this.state.matches}
+                            />}
                         {value === 2 && <TabContainer>Page Three</TabContainer>}
                     </div>
                 </NoSsr>

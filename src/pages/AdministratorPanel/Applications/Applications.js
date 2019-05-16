@@ -22,10 +22,10 @@ children: PropTypes.node.isRequired,
 };
 
 const styles = theme => ({
-root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-},
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+    },
 });
 
 // import MentorAppList from './MentorAppList';
@@ -93,6 +93,7 @@ class Applications extends React.Component {
     render() {
         const { classes } = this.props;
         const { value } = this.state;
+
         return (
             <div className='MentorApplication'>
                 <div className={classes.root}>
@@ -107,8 +108,16 @@ class Applications extends React.Component {
                         <MentorApplications 
                             mentors={this.filterBySearch('mentor')}
                         />}
-                    {value === 1 && <StudentApplications />}
+                    {value === 1 && 
+                    this.props.mentees.length && 
+                        <StudentApplications 
+                                users={this.props.users} 
+                                mentees={this.filterBySearch("mentee")}
+                                mentors={this.props.mentors}
+                            />}
                 </div>
+
+
                 {/* <InputGroup>
                     <Input
                         placeholder='Search by email or name'

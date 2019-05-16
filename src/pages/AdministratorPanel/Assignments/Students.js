@@ -9,6 +9,12 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from '@material-ui/core/Button';
+
+import InputBase from '@material-ui/core/InputBase';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
 import { deleteMatch } from '../../../actions';
 
@@ -20,22 +26,15 @@ const styles = theme => ({
     },
     table: {
       minWidth: 700
-    }
-  });
-  
-  let id = 0;
-  function createData(name, calories, fat, carbs, protein) {
-    id += 1;
-    return { id, name, calories, fat, carbs, protein };
-  }
-  
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9)
-  ];
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    extendedIcon: {
+        marginRight: theme.spacing.unit,
+    },
+});
+
 
 class StudentAssignments extends React.Component {
     routeToAssignments(id) {
@@ -53,26 +52,36 @@ class StudentAssignments extends React.Component {
 
         return (
             <Paper className={classes.root}>
+                <InputBase className={classes.input} placeholder="Search Matches by Student" />
+                  <IconButton className={classes.iconButton} aria-label="Search">
+                      <SearchIcon />
+                  </IconButton>
+                <Divider className={classes.divider} />
+
                 <Table className={classes.table}>
                     <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat (g)</TableCell>
-                        <TableCell align="right">Carbs (g)</TableCell>
-                        <TableCell align="right">Protein (g)</TableCell>
+                        <TableCell>Mentee ID</TableCell>
+                        <TableCell align="left">Mentee Name</TableCell>
+                        <TableCell align="left">Mentee Email</TableCell>
+                        <TableCell align="left">Mentor Name</TableCell>
+                        <TableCell align="left"></TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {rows.map(row => (
-                        <TableRow key={row.id}>
+                    {this.props.matchedUsers.map(match => (
+                        <TableRow key={match.id}>
                         <TableCell component="th" scope="row">
-                            {row.name}
+                            {match.mentee.id}
                         </TableCell>
-                        <TableCell align="right">{row.calories}</TableCell>
-                        <TableCell align="right">{row.fat}</TableCell>
-                        <TableCell align="right">{row.carbs}</TableCell>
-                        <TableCell align="right">{row.protein}</TableCell>
+                        <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
+                        <TableCell align="leftt">{match.mentee.email}</TableCell>
+                        <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
+                        <TableCell align="left">
+                            <Button variant="outlined" size="small" color="primary" className={classes.margin}>
+                                Deny
+                            </Button>
+                        </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
