@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
-
+import Mapbox from '../../../components/MapboxMap/UserMapboxMap';
 import { getSpecificMatch, getUsers } from '../../../actions';
 
 import Recommended from './Recommended';
@@ -78,10 +78,11 @@ class Assignment extends React.Component {
                             mentorMatch={mentorMatch}
                             menteeMatch={menteeMatch}
                         />
+
                     </TabPane>
 
                     <TabPane tabId='2'>
-                        <MapView mentorMatch={mentorMatch} menteeMatch={menteeMatch} />
+                        <Mapbox />
                     </TabPane>
                 </TabContent>
             </div>
