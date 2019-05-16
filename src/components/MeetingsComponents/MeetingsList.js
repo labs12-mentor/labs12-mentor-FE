@@ -26,7 +26,8 @@ class MeetingsList extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      isLoaded: false
+      isLoaded: false,
+      open: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -41,6 +42,14 @@ class MeetingsList extends React.Component {
     await this.props.getMeetings();
     this.setState({ ...this.state, isLoaded: true });
   }
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
     const externalCloseBtn = (
