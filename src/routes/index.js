@@ -17,20 +17,18 @@ import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
-import Navbar from '../components/Navbar';
 import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
-import PrimarySearchAppBar from '../components/MaterialNavBar';
+import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-            <PrimarySearchAppBar />
-            <Navbar />
+            <MaterialNavbar />
 
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route
