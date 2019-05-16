@@ -150,9 +150,9 @@ class AdminPanel extends React.Component {
                     <div className={classes.root}>
                         <AppBar position="static">
                         <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
-                            <LinkTab label="Applications" href="page1" />
-                            <LinkTab label="Match Assignments" href="page2" />
-                            <LinkTab label="Profile Forms" href="page3" />
+                            <Tab label="Applications" />
+                            <Tab label="Match Assignments" />
+                            <Tab label="Profile Forms" />
                         </Tabs>
                         </AppBar>
                         {value === 0 && 

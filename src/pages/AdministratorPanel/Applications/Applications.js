@@ -28,8 +28,6 @@ const styles = theme => ({
     },
 });
 
-// import MentorAppList from './MentorAppList';
-// import GetMentorApplication from './GetMentorApplication';
 
 class Applications extends React.Component {
     state = {
@@ -116,53 +114,15 @@ class Applications extends React.Component {
                                 mentors={this.props.mentors}
                             />}
                 </div>
-
-
-                {/* <InputGroup>
-                    <Input
-                        placeholder='Search by email or name'
-                        name='searchBarContents'
-                        value={this.state.searchBarContents}
-                        onChange={this.changeHandler}
-                    />
-                </InputGroup>
-
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-                    <DropdownToggle caret>All</DropdownToggle>
-
-                    <DropdownMenu>
-                        <DropdownItem>Undecided</DropdownItem>
-                        <DropdownItem>Approved</DropdownItem>
-                        <DropdownItem>Denied</DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
-
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId='1'>
-
-                        {this.props.mentors.length && (
-                            <MentorAppList mentors={this.filterBySearch('mentor')} />
-                        )}
-                    </TabPane>
-
-                    <TabPane tabId='2'>
-                        {this.props.mentees.length && 
-                            <GetMentorApplication 
-                                users={this.props.users} 
-                                mentees={this.filterBySearch("mentee")}
-                                mentors={this.props.mentors}
-                            />}
-                    </TabPane>
-                </TabContent> */}
             </div>
         );
     }
 }
 
-// MentorApplications.propTypes = {
-//     mentors: PropTypes.array.isRequired,
-//     mentees: PropTypes.array.isRequired,
-//     users: PropTypes.array.isRequired
-// };
+Applications.propTypes = {
+    mentors: PropTypes.array.isRequired,
+    mentees: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired
+};
 
 export default withStyles(styles)(Applications);

@@ -78,8 +78,8 @@ class MentorApplications extends React.Component {
     }
 }
 
-// ApplicationsList.propTypes = {
-//     mentors: PropTypes.array.isRequired
-// };
+MentorApplications.propTypes = {
+    mentors: PropTypes.array.isRequired
+};
 
 export default withStyles(styles)(MentorApplications);

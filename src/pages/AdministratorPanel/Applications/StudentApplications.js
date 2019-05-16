@@ -103,9 +103,9 @@ class StudentApplications extends React.Component {
     }
 }
 
-// GetMentorApplication.propTypes = {
-//     mentees: PropTypes.array.isRequired,
-//     users: PropTypes.array.isRequired
-// };
+StudentApplications.propTypes = {
+    mentees: PropTypes.array.isRequired,
+    users: PropTypes.array.isRequired
+};
 
 export default withStyles(styles)(StudentApplications);
