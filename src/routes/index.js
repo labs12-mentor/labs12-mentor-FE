@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
 import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
-
 import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import OrganizationDetails from '../pages/OrganizationDetails';
@@ -11,7 +10,6 @@ import UserLogin from '../pages/UserLogin';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
-
 import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
