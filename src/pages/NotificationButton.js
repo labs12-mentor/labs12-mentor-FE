@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink  } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button } from 'reactstrap';
 
 import { getNotifications } from '../actions/notifications';
+
+import { theme } from '../themes.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import Badge from '@material-ui/core/Badge';
+import IconButton from '@material-ui/core/IconButton';
 
 class NotificationButton extends Component {
     constructor(props) {
@@ -22,17 +28,11 @@ class NotificationButton extends Component {
     render() {
         return (
             <div>
-                <Link to='/user/notifications'>
-                    <Button>
-                        {/* make button an image */}
-                        <span>Notifications!</span>
-
-                        {/* display notification count */}
-                        {this.state.pageLoaded ? (
-                            <span>{this.props.notificationsCount}</span>
-                        ) : null}
-                    </Button>
-                </Link>
+                <MuiThemeProvider theme={theme}>
+                    <Badge badgeContent={this.props.notificationsCount} color="error">
+                        <NotificationsIcon />
+                    </Badge>
+                </MuiThemeProvider>
             </div>
         );
     }

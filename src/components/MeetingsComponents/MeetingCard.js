@@ -3,6 +3,23 @@ import MeetingsForm from './MeetingsForm.js';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalBody } from 'reactstrap';
 import { deleteMeeting } from '../../actions';
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+const styles = theme => ({
+    root: {
+      width: '100%',
+    },
+    heading: {
+      fontSize: theme.typography.pxToRem(15),
+      fontWeight: theme.typography.fontWeightRegular,
+    },
+  });
 
 class MeetingCard extends React.Component {
     constructor(props) {
@@ -32,7 +49,11 @@ class MeetingCard extends React.Component {
         );
         return (
             <div>
+                <ExpansionPanel>
+                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <h3>{this.props.content}</h3>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
                 <h4>Match_id:{this.props.match_id}</h4>
 
                 <Button color='danger' onClick={() => this.props.deleteMeeting(this.props.id)}>
@@ -55,6 +76,8 @@ class MeetingCard extends React.Component {
                         />
                     </ModalBody>
                 </Modal>
+                </ExpansionPanelDetails>
+                </ExpansionPanel>
             </div>
         );
     }
@@ -71,4 +94,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MeetingCard);
+)(withStyles(styles)(MeetingCard));

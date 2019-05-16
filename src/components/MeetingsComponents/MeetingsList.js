@@ -7,7 +7,11 @@ import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 import styled from 'styled-components';
 import Sidebar from '../Sidebar';
+<<<<<<< HEAD
 import Mapbox from '../MapboxMap/UserMapboxMap';
+=======
+import MaterialSideBar from "../MaterialSideBar";
+>>>>>>> master
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -62,15 +66,22 @@ class MeetingsList extends React.Component {
       <div>
         <h1>Your Meetings</h1>
           <ContainerDiv>
-          <Sidebar />
+          <MaterialSideBar />
           <MeetingContainer>
           <h2>Upcoming Meetings</h2>
+          <Button color="primary" onClick={this.toggle}>
+            Create New Meeting
+          </Button>
           {this.state.isLoaded ? (
             nonDeleted.map((meeting, index) => {
               return (
                 <div key={index}>
+<<<<<<< HEAD
                   <Link to={`/user/meetings/${meeting.id}`}>Link</Link>
                   <Mapbox/>
+=======
+                  
+>>>>>>> master
                   <MeetingCard
                     id={meeting.id}
                     content={meeting.content}
@@ -84,9 +95,7 @@ class MeetingsList extends React.Component {
             <h3>Loading</h3>
           )}
 
-          <Button color="primary" onClick={this.toggle}>
-            Create New Meeting
-          </Button>
+
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}

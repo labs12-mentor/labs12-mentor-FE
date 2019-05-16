@@ -8,7 +8,7 @@ import GetMentorApplicationCard from './GetMentorApplicationCard';
 class GetMentorApplication extends React.Component {
     state = {
         mentees: [],
-        mentorIds: []
+        mentors: []
     }
 
     componentDidMount() {
