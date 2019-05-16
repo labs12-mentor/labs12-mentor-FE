@@ -13,7 +13,7 @@ import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
-import Mapbox from '../components/MapboxMap/ListAvailableMap';
+import Mapbox from '../components/MapboxMap/UserMapboxMap';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import Navbar from '../components/Navbar';
 import RegDetails from '../pages/RegistrationDetails';
@@ -60,7 +60,6 @@ const Routes = (props) => {
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
-            {/* <Route exact path='/map' component={Mapbox} /> */}
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
         </Router>
     );

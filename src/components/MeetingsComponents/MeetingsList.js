@@ -7,6 +7,7 @@ import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 import styled from 'styled-components';
 import Sidebar from '../Sidebar';
+import Mapbox from '../MapboxMap/UserMapboxMap';
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -69,6 +70,7 @@ class MeetingsList extends React.Component {
               return (
                 <div key={index}>
                   <Link to={`/user/meetings/${meeting.id}`}>Link</Link>
+                  <Mapbox/>
                   <MeetingCard
                     id={meeting.id}
                     content={meeting.content}

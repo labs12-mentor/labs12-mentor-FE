@@ -28,17 +28,6 @@ function centerify(a, b) {
   ];
 }
 
-function longlatrand(a) {
-  //pass in an array x,y, randomizes to avoid stacking
-  return [ a[0] + (Math.random() * 0.05), a[1] + (Math.random() * 0.05)];
-}
-
-// 
-// Take list of xy, return greatest distance difference, use for calculating zoom
-// center on average?
-
-// console.log(center);
-
 class Mapbox extends React.Component {
   render() {
     return (
@@ -47,14 +36,14 @@ class Mapbox extends React.Component {
         zoom={zoom}
         style="mapbox://styles/mapbox/streets-v8"
         containerStyle={{
-          height: "100vh",
-          width: "100vw"
+          height: "50vh",
+          width: "75vw"
         }}
       >
         <ZoomControl />
         <Layer type="symbol" id="marker" layout={{ "icon-image": "marker-15" }}>
-          <Feature coordinates={longlatrand(longlatify(mentor))} />
-          <Feature coordinates={longlatrand(longlatify(mentee))} />
+          <Feature coordinates={(longlatify(mentor))} />
+          <Feature coordinates={(longlatify(mentee))} />
         </Layer>
       </Map>
     );
