@@ -90,8 +90,9 @@ class OrganizationRegister extends React.Component {
                         </FormGroup>
 
                         <FormGroup row>
-                            <FormControl margin='normal' required fullWidth>
-                                Logo - please upload a .png or .jpg for your desired logo image.
+                            <FormControl margin='normal' fullWidth>
+                                Logo - please upload a .png or .jpg for your desired logo image
+                                (optional).
                                 <Input
                                     accept='image/*'
                                     type='file'
@@ -163,7 +164,7 @@ class OrganizationRegister extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' fullWidth>
-                                <InputLabel htmlFor='user_last_name'>Email</InputLabel>
+                                <InputLabel htmlFor='user_last_name'>Last name</InputLabel>
                                 <Input
                                     type='text'
                                     name='user_last_name'
