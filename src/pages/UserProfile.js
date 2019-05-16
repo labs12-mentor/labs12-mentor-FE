@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Form,
   FormGroup,
@@ -26,12 +26,12 @@ import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
 import { createMentee, getMentees, getMatches } from "../actions";
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
 
 function TabContainer(props) {
   return (
@@ -42,26 +42,26 @@ function TabContainer(props) {
 }
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 const styles = {
   root: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 };
 
 const ContainerDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 `;
 
 const ProfileContainer = styled.div`
-    width: 70%;
-    margin: auto;
+  width: 70%;
+  margin: auto;
 `;
 
 class UserProfile extends React.Component {
@@ -81,13 +81,13 @@ class UserProfile extends React.Component {
     };
   }
 
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
     }
+  }
 
   async componentDidMount() {
     await this.props.getCurrentUser();
@@ -145,100 +145,106 @@ class UserProfile extends React.Component {
     } else {
       return (
         <div>
-        <AppBar position="static">
-          <Tabs 
-          value={value} 
-          onChange={this.handleChange}
-          centered
-          >
-            <Tab label="PROFILE" />
-            <Tab label="MEETINGS" />
-            <Tab label="MENTORS" />
-            <Tab label="USER UPDATE" />
+          <AppBar position="static">
+            <Tabs value={value} onChange={this.handleChange} centered>
+              <Tab label="PROFILE" />
+              <Tab label="MEETINGS" />
+              <Tab label="MENTORS" />
+              <Tab label="USER UPDATE" />
+            </Tabs>
+          </AppBar>
+          {value === 0 && (
+            <TabContainer>
+              <ContainerDiv>
+                <Sidebar />
+                <ProfileContainer>
+                  <Form>
+                    <Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>First Name</h3>
+                          <Label for="lastName">
+                            {this.state.user.first_name}
+                          </Label>
+                        </FormGroup>
+                      </Col>
 
-          </Tabs>
-        </AppBar>
-        {value === 0 && <TabContainer>
-          <ContainerDiv>
-                     <Sidebar />
-                       <ProfileContainer>
-                       <Form>
-                         <Row>
-                           <Col md={6}>
-                             <FormGroup>
-                               <h3>First Name</h3>
-                               <Label for="lastName">
-                                 {this.state.user.first_name}
-                               </Label>
-                             </FormGroup>
-                           </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Last Name</h3>
+                          <Label for="lastName">
+                            {this.state.user.last_name}
+                          </Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
 
-                           <Col md={6}>
-                             <FormGroup>
-                               <h3>Last Name</h3>
-                               <Label for="lastName">
-                                 {this.state.user.last_name}
-                               </Label>
-                             </FormGroup>
-                           </Col>
-                         </Row>
+                    <Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>State</h3>
 
-                         <Row>
-                           <Col md={6}>
-                             <FormGroup>
-                               <h3>State</h3>
+                          <Label for="address">{this.state.user.state}</Label>
+                        </FormGroup>
+                      </Col>
 
-                               <Label for="address">
-                                 {this.state.user.state}
-                               </Label>
-                            </FormGroup>
-                           </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Street</h3>
 
-                           <Col md={6}>
-                             <FormGroup>
-                               <h3>Street</h3>
+                          <Label for="zipCode">{this.state.user.street}</Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
 
-                               <Label for="zipCode">
-                                {this.state.user.street}
-                               </Label>
-                             </FormGroup>
-                           </Col>
-                         </Row>
+                    <Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Git Hub</h3>
+                          <Label for="github">{this.state.user.gitHub}</Label>
+                        </FormGroup>
+                      </Col>
 
-                         <Row>
-                          <Col md={6}>
-                             <FormGroup>
-                               <h3>Git Hub</h3>
-                               <Label for="github">
-                               {this.state.user.gitHub}
-                               </Label>
-  
-                            </FormGroup>
-                          </Col>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Linkedin</h3>
+                          <Label for="linkedIn">
+                            {this.state.user.linkedin}
+                          </Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
 
-                          <Col md={6}>
-                            <FormGroup>
-                              <h3>Linkedin</h3>
-                              <Label for="linkedIn">{this.state.user.linkedin}</Label>
-
-                            </FormGroup>
-                          </Col>
-                        </Row>
-
-                        <Card>
-                          <CardBody>
-                            <ExperienceList />
-                          </CardBody>
-                        </Card>
-                      </Form>
-                    </ProfileContainer>
-                    </ContainerDiv>
-        </TabContainer>}
-        {value === 1 && <TabContainer>
-          <MeetingsList/>
-        </TabContainer>}
-        {value === 2 && <TabContainer>Item Three</TabContainer>}
-      </div>
+                    <Card>
+                      <CardBody>
+                        <ExperienceList />
+                      </CardBody>
+                    </Card>
+                  </Form>
+                </ProfileContainer>
+              </ContainerDiv>
+            </TabContainer>
+          )}
+          {value === 1 && (
+            <TabContainer>
+              <MeetingsList />
+            </TabContainer>
+          )}
+          {value === 2 && (
+            <TabContainer>
+              {this.state.applied ? (
+                <h2>Applied</h2>
+              ) : (
+                <MentorsList userId={this.state.user.id} />
+              )}
+            </TabContainer>
+          )}
+          {value === 3 && (
+            <TabContainer>
+              <UserProfileForm />
+            </TabContainer>
+          )}
+        </div>
         // <div>
         //   <Nav tabs>
         //     <NavItem>
@@ -392,8 +398,8 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
-    user: PropTypes.object.isRequired,
-    mentees: PropTypes.array.isRequired
+  user: PropTypes.object.isRequired,
+  mentees: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => {
