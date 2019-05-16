@@ -64,11 +64,14 @@ class MeetingsList extends React.Component {
           <Sidebar />
           <MeetingContainer>
           <h2>Upcoming Meetings</h2>
+          <Button color="primary" onClick={this.toggle}>
+            Create New Meeting
+          </Button>
           {this.state.isLoaded ? (
             nonDeleted.map((meeting, index) => {
               return (
                 <div key={index}>
-                  <Link to={`/user/meetings/${meeting.id}`}>Link</Link>
+                  
                   <MeetingCard
                     id={meeting.id}
                     content={meeting.content}
@@ -82,9 +85,7 @@ class MeetingsList extends React.Component {
             <h3>Loading</h3>
           )}
 
-          <Button color="primary" onClick={this.toggle}>
-            Create New Meeting
-          </Button>
+
           <Modal
             isOpen={this.state.modal}
             toggle={this.toggle}
