@@ -6,7 +6,7 @@ import HomePage from '../pages/HomePage';
 import OrganizationRegister from '../pages/OrganizationRegister';
 import OrganizationDetails from '../pages/OrganizationDetails';
 import UserRegister from '../pages/UserRegistration';
-// import UserLogin from '../pages/UserLogin';
+import UserLogin from '../pages/MaterialUserLogin';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage';
@@ -23,13 +23,12 @@ import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
 import PrimarySearchAppBar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
-import UserLogin from '../pages/MaterialUserLogin';
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
             <PrimarySearchAppBar />
-            <Navbar />
+            {/* <Navbar /> */}
 
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route

@@ -14,7 +14,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Button
 } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
@@ -22,7 +21,7 @@ import history from "../history";
 import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
-import UserProfileForm from "../components/UserComponents/UserProfileForm";
+import UserProfileForm from "../components/UserComponents/MaterialUserProfileForm";
 import Sidebar from "../components/Sidebar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
