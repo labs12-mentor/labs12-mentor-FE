@@ -29,6 +29,9 @@ const styles = theme => ({
     minWidth: 275,
     maxHeight: 500,
     overflow: "auto"
+  },
+  button: {
+    margin: theme.spacing.unit,
   }
 });
 
@@ -83,7 +86,7 @@ class MeetingsList extends React.Component {
           <MeetingContainer>
             <h2>Upcoming Meetings</h2>
             <Button
-              variant="outlined"
+              variant="contained"
               color="primary"
               onClick={this.handleClickOpen}
             >

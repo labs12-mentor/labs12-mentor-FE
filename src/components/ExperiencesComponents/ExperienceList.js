@@ -13,6 +13,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import CardHeader from '@material-ui/core/CardHeader';
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from 'prop-types';
 
@@ -30,6 +31,9 @@ const styles = theme => ({
     minWidth: 275,
     maxHeight: 500,
     overflow: "auto"
+  },
+  button: {
+    margin: theme.spacing.unit,
   }
 });
 
@@ -67,9 +71,10 @@ class ExperienceList extends React.Component {
       <Card>
         <h1>Experiences</h1>
         <Button
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={this.handleClickOpen}
+          className={classes.button}
         >
           Create New Experience
         </Button>
