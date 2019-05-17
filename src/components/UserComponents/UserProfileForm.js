@@ -113,7 +113,7 @@ class UserProfileForm extends React.Component {
           <CssBaseline />
           <Paper elevation={1} className={classes.paper}>
             <Typography component="h1" variant="h5">
-              Create a new Mentorship Program
+              Update Your Info
             </Typography>
       <form className={classes.form} onSubmit={this.updateUser}>
         <FormGroup row>
