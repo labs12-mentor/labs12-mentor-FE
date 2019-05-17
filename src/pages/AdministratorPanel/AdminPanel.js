@@ -14,6 +14,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import Applications from './Applications/Applications';
 import Assignments from './Assignments/Assignments';
+import ProfileForms from './ProfileForms/ProfileForms';
 
 function TabContainer(props) {
     return (
@@ -112,7 +113,6 @@ class AdminPanel extends React.Component {
     };
 
     render() {
-        console.log('matches', this.state.matches);
         const matchedUsers = [];
         this.state.matches.forEach(match => {
             if(match.deleted === false && match.mentor_id !== match.mentee_id){
@@ -163,7 +163,7 @@ class AdminPanel extends React.Component {
                             users={this.state.users}
                             matches={this.state.matches}
                         />}
-                    {value === 2 && <TabContainer>Page Three</TabContainer>}
+                    {value === 2 && <ProfileForms />}
                     </MuiThemeProvider>
                 </div>
             </NoSsr>
