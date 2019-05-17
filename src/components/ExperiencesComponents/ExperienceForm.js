@@ -8,6 +8,7 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 class ExperienceForm extends React.Component {
   state = {
+    user_id: this.props.userId,
     name: "",
     canEdit: false
   };
@@ -30,6 +31,7 @@ class ExperienceForm extends React.Component {
   };
 
   render() {
+    console.log(this.state)
     if (this.props.canEdit === true) {
       return (
         <Form onSubmit={this.updateAnExperience}>

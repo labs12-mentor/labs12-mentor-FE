@@ -133,7 +133,8 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { value } = this.state;
+    //console.log(this.state.user)
+    //const { value } = this.state;
 
     if (this.state.isLoaded === false) {
       return <h1>Loading</h1>;
@@ -141,7 +142,7 @@ class UserProfile extends React.Component {
       return (
         <div>
           <AppBar position="static">
-            <Tabs value={value} onChange={this.handleChange} centered>
+            <Tabs value={this.state.value} onChange={this.handleChange} centered>
               <Tab label="PROFILE" />
               <Tab label="MEETINGS" />
               <Tab label="MENTORS" />
@@ -149,7 +150,7 @@ class UserProfile extends React.Component {
             </Tabs>
           </AppBar>
 
-          {value === 0 && (
+          {this.state.value === 0 && (
             <TabContainer>
               <ContainerDiv>
                 <MaterialSideBar />
@@ -213,7 +214,9 @@ class UserProfile extends React.Component {
 
                     <Card>
                       <CardBody>
-                        <ExperienceList />
+                        <ExperienceList 
+                        userId={this.state.user.id}
+                        />
                       </CardBody>
                     </Card>
                   </Form>
@@ -221,12 +224,12 @@ class UserProfile extends React.Component {
               </ContainerDiv>
             </TabContainer>
           )}
-          {value === 1 && (
+          {this.state.value === 1 && (
             <TabContainer>
               <MeetingsList />
             </TabContainer>
           )}
-          {value === 2 && (
+          {this.state.value === 2 && (
             <TabContainer>
               {this.state.applied ? (
                 <h2>Applied</h2>
@@ -235,7 +238,7 @@ class UserProfile extends React.Component {
               )}
             </TabContainer>
           )}
-          {value === 3 && (
+          {this.state.value === 3 && (
             <TabContainer>
               <UserProfileForm />
             </TabContainer>

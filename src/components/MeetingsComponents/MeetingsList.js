@@ -9,6 +9,28 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types';
+
+
+const styles = theme => ({
+  // root: {
+  //     flexGrow: 1,
+  // },
+  // demo: {
+  //     backgroundColor: theme.palette.background.paper,
+  // },
+  // title: {
+  //     margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+  // },
+  card: {
+    minWidth: 275,
+    maxHeight: 500,
+    overflow: "auto"
+  }
+});
 
 const ContainerDiv = styled.div`
   display: flex;
@@ -28,17 +50,11 @@ class MeetingsList extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      open: false
+      open: false,
+      
     };
-
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
   async componentDidMount() {
     await this.props.getMeetings();
     this.setState({ ...this.state, isLoaded: true });
@@ -53,6 +69,8 @@ class MeetingsList extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
     });
@@ -88,18 +106,22 @@ class MeetingsList extends React.Component {
             </Dialog>
 
             {this.state.isLoaded ? (
-              nonDeleted.map((meeting, index) => {
-                return (
-                  <div key={index}>
-                    <MeetingCard
-                      id={meeting.id}
-                      content={meeting.content}
-                      match_id={meeting.match_id}
-                      deleteMeeting={this.props.deleteMeeting}
-                    />
-                  </div>
-                );
-              })
+              <Card className={classes.card}>
+                <CardContent>
+                  {nonDeleted.map((meeting, index) => {
+                    return (
+                      <div key={index}>
+                        <MeetingCard
+                          id={meeting.id}
+                          content={meeting.content}
+                          match_id={meeting.match_id}
+                          deleteMeeting={this.props.deleteMeeting}
+                        />
+                      </div>
+                    );
+                  })}
+                </CardContent>
+              </Card>
             ) : (
               <h3>Loading</h3>
             )}
@@ -112,6 +134,10 @@ class MeetingsList extends React.Component {
   }
 }
 
+MeetingsList.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
     meetings: state.meetings.meetings
@@ -121,4 +147,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { getMeetings }
-)(MeetingsList);
+)(withStyles(styles)(MeetingsList));
