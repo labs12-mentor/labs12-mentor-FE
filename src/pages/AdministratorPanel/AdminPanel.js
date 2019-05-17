@@ -106,8 +106,6 @@ class AdminPanel extends React.Component {
             });
         });
 
-
-
         return this.state.mentorUserInfo;
     };
 

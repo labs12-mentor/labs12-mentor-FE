@@ -43,7 +43,8 @@ const styles = theme => ({
 class StudentApplications extends React.Component {
     state = {
         mentees: [],
-        mentors: []
+        mentors: [],
+        searchBarContents: ''
     }
 
     componentDidMount() {
@@ -58,9 +59,42 @@ class StudentApplications extends React.Component {
         // history.push(`/user/admin/mentorapplication/${id}`);
     }
 
+    changeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    filterBySearch = (role) => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        let filteredUsers = [];
+
+        if (role === 'mentee') {
+            filteredUsers = this.props.mentees.filter((mentee) => {
+                return (
+                    mentee.last_name.toLowerCase().includes(searchInput) ||
+                    mentee.first_name.toLowerCase().includes(searchInput) ||
+                    mentee.email.toLowerCase().includes(searchInput)
+                );
+            });
+        } else if (role === 'mentor') {
+            filteredUsers = this.props.mentors.filter((mentor) => {
+                return (
+                    mentor.last_name.toLowerCase().includes(searchInput) ||
+                    mentor.first_name.toLowerCase().includes(searchInput) ||
+                    mentor.email.toLowerCase().includes(searchInput)
+                );
+            });
+        }
+
+        return filteredUsers;
+    };
+
     render() {
         let menteeApplications = [];
-        this.state.mentees.forEach(mentee => {
+        this.filterBySearch("mentee").forEach(mentee => {
             this.state.mentors.forEach(mentor => {
                 if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
                     menteeApplications.push(mentee);
@@ -77,6 +111,9 @@ class StudentApplications extends React.Component {
                 <Input
                     placeholder="Search Student Applications"
                     className={classes.input}
+                    name='searchBarContents'
+                    value={this.state.searchBarContents}
+                    onChange={this.changeHandler}
                     inputProps={{
                     'aria-label': 'Description',
                     }}
