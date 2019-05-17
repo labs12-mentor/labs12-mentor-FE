@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Label, Col, Row, Card, CardBody } from "reactstrap";
+import { Form, FormGroup, Label, Col, Row } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import history from "../history";
@@ -17,8 +17,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 
 function TabContainer(props) {
   return (
@@ -43,6 +43,10 @@ const styles = {
     margin: 10,
     width: 60,
     height: 60
+  },
+  applied: {
+    width: "100%"
+    //maxWidth: 500,
   }
 };
 
@@ -133,7 +137,9 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { value } = this.state;
+    const { classes } = this.props;
+    //console.log(this.state.user)
+    //const { value } = this.state;
 
     if (this.state.isLoaded === false) {
       return <h1>Loading</h1>;
@@ -141,7 +147,11 @@ class UserProfile extends React.Component {
       return (
         <div>
           <AppBar position="static">
-            <Tabs value={value} onChange={this.handleChange} centered>
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              centered
+            >
               <Tab label="PROFILE" />
               <Tab label="MEETINGS" />
               <Tab label="MENTORS" />
@@ -149,7 +159,7 @@ class UserProfile extends React.Component {
             </Tabs>
           </AppBar>
 
-          {value === 0 && (
+          {this.state.value === 0 && (
             <TabContainer>
               <ContainerDiv>
                 <MaterialSideBar />
@@ -212,30 +222,37 @@ class UserProfile extends React.Component {
                     </Row>
 
                     <Card>
-                      <CardBody>
-                        <ExperienceList />
-                      </CardBody>
+                      <CardContent>
+                        <ExperienceList userId={this.state.user.id} />
+                      </CardContent>
                     </Card>
                   </Form>
                 </ProfileContainer>
               </ContainerDiv>
             </TabContainer>
           )}
-          {value === 1 && (
+          {this.state.value === 1 && (
             <TabContainer>
               <MeetingsList />
             </TabContainer>
           )}
-          {value === 2 && (
+          {this.state.value === 2 && (
             <TabContainer>
               {this.state.applied ? (
-                <h2>Applied</h2>
+                <Typography
+                  component="h2"
+                  variant="h3"
+                  align="center"
+                  color="primary"
+                >
+                  You have already applied to a mentor
+                </Typography>
               ) : (
                 <MentorsList userId={this.state.user.id} />
               )}
             </TabContainer>
           )}
-          {value === 3 && (
+          {this.state.value === 3 && (
             <TabContainer>
               <UserProfileForm />
             </TabContainer>
