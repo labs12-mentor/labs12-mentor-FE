@@ -91,7 +91,7 @@ class MentorAssignments extends React.Component {
                         <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
                         <TableCell align="left">
                             <Button variant="outlined" size="small" color="primary" className={classes.margin}>
-                                Deny
+                                Delete
                             </Button>
                         </TableCell>
                         </TableRow>
@@ -99,36 +99,6 @@ class MentorAssignments extends React.Component {
                     </TableBody>
                 </Table>
             </Paper>
-            // <Table striped>
-            //     <thead>
-            //         <tr>
-            //             <th>Last Name</th>
-            //             <th>First Name</th>
-            //             <th>City</th>
-            //             <th>Matched Student</th>
-            //             <th></th>
-            //         </tr>
-            //     </thead>
-
-            //     <tbody>
-            //         {this.props.matchedUsers.map(match => {
-            //             return <tr key={match.id} onClick={() => this.routeToAssignments(match.id)}>
-            //                        <td>{match.mentor.last_name}</td>
-            //                        <td>{match.mentor.first_name}</td>
-            //                        <td>{match.mentor.email}</td>
-            //                        <td>{match.mentee.first_name + " " + match.mentee.last_name}</td>
-            //                        <td>
-            //                            <Button 
-            //                                 color="danger" 
-            //                                 onClick={e => this.deleteMatch(e, match.id)}
-            //                             >
-            //                                 Delete
-            //                             </Button>
-            //                        </td>
-            //                     </tr>
-            //         })}
-            //     </tbody>
-            // </Table>
         );
     }
 }

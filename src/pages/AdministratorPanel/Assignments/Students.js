@@ -94,7 +94,7 @@ class StudentAssignments extends React.Component {
                         <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
                         <TableCell align="left">
                             <Button variant="outlined" size="small" color="primary" className={classes.margin}>
-                                Deny
+                                Delete
                             </Button>
                         </TableCell>
                         </TableRow>
