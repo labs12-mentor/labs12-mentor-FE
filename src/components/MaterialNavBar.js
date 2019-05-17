@@ -256,7 +256,8 @@ MaterialNavbar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.auth.token !== null
+    authenticated: state.auth.token !== null,
+    currentUser: state.auth.currentUser,
   };
 };
 
