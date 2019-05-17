@@ -84,11 +84,14 @@ class MentorProfile extends React.Component {
     const applied = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
+    //console.log(applied)
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
+    //console.log(this.state.wanted_mentor)
     await this.props.getSpecificMentor(
       this.state.wanted_mentor.wanted_mentor_id
     );
     await this.setState({ ...this.state, mentor: this.props.mentor });
+    //console.log(this.state.mentor)
     await this.props.getSpecificUser(this.state.mentor.user_id);
     await this.setState({ ...this.state, profile: this.props.profile });
   }
@@ -99,7 +102,10 @@ class MentorProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.profile);
+    // console.log(applied)
+    //console.log(this.state.profile);
+    // console.log(this.state.menteed)
+    // console.log(this.state.matches)
     return (
       <div>
         {this.state.isLoaded ? (

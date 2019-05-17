@@ -19,6 +19,8 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import { theme } from '../themes.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 function TabContainer(props) {
   return (
@@ -146,6 +148,7 @@ class UserProfile extends React.Component {
     } else {
       return (
         <div>
+          <MuiThemeProvider theme={theme}>
           <AppBar position="static">
             <Tabs
               value={this.state.value}
@@ -257,6 +260,7 @@ class UserProfile extends React.Component {
               <UserProfileForm />
             </TabContainer>
           )}
+          </MuiThemeProvider>
         </div>
       );
     }
