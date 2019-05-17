@@ -3,6 +3,30 @@ import { API_URL } from '../constants/config';
 import { connect } from 'react-redux';
 import { githubAuthStart, githubAuthSuccess, githubAuthFailure } from '../actions';
 
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { loadCSS } from 'fg-loadcss/src/loadCSS';
+import { withStyles } from '@material-ui/core/styles';
+import Icon from '@material-ui/core/Icon';
+
+const styles = theme => ({
+    root: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+    },
+    icon: {
+        margin: theme.spacing.unit * 2,
+    },
+    iconHover: {
+        margin: theme.spacing.unit * 2,
+        '&:hover': {
+            // color: ,
+        },
+    },
+});
+
+
 class OAuth extends Component {
     constructor(props) {
         super(props);
@@ -23,6 +47,10 @@ class OAuth extends Component {
             this.popup.close();
             this.setState({ user });
         });
+        loadCSS(
+            'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
+            document.querySelector('#insertion-point-jss'),
+        );
     }
 
     checkPopup() {
@@ -71,7 +99,7 @@ class OAuth extends Component {
     }
 
     render() {
-        const { socket, provider } = this.props;
+        const { socket, provider, classes } = this.props;
         socket.on(provider, (user) => {
             if (user.token !== undefined || user.token !== null) {
                 this.props.githubAuthSuccess({ token: user.token });
@@ -82,9 +110,22 @@ class OAuth extends Component {
             this.setState({ user });
         });
 
-        return <button onClick={this.startAuth}>{provider}</button>;
+        return (
+        <div>
+            <Icon 
+                className={classNames(classes.iconHover, 'fab fa-github-square')}
+                color="inherit"
+                style={{ fontSize: 30 }}
+                onClick={this.startAuth} />
+        </div>
+        );
     }
 }
+
+OAuth.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (state) => {
     return {};
 };
@@ -98,4 +139,6 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(OAuth);
+)(withStyles(styles)(OAuth));
+
+// <button onClick={this.startAuth}>{provider}</button>
