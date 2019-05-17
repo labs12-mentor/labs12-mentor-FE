@@ -93,36 +93,32 @@ class Applications extends React.Component {
         const { value } = this.state;
 
         return (
-            <div className='MentorApplication'>
-                <div className={classes.root}>
-                    <AppBar position="static">
-                    <Tabs value={value} onChange={this.handleChange}>
-                        <Tab label="Mentor Applications" />
-                        <Tab label="Student Applications" />
-                    </Tabs>
-                    </AppBar>
-                    {value === 0 && 
-                    this.props.mentors.length &&
-                        <MentorApplications 
-                            mentors={this.filterBySearch('mentor')}
-                        />}
-                    {value === 1 && 
-                    this.props.mentees.length && 
-                        <StudentApplications 
-                                users={this.props.users} 
-                                mentees={this.filterBySearch("mentee")}
-                                mentors={this.props.mentors}
-                            />}
-                </div>
+            <div className={classes.root}>
+                <AppBar position="static">
+                <Tabs value={value} onChange={this.handleChange}>
+                    <Tab label="Mentor Applications" />
+                    <Tab label="Student Applications" />
+                </Tabs>
+                </AppBar>
+                {value === 0 && 
+                    <MentorApplications 
+                        mentors={this.filterBySearch('mentor')}
+                    />}
+                {value === 1 && 
+                    <StudentApplications 
+                        users={this.props.users}
+                        mentees={this.filterBySearch("mentee")}
+                        mentors={this.props.mentors}
+                    />}
             </div>
         );
     }
 }
 
-Applications.propTypes = {
-    mentors: PropTypes.array.isRequired,
-    mentees: PropTypes.array.isRequired,
-    users: PropTypes.array.isRequired
-};
+// Applications.propTypes = {
+//     mentors: PropTypes.array.isRequired,
+//     mentees: PropTypes.array.isRequired,
+//     users: PropTypes.array.isRequired
+// };
 
 export default withStyles(styles)(Applications);

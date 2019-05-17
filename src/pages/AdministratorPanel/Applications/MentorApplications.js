@@ -51,7 +51,7 @@ class MentorApplications extends React.Component {
         let mentorApplications = [];
 
         return (
-            <Paper className={classes.root}>              
+            <Paper className={classes.root}>   
                 {/* <InputBase className={classes.input} placeholder="Search Mentor Applications" /> */}
                   <Input
                     placeholder="Search Mentor Applications"
@@ -63,7 +63,6 @@ class MentorApplications extends React.Component {
                   <IconButton className={classes.iconButton} aria-label="Search">
                       <SearchIcon />
                   </IconButton>
-                <Divider className={classes.divider} />
 
                 <Table className={classes.table}>
                     <TableHead>
