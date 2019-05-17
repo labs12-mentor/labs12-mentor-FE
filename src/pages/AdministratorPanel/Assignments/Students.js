@@ -30,6 +30,9 @@ const styles = theme => ({
         marginLeft: '30%',
         width: '28%'
     },
+    iconButton: {
+        padding: 10,   
+    },
     table: {
       minWidth: 700
     },
@@ -69,7 +72,6 @@ class StudentAssignments extends React.Component {
                   <IconButton className={classes.iconButton} aria-label="Search">
                       <SearchIcon />
                   </IconButton>
-                <Divider className={classes.divider} />
 
                 <Table className={classes.table}>
                     <TableHead>

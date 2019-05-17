@@ -69,7 +69,6 @@ class MentorAssignments extends React.Component {
                   <IconButton className={classes.iconButton} aria-label="Search">
                       <SearchIcon />
                   </IconButton>
-                <Divider className={classes.divider} />
 
                 <Table className={classes.table}>
                     <TableHead>
