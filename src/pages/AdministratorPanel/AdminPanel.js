@@ -9,6 +9,8 @@ import Tabs from '@material-ui/core/Tabs';
 import NoSsr from '@material-ui/core/NoSsr';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import { theme } from '../../themes.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import Applications from './Applications/Applications';
 import Assignments from './Assignments/Assignments';
@@ -140,6 +142,8 @@ class AdminPanel extends React.Component {
         return (
             <NoSsr>
                 <div className={classes.root}>
+                    <MuiThemeProvider theme={theme}>
+
                     <AppBar position="static">
                     <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
                         <Tab label="Applications" />
@@ -160,6 +164,7 @@ class AdminPanel extends React.Component {
                             matches={this.state.matches}
                         />}
                     {value === 2 && <TabContainer>Page Three</TabContainer>}
+                    </MuiThemeProvider>
                 </div>
             </NoSsr>
         );
