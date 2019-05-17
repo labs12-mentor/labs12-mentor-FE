@@ -7,7 +7,13 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
-import { theme } from '../themes';
+import Avatar from '@material-ui/core/Avatar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Typography from '@material-ui/core/Typography';
+
+import { theme } from '../themes.js';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import { registerOrganization } from '../actions';
@@ -17,10 +23,35 @@ const styles = (theme) => ({
     root: {
         width: '100%'
     },
+    main: {
+        // width: 'auto',
+        // display: 'block', // Fix IE 11 issue.
+        marginLeft: theme.spacing.unit * 3,
+        marginRight: theme.spacing.unit * 3,
+        // [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+        //     width: 400,
+        //     marginLeft: 'auto',
+        //     marginRight: 'auto',
+        // },
+    },
     paper: {
-        width: '80%',
-        background: 'black'
-    }
+        marginTop: theme.spacing.unit * 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    },
+    avatar: {
+        margin: theme.spacing.unit,
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing.unit,
+    },
+    submit: {
+        marginTop: theme.spacing.unit * 3,
+    },
 });
 
 class OrganizationRegister extends React.Component {
@@ -51,12 +82,17 @@ class OrganizationRegister extends React.Component {
     };
 
     render() {
+        const { classes } = this.props;
         return (
             <MuiThemeProvider theme={theme}>
-                <Paper elevation={1}>
-                    <h1>Create a new Mentorship Program</h1>
+                <main className={classes.main}>
+                <CssBaseline />
+                <Paper elevation={1} className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        Create a new Mentorship Program
+                    </Typography>
 
-                    <form onSubmit={this.handleSubmit}>
+                    <form className={classes.form} onSubmit={this.handleSubmit}>
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
                                 <InputLabel htmlFor='organization_name'>
@@ -91,8 +127,8 @@ class OrganizationRegister extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' fullWidth>
-                                Logo - please upload a .png or .jpg for your desired logo image
-                                (optional).
+                                <p>Logo - please upload a .png or .jpg for your desired logo image
+                                (optional).</p>
                                 <Input
                                     accept='image/*'
                                     type='file'
@@ -176,17 +212,26 @@ class OrganizationRegister extends React.Component {
                             </FormControl>
                         </FormGroup>
 
-                        <Button variant='contained' type='submit'>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                onClick={this.handleSubmit}
+                            >
                             Launch Program
                         </Button>
                     </form>
                 </Paper>
+                </main>
             </MuiThemeProvider>
         );
     }
 }
 
-OrganizationRegister.propTypes = {};
+OrganizationRegister.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => {
     return {};
