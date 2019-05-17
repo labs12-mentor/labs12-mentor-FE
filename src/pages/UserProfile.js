@@ -1,20 +1,5 @@
 import React from "react";
-import {
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Col,
-  Row,
-  Card,
-  CardBody,
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Button
-} from "reactstrap";
+import { Form, FormGroup, Label, Col, Row, Card, CardBody } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import history from "../history";
@@ -22,7 +7,6 @@ import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
 import UserProfileForm from "../components/UserComponents/UserProfileForm";
-import Sidebar from "../components/Sidebar";
 import MaterialSideBar from "../components/MaterialSideBar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
@@ -33,6 +17,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
+import Grid from "@material-ui/core/Grid";
 
 function TabContainer(props) {
   return (
@@ -49,6 +35,14 @@ TabContainer.propTypes = {
 const styles = {
   root: {
     flexGrow: 1
+  },
+  avatar: {
+    margin: 10
+  },
+  bigAvatar: {
+    margin: 10,
+    width: 60,
+    height: 60
   }
 };
 
@@ -154,6 +148,7 @@ class UserProfile extends React.Component {
               <Tab label="USER UPDATE" />
             </Tabs>
           </AppBar>
+
           {value === 0 && (
             <TabContainer>
               <ContainerDiv>
@@ -246,153 +241,6 @@ class UserProfile extends React.Component {
             </TabContainer>
           )}
         </div>
-        // <div>
-        //   <Nav tabs>
-        //     <NavItem>
-        //       <NavLink
-        //         className={classnames({ active: this.state.activeTab === "1" })}
-        //         onClick={() => {
-        //           this.toggle("1");
-        //         }}
-        //       >
-        //         Profile Information
-        //       </NavLink>
-        //     </NavItem>
-        //     <NavItem>
-        //       <NavLink
-        //         className={classnames({ active: this.state.activeTab === "2" })}
-        //         onClick={() => {
-        //           this.toggle("2");
-        //         }}
-        //       >
-        //         Meetings
-        //       </NavLink>
-        //     </NavItem>
-        //     <NavItem>
-        //       <NavLink
-        //         className={classnames({ active: this.state.activeTab === "3" })}
-        //         onClick={() => {
-        //           this.toggle("3");
-        //         }}
-        //       >
-        //         Mentors
-        //       </NavLink>
-        //     </NavItem>
-        //     <NavItem>
-        //       <NavLink
-        //         className={classnames({ active: this.state.activeTab === "4" })}
-        //         onClick={() => {
-        //           this.toggle("4");
-        //         }}
-        //       >
-        //         Update User
-        //       </NavLink>
-        //     </NavItem>
-        //   </Nav>
-        //   <TabContent activeTab={this.state.activeTab}>
-        //     <TabPane tabId="1">
-        //       <Row>
-        //         <Col sm="12">
-        //           <ContainerDiv>
-        //             <Sidebar />
-        //             <ProfileContainer>
-        //               <Form>
-        //                 <Row>
-        //                   <Col md={6}>
-        //                     <FormGroup>
-        //                       <h3>First Name</h3>
-        //                       <Label for="lastName">
-        //                         {this.state.user.first_name}
-        //                       </Label>
-        //                     </FormGroup>
-        //                   </Col>
-
-        //                   <Col md={6}>
-        //                     <FormGroup>
-        //                       <h3>Last Name</h3>
-        //                       <Label for="lastName">
-        //                         {this.state.user.last_name}
-        //                       </Label>
-        //                     </FormGroup>
-        //                   </Col>
-        //                 </Row>
-
-        //                 <Row>
-        //                   <Col md={6}>
-        //                     <FormGroup>
-        //                       <h3>State</h3>
-
-        //                       <Label for="address">
-        //                         {this.state.user.state}
-        //                       </Label>
-        //                     </FormGroup>
-        //                   </Col>
-
-        //                   <Col md={6}>
-        //                     <FormGroup>
-        //                       <h3>Street</h3>
-
-        //                       <Label for="zipCode">
-        //                         {this.state.user.street}
-        //                       </Label>
-        //                     </FormGroup>
-        //                   </Col>
-        //                 </Row>
-
-        //                 <Row>
-        //                   <Col md={6}>
-        //                     <FormGroup>
-        //                       <Label for="github">Github</Label>
-        //                       <Input
-        //                         type="text"
-        //                         name="github"
-        //                         id="github"
-        //                         value={this.state.github}
-        //                         onChange={this.changeHandler}
-        //                       />
-        //                     </FormGroup>
-        //                   </Col>
-
-        //                   <Col md={6}>
-        //                     <FormGroup>
-        //                       <Label for="linkedIn">linkedIn</Label>
-        //                       <Input
-        //                         type="text"
-        //                         name="linkedIn"
-        //                         id="linkedIn"
-        //                         value={this.state.linkedIn}
-        //                         onChange={this.changeHandler}
-        //                       />
-        //                     </FormGroup>
-        //                   </Col>
-        //                 </Row>
-
-        //                 <Card>
-        //                   <CardBody>
-        //                     <ExperienceList />
-        //                   </CardBody>
-        //                 </Card>
-        //               </Form>
-        //             </ProfileContainer>
-        //           </ContainerDiv>
-        //         </Col>
-        //       </Row>
-        //     </TabPane>
-        //     <TabPane tabId="2">
-        //       <MeetingsList />
-        //     </TabPane>
-        //     <TabPane tabId="3">
-        //       {this.state.applied ? (
-        //         <h2>Applied</h2>
-        //       ) : (
-        //         <MentorsList userId={this.state.user.id} />
-        //       )}
-        //     </TabPane>
-        //     <TabPane tabId="4">
-        //       <UserProfileForm />
-        //     </TabPane>
-        //   </TabContent>
-        // </div>
       );
     }
   }
@@ -400,7 +248,8 @@ class UserProfile extends React.Component {
 
 UserProfile.propTypes = {
   user: PropTypes.object.isRequired,
-  mentees: PropTypes.array.isRequired
+  mentees: PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
@@ -421,4 +270,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserProfile);
+)(withStyles(styles)(UserProfile));
