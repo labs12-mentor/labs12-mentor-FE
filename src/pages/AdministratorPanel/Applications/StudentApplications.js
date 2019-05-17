@@ -12,6 +12,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
 
 import StudentApplicationCard from './StudentApplicationCard';
 
@@ -25,8 +26,9 @@ const styles = theme => ({
       minWidth: 700
     },
     input: {
-        marginLeft: 8,
         flex: 1,
+        marginLeft: '30%',
+        width: '28%'
     },
     iconButton: {
         padding: 10,   
@@ -71,11 +73,17 @@ class StudentApplications extends React.Component {
         return (
             <Paper className={classes.root}>
 
-                <InputBase className={classes.input} placeholder="Search Student Applications" />
-                  <IconButton className={classes.iconButton} aria-label="Search">
-                      <SearchIcon />
-                  </IconButton>
-                <Divider className={classes.divider} />
+                {/* <InputBase className={classes.input} placeholder="Search Student Applications" /> */}
+                <Input
+                    placeholder="Search Student Applications"
+                    className={classes.input}
+                    inputProps={{
+                    'aria-label': 'Description',
+                    }}
+                />
+                <IconButton className={classes.iconButton} aria-label="Search">
+                    <SearchIcon />
+                </IconButton>
 
                 <Table className={classes.table}>
                     <TableHead>

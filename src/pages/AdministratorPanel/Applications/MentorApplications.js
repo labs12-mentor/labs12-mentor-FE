@@ -13,6 +13,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
 
 import MentorApplicationCard from './MentorApplicationCard';
 
@@ -20,14 +21,15 @@ const styles = theme => ({
     root: {
       width: "100%",
       marginTop: theme.spacing.unit * 3,
-      overflowX: "auto"
+      overflowX: "auto",
     },
     table: {
       minWidth: 700
     },
     input: {
-        marginLeft: 8,
         flex: 1,
+        marginLeft: '30%',
+        width: '28%'
     },
     iconButton: {
         padding: 10,   
@@ -49,12 +51,18 @@ class MentorApplications extends React.Component {
         let mentorApplications = [];
 
         return (
-            <Paper className={classes.root}>
-                <InputBase className={classes.input} placeholder="Search Mentor Applications" />
+            <Paper className={classes.root}>   
+                {/* <InputBase className={classes.input} placeholder="Search Mentor Applications" /> */}
+                  <Input
+                    placeholder="Search Mentor Applications"
+                    className={classes.input}
+                    inputProps={{
+                      'aria-label': 'Description',
+                    }}
+                  />
                   <IconButton className={classes.iconButton} aria-label="Search">
                       <SearchIcon />
                   </IconButton>
-                <Divider className={classes.divider} />
 
                 <Table className={classes.table}>
                     <TableHead>

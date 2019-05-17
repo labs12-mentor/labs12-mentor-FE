@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import classnames from 'classnames';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -14,8 +12,6 @@ import Typography from '@material-ui/core/Typography';
 
 import Applications from './Applications/Applications';
 import Assignments from './Assignments/Assignments';
-// import MentorAssignment from './MentorAssignment';
-// import ProfileForms from './ProfileForms';
 
 function TabContainer(props) {
     return (
@@ -35,6 +31,7 @@ function LinkTab(props) {
 
 const styles = theme => ({
     root: {
+        marginTop: 100,
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
     },
@@ -115,6 +112,8 @@ class AdminPanel extends React.Component {
     };
 
     render() {
+        console.log(this.props.mentees);
+
         const matchedUsers = [];
         this.state.matches.forEach(match => {
             if(match.deleted === false){
@@ -143,56 +142,30 @@ class AdminPanel extends React.Component {
         const { value } = this.state;
         
         return (
-            <div className='AdminPanel'>
-                <h1> Administrator Panel </h1>
-
-                <NoSsr>
-                    <div className={classes.root}>
-                        <AppBar position="static">
-                        <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
-                            <Tab label="Applications" />
-                            <Tab label="Match Assignments" />
-                            <Tab label="Profile Forms" />
-                        </Tabs>
-                        </AppBar>
-                        {value === 0 && 
-                            <Applications
-                                users={this.state.users}
-                                mentees={this.filterMentees()}
-                                mentors={this.filterMentors()} 
-                            />}
-                        {value === 1 && 
-                            <Assignments 
-                                matchedUsers={matchedUsers} 
-                                users={this.state.users}
-                                matches={this.state.matches}
-                            />}
-                        {value === 2 && <TabContainer>Page Three</TabContainer>}
-                    </div>
-                </NoSsr>
-
-                {/* 
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId='1'>
-                        <MentorApplications
+            <NoSsr>
+                <div className={classes.root}>
+                    <AppBar position="static">
+                    <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
+                        <Tab label="Applications" />
+                        <Tab label="Match Assignments" />
+                        <Tab label="Profile Forms" />
+                    </Tabs>
+                    </AppBar>
+                    {value === 0 && 
+                        <Applications
                             users={this.state.users}
                             mentees={this.filterMentees()}
-                            mentors={this.filterMentors()}
-                        />
-                    </TabPane>
-                    <TabPane tabId='2'>
-                        <MentorAssignment 
+                            mentors={this.filterMentors()} 
+                        />}
+                    {value === 1 && 
+                        <Assignments 
                             matchedUsers={matchedUsers} 
                             users={this.state.users}
                             matches={this.state.matches}
-                        />
-                    </TabPane>
-
-                    <TabPane tabId='3'>
-                        <ProfileForms />
-                    </TabPane>
-                </TabContent> */}
-            </div>
+                        />}
+                    {value === 2 && <TabContainer>Page Three</TabContainer>}
+                </div>
+            </NoSsr>
         );
     }
 }

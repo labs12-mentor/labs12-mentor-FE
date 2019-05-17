@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -23,6 +24,14 @@ const styles = theme => ({
       width: "100%",
       marginTop: theme.spacing.unit * 3,
       overflowX: "auto"
+    },
+    input: {
+        flex: 1,
+        marginLeft: '30%',
+        width: '28%'
+    },
+    iconButton: {
+        padding: 10,   
     },
     table: {
       minWidth: 700
@@ -52,11 +61,17 @@ class StudentAssignments extends React.Component {
 
         return (
             <Paper className={classes.root}>
-                <InputBase className={classes.input} placeholder="Search Matches by Student" />
+                {/* <InputBase className={classes.input} placeholder="Search Matches by Student" /> */}
+                    <Input
+                        placeholder="Search Matches by Student"
+                        className={classes.input}
+                        inputProps={{
+                            'aria-label': 'Description',
+                        }}
+                    />
                   <IconButton className={classes.iconButton} aria-label="Search">
                       <SearchIcon />
                   </IconButton>
-                <Divider className={classes.divider} />
 
                 <Table className={classes.table}>
                     <TableHead>
@@ -79,7 +94,7 @@ class StudentAssignments extends React.Component {
                         <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
                         <TableCell align="left">
                             <Button variant="outlined" size="small" color="primary" className={classes.margin}>
-                                Deny
+                                Delete
                             </Button>
                         </TableCell>
                         </TableRow>
