@@ -90,8 +90,8 @@ class Assignments extends React.Component {
                   <Tab label="Students" />
                 </Tabs>
               </AppBar>
-              {value === 0 && <MentorAssignments matchedUsers={this.filterBySearch('mentor')} />}
-              {value === 1 && <StudentAssignments matchedUsers={this.filterBySearch('mentee')} />}
+              {value === 0 && <MentorAssignments matchedUsers={this.props.matchedUsers} />}
+              {value === 1 && <StudentAssignments matchedUsers={this.props.matchedUsers} />}
             </div>
         );
     }

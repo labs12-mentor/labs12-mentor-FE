@@ -11,6 +11,32 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardHeader from "@material-ui/core/CardHeader";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+
+
+const styles = theme => ({
+  // root: {
+  //     flexGrow: 1,
+  // },
+  // demo: {
+  //     backgroundColor: theme.palette.background.paper,
+  // },
+  // title: {
+  //     margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`,
+  // },
+  card: {
+    minWidth: 275,
+    maxHeight: 500,
+    overflow: "auto"
+  },
+  button: {
+    margin: theme.spacing.unit
+  }
+});
 
 class ExperienceList extends React.Component {
   constructor(props) {
@@ -19,15 +45,8 @@ class ExperienceList extends React.Component {
       isLoaded: false,
       open: false
     };
-
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
   async componentDidMount() {
     await this.props.getExperiences();
     this.setState({ isLoaded: true });
@@ -42,16 +61,20 @@ class ExperienceList extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     const nonDeleted = this.props.experiences.filter(experience => {
       return experience.deleted === false;
     });
     return (
-      <div>
+      <Card>
+        
         <h1>Experiences</h1>
         <Button
-          variant="outlined"
+          variant="contained"
           color="primary"
           onClick={this.handleClickOpen}
+          className={classes.button}
         >
           Create New Experience
         </Button>
@@ -61,7 +84,7 @@ class ExperienceList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-            <ExperienceForm canEdit={false} />
+            <ExperienceForm canEdit={false} userId={this.props.userId} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -71,19 +94,25 @@ class ExperienceList extends React.Component {
         </Dialog>
 
         {this.state.isLoaded ? (
-          nonDeleted.map(experience => {
-            return (
-              <ExeperienceCard
-                id={experience.id}
-                key={experience.id}
-                name={experience.name}
-              />
-            );
-          })
+          <Card className={classes.card}>
+            <CardContent>
+              {nonDeleted.map(experience => {
+                return (
+                  <ExeperienceCard
+                    id={experience.id}
+                    key={experience.id}
+                    name={experience.name}
+                  />
+                );
+              })}
+            </CardContent>
+          </Card>
         ) : (
           <h2>Loading</h2>
         )}
-      </div>
+        
+      </Card>
+      
     );
   }
 }
@@ -97,4 +126,4 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   { getExperiences, updateExperience, getSpecificExperience }
-)(ExperienceList);
+)(withStyles(styles)(ExperienceList));

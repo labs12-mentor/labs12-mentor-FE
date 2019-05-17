@@ -42,15 +42,6 @@ class MeetingCard extends React.Component {
   };
 
   render() {
-    const externalCloseBtn = (
-      <button
-        className="close"
-        style={{ position: "absolute", top: "15px", right: "15px" }}
-        onClick={this.toggle}
-      >
-        &times;
-      </button>
-    );
     return (
       <div>
         <ExpansionPanel>

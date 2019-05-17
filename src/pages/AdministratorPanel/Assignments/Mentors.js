@@ -43,25 +43,53 @@ const styles = theme => ({
   
 
 class MentorAssignments extends React.Component {
+    state = {
+        searchBarContents: ''
+    }
+
     routeToAssignments(id) {
         // history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
+
+    changeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    };
 
     deleteMatch = (e, matchId) => {
         e.preventDefault();
         this.props.deleteMatch(matchId);
     }
 
+    filterBySearch = (role) => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        const filteredMentees = this.props.matchedUsers.filter((match) => {
+            return (
+                match[role].last_name.toLowerCase().includes(searchInput) ||
+                match[role].first_name.toLowerCase().includes(searchInput) ||
+                match[role].email.toLowerCase().includes(searchInput)
+            );
+        });
+
+        return filteredMentees;
+    };
+
     render() {
         const { classes } = this.props;
         let mentorApplications = [];
-
+        
         return (
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}
                     <Input
                         placeholder="Search Matches by Mentor"
                         className={classes.input}
+                        name='searchBarContents'
+                        value={this.state.searchBarContents}
+                        onChange={this.changeHandler}
                         inputProps={{
                             'aria-label': 'Description',
                         }}
@@ -80,8 +108,9 @@ class MentorAssignments extends React.Component {
                         <TableCell align="left"></TableCell>
                     </TableRow>
                     </TableHead>
+
                     <TableBody>
-                    {this.props.matchedUsers.map(match => (
+                    {this.filterBySearch('mentor').map(match => (
                         <TableRow key={match.id}>
                         <TableCell component="th" scope="row">
                             {match.mentor.id}
@@ -90,7 +119,13 @@ class MentorAssignments extends React.Component {
                         <TableCell align="left">{match.mentor.email}</TableCell>
                         <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
                         <TableCell align="left">
-                            <Button variant="outlined" size="small" color="primary" className={classes.margin}>
+                            <Button 
+                                variant="outlined" 
+                                size="small" 
+                                color="primary" 
+                                className={classes.margin}
+                                onClick={e => this.deleteMatch(e, match.id)}
+                            >
                                 Delete
                             </Button>
                         </TableCell>
