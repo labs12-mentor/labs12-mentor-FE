@@ -27,7 +27,7 @@ import MentorProfile from '../components/MentorComponents/MentorProfile';
 import styled from 'styled-components';
 
 const AppCont = styled.div`
-    margin: 70px auto;
+    margin: 80px auto;
     width: 80%;
 
 `;
