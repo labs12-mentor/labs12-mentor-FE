@@ -28,6 +28,10 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 const styles = theme => ({
   root: {
     width: '100%',
+    position: 'fixed',
+    zIndex: 1,
+    top: 0,
+    marginBottom: 30,
   },
   grow: {
     flexGrow: 1,
@@ -225,9 +229,6 @@ class MaterialNavbar extends React.Component {
                 >
                   <AccountCircle />
                 </IconButton>
-                    <Button component={RouterLink} to="/" onClick={this.props.logoutUser} color="inherit">
-                  Logout
-                </Button>
               </div>
             )}
             </div>
