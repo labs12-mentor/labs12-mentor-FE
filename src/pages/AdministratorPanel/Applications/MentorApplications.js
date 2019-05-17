@@ -86,7 +86,7 @@ class MentorApplications extends React.Component {
     render() {
         const { classes } = this.props;
         let mentorApplications = [];
-        console.log(this.state.searchBarContents);
+        
         return (
             <Paper className={classes.root}>   
                 {/* <InputBase className={classes.input} placeholder="Search Mentor Applications" /> */}

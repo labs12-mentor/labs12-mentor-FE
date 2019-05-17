@@ -80,7 +80,7 @@ class MentorAssignments extends React.Component {
     render() {
         const { classes } = this.props;
         let mentorApplications = [];
-
+        console.log(this.props.matchedUsers);
         return (
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}

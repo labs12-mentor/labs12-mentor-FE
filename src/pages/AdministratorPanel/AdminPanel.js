@@ -110,8 +110,7 @@ class AdminPanel extends React.Component {
     };
 
     render() {
-        console.log(this.props.mentees);
-
+        console.log('matches', this.state.matches);
         const matchedUsers = [];
         this.state.matches.forEach(match => {
             if(match.deleted === false){
@@ -124,15 +123,14 @@ class AdminPanel extends React.Component {
                 this.state.users.forEach(user => {
                     if(user.id === match.mentor_id){
                         userMatchInfo.mentor = user;
-                        userMatchInfo.mentee = user;//delete according to below
-                        matchedUsers.push(userMatchInfo);
-                    } 
+                        // userMatchInfo.mentee = user;//delete according to below
+                    } else if(user.id === match.mentee_id){
+                        userMatchInfo.mentee = user;
+                    }
                     //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
-                    // else if(user.id === match.mentee_id){
-                    //     userMatchInfo.mentee = user;
-                    //     matchedUsers.push(userMatchInfo);
-                    // }
+                    
                 });
+                matchedUsers.push(userMatchInfo);
             }
         });
 
