@@ -80,7 +80,7 @@ class MentorAssignments extends React.Component {
     render() {
         const { classes } = this.props;
         let mentorApplications = [];
-        console.log(this.props.matchedUsers);
+        
         return (
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}
@@ -119,7 +119,13 @@ class MentorAssignments extends React.Component {
                         <TableCell align="left">{match.mentor.email}</TableCell>
                         <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
                         <TableCell align="left">
-                            <Button variant="outlined" size="small" color="primary" className={classes.margin}>
+                            <Button 
+                                variant="outlined" 
+                                size="small" 
+                                color="primary" 
+                                className={classes.margin}
+                                onClick={e => this.deleteMatch(e, match.id)}
+                            >
                                 Delete
                             </Button>
                         </TableCell>

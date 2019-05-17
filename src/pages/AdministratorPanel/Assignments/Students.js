@@ -70,6 +70,7 @@ class StudentAssignments extends React.Component {
 
     filterBySearch = (role) => {
         const searchInput = this.state.searchBarContents.toLowerCase();
+        
         const filteredMentees = this.props.matchedUsers.filter((match) => {
             return (
                 match[role].last_name.toLowerCase().includes(searchInput) ||
@@ -122,7 +123,13 @@ class StudentAssignments extends React.Component {
                             <TableCell align="left">{match.mentee.email}</TableCell>
                             <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
                             <TableCell align="left">
-                                <Button variant="outlined" size="small" color="primary" className={classes.margin}>
+                                <Button 
+                                    variant="outlined" 
+                                    size="small" 
+                                    color="primary" 
+                                    className={classes.margin}
+                                    onClick={e => this.deleteMatch(e, match.id)}
+                                >
                                     Delete
                                 </Button>
                             </TableCell>

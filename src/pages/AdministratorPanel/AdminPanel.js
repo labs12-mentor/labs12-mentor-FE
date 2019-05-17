@@ -113,7 +113,7 @@ class AdminPanel extends React.Component {
         console.log('matches', this.state.matches);
         const matchedUsers = [];
         this.state.matches.forEach(match => {
-            if(match.deleted === false){
+            if(match.deleted === false && match.mentor_id !== match.mentee_id){
                 let userMatchInfo = {
                     mentor: {},
                     mentee: {},
