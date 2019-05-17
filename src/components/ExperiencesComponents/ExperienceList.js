@@ -17,6 +17,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
+
 const styles = theme => ({
   // root: {
   //     flexGrow: 1,
@@ -67,6 +68,7 @@ class ExperienceList extends React.Component {
     });
     return (
       <Card>
+        
         <h1>Experiences</h1>
         <Button
           variant="contained"
@@ -108,7 +110,9 @@ class ExperienceList extends React.Component {
         ) : (
           <h2>Loading</h2>
         )}
+        
       </Card>
+      
     );
   }
 }
