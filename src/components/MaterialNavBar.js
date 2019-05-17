@@ -25,6 +25,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -96,6 +97,12 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
   },
 });
 
@@ -218,6 +225,7 @@ class MaterialNavbar extends React.Component {
             
             {this.props.authenticated && (
               <div>
+                {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)}
                 <IconButton color="inherit" component={RouterLink} to="/user/notifications">
                     <NotificationButton />
                 </IconButton>
@@ -229,6 +237,7 @@ class MaterialNavbar extends React.Component {
                 >
                   <AccountCircle />
                 </IconButton>
+
               </div>
             )}
             </div>
@@ -256,7 +265,8 @@ MaterialNavbar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.auth.token !== null
+    authenticated: state.auth.token !== null,
+    currentUser: state.auth.currentUser
   };
 };
 

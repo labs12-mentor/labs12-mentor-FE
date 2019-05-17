@@ -77,48 +77,26 @@ class StudentApplicationCard extends React.Component {
                     })}
                 </TableCell>
                 <TableCell>                    
-                    <Button variant="contained" size="small" color="primary" className={classes.margin}>
+                    <Button 
+                        variant="contained" 
+                        size="small" 
+                        color="primary" 
+                        className={classes.margin}
+                        onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")}
+                    >
                         Approve
                     </Button>
-                    <Button variant="outlined" size="small" color="primary" className={classes.margin}>
+                    <Button 
+                        variant="outlined" 
+                        size="small" 
+                        color="primary" 
+                        className={classes.margin}
+                        onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} 
+                    >
                         Deny
                     </Button>
                 </TableCell>
             </TableRow>
-            // <tr onClick={() => this.routeToApplication(mentee.id)}>
-            //     <td>{mentee.last_name}</td>
-            //     <td>{mentee.first_name}</td>
-            //     <td>{mentee.email}</td>
-            //     <td>{this.props.users.filter(user => {
-            //             return user.id === mentee.wanted_mentor_id
-            //         }).map(user => {
-            //             return user.first_name + " " + user.last_name;
-            //         })}
-            //     </td>
-
-            //     <td>
-            //         {/* {!this.state.approve && !this.state.deny ?  */}
-            //         <ButtonGroup>
-            //             <Button 
-            //                 onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} 
-            //                 name="approve" 
-            //                 color="success"
-            //             >
-            //                 Approve
-            //             </Button>
-
-            //             <Button 
-            //                 onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} 
-            //                 name="deny" 
-            //                 color="danger"
-            //             >
-            //                 Deny
-            //             </Button>
-            //         </ButtonGroup> 
-            //         {/* :  */}
-            //         {/* <p>{this.state.approve ? "Approved" : "Denied" }</p>} */}
-            //     </td>
-            // </tr>
         );
     }
 }

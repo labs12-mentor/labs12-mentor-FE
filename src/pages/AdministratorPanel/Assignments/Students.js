@@ -46,14 +46,41 @@ const styles = theme => ({
 
 
 class StudentAssignments extends React.Component {
+    state = {
+        searchBarContents: ''
+    }
+
+
     routeToAssignments(id) {
         // history.push(`/user/admin/mentorassignment/${id}/mentee`);
     }
+
+    changeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    };
 
     deleteMatch = (e, matchId) => {
         e.preventDefault();
         this.props.deleteMatch(matchId);
     }
+
+    filterBySearch = (role) => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        
+        const filteredMentees = this.props.matchedUsers.filter((match) => {
+            return (
+                match[role].last_name.toLowerCase().includes(searchInput) ||
+                match[role].first_name.toLowerCase().includes(searchInput) ||
+                match[role].email.toLowerCase().includes(searchInput)
+            );
+        });
+
+        return filteredMentees;
+    };
 
     render() {
         const { classes } = this.props;
@@ -65,6 +92,9 @@ class StudentAssignments extends React.Component {
                     <Input
                         placeholder="Search Matches by Student"
                         className={classes.input}
+                        name='searchBarContents'
+                        value={this.state.searchBarContents}
+                        onChange={this.changeHandler}
                         inputProps={{
                             'aria-label': 'Description',
                         }}
@@ -84,55 +114,30 @@ class StudentAssignments extends React.Component {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {this.props.matchedUsers.map(match => (
+                    {this.filterBySearch('mentee').map(match => (
                         <TableRow key={match.id}>
-                        <TableCell component="th" scope="row">
-                            {match.mentee.id}
-                        </TableCell>
-                        <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
-                        <TableCell align="leftt">{match.mentee.email}</TableCell>
-                        <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
-                        <TableCell align="left">
-                            <Button variant="outlined" size="small" color="primary" className={classes.margin}>
-                                Delete
-                            </Button>
-                        </TableCell>
+                            <TableCell component="th" scope="row">
+                                {match.mentee.id}
+                            </TableCell>
+                            <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
+                            <TableCell align="left">{match.mentee.email}</TableCell>
+                            <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
+                            <TableCell align="left">
+                                <Button 
+                                    variant="outlined" 
+                                    size="small" 
+                                    color="primary" 
+                                    className={classes.margin}
+                                    onClick={e => this.deleteMatch(e, match.id)}
+                                >
+                                    Delete
+                                </Button>
+                            </TableCell>
                         </TableRow>
                     ))}
                     </TableBody>
                 </Table>
             </Paper>
-            // <Table striped>
-            //     <thead>
-            //         <tr>
-            //             <th>Last Name</th>
-            //             <th>First Name</th>
-            //             <th>City</th>
-            //             <th>Matched Mentor</th>
-            //             <th>Status</th>
-            //             <th />
-            //         </tr>
-            //     </thead>
-
-            //     <tbody>
-            //         {this.props.matchedUsers.map(match => {
-            //             return <tr key={match.id} onClick={() => this.routeToAssignments(match.id)}>
-            //                         <td>{match.mentee.last_name}</td>
-            //                         <td>{match.mentee.first_name}</td>
-            //                         <td>{match.mentee.email}</td>
-            //                         <td>{match.mentor.first_name + " " + match.mentor.last_name}</td>
-            //                         <td>
-            //                            <Button 
-            //                                 color="danger" 
-            //                                 onClick={e => this.deleteMatch(e, match.id)}
-            //                             >
-            //                                 Delete
-            //                             </Button>
-            //                         </td>
-            //                     </tr>
-            //         })}
-            //     </tbody>
-            // </Table>
         );
     }
 }

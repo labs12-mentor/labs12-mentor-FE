@@ -42,20 +42,60 @@ const styles = theme => ({
   });
 
 class MentorApplications extends React.Component {
+    state = {
+        searchBarContents: ''
+    }
+
     routeToApplication(id) {
         // history.push(`/user/admin/mentorapplication/${id}`);
     }
 
+    changeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    filterBySearch = (role) => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        let filteredUsers = [];
+
+        if (role === 'mentee') {
+            filteredUsers = this.props.mentees.filter((mentee) => {
+                return (
+                    mentee.last_name.toLowerCase().includes(searchInput) ||
+                    mentee.first_name.toLowerCase().includes(searchInput) ||
+                    mentee.email.toLowerCase().includes(searchInput)
+                );
+            });
+        } else if (role === 'mentor') {
+            filteredUsers = this.props.mentors.filter((mentor) => {
+                return (
+                    mentor.last_name.toLowerCase().includes(searchInput) ||
+                    mentor.first_name.toLowerCase().includes(searchInput) ||
+                    mentor.email.toLowerCase().includes(searchInput)
+                );
+            });
+        }
+
+        return filteredUsers;
+    };
+
     render() {
         const { classes } = this.props;
         let mentorApplications = [];
-
+        
         return (
             <Paper className={classes.root}>   
                 {/* <InputBase className={classes.input} placeholder="Search Mentor Applications" /> */}
                   <Input
                     placeholder="Search Mentor Applications"
                     className={classes.input}
+                    name='searchBarContents'
+                    value={this.state.searchBarContents}
+                    onChange={this.changeHandler}
                     inputProps={{
                       'aria-label': 'Description',
                     }}
@@ -76,7 +116,7 @@ class MentorApplications extends React.Component {
                     </TableHead>
 
                     <TableBody>
-                    {this.props.mentors.map((mentor, index)=> (
+                    {this.filterBySearch('mentor').map((mentor, index)=> (
                         <MentorApplicationCard key={index} mentor={mentor} />
                     ))}
                     </TableBody>
