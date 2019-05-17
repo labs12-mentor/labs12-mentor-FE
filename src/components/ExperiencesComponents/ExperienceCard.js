@@ -30,10 +30,7 @@ class ExperienceCard extends React.Component {
     this.state = {
       open: false
     };
-
   }
-
-
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -44,8 +41,6 @@ class ExperienceCard extends React.Component {
   };
 
   render() {
-
-
     return (
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>

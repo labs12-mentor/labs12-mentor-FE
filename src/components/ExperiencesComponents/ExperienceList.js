@@ -13,9 +13,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from '@material-ui/core/CardHeader';
+import CardHeader from "@material-ui/core/CardHeader";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const styles = theme => ({
   // root: {
@@ -33,7 +33,7 @@ const styles = theme => ({
     overflow: "auto"
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   }
 });
 
@@ -44,8 +44,6 @@ class ExperienceList extends React.Component {
       isLoaded: false,
       open: false
     };
-
-    
   }
 
   async componentDidMount() {
@@ -84,10 +82,7 @@ class ExperienceList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-            <ExperienceForm 
-            canEdit={false} 
-            userId={this.props.userId}
-            />
+            <ExperienceForm canEdit={false} userId={this.props.userId} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -97,19 +92,19 @@ class ExperienceList extends React.Component {
         </Dialog>
 
         {this.state.isLoaded ? (
-             <Card className={classes.card}>
-             <CardContent>
-          {nonDeleted.map(experience => {
-            return (
-              <ExeperienceCard
-                id={experience.id}
-                key={experience.id}
-                name={experience.name}
-              />
-            );
-          })}
-               </CardContent>
-              </Card>
+          <Card className={classes.card}>
+            <CardContent>
+              {nonDeleted.map(experience => {
+                return (
+                  <ExeperienceCard
+                    id={experience.id}
+                    key={experience.id}
+                    name={experience.name}
+                  />
+                );
+              })}
+            </CardContent>
+          </Card>
         ) : (
           <h2>Loading</h2>
         )}

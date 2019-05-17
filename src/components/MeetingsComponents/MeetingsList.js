@@ -12,8 +12,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { withStyles } from "@material-ui/core/styles";
-import PropTypes from 'prop-types';
-
+import PropTypes from "prop-types";
 
 const styles = theme => ({
   // root: {
@@ -31,7 +30,7 @@ const styles = theme => ({
     overflow: "auto"
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   }
 });
 
@@ -53,8 +52,7 @@ class MeetingsList extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      open: false,
-      
+      open: false
     };
   }
 
@@ -138,7 +136,7 @@ class MeetingsList extends React.Component {
 }
 
 MeetingsList.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

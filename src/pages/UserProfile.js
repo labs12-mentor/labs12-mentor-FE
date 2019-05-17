@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Label, Col, Row,  } from "reactstrap";
+import { Form, FormGroup, Label, Col, Row } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import history from "../history";
@@ -19,7 +19,6 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-
 
 function TabContainer(props) {
   return (
@@ -45,8 +44,8 @@ const styles = {
     width: 60,
     height: 60
   },
-  applied : {
-    width: '100%',
+  applied: {
+    width: "100%"
     //maxWidth: 500,
   }
 };
@@ -148,7 +147,11 @@ class UserProfile extends React.Component {
       return (
         <div>
           <AppBar position="static">
-            <Tabs value={this.state.value} onChange={this.handleChange} centered>
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              centered
+            >
               <Tab label="PROFILE" />
               <Tab label="MEETINGS" />
               <Tab label="MENTORS" />
@@ -220,9 +223,7 @@ class UserProfile extends React.Component {
 
                     <Card>
                       <CardContent>
-                        <ExperienceList 
-                        userId={this.state.user.id}
-                        />
+                        <ExperienceList userId={this.state.user.id} />
                       </CardContent>
                     </Card>
                   </Form>
@@ -238,14 +239,14 @@ class UserProfile extends React.Component {
           {this.state.value === 2 && (
             <TabContainer>
               {this.state.applied ? (
-      <Typography 
-      component="h2" 
-      variant="h3" 
-      align="center"
-      color="primary"
-      >
-      You have already applied to a mentor
-    </Typography>
+                <Typography
+                  component="h2"
+                  variant="h3"
+                  align="center"
+                  color="primary"
+                >
+                  You have already applied to a mentor
+                </Typography>
               ) : (
                 <MentorsList userId={this.state.user.id} />
               )}

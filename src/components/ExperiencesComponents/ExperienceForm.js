@@ -31,7 +31,7 @@ class ExperienceForm extends React.Component {
   };
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     if (this.props.canEdit === true) {
       return (
         <Form onSubmit={this.updateAnExperience}>
@@ -47,20 +47,19 @@ class ExperienceForm extends React.Component {
         </Form>
       );
     } else {
-    return (
-      <Form onSubmit={this.createAnExperience}>
-        <FormGroup>
-          <Input
-            type="text"
-            name="name"
-            placeholder="Add an Experience"
-            onChange={this.handleChanges}
-          />
-        </FormGroup>
-        <Button onClick={this.createAnExperience}>Add</Button>
-      </Form>
-    
-    );
+      return (
+        <Form onSubmit={this.createAnExperience}>
+          <FormGroup>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Add an Experience"
+              onChange={this.handleChanges}
+            />
+          </FormGroup>
+          <Button onClick={this.createAnExperience}>Add</Button>
+        </Form>
+      );
     }
   }
 }
