@@ -6,7 +6,7 @@ import {
   whiteColor,
   grayColor,
   hexToRgb
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../material-kit-pro-react.jsx";
 
 const signupPageStyle = theme => ({
   description,
@@ -65,7 +65,7 @@ const signupPageStyle = theme => ({
   },
   iconButtons: {
     marginRight: "3px !important",
-    marginLeft: "3px !important"
+    marginLeft: "3px !important",
   },
   block: {
     color: "inherit",
