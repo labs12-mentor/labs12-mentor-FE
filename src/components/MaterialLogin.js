@@ -76,9 +76,9 @@ class UserLogin extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
                 <Card>
-                  <form className={classes.form}>
+                  <form className={classes.form}  onSubmit={this.handleSubmit}>
                     <CardHeader
-                      color="primary"
+                      color="info"
                       signup
                       className={classes.cardHeader}
                     >
@@ -100,7 +100,6 @@ class UserLogin extends React.Component {
                       Or Be Classical
                     </p>
                     <CardBody signup>
-                        {/* <form className={classes.form} onSubmit={this.handleSubmit}> */}
                             <FormGroup row>
                                 <FormControl margin='normal' required fullWidth>
                                     <InputLabel htmlFor='user_email'><EmailIcon />  Email</InputLabel>
@@ -128,10 +127,9 @@ class UserLogin extends React.Component {
                                     />
                                 </FormControl>
                             </FormGroup>
-                        {/* </form> */}
                     </CardBody>
                     <div className={classes.textCenter}>
-                      <Button simple color="primary" size="lg">
+                      <Button simple color="info" size="lg" className={classes.submitButton} >
                         Get started
                       </Button>
                     </div>

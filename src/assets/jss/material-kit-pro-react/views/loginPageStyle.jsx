@@ -1,5 +1,6 @@
 import {
   container,
+  infoColor,
   description,
   cardTitle,
   blackColor,
@@ -50,7 +51,7 @@ const signupPageStyle = theme => ({
   },
   cardHeader: {
     width: "auto",
-    textAlign: "center"
+    textAlign: "center",
   },
   socialLine: {
     marginTop: "1rem",
@@ -116,6 +117,10 @@ const signupPageStyle = theme => ({
     bottom: "0",
     color: whiteColor,
     zIndex: "2"
+  },
+  submitButton: {
+    color: infoColor,
+    size: 'lg'
   }
 });
 
