@@ -25,6 +25,8 @@ import MatchesList from '../components/MatchesComponents/MatchesList';
 import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
+import newRegister from '../components/MaterialSignUp';
+
 import styled from 'styled-components';
 
 const AppCont = styled.div`
@@ -42,8 +44,9 @@ const Routes = (props) => {
             <Route
                 exact
                 path='/organization/register'
-                component={RouteNoAuthNeeded(OrganizationRegister)}
+                component={RouteNoAuthNeeded(newRegister)}
             />
+            <Route exact path='/newRegister' component={newRegister} />
             <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(SignIn)} />
