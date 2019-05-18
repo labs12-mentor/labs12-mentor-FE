@@ -5,9 +5,12 @@ import { withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from '@material-ui/core/Button';
+
+import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
     root: {
@@ -24,7 +27,12 @@ const styles = theme => ({
     extendedIcon: {
         marginRight: theme.spacing.unit,
     },
-
+    CircleCheck:{
+        fontSize: '27px'
+    },
+    DeleteForever: {
+        fontSize: '30px',
+    },
 });
   
 
@@ -47,18 +55,17 @@ class MentorApplicationCard extends React.Component {
                 <TableCell align="left">{mentor.first_name}</TableCell>
                 <TableCell align="left">{mentor.email}</TableCell>
                 <TableCell align="left">
-                    {/* <Button variant="contained" size="small" color="primary" className={classes.margin}>
-                        Approve
-                    </Button>
-                    <Button variant="outlined" size="small" color="primary" className={classes.margin}>
-                        Deny
-                    </Button> */}
-                    <IconButton>
-                        <CheckCircle color='primary' />
-                    </IconButton>
-                    <IconButton>
-                    <DeleteForeverIcon color='primary' />
-                    </IconButton>
+                    <Tooltip title="Add">
+                        <IconButton>
+                            <CheckCircle className={classes.CircleCheck} color='primary' />
+                        </IconButton>
+                    </Tooltip>
+                    
+                    <Tooltip title="Delete">
+                        <IconButton>
+                            <DeleteForeverIcon  className={classes.DeleteForever} color="primary" />
+                        </IconButton>
+                    </Tooltip>                    
                 </TableCell>
             </TableRow>
         );

@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { createMatch } from '../../../actions';
 
@@ -27,6 +28,12 @@ const styles = theme => ({
     },
     extendedIcon: {
         marginRight: theme.spacing.unit,
+    },
+    CircleCheck:{
+        fontSize: '27px'
+    },
+    DeleteForever: {
+        fontSize: '30px',
     },
 });
 
@@ -79,31 +86,17 @@ class StudentApplicationCard extends React.Component {
                         return user.first_name + " " + user.last_name;
                     })}
                 </TableCell>
-                <TableCell>                    
-                    {/* <Button 
-                        variant="contained" 
-                        size="small" 
-                        color="primary" 
-                        className={classes.margin}
-                        onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")}
-                    >
-                        Approve
-                    </Button>
-                    <Button 
-                        variant="outlined" 
-                        size="small" 
-                        color="primary" 
-                        className={classes.margin}
-                        onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} 
-                    >
-                        Deny
-                    </Button> */}
-                    <IconButton>
-                        <CheckCircle color='primary' onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} />
-                    </IconButton>
-                    <IconButton>
-                    <DeleteForeverIcon color='primary' onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} />
-                    </IconButton>
+                <TableCell>
+                    <Tooltip title="Add">
+                        <IconButton>
+                            <CheckCircle color='primary' className={classes.CircleCheck} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Delete">
+                        <IconButton>
+                        <DeleteForeverIcon color='primary' className={classes.DeleteForever} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} />
+                        </IconButton>
+                    </Tooltip>                    
                 </TableCell>
             </TableRow>
         );

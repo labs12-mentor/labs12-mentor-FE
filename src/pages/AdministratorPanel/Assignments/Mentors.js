@@ -14,6 +14,7 @@ import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -40,6 +41,9 @@ const styles = theme => ({
     },
     extendedIcon: {
         marginRight: theme.spacing.unit,
+    },
+    DeleteForever: {
+        fontSize: '30px',
     },
   });
   
@@ -121,19 +125,11 @@ class MentorAssignments extends React.Component {
                         <TableCell align="left">{match.mentor.email}</TableCell>
                         <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
                         <TableCell align="left">
-                            {/* <Button 
-                                variant="outlined" 
-                                size="small" 
-                                color="primary" 
-                                className={classes.margin}
-                                onClick={e => this.deleteMatch(e, match.id)}
-                            >
-                                Delete
-                            </Button> */}
-
-                            <IconButton>
-                                <DeleteForeverIcon color='primary' onClick={e => this.deleteMatch(e, match.id)} />
-                            </IconButton>
+                            <Tooltip title="Delete">
+                                <IconButton>
+                                    <DeleteForeverIcon color='primary' className={classes.DeleteForever} onClick={e => this.deleteMatch(e, match.id)} />
+                                </IconButton>                            
+                            </Tooltip>
                         </TableCell>
                         </TableRow>
                     ))}
