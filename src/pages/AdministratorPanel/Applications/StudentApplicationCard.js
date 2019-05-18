@@ -7,6 +7,9 @@ import { withStyles } from "@material-ui/core/styles";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CheckCircle from '@material-ui/icons/CheckCircle';
 
 import { createMatch } from '../../../actions';
 
@@ -63,9 +66,9 @@ class StudentApplicationCard extends React.Component {
         return (
 
             <TableRow >
-                <TableCell component="th" scope="row">
+                {/* <TableCell component="th" scope="row">
                 {mentee.id}
-                </TableCell>
+                </TableCell> */}
                 <TableCell align="left">{mentee.last_name}</TableCell>
                 <TableCell align="left">{mentee.first_name}</TableCell>
                 <TableCell align="left">{mentee.email}</TableCell>
@@ -77,7 +80,7 @@ class StudentApplicationCard extends React.Component {
                     })}
                 </TableCell>
                 <TableCell>                    
-                    <Button 
+                    {/* <Button 
                         variant="contained" 
                         size="small" 
                         color="primary" 
@@ -94,7 +97,13 @@ class StudentApplicationCard extends React.Component {
                         onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} 
                     >
                         Deny
-                    </Button>
+                    </Button> */}
+                    <IconButton>
+                        <CheckCircle color='primary' onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} />
+                    </IconButton>
+                    <IconButton>
+                    <DeleteForeverIcon color='primary' onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} />
+                    </IconButton>
                 </TableCell>
             </TableRow>
         );

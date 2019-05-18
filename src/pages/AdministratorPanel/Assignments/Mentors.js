@@ -11,10 +11,12 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import CheckCircle from '@material-ui/icons/CheckCircle';
 
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { deleteMatch } from '../../../actions';
@@ -101,7 +103,7 @@ class MentorAssignments extends React.Component {
                 <Table className={classes.table}>
                     <TableHead>
                     <TableRow>
-                        <TableCell>Mentor ID</TableCell>
+                        {/* <TableCell>Mentor ID</TableCell> */}
                         <TableCell align="left">Mentor Name</TableCell>
                         <TableCell align="left">Mentor Email</TableCell>
                         <TableCell align="left">Student Name</TableCell>
@@ -112,14 +114,14 @@ class MentorAssignments extends React.Component {
                     <TableBody>
                     {this.filterBySearch('mentor').map(match => (
                         <TableRow key={match.id}>
-                        <TableCell component="th" scope="row">
+                        {/* <TableCell component="th" scope="row">
                             {match.mentor.id}
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
                         <TableCell align="left">{match.mentor.email}</TableCell>
                         <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
                         <TableCell align="left">
-                            <Button 
+                            {/* <Button 
                                 variant="outlined" 
                                 size="small" 
                                 color="primary" 
@@ -127,7 +129,11 @@ class MentorAssignments extends React.Component {
                                 onClick={e => this.deleteMatch(e, match.id)}
                             >
                                 Delete
-                            </Button>
+                            </Button> */}
+
+                            <IconButton>
+                                <DeleteForeverIcon color='primary' onClick={e => this.deleteMatch(e, match.id)} />
+                            </IconButton>
                         </TableCell>
                         </TableRow>
                     ))}
