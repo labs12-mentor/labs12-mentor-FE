@@ -39,9 +39,9 @@ class OrganizationRegister extends React.Component {
       user_password: '',
       user_first_name: '',
       user_last_name: '',
-      checked: [1]
+      // checked: [1]
     };
-    this.handleToggle = this.handleToggle.bind(this);
+    // this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleInputs = (e) => {
@@ -53,34 +53,35 @@ class OrganizationRegister extends React.Component {
   };
 
   handleSubmit = (e) => {
+    console.log(this.state);
       e.preventDefault();
       this.props.registerOrganization(this.state);
   };
 
 
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  // handleToggle(value) {
+  //   const { checked } = this.state;
+  //   const currentIndex = checked.indexOf(value);
+  //   const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
 
-    this.setState({
-      checked: newChecked
-    });
-  }
+  //   this.setState({
+  //     checked: newChecked
+  //   });
+  // }
+
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
   render() {
     const { classes, ...rest } = this.props;
-    console.log(this.state.organization_name);
-    console.log(this.state.organization_description);
+    
     return (
       <div>
         {/* <Header
