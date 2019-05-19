@@ -1,5 +1,8 @@
 /* eslint-disable */
 import React from "react";
+import { connect } from "react-redux";
+import history from "../history";
+import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -41,13 +44,85 @@ import marc from "../assets/img/faces/marc.jpg";
 import kendall from "../assets/img/faces/kendall.jpg";
 import cardProfile2Square from "../assets/img/faces/card-profile2-square.jpg";
 
+import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
+import MeetingsList from "../components/MeetingsComponents/MeetingsList";
+import UserProfileForm from "../components/UserComponents/UserProfileForm";
+import MaterialSideBar from "../components/MaterialSideBar";
+import MentorsList from "../components/MentorComponents/MentorsList.js";
+
+
+import { getCurrentUser } from "../actions/auth";
+import { createMentee, getMentees, getMatches } from "../actions";
+
 import profilePageStyle from "../assets/jss/material-kit-pro-react/views/profilePageStyle.jsx";
 
-class ProfilePage extends React.Component {
-  componentDidMount() {
+class UserProfile extends React.Component {
+    constructor(props) {
+      super(props);     
+      this.state = {
+        isLoaded: false,
+        applied: false,
+        user: [],
+        menteed: [],
+        matches: [],
+        wanted_mentor: [],
+        value: 0
+      };
+    }
+
+
+
+    async componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+
+    await this.props.getCurrentUser();
+    await this.props.getMentees();
+    await this.props.getMatches();
+    await this.setState({
+      user: this.props.user,
+      menteed: this.props.mentees,
+      matches: this.props.matches
+    });
+    let matched = await this.state.menteed.filter(id => {
+      return id.user_id === this.state.user.id;
+    });
+    await this.setState({ ...this.state, wanted_mentor: matched[0] });
+
+    if (this.state.wanted_mentor !== undefined) {
+      await this.setState({
+        ...this.state,
+        isLoaded: true,
+        applied: true
+      });
+    } else {
+      await this.setState({
+        ...this.state,
+        isLoaded: true
+      });
+    }
   }
+
+  toggleApply() {
+    this.setState({ ...this.state, applied: true });
+  }
+
+  changeHandler = e => {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  toForm = e => {
+    e.preventDefault();
+    history.push("/user/mentorform");
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
     const { classes, ...rest } = this.props;
     const imageClasses = classNames(
@@ -56,6 +131,7 @@ class ProfilePage extends React.Component {
       classes.imgFluid
     );
     const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+
     return (
       <div>
         <Parallax
@@ -119,7 +195,7 @@ class ProfilePage extends React.Component {
                 </div>
               </GridItem>
             </GridContainer>
-            <div
+            {/* <div
               className={classNames(classes.description, classes.textCenter)}
             >
               <p>
@@ -128,7 +204,7 @@ class ProfilePage extends React.Component {
                 and records all of his own music, giving it a warm, intimate
                 feel with a solid groove structure.{" "}
               </p>
-            </div>
+            </div> */}
             <div className={classes.profileTabs}>
               <NavPills
                 alignCenter
@@ -289,7 +365,7 @@ class ProfilePage extends React.Component {
                     )
                   },
                   {
-                    tabButton: "Work",
+                    tabButton: "Meetings",
                     tabIcon: Palette,
                     tabContent: (
                       <GridContainer>
@@ -443,7 +519,7 @@ class ProfilePage extends React.Component {
                     )
                   },
                   {
-                    tabButton: "Connections",
+                    tabButton: "Mentors",
                     tabIcon: People,
                     tabContent: (
                       <div>
@@ -613,7 +689,7 @@ class ProfilePage extends React.Component {
                     )
                   },
                   {
-                    tabButton: "Media",
+                    tabButton: "User Update",
                     tabIcon: Camera,
                     tabContent: (
                       <GridContainer justify="center">
@@ -660,4 +736,28 @@ class ProfilePage extends React.Component {
   }
 }
 
-export default withStyles(profilePageStyle)(ProfilePage);
+UserProfile.propTypes = {
+  user: PropTypes.object.isRequired,
+  mentees: PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.currentUser,
+    mentees: state.mentees.mentees,
+    matches: state.matches.matches
+  };
+};
+
+const mapDispatchToProps = {
+  getCurrentUser,
+  createMentee,
+  getMentees,
+  getMatches
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(profilePageStyle)(UserProfile));
