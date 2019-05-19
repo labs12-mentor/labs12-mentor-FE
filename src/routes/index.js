@@ -27,6 +27,7 @@ import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
+import LandingPage from '../pages/LandingPage/LandingPage';
 
 import styled from 'styled-components';
 
@@ -41,7 +42,7 @@ const Routes = (props) => {
         <Router history={props.history}>
             <MaterialNavbar />
             <AppCont>
-            <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
+            <Route exact path='/' component={RouteNoAuthNeeded(LandingPage)} />
             <Route
                 exact
                 path='/organization/register'

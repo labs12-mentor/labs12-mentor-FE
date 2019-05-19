@@ -3,7 +3,7 @@ import {
   mrAuto,
   mlAuto,
   grayColor
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../../material-kit-pro-react.jsx";
 
 const workStyle = {
   mrAuto,
