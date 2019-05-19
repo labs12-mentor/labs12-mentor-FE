@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
-import CustomTable from "./CustomTable.js";
+//import CustomTable from "./CustomTable.js";
 
 const styles = theme => ({
   root: {
@@ -41,7 +41,6 @@ const UserGrid = props => {
       </Typography>
         </Paper>
       </Grid>
-      <CustomTable/>
       </Grid>
     </div>
   );

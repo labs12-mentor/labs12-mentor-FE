@@ -56,9 +56,9 @@ class SectionTeam extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={7} md={7}>
                     <CardBody plain>
-                      <h4 className={classes.cardTitle}>Alec Thompson</h4>
+                      <h4 className={classes.cardTitle}>CJ Wright</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>FOUNDER</h6>
+                        <h6 className={classes.cardCategory}>Program Manager</h6>
                       </Muted>
                       <p className={classes.description}>
                         Don't be scared of the truth because we need to restart
@@ -99,15 +99,14 @@ class SectionTeam extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={7} md={7}>
                     <CardBody plain>
-                      <h4 className={classes.cardTitle}>Kendall Andrew</h4>
+                      <h4 className={classes.cardTitle}>Jordan Spell</h4>
                       <Muted>
                         <h6 className={classes.cardCategory}>
-                          GRAPHIC DESIGNER
+                          WEB DEVELOPER
                         </h6>
                       </Muted>
                       <p className={classes.description}>
-                        Don't be scared of the truth because we need to restart
-                        the human foundation in truth...
+                        Be Happy, Don't Worry
                       </p>
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
@@ -147,13 +146,12 @@ class SectionTeam extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={7} md={7}>
                     <CardBody plain>
-                      <h4 className={classes.cardTitle}>Gina Andrew</h4>
+                      <h4 className={classes.cardTitle}>Jor Ming Poon</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>WEB DESIGNER</h6>
+                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
                       </Muted>
                       <p className={classes.description}>
-                        I love you like Kanye loves Kanye. Don't be scared of
-                        the truth.
+                        Be You
                       </p>
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
@@ -190,13 +188,96 @@ class SectionTeam extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={7} md={7}>
                     <CardBody plain>
-                      <h4 className={classes.cardTitle}>George West</h4>
+                      <h4 className={classes.cardTitle}>Lukas Siatkas</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>BACKEND HACKER</h6>
+                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
                       </Muted>
                       <p className={classes.description}>
-                        I love you like Kanye loves Kanye. Don't be scared of
-                        the truth.
+                        Be LUKAS
+                      </p>
+                    </CardBody>
+                    <CardFooter plain className={classes.justifyContentCenter}>
+                      <Button justIcon simple color="linkedin">
+                        <i className="fab fa-linkedin-in" />
+                      </Button>
+                      <Button justIcon simple color="facebook">
+                        <i className="fab fa-facebook-square" />
+                      </Button>
+                      <Button justIcon simple color="google">
+                        <i className="fab fa-google" />
+                      </Button>
+                    </CardFooter>
+                  </GridItem>
+                </GridContainer>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={6}>
+              <Card profile plain className={classes.card3}>
+                <GridContainer>
+                  <GridItem xs={12} sm={5} md={5}>
+                    <CardHeader image plain>
+                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                        <img src={cardProfile2Square} alt="..." />
+                      </a>
+                      <div
+                        className={classes.coloredShadow}
+                        style={{
+                          backgroundImage: `url(${cardProfile2Square})`,
+                          opacity: "1"
+                        }}
+                      />
+                    </CardHeader>
+                  </GridItem>
+                  <GridItem xs={12} sm={7} md={7}>
+                    <CardBody plain>
+                      <h4 className={classes.cardTitle}>Kathryn Hampton</h4>
+                      <Muted>
+                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
+                      </Muted>
+                      <p className={classes.description}>
+                        Be Awesome
+                      </p>
+                    </CardBody>
+                    <CardFooter plain className={classes.justifyContentCenter}>
+                      <Button justIcon simple color="linkedin">
+                        <i className="fab fa-linkedin-in" />
+                      </Button>
+                      <Button justIcon simple color="facebook">
+                        <i className="fab fa-facebook-square" />
+                      </Button>
+                      <Button justIcon simple color="google">
+                        <i className="fab fa-google" />
+                      </Button>
+                    </CardFooter>
+                  </GridItem>
+                </GridContainer>
+              </Card>
+            </GridItem>
+            <GridItem xs={12} sm={6} md={6}>
+              <Card profile plain className={classes.card3}>
+                <GridContainer>
+                  <GridItem xs={12} sm={5} md={5}>
+                    <CardHeader image plain>
+                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                        <img src={cardProfile2Square} alt="..." />
+                      </a>
+                      <div
+                        className={classes.coloredShadow}
+                        style={{
+                          backgroundImage: `url(${cardProfile2Square})`,
+                          opacity: "1"
+                        }}
+                      />
+                    </CardHeader>
+                  </GridItem>
+                  <GridItem xs={12} sm={7} md={7}>
+                    <CardBody plain>
+                      <h4 className={classes.cardTitle}>Thomas Folbrecht</h4>
+                      <Muted>
+                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
+                      </Muted>
+                      <p className={classes.description}>
+                        Be Cool
                       </p>
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
