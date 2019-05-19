@@ -34,8 +34,8 @@ class SectionProduct extends React.Component {
           <GridContainer>
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
-                title="Free Chat"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+                title="Create an Organization"
+                description="Using Profiles and Machine learning to assist your match mentors and mentees based on interests, skills, and location. Helping you manage your mentorship program."
                 icon={Chat}
                 iconColor="info"
                 vertical
@@ -43,8 +43,8 @@ class SectionProduct extends React.Component {
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
-                title="Verified Users"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+                title="Support and tools"
+                description="Create meetings with an interactive calendar, add notes, Zoom links, record them as complete."
                 icon={VerifiedUser}
                 iconColor="success"
                 vertical
@@ -52,8 +52,8 @@ class SectionProduct extends React.Component {
             </GridItem>
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
-                title="Fingerprint"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
+                title="Mentors/ Mentee Profiles"
+                description="Profiles that allow users to showcase skills and interests."
                 icon={Fingerprint}
                 iconColor="danger"
                 vertical
