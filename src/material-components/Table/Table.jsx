@@ -10,7 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import style from "assets/jss/material-kit-pro-react/components/tableStyle.jsx";
+import style from "../../assets/jss/material-kit-pro-react/components/tableStyle.jsx";
 
 function CustomTable({ ...props }) {
   const {
@@ -29,7 +29,7 @@ function CustomTable({ ...props }) {
     customHeadClassesForCells
   } = props;
   return (
-    <div className={classes.tableResponsive}>
+    <div className={classes.tableResponsive} style={{ width: '100%' }}>
       <Table className={classes.table}>
         {tableHead !== undefined ? (
           <TableHead className={classes[tableHeaderColor]}>

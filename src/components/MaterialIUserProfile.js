@@ -220,8 +220,8 @@ class UserProfile extends React.Component {
                           className={classes.gridItem}
                         >
                           <h4 className={classes.title}>Latest Collections</h4>
-                          <GridContainer className={classes.collections}>
-                            <ExperienceList userId={this.state.user.id} />
+                          <GridContainer className={classes.collections} style={{ width: '100%' }}>
+                            <ExperienceList style={{ width: '100%' }} userId={this.state.user.id} />
                           </GridContainer>
                                                   
                         </GridItem>
