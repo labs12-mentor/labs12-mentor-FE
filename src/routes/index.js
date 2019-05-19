@@ -28,6 +28,7 @@ import MentorProfile from '../components/MentorComponents/MentorProfile';
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
+import newProfile from '../components/MaterialIUserProfile';
 
 import styled from 'styled-components';
 
@@ -48,6 +49,7 @@ const Routes = (props) => {
                 path='/organization/register'
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
+            <Route exact path='/newProfile' component={newProfile} />
             <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
