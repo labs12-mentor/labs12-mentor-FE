@@ -70,8 +70,6 @@ class UserProfile extends React.Component {
       };
     }
 
-
-
     async componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
@@ -215,119 +213,14 @@ class UserProfile extends React.Component {
                     tabIcon: Palette,
                     tabContent: (
                       <GridContainer>
-                        <GridItem
-                          xs={12}
-                          sm={12}
-                          md={7}
-                          className={classes.gridItem}
-                        >
-                          <h4 className={classes.title}>Latest Collections</h4>
-                          <GridContainer className={classes.collections}>
-                            <GridItem xs={12} sm={12} md={6}>
-                              <Card
-                                background
-                                style={{
-                                  backgroundImage:
-                                    "url(" + mariyaGeorgieva + ")"
-                                }}
-                              >
-                                <a href="#pablo" />
-                                <CardBody
-                                  background
-                                  className={classes.cardBody}
-                                >
-                                  <Badge
-                                    color="warning"
-                                    className={classes.badge}
-                                  >
-                                    Spring 2016
-                                  </Badge>
-                                  <a href="#pablo">
-                                    <h2 className={classes.cardTitleWhite}>
-                                      Stilleto
-                                    </h2>
-                                  </a>
-                                </CardBody>
-                              </Card>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={6}>
-                              <Card
-                                background
-                                style={{
-                                  backgroundImage: "url(" + clemOnojeghuo + ")"
-                                }}
-                              >
-                                <a href="#pablo" />
-                                <CardBody
-                                  background
-                                  className={classes.cardBody}
-                                >
-                                  <Badge color="info" className={classes.badge}>
-                                    Spring 2016
-                                  </Badge>
-                                  <a href="#pablo">
-                                    <h2 className={classes.cardTitleWhite}>
-                                      High Heels
-                                    </h2>
-                                  </a>
-                                </CardBody>
-                              </Card>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={6}>
-                              <Card
-                                background
-                                style={{
-                                  backgroundImage: "url(" + oluEletu + ")"
-                                }}
-                              >
-                                <a href="#pablo" />
-                                <CardBody
-                                  background
-                                  className={classes.cardBody}
-                                >
-                                  <Badge
-                                    color="danger"
-                                    className={classes.badge}
-                                  >
-                                    Summer 2016
-                                  </Badge>
-                                  <a href="#pablo">
-                                    <h2 className={classes.cardTitleWhite}>
-                                      Flats
-                                    </h2>
-                                  </a>
-                                </CardBody>
-                              </Card>
-                            </GridItem>
-                            <GridItem xs={12} sm={12} md={6}>
-                              <Card
-                                background
-                                style={{
-                                  backgroundImage:
-                                    "url(" + darrenColeshill + ")"
-                                }}
-                              >
-                                <a href="#pablo" />
-                                <CardBody
-                                  background
-                                  className={classes.cardBody}
-                                >
-                                  <Badge
-                                    color="success"
-                                    className={classes.badge}
-                                  >
-                                    Winter 2016
-                                  </Badge>
-                                  <a href="#pablo">
-                                    <h2 className={classes.cardTitleWhite}>
-                                      Men's Sneakers
-                                    </h2>
-                                  </a>
-                                </CardBody>
-                              </Card>
-                            </GridItem>
-                          </GridContainer>
-                        </GridItem>
+                          <GridItem
+                            xs={12}
+                            sm={12}
+                            md={7}
+                            className={classes.gridItem}
+                          >
+                            <ExperienceList userId={this.state.user.id} />
+                          </GridItem>
                         <GridItem
                           xs={12}
                           sm={12}
@@ -736,11 +629,11 @@ class UserProfile extends React.Component {
   }
 }
 
-UserProfile.propTypes = {
-  user: PropTypes.object.isRequired,
-  mentees: PropTypes.array.isRequired,
-  classes: PropTypes.object.isRequired
-};
+// UserProfile.propTypes = {
+//   user: PropTypes.object.isRequired,
+//   mentees: PropTypes.array.isRequired,
+//   classes: PropTypes.object.isRequired
+// };
 
 const mapStateToProps = state => {
   return {
