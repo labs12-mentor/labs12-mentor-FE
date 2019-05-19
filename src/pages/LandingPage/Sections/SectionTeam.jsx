@@ -58,7 +58,7 @@ class SectionTeam extends React.Component {
                     <CardBody plain>
                       <h4 className={classes.cardTitle}>CJ Wright</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>Program Manager</h6>
+                        <h6 className={classes.cardCategory}>PROGRAM MANAGER</h6>
                       </Muted>
                       <p className={classes.description}>
                         Don't be scared of the truth because we need to restart
