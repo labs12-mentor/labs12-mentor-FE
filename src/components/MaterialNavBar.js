@@ -2,6 +2,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions';
+import NotificationButton from '../pages/NotificationButton';
 
 import { theme } from '../themes.js';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -24,9 +25,14 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+
 const styles = theme => ({
   root: {
     width: '100%',
+    position: 'fixed',
+    zIndex: 1,
+    top: 0,
+    marginBottom: 30,
   },
   grow: {
     flexGrow: 1,
@@ -92,9 +98,15 @@ const styles = theme => ({
       display: 'none',
     },
   },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  input: {
+    display: 'none',
+  },
 });
 
-class PrimarySearchAppBar extends React.Component {
+class MaterialNavbar extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
@@ -131,43 +143,53 @@ class PrimarySearchAppBar extends React.Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+        <MenuItem component={RouterLink} to="/user/profile" onClick={this.handleMenuClose}>Profile</MenuItem>
+        <MenuItem component={RouterLink} to="/organization" onClick={this.handleMenuClose}>Organization</MenuItem>
+        <MenuItem component={RouterLink} to="/" onClick={()=> {this.props.logoutUser(); this.handleMenuClose()}}>Logout</MenuItem>
       </Menu>
     );
 
-    const renderMobileMenu = (
-      <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-        open={isMobileMenuOpen}
-        onClose={this.handleMenuClose}
-      >
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <p>Messages</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <p>Notifications</p>
-        </MenuItem>
-        <MenuItem onClick={this.handleProfileMenuOpen}>
-          <IconButton color="inherit">
-            <AccountCircle />
-          </IconButton>
-          <p>Profile</p>
-        </MenuItem>
-      </Menu>
-    );
+    const renderMobileMenu = () => {
+      if(!this.props.authenticated){
+        return(
+          <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={this.handleMenuClose}>
+            <MenuItem component={RouterLink} to='/user/login' onClick={this.handleMobileMenuClose}>
+              <p>Login</p>
+            </MenuItem>
+            <MenuItem component={RouterLink} to='/organization/register' onClick={this.handleMobileMenuClose}>
+              <p>Register Org</p>
+            </MenuItem>
+          </Menu> 
+        )}
+      
+        else { 
+          return(
+          <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            onClose={this.handleMenuClose}>
+              <MenuItem onClick={this.handleMobileMenuClose}>
+                <IconButton component={RouterLink} to="/user/notifications" color="inherit">
+                  <NotificationButton />
+                </IconButton>
+                <p>Notifications</p>
+              </MenuItem>
+              <MenuItem onClick={this.handleProfileMenuOpen}>
+                <IconButton color="inherit">
+                  <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+              </MenuItem>
+          </Menu> )}
+
+    };
 
     const navlinksPublic = [
       {
@@ -179,16 +201,6 @@ class PrimarySearchAppBar extends React.Component {
         text: 'Register organization'
       }
     ];
-    const navlinksPrivate = [
-      {
-        linkTo: '/user/profile',
-        text: 'Profile'
-      },
-      {
-        linkTo: '/organization',
-        text: 'Organization'
-      }
-    ];
 
     return (
       <div className={classes.root}>
@@ -197,34 +209,25 @@ class PrimarySearchAppBar extends React.Component {
 
         <AppBar position="static" color="primary">
           <Toolbar>
-            {/*<IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-              <MenuIcon />
-    </IconButton>*/}
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               MentorMatch
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
 
-            {/*switch based on loggedin status*/}
             {!this.props.authenticated && 
               navlinksPublic.map((elem, i) => (
-                <Button key={i} component={RouterLink} to={elem.linkTo}>
+                <Button key={i} component={RouterLink} to={elem.linkTo} color="inherit">
                   {elem.text}
                 </Button>
               ))
             }
+            
             {this.props.authenticated && (
               <div>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="secondary">
-                    <MailIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton color="inherit">
-                  <Badge badgeContent={17} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
+                {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)}
+                <IconButton color="inherit" component={RouterLink} to="/user/notifications">
+                    <NotificationButton />
                 </IconButton>
                 <IconButton
                   aria-owns={isMenuOpen ? 'material-appbar' : undefined}
@@ -234,9 +237,7 @@ class PrimarySearchAppBar extends React.Component {
                 >
                   <AccountCircle />
                 </IconButton>
-                    <Button component={RouterLink} to="/" onClick={this.props.logoutUser} color="inherit">
-                  Logout
-                </Button>
+
               </div>
             )}
             </div>
@@ -250,13 +251,13 @@ class PrimarySearchAppBar extends React.Component {
         </MuiThemeProvider>
 
         {renderMenu}
-        {renderMobileMenu}
+        {renderMobileMenu()}
       </div>
     );
   }
 }
 
-PrimarySearchAppBar.propTypes = {
+MaterialNavbar.propTypes = {
   classes: PropTypes.object.isRequired,
   authenticated: PropTypes.bool.isRequired,
   logoutUser: PropTypes.func.isRequired
@@ -264,7 +265,8 @@ PrimarySearchAppBar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    authenticated: state.auth.token !== null
+    authenticated: state.auth.token !== null,
+    currentUser: state.auth.currentUser
   };
 };
 
@@ -275,4 +277,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(PrimarySearchAppBar));
+)(withStyles(styles)(MaterialNavbar));

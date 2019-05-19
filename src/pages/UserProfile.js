@@ -1,21 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Col,
-  Row,
-  Card,
-  CardBody,
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Button
-} from "reactstrap";
+import React from "react";
+import { Form, FormGroup, Label, Col, Row } from "reactstrap";
 import classnames from "classnames";
 import { connect } from "react-redux";
 import history from "../history";
@@ -23,23 +7,62 @@ import { getCurrentUser } from "../actions/auth";
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
 import UserProfileForm from "../components/UserComponents/UserProfileForm";
-import Sidebar from "../components/Sidebar";
+import MaterialSideBar from "../components/MaterialSideBar";
 import styled from "styled-components";
 import MentorsList from "../components/MentorComponents/MentorsList.js";
 import { createMentee, getMentees, getMatches } from "../actions";
-import MentorProfile from "../components/MentorComponents/MentorProfile";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import { theme } from '../themes.js';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  avatar: {
+    margin: 10
+  },
+  bigAvatar: {
+    margin: 10,
+    width: 60,
+    height: 60
+  },
+  applied: {
+    width: "100%"
+    //maxWidth: 500,
+  }
+};
 
 const ContainerDiv = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
 `;
 
 const ProfileContainer = styled.div`
-    width: 70%;
-    margin: auto;
+  width: 70%;
+  margin: auto;
 `;
 
 class UserProfile extends React.Component {
@@ -54,17 +77,18 @@ class UserProfile extends React.Component {
       user: [],
       menteed: [],
       matches: [],
-      wanted_mentor: []
+      wanted_mentor: [],
+      value: 0
     };
   }
 
-    toggle(tab) {
-        if (this.state.activeTab !== tab) {
-            this.setState({
-                activeTab: tab
-            });
-        }
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
     }
+  }
 
   async componentDidMount() {
     await this.props.getCurrentUser();
@@ -110,157 +134,133 @@ class UserProfile extends React.Component {
     history.push("/user/mentorform");
   };
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
+    const { classes } = this.props;
+    //console.log(this.state.user)
+    //const { value } = this.state;
+
     if (this.state.isLoaded === false) {
       return <h1>Loading</h1>;
     } else {
       return (
         <div>
-          <Nav tabs>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === "1" })}
-                onClick={() => {
-                  this.toggle("1");
-                }}
-              >
-                Profile Information
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === "2" })}
-                onClick={() => {
-                  this.toggle("2");
-                }}
-              >
-                Meetings
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === "3" })}
-                onClick={() => {
-                  this.toggle("3");
-                }}
-              >
-                Mentors
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className={classnames({ active: this.state.activeTab === "4" })}
-                onClick={() => {
-                  this.toggle("4");
-                }}
-              >
-                Update User
-              </NavLink>
-            </NavItem>
-          </Nav>
-          <TabContent activeTab={this.state.activeTab}>
-            <TabPane tabId="1">
-              <Row>
-                <Col sm="12">
-                  <ContainerDiv>
-                    <Sidebar />
-                    <ProfileContainer>
-                      <Form>
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup>
-                              <h3>First Name</h3>
-                              <Label for="lastName">
-                                {this.state.user.first_name}
-                              </Label>
-                            </FormGroup>
-                          </Col>
+          <MuiThemeProvider theme={theme}>
+          <AppBar position="static">
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+              centered
+            >
+              <Tab label="PROFILE" />
+              <Tab label="MEETINGS" />
+              <Tab label="MENTORS" />
+              <Tab label="USER UPDATE" />
+            </Tabs>
+          </AppBar>
 
-                          <Col md={6}>
-                            <FormGroup>
-                              <h3>Last Name</h3>
-                              <Label for="lastName">
-                                {this.state.user.last_name}
-                              </Label>
-                            </FormGroup>
-                          </Col>
-                        </Row>
+          {this.state.value === 0 && (
+            <TabContainer>
+              <ContainerDiv>
+                <MaterialSideBar />
+                <ProfileContainer>
+                  <Form>
+                    <Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>First Name</h3>
+                          <Label for="lastName">
+                            {this.state.user.first_name}
+                          </Label>
+                        </FormGroup>
+                      </Col>
 
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup>
-                              <h3>State</h3>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Last Name</h3>
+                          <Label for="lastName">
+                            {this.state.user.last_name}
+                          </Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
 
-                              <Label for="address">
-                                {this.state.user.state}
-                              </Label>
-                            </FormGroup>
-                          </Col>
+                    <Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>State</h3>
 
-                          <Col md={6}>
-                            <FormGroup>
-                              <h3>Street</h3>
+                          <Label for="address">{this.state.user.state}</Label>
+                        </FormGroup>
+                      </Col>
 
-                              <Label for="zipCode">
-                                {this.state.user.street}
-                              </Label>
-                            </FormGroup>
-                          </Col>
-                        </Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Street</h3>
 
-                        <Row>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label for="github">Github</Label>
-                              <Input
-                                type="text"
-                                name="github"
-                                id="github"
-                                value={this.state.github}
-                                onChange={this.changeHandler}
-                              />
-                            </FormGroup>
-                          </Col>
+                          <Label for="zipCode">{this.state.user.street}</Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
 
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label for="linkedIn">linkedIn</Label>
-                              <Input
-                                type="text"
-                                name="linkedIn"
-                                id="linkedIn"
-                                value={this.state.linkedIn}
-                                onChange={this.changeHandler}
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
+                    <Row>
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Git Hub</h3>
+                          <Label for="github">{this.state.user.gitHub}</Label>
+                        </FormGroup>
+                      </Col>
 
-                        <Card>
-                          <CardBody>
-                            <ExperienceList />
-                          </CardBody>
-                        </Card>
-                      </Form>
-                    </ProfileContainer>
-                  </ContainerDiv>
-                </Col>
-              </Row>
-            </TabPane>
-            <TabPane tabId="2">
+                      <Col md={6}>
+                        <FormGroup>
+                          <h3>Linkedin</h3>
+                          <Label for="linkedIn">
+                            {this.state.user.linkedin}
+                          </Label>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Card>
+                      <CardContent>
+                        <ExperienceList userId={this.state.user.id} />
+                      </CardContent>
+                    </Card>
+                  </Form>
+                </ProfileContainer>
+              </ContainerDiv>
+            </TabContainer>
+          )}
+          {this.state.value === 1 && (
+            <TabContainer>
               <MeetingsList />
-            </TabPane>
-            <TabPane tabId="3">
+            </TabContainer>
+          )}
+          {this.state.value === 2 && (
+            <TabContainer>
               {this.state.applied ? (
-                <h2>Applied</h2>
+                <Typography
+                  component="h2"
+                  variant="h3"
+                  align="center"
+                  color="primary"
+                >
+                  You have already applied to a mentor
+                </Typography>
               ) : (
                 <MentorsList userId={this.state.user.id} />
               )}
-            </TabPane>
-            <TabPane tabId="4">
+            </TabContainer>
+          )}
+          {this.state.value === 3 && (
+            <TabContainer>
               <UserProfileForm />
-            </TabPane>
-          </TabContent>
+            </TabContainer>
+          )}
+          </MuiThemeProvider>
         </div>
       );
     }
@@ -268,8 +268,9 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
-    user: PropTypes.object.isRequired,
-    mentees: PropTypes.array.isRequired
+  user: PropTypes.object.isRequired,
+  mentees: PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
@@ -290,4 +291,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(UserProfile);
+)(withStyles(styles)(UserProfile));

@@ -5,9 +5,39 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import NoSsr from '@material-ui/core/NoSsr';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+
 import MentorApplications from './MentorApplications';
 import MentorAssignment from './MentorAssignment';
 import ProfileForms from './ProfileForms';
+
+function TabContainer(props) {
+    return (
+        <Typography component="div" style={{ padding: 8 * 3 }}>
+        {props.children}
+        </Typography>
+    );
+}
+
+TabContainer.propTypes = {
+    children: PropTypes.node.isRequired,
+};
+
+function LinkTab(props) {
+    return <Tab component="a" onClick={event => event.preventDefault()} {...props} />;
+}
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+    },
+});
 
 class AdminPanel extends React.Component {
     constructor(props) {
@@ -19,7 +49,8 @@ class AdminPanel extends React.Component {
             mentees: [],
             mentors: [],
             menteeUserInfo: [],
-            mentorUserInfo: []
+            mentorUserInfo: [],
+            value: 0
         };
     }
 
@@ -48,6 +79,10 @@ class AdminPanel extends React.Component {
             });
         }
     };
+
+    handleChange = (event, value) => {
+        this.setState({ value });
+      };
 
     filterMentees = () => {
         this.state.users.filter((user) => {
@@ -78,36 +113,52 @@ class AdminPanel extends React.Component {
         return this.state.mentorUserInfo;
     };
 
-    filterMatchedUsers() {
+    render() {
         const matchedUsers = [];
-        this.state.matches.forEach((match) => {
-            let userMatchInfo = {
-                mentor: {},
-                mentee: {},
-                id: match.id,
-                status: 'undecided'
-            };
-            this.state.users.forEach((user) => {
-                if (user.id === match.mentor_id) {
-                    userMatchInfo.mentor = user;
-                    userMatchInfo.mentee = user; //delete according to below
-                    matchedUsers.push(userMatchInfo);
+        this.state.matches.forEach(match => {
+            if(match.deleted === false){
+                let userMatchInfo = {
+                    mentor: {},
+                    mentee: {},
+                    id: match.id,
+                    status: "undecided"
                 }
-                //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
-                // else if(user.id === match.mentee_id){
-                //     userMatchInfo.mentee = user;
-                //     matchedUsers.push(userMatchInfo);
-                // }
-            });
+                this.state.users.forEach(user => {
+                    if(user.id === match.mentor_id){
+                        userMatchInfo.mentor = user;
+                        userMatchInfo.mentee = user;//delete according to below
+                        matchedUsers.push(userMatchInfo);
+                    } 
+                    //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
+                    // else if(user.id === match.mentee_id){
+                    //     userMatchInfo.mentee = user;
+                    //     matchedUsers.push(userMatchInfo);
+                    // }
+                });
+            }
         });
 
-        return matchedUsers;
-    }
-
-    render() {
+        const { classes } = this.props;
+        const { value } = this.state;
+        
         return (
             <div className='AdminPanel'>
                 <h1> Administrator Panel </h1>
+
+                <NoSsr>
+                    <div className={classes.root}>
+                        <AppBar position="static">
+                        <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
+                            <LinkTab label="Applications" href="page1" />
+                            <LinkTab label="Match Assignments" href="page2" />
+                            <LinkTab label="Profile Forms" href="page3" />
+                        </Tabs>
+                        </AppBar>
+                        {value === 0 && <TabContainer>Page One</TabContainer>}
+                        {value === 1 && <TabContainer>Page Two</TabContainer>}
+                        {value === 2 && <TabContainer>Page Three</TabContainer>}
+                    </div>
+                </NoSsr>
 
                 <Nav tabs>
                     <NavItem>
@@ -153,8 +204,8 @@ class AdminPanel extends React.Component {
                         />
                     </TabPane>
                     <TabPane tabId='2'>
-                        <MentorAssignment
-                            matchedUsers={this.filterMatchedUsers()}
+                        <MentorAssignment 
+                            matchedUsers={matchedUsers} 
                             users={this.state.users}
                             matches={this.state.matches}
                         />
@@ -176,6 +227,7 @@ AdminPanel.propTypes = {
     mentors: PropTypes.array.isRequired
 };
 
+
 const mapStateToProps = (state) => {
     return {
         users: state.users.users,
@@ -195,4 +247,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AdminPanel);
+)(withStyles(styles)(AdminPanel));

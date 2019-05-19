@@ -8,40 +8,52 @@ import OrganizationRegister from '../pages/OrganizationRegister';
 import OrganizationDetails from '../pages/OrganizationDetails';
 import UserRegister from '../pages/UserRegistration';
 import UserLogin from '../pages/UserLogin';
+import SignIn from '../pages/MaterialLogIn';
 import Notifications from '../pages/NotificationsView';
 import AdminPanel from '../pages/AdminPanel/AdminPanel';
+import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdminPanel/Application/Application';
 import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
-import Navbar from '../components/Navbar';
 import RegDetails from '../pages/RegistrationDetails';
 import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
-import PrimarySearchAppBar from '../components/MaterialNavBar';
+import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
+
+import newRegister from '../components/MaterialSignUp';
+
+import styled from 'styled-components';
+
+const AppCont = styled.div`
+    margin: 80px auto;
+    width: 80%;
+
+`;
 
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-            <PrimarySearchAppBar />
-            <Navbar />
-
+            <MaterialNavbar />
+            <AppCont>
             <Route exact path='/' component={RouteNoAuthNeeded(HomePage)} />
             <Route
                 exact
                 path='/organization/register'
-                component={RouteNoAuthNeeded(OrganizationRegister)}
+                component={RouteNoAuthNeeded(newRegister)}
             />
+            <Route exact path='/newRegister' component={newRegister} />
             <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
-            <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
+            <Route exact path='/user/login' component={RouteNoAuthNeeded(SignIn)} />
             <Route exact path='/user/profile' component={RouteAuthNeeded(UserProfile)} />
             <Route exact path='/user/notifications' component={RouteAuthNeeded(Notifications)} />
             <Route exact path='/user/admin/profile' component={RouteAuthNeeded(AdminPanel)} />
+            <Route exact path='/user/admin/panel' component={RouteAuthNeeded(AdministratorPanel)} />
             <Route
                 exact
                 path='/user/admin/mentorapplication/:id'
@@ -61,6 +73,7 @@ const Routes = (props) => {
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
+            </AppCont>
         </Router>
     );
 };
