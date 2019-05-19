@@ -38,6 +38,9 @@ const styles = theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
     },
+    primaryText: {
+        color: 'white'
+    }
 });
 
 class AdminPanel extends React.Component {
@@ -145,7 +148,7 @@ class AdminPanel extends React.Component {
                     <MuiThemeProvider theme={theme}>
 
                     <AppBar position="static">
-                    <Tabs variant="fullWidth" value={value} onChange={this.handleChange}>
+                    <Tabs variant="fullWidth" value={value} onChange={this.handleChange} style={styles.primaryText} >
                         <Tab label="Applications" />
                         <Tab label="Match Assignments" />
                         <Tab label="Profile Forms" />

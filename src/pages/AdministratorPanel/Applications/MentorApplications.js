@@ -107,7 +107,7 @@ class MentorApplications extends React.Component {
                 <Table className={classes.table}>
                     <TableHead>
                     <TableRow>
-                        <TableCell>Mentor ID</TableCell>
+                        {/* <TableCell>Mentor ID</TableCell> */}
                         <TableCell align="left">Last Name</TableCell>
                         <TableCell align="left">First Name</TableCell>
                         <TableCell align="left">Email</TableCell>

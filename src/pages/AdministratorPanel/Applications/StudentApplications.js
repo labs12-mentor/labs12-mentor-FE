@@ -125,7 +125,7 @@ class StudentApplications extends React.Component {
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                        <TableCell>Mentee ID</TableCell>
+                            {/* <TableCell>Mentee ID</TableCell> */}
                             <TableCell align="left">Last Name</TableCell>
                             <TableCell align="left">First Name</TableCell>
                             <TableCell align="left">Email</TableCell>
