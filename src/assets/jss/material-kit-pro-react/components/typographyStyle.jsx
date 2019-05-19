@@ -7,7 +7,7 @@ import {
   dangerColor,
   roseColor,
   grayColor
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../material-kit-pro-react.jsx";
 
 const typographyStyle = {
   defaultFontStyle: {
