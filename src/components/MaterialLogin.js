@@ -22,6 +22,7 @@ import { FormGroup } from '@material-ui/core';
 import loginPageStyle from "../assets/jss/material-kit-pro-react/views/loginPageStyle.jsx";
 import image from "../assets/img/bg7.jpg";
 
+import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
 import { API_URL_HOME } from '../constants/config';
 import { loginUser } from '../actions';
@@ -51,6 +52,7 @@ class UserLogin extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log(this.state);
         this.props.loginUser(this.state);
     };
 
@@ -83,7 +85,7 @@ class UserLogin extends React.Component {
                       className={classes.cardHeader}
                     >
                       <h4 className={classes.cardTitle}>Login</h4>
-                      <div className={classes.socialLine}>
+                      <div className={classes.socialLine}>                        
                         <Button
                           justIcon
                           color="transparent"
@@ -105,11 +107,11 @@ class UserLogin extends React.Component {
                                     <InputLabel htmlFor='user_email'><EmailIcon />  Email</InputLabel>
                                     <Input
                                         type='email'
-                                        name='user_email'
+                                        name="email"
                                         id='user_email'
                                         placeholder='Enter the user email'
                                         value={this.user_email}
-                                        onChange={this.handleInputs}
+                                        onChange={this.changeHandler}
                                     />
                                 </FormControl>
                             </FormGroup>
@@ -119,21 +121,28 @@ class UserLogin extends React.Component {
                                     <InputLabel htmlFor='user_password'><PasswordIcon /> Password</InputLabel>
                                     <Input
                                         type='password'
-                                        name='user_password'
+                                        name="password"
                                         id='user_password'
                                         placeholder='Enter the user password'
                                         value={this.user_password}
-                                        onChange={this.handleInputs}
+                                        onChange={this.changeHandler}
                                     />
                                 </FormControl>
                             </FormGroup>
                     </CardBody>
                     <div className={classes.textCenter}>
-                      <Button simple color="info" size="lg" className={classes.submitButton} >
+                      <Button 
+                        simple 
+                        color="info" 
+                        size="lg" 
+                        className={classes.submitButton}
+                        onClick={this.handleSubmit}
+                    >
                         Get started
                       </Button>
                     </div>
                   </form>
+                  <OAuthContainer provider={provider} socket={socket} />
                 </Card>
               </GridItem>
             </GridContainer>
@@ -144,7 +153,9 @@ class UserLogin extends React.Component {
   }
 }
 
-UserLogin.propTypes = {};
+UserLogin.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => {
     return {};
