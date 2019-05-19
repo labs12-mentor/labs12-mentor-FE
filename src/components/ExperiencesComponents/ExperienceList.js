@@ -64,12 +64,11 @@ class ExperienceList extends React.Component {
     const { classes } = this.props;
 
     const nonDeleted = this.props.experiences.filter(experience => {
-      return experience.deleted === false;
+      return experience.deleted === false && this.props.userId === experience.user_id;
     });
+    console.log(nonDeleted);
     return (
       <Card>
-        
-        <h1>Experiences</h1>
         <Button
           variant="contained"
           color="primary"
