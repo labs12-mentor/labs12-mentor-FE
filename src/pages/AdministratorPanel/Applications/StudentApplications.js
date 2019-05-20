@@ -108,7 +108,7 @@ class StudentApplications extends React.Component {
                 mentee_id: menteeId,
                 deleted: false,
             });
-        } else if(status === "deny") {
+        } else if(status === "denied") {
             this.props.deleteMentee(menteeId);
         }
     }
@@ -130,11 +130,12 @@ class StudentApplications extends React.Component {
         let menteeApplications = [];
         this.filterBySearch("mentee").forEach(mentee => {
             this.state.mentors.forEach(mentor => {
-                if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
+                if(!mentee.deleted && mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
                     menteeApplications.push(mentee);
                 }
             });
         });
+        console.log(menteeApplications);
 
         return (
             <Paper className={classes.root}>

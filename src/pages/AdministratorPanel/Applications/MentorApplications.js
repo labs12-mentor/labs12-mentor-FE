@@ -99,11 +99,12 @@ class MentorApplications extends React.Component {
         })[0];
         
         if(status === "approved"){
+            clickedUser.role = "MENTOR";
+            
             this.props.updateUser(
                 clickedUser.id, 
                 {
-                    ...clickedUser, 
-                    role: "MENTOR"
+                    ...clickedUser
                 }
             );
         } else if(status === "denied") {

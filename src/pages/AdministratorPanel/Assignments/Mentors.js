@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
+import { updateUser } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // material-ui icons
@@ -53,7 +54,7 @@ const styles = theme => ({
 
 class MentorAssignments extends React.Component {
     state = {
-        searchBarContents: ''
+        searchBarContents: '',
     }
 
     routeToAssignments(id) {
@@ -86,19 +87,24 @@ class MentorAssignments extends React.Component {
         return filteredMentees;
     };
 
+    clickHandler = (e, mentor) => {
+        e.preventDefault();
+        const clickedUser = this.props.users.filter(user => {
+            return user.id == mentor.id;
+        })[0];
+
+        clickedUser.role = "MENTEE";
+        
+        this.props.updateUser(
+            clickedUser.id, 
+            {
+                ...clickedUser
+            }
+        );
+    }
+
     render() {
         const { classes } = this.props;
-        const fillButtons = [
-            { color: "info", icon: Person },
-            { color: "success", icon: Edit },
-            { color: "danger", icon: Close }
-          ].map((prop, key) => {
-            return (
-              <Button justIcon size="sm" color={prop.color} key={key}>
-                <prop.icon />
-              </Button>
-            );
-          });
         
           const approvedMentors = this.props.users.filter(user => {
               return user.role === "MENTOR"
@@ -132,12 +138,7 @@ class MentorAssignments extends React.Component {
                     tableData={approvedMentors.map((mentor, index)=> {
                         return (
                             [
-                                <IconButton 
-                                    style={{color: 'black'}} 
-                                    className={classes.iconButton}
-                                > 
-                                    <LinkIcon /> 
-                                </IconButton>, 
+                                ' ', 
                                 mentor.last_name, 
                                 mentor.first_name, 
                                 mentor.email,                                  
@@ -145,7 +146,7 @@ class MentorAssignments extends React.Component {
                                     <Button justIcon size="sm" color={"info"} >
                                         <Person />
                                     </Button>,
-                                    <Button justIcon size="sm" color={"danger"} >
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentor)}>
                                         <Close />
                                     </Button>
                                 ]
@@ -193,4 +194,4 @@ class MentorAssignments extends React.Component {
 //     matchedUsers: PropTypes.array.isRequired
 // };
 
-export default connect(null, { deleteMatch })(withStyles(styles)(MentorAssignments));
+export default connect(null, { updateUser })(withStyles(styles)(MentorAssignments));

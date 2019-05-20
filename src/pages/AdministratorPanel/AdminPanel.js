@@ -190,6 +190,7 @@ class AdminPanel extends React.Component {
                     matchedUsers={matchedUsers} 
                     users={this.state.users}
                     matches={this.state.matches}
+                    mentors={this.filterMentors()}
                 />
             )
           },
