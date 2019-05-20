@@ -8,13 +8,13 @@ import {
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import ExperienceForm from './ExperienceForm';
+import ExperienceCard from './ExperienceCard'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 // @material-ui/icons
-import Edit from "@material-ui/icons/Edit";
-import Clear from "@material-ui/icons/Clear";
+
 // core components
 import Table from "../../material-components/Table/Table.jsx";
 import Button from "../../material-components/CustomButtons/Button.jsx";
@@ -85,13 +85,15 @@ class ExperienceList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-            <ExperienceForm canEdit={false} userId={this.props.userId} />
+            <ExperienceForm canEdit={false} userId={this.props.userId}
+            handleClose={this.handleClose}
+            />
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+          {/* <DialogActions>
+            <Button onClick={this.handleClose} color="warning">
               Cancel
             </Button>
-          </DialogActions>
+          </DialogActions> */}
         </Dialog>
 
         <Table
@@ -99,7 +101,10 @@ class ExperienceList extends React.Component {
             return ([
                 <p className={classes.cardTitle}>{experience.name}</p>,
                 <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button
+                <ExperienceCard
+                id={experience.id}
+                />
+                  {/* <Button
                     justIcon
                     color="info"
                     size="sm"
@@ -114,7 +119,7 @@ class ExperienceList extends React.Component {
                     style={{ marginLeft: 10 }}
                   >
                     <Clear style={{ fontSize: 40 }} />
-                  </Button>
+                  </Button> */}
                 </div>
             ])
           })}

@@ -1,4 +1,4 @@
-import { whiteColor, grayColor } from "assets/jss/material-kit-pro-react.jsx";
+import { whiteColor, grayColor } from "../../../assets/jss/material-kit-pro-react.jsx";
 
 const modalStyle = theme => ({
   modalRoot: {
@@ -7,7 +7,8 @@ const modalStyle = theme => ({
   },
   modal: {
     [theme.breakpoints.up("sm")]: {
-      maxWidth: "500px",
+      //500px
+      maxWidth: "700px",
       margin: "auto"
     },
     borderRadius: "6px",

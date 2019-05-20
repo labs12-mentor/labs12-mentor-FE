@@ -78,39 +78,39 @@ class MeetingsList extends React.Component {
 
     const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
-
     });
     return (
       <div>
-        <Button
-            variant="contained"
-            color="info"
-            onClick={this.handleClickOpen}
-          >
-            Create New Meeting
-          </Button>
+        <Button variant="contained" color="info" onClick={this.handleClickOpen}>
+          Create New Meeting
+        </Button>
 
-          <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
-            >
-              <DialogContent>
-                <MeetingsForm canEdit={false} />
-              </DialogContent>
-              <DialogActions>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogContent>
+            <MeetingsForm canEdit={false} handleClose={this.handleClose} />
+          </DialogContent>
+          {/* <DialogActions>
                 <Button onClick={this.handleClose} color="info">
                   Cancel
                 </Button>
-              </DialogActions>
-            </Dialog>
+              </DialogActions> */}
+        </Dialog>
 
-          <Table
-          tableData={nonDeleted.slice(1,7).map(meeting => {
-            return ([
-                <p className={classes.cardTitle}>{meeting.content}</p>,
-                <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button
+        <Table
+          // nonDeleted.slice(1,7).map backend logic
+          tableData={nonDeleted.slice(1, 7).map(meeting => {
+            return [
+              <p className={classes.cardTitle}>{meeting.content}</p>,
+              <div
+                className={classes.buttonGroup}
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <MeetingCard id={meeting.id} />
+                {/* <Button
                     justIcon
                     color="info"
                     size="sm"
@@ -125,11 +125,11 @@ class MeetingsList extends React.Component {
                     style={{ marginLeft: 10 }}
                   >
                     <Clear style={{ fontSize: 40 }} />
-                  </Button>
-                </div>
-            ])
+                  </Button> */}
+              </div>
+            ];
           })}
-        /> 
+        />
         {/* <h1>Your Meetings</h1>
         <ContainerDiv>
           <MeetingContainer>

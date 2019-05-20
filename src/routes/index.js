@@ -32,7 +32,11 @@ import UserProfile from '../components/MaterialIUserProfile';
 import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
+
 import materialtable from '../pages/AdministratorPanel/MaterialTable';
+
+import UserModal from '../components/UserComponents/UserModal'
+
 
 import styled from 'styled-components';
 
@@ -53,7 +57,7 @@ const Routes = (props) => {
                 path='/organization/register'
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
-            <Route exact path='/table' component={materialtable} />
+            {/* <Route exact path="/guide" component={UserModal}/> */}
             <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
