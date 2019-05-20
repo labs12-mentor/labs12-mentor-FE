@@ -38,20 +38,10 @@ import NavBar from '../components/newNav';
 
 import UserModal from '../components/UserComponents/UserModal'
 
-
-import styled from 'styled-components';
-
-const AppCont = styled.div`
-    margin: 80px auto;
-    width: 80%;
-
-`;
-
 const Routes = (props) => {
     return (
         <Router history={props.history}>
             <MaterialNavbar />
-            <AppCont>
             <Route exact path='/' component={LandingPage} />
             <Route
                 exact
@@ -85,7 +75,6 @@ const Routes = (props) => {
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
             <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
-            </AppCont>
         </Router>
     );
 };
