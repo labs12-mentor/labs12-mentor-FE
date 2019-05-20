@@ -66,7 +66,7 @@ class LandingPage extends React.Component {
           <div className={classes.container}>
             <SectionProduct />
             <SectionTeam />
-            {/* <SectionWork /> */}
+            <SectionWork />
           </div>
         </div>
       </div>
