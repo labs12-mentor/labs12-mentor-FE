@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions';
+import { logoutUser, getCurrentUser } from '../actions';
 import NotificationButton from '../pages/NotificationButton';
 
 import { theme } from '../themes.js';
@@ -120,6 +120,10 @@ class MaterialNavbar extends React.Component {
     mobileMoreAnchorEl: null,
   };
 
+  async componentDidMount() {
+    await this.props.getCurrentUser();
+  }
+
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
   };
@@ -138,6 +142,7 @@ class MaterialNavbar extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
@@ -152,6 +157,7 @@ class MaterialNavbar extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem component={RouterLink} to="/user/profile" onClick={this.handleMenuClose}>Profile</MenuItem>
+        {this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <MenuItem component={RouterLink} to="/user/admin/panel" onClick={this.handleMenuClose}>Panel</MenuItem>}
         <MenuItem component={RouterLink} to="/organization" onClick={this.handleMenuClose}>Organization</MenuItem>
         <MenuItem component={RouterLink} to="/" onClick={()=> {this.props.logoutUser(); this.handleMenuClose()}}>Logout</MenuItem>
       </Menu>
@@ -235,7 +241,7 @@ class MaterialNavbar extends React.Component {
             
             {this.props.authenticated && (
               <div>
-                {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)}
+                {/* {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)} */}
                 <IconButton style={{color: "white"}} component={RouterLink} to="/user/notifications">
                     <NotificationButton />
                 </IconButton>
@@ -281,7 +287,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  logoutUser
+  logoutUser,
+  getCurrentUser
 };
 
 export default connect(
