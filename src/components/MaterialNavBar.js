@@ -44,6 +44,7 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    color: 'white',
   },
   title: {
     display: 'none',
@@ -75,6 +76,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'white',
   },
   inputRoot: {
     color: 'inherit',
@@ -105,6 +107,7 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+    color: 'white',
   },
   input: {
     display: 'none',
@@ -222,7 +225,7 @@ class MaterialNavbar extends React.Component {
 
             {!this.props.authenticated && 
               navlinksPublic.map((elem, i) => (
-                <Button key={i} component={RouterLink} to={elem.linkTo} color="inherit">
+                <Button key={i} component={RouterLink} to={elem.linkTo} style={{color: "white"}}>
                   {elem.text}
                 </Button>
               ))
@@ -231,14 +234,14 @@ class MaterialNavbar extends React.Component {
             {this.props.authenticated && (
               <div>
                 {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)}
-                <IconButton color="inherit" component={RouterLink} to="/user/notifications">
+                <IconButton style={{color: "white"}} component={RouterLink} to="/user/notifications">
                     <NotificationButton />
                 </IconButton>
                 <IconButton
                   aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
-                  color="inherit"
+                  style={{color: "white"}}
                 >
                   <AccountCircle />
                 </IconButton>
@@ -247,8 +250,8 @@ class MaterialNavbar extends React.Component {
             )}
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                <MoreIcon />
+              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} style={{color: "white"}}>
+                <MoreIcon style={{color: "white"}} />
               </IconButton>
             </div>
           </Toolbar>
