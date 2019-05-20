@@ -18,7 +18,7 @@ import Assignment from '../pages/AdminPanel/Assignment/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import RegDetails from '../pages/RegistrationDetails';
-import UserProfile from '../pages/UserProfile';
+// import UserProfile from '../pages/UserProfile';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
@@ -28,6 +28,15 @@ import MentorProfile from '../components/MentorComponents/MentorProfile';
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
+import UserProfile from '../components/MaterialIUserProfile';
+import blogposts from '../pages/BlogPostPage/BlogPostPage';
+// import table from '../components/ExperiencesComponents/table';
+import shoppingcart from '../pages/ShoppingCart';
+
+import materialtable from '../pages/AdministratorPanel/MaterialTable';
+
+import UserModal from '../components/UserComponents/UserModal'
+
 
 import styled from 'styled-components';
 
@@ -48,6 +57,7 @@ const Routes = (props) => {
                 path='/organization/register'
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
+            {/* <Route exact path="/guide" component={UserModal}/> */}
             <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />

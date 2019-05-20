@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { updateUser, getCurrentUser } from "../../actions";
 import withStyles from '@material-ui/core/styles/withStyles';
-import Button from '@material-ui/core/Button';
+import Button from "../../material-components/CustomButtons/Button.jsx";
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -109,7 +109,7 @@ class UserProfileForm extends React.Component {
     const { classes } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
-        <main className={classes.main}>
+        <main className={classes.main} style={{ width: '50%' }}>
           <CssBaseline />
           <Paper elevation={1} className={classes.paper}>
             <Typography component="h1" variant="h5">
@@ -204,11 +204,15 @@ class UserProfileForm extends React.Component {
           />
         </FormControl>
         </FormGroup>
-        <Button type="submit"
+
+        <Button 
+          center
+          type="submit"
           variant="contained"
-          color="primary"
+          color="info"
           className={classes.submit}
-          onClick={this.updateUser}>
+          onClick={this.updateUser}
+        >
             Update
         </Button>
       </form>

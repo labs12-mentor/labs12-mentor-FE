@@ -4,7 +4,13 @@ import {
   createExperience,
   updateExperience
 } from "../../actions/experiences.js";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+// import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { FormGroup } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
+import Button from "../../material-components/CustomButtons/Button";
+//../material-components/CustomButtons/Button.jsx";
 
 class ExperienceForm extends React.Component {
   state = {
@@ -31,34 +37,46 @@ class ExperienceForm extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     if (this.props.canEdit === true) {
       return (
-        <Form onSubmit={this.updateAnExperience}>
-          <FormGroup>
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel> Experience</InputLabel>
             <Input
-              type="text"
               name="name"
-              placeholder={this.props.name}
+              placeholder="Experience"
+              value={this.state.name}
               onChange={this.handleChanges}
             />
-          </FormGroup>
-          <Button onClick={this.updateAnExperience}>Update</Button>
-        </Form>
+          </FormControl>
+          <Button onClick={this.updateAnExperience} color="info">
+            Update
+          </Button>
+          {/* <Button onClick={this.props.handleClose} color="info">
+            Cancel
+          </Button> */}
+        </FormGroup>
       );
     } else {
       return (
-        <Form onSubmit={this.createAnExperience}>
-          <FormGroup>
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel> Experience</InputLabel>
             <Input
-              type="text"
               name="name"
-              placeholder="Add an Experience"
+              placeholder="Experience"
+              value={this.state.name}
               onChange={this.handleChanges}
             />
-          </FormGroup>
-          <Button onClick={this.createAnExperience}>Add</Button>
-        </Form>
+          </FormControl>
+          <Button onClick={this.createAnExperience} color="info">
+            Add
+          </Button>
+          <Button onClick={this.props.handleClose} color="info">
+            Cancel
+          </Button>
+        </FormGroup>
       );
     }
   }

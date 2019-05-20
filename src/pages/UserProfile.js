@@ -21,6 +21,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { theme } from '../themes.js';
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import UserGrid from "../components/UserComponents/UserGrid.js"
 
 function TabContainer(props) {
   return (
@@ -74,7 +75,7 @@ class UserProfile extends React.Component {
       isLoaded: false,
       activeTab: "1",
       applied: false,
-      user: [],
+      user: {},
       menteed: [],
       matches: [],
       wanted_mentor: [],
@@ -167,7 +168,9 @@ class UserProfile extends React.Component {
               <ContainerDiv>
                 <MaterialSideBar />
                 <ProfileContainer>
-                  <Form>
+                  <UserGrid/>
+                  <ExperienceList userId={this.state.user.id} />
+                  {/* <Form>
                     <Row>
                       <Col md={6}>
                         <FormGroup>
@@ -229,7 +232,7 @@ class UserProfile extends React.Component {
                         <ExperienceList userId={this.state.user.id} />
                       </CardContent>
                     </Card>
-                  </Form>
+                  </Form> */}
                 </ProfileContainer>
               </ContainerDiv>
             </TabContainer>

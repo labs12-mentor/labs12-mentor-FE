@@ -15,6 +15,9 @@ import GridItem from "../../material-components/Grid/GridItem.jsx";
 import Button from "../../material-components/CustomButtons/Button.jsx";
 import HeaderLinks from "../../material-components/Header/HeaderLinks.jsx";
 import Parallax from "../../material-components/Parallax/Parallax.jsx";
+//import {Link} from "react-router-dom"
+import { Link as RouterLink } from 'react-router-dom';
+
 
 import landingPageStyle from "../../assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
 
@@ -39,16 +42,18 @@ class LandingPage extends React.Component {
                 <h1 className={classes.title}>Mentor Match.</h1>
                 <h4>
                 We help organizations manage the lifecycle of their mentorship programs, 
-                from initial matchmaking to supporting those relationships allowing you 
+                from initial matchmaking to flourishing those relationships allowing you 
                 to provide ongoing support and continuous improvement.
                 </h4>
                 <br />
                 <Button
-                  color="danger"
+                  color="info"
                   size="lg"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                  target="_blank"
+                  //href="/user/login"
+                  //target="_blank"
                   rel="noopener noreferrer"
+                  component={RouterLink} 
+                  to='/organization/register'
                 >
                   <i className="fas fa-play" />
                   Get Started
@@ -61,7 +66,7 @@ class LandingPage extends React.Component {
           <div className={classes.container}>
             <SectionProduct />
             <SectionTeam />
-            {/* <SectionWork /> */}
+            <SectionWork />
           </div>
         </div>
       </div>

@@ -1,18 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
-import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import { withStyles } from "@material-ui/core/styles"
+import Table from "../../../material-components/Table/Table.jsx";
+import Button from "../../../material-components/CustomButtons/Button.jsx";
+// material-ui icons
+import Person from "@material-ui/icons/Person";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
+import LinkIcon from '@material-ui/icons/Link';
+
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
+
+import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
 
 import StudentApplicationCard from './StudentApplicationCard';
 
@@ -92,7 +97,40 @@ class StudentApplications extends React.Component {
         return filteredUsers;
     };
 
+    clickHandler = (e, mentorId, menteeId, status) => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: true
+        });
+        if(status === "approved"){
+            this.props.createMatch({
+                mentor_id: mentorId,
+                mentee_id: menteeId,
+                deleted: false,
+                status: status
+            });
+            //create a match
+            //remove that mentor from the available mentors
+            
+            // this.props.evaluateMatch(e, mentorId, menteeId);
+        }
+    }
+
     render() {
+        const { classes } = this.props;
+        const fillButtons = [
+          { color: "info", icon: Person },
+          { color: "success", icon: Edit },
+          { color: "danger", icon: Close }
+        ].map((prop, key) => {
+          return (
+            <Button justIcon size="sm" color={prop.color} key={key}>
+              <prop.icon />
+            </Button>
+          );
+        });
+
         let menteeApplications = [];
         this.filterBySearch("mentee").forEach(mentee => {
             this.state.mentors.forEach(mentor => {
@@ -101,8 +139,6 @@ class StudentApplications extends React.Component {
                 }
             });
         });
-        
-        const { classes } = this.props;
 
         return (
             <Paper className={classes.root}>
@@ -122,11 +158,34 @@ class StudentApplications extends React.Component {
                     <SearchIcon />
                 </IconButton>
 
-                <Table className={classes.table}>
+                <Table
+                    tableHead={[
+                    " ",
+                    "Last Name",
+                    "First Name",
+                    "Email",
+                    "Desired Mentor",
+                    "",
+                    ]}
+                    tableData={menteeApplications.map((mentee, index)=> {
+                        return (
+                            [
+                            <IconButton style={{color: 'black'}} className={classes.iconButton}> <LinkIcon /> </IconButton>, 
+                            mentee.last_name, 
+                            mentee.first_name,
+                            mentee.email,
+                            this.props.users.filter(user => {return user.id === mentee.wanted_mentor_id}).map(user => {return user.first_name + " " + user.last_name}),
+                            fillButtons
+                        ]
+                        )
+                    })}
+                />
+
+                {/* <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
                             {/* <TableCell>Mentee ID</TableCell> */}
-                            <TableCell align="left">Last Name</TableCell>
+                            {/* <TableCell align="left">Last Name</TableCell>
                             <TableCell align="left">First Name</TableCell>
                             <TableCell align="left">Email</TableCell>
                             <TableCell align="left">Desired Mentor</TableCell>
@@ -142,7 +201,7 @@ class StudentApplications extends React.Component {
                                     /> )
                         })}
                 </TableBody>
-            </Table>
+            </Table> */}
         </Paper>
         );
     }

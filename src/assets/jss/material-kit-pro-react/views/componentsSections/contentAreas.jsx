@@ -3,11 +3,11 @@ import {
   mrAuto,
   mlAuto,
   grayColor
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../../material-kit-pro-react.jsx";
 
-import checkboxes from "assets/jss/material-kit-pro-react/customCheckboxRadioSwitchStyle.jsx";
-import buttonGroup from "assets/jss/material-kit-pro-react/buttonGroupStyle.jsx";
-import tooltips from "assets/jss/material-kit-pro-react/tooltipsStyle.jsx";
+import checkboxes from "../../../material-kit-pro-react/customCheckboxRadioSwitchStyle.jsx";
+import buttonGroup from "../../../material-kit-pro-react/buttonGroupStyle.jsx";
+import tooltips from "../../../material-kit-pro-react/tooltipsStyle.jsx";
 
 const contentAreas = {
   title,
