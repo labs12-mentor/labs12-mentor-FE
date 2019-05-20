@@ -37,7 +37,7 @@ class ExperienceForm extends React.Component {
   };
 
   render() {
-    console.log(this.state);
+    //console.log(this.state);
     if (this.props.canEdit === true) {
       return (
         <FormGroup row>
@@ -53,6 +53,9 @@ class ExperienceForm extends React.Component {
           <Button onClick={this.updateAnExperience} color="info">
             Update
           </Button>
+          {/* <Button onClick={this.props.handleClose} color="info">
+            Cancel
+          </Button> */}
         </FormGroup>
       );
     } else {
@@ -69,6 +72,9 @@ class ExperienceForm extends React.Component {
           </FormControl>
           <Button onClick={this.createAnExperience} color="info">
             Add
+          </Button>
+          <Button onClick={this.props.handleClose} color="info">
+            Cancel
           </Button>
         </FormGroup>
       );

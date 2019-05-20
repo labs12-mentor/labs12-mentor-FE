@@ -45,7 +45,6 @@ class MeetingCard extends React.Component {
   };
 
   render() {
-    console.log(this.props.id)
     return (
       <div>
         <Button
@@ -58,7 +57,11 @@ class MeetingCard extends React.Component {
         >
           <Edit style={{ fontSize: 30 }} />
         </Button>
-        <Button justIcon color="info" size="sm" style={{ marginLeft: 10 }}
+        <Button
+          justIcon
+          color="info"
+          size="sm"
+          style={{ marginLeft: 10 }}
           onClick={() => {
             this.props.deleteMeeting(this.props.id);
           }}
