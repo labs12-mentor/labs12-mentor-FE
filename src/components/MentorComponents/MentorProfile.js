@@ -24,8 +24,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import Icon from '@material-ui/core/Icon'
-import Grid from '@material-ui/core/Grid';
+import Icon from "@material-ui/core/Icon";
+import Grid from "@material-ui/core/Grid";
 
 // const style = {
 //   ...cardsStyle
@@ -112,42 +112,42 @@ class MentorProfile extends React.Component {
       <div>
         {this.state.isLoaded ? (
           <div>
-             <Grid
-  container
-  // spacing={0}
-  direction="column"
-  alignItems="center"
-  justify="center"
-  spacing={24}
-  // style={{ minHeight: '100vh' }}
- >
- <Grid item xs={12}>
-            <Card className={classes.card}>
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="Recipe" className={classes.avatar}>
-                    M
-                  </Avatar>
-                }
-                // action={
-                //   <IconButton>
-                //     <MoreVertIcon />
-                //   </IconButton>
-                // }
-                title={`${this.state.profile.first_name}  ${
-                  this.state.profile.last_name
-                }`}
-                subheader="Mentor Profile"
-              />
-              <CardMedia />
-              <CardContent>
-                <Typography component="p">Email:</Typography>
-                <Typography component="p">
-                  {this.state.profile.email}
-                </Typography>
-              </CardContent>
-              <CardActions className={classes.actions} disableActionSpacing>
-                {/* <IconButton aria-label="github">
+            <Grid
+              container
+              // spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              spacing={24}
+              // style={{ minHeight: '100vh' }}
+            >
+              <Grid item xs={12}>
+                <Card className={classes.card}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="Recipe" className={classes.avatar}>
+                        M
+                      </Avatar>
+                    }
+                    // action={
+                    //   <IconButton>
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    title={`${this.state.profile.first_name}  ${
+                      this.state.profile.last_name
+                    }`}
+                    subheader="Mentor Profile"
+                  />
+                  <CardMedia />
+                  <CardContent>
+                    <Typography component="p">Email:</Typography>
+                    <Typography component="p">
+                      {this.state.profile.email}
+                    </Typography>
+                  </CardContent>
+                  <CardActions className={classes.actions} disableActionSpacing>
+                    {/* <IconButton aria-label="github">
                 <FavoriteIcon/>
                 </IconButton>
                 <IconButton aria-label="Share">
@@ -163,10 +163,14 @@ class MentorProfile extends React.Component {
                 >
                   <ExpandMoreIcon />
                 </IconButton> */}
-              </CardActions>
-              <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                  {/* <Typography paragraph>State:</Typography>
+                  </CardActions>
+                  <Collapse
+                    in={this.state.expanded}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    <CardContent>
+                      {/* <Typography paragraph>State:</Typography>
                   <Typography paragraph>{this.state.profile.state}</Typography>
                   <Typography paragraph>Street:</Typography>
 
@@ -176,10 +180,10 @@ class MentorProfile extends React.Component {
                   <Typography paragraph>
                     {this.state.profile.zipcode}
                   </Typography> */}
-                </CardContent>
-              </Collapse>
-            </Card>
-            </Grid>  
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
             </Grid>
           </div>
         ) : (
