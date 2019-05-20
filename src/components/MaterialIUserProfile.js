@@ -137,13 +137,12 @@ class UserProfile extends React.Component {
     if (this.state.isLoaded === false) {
       return (
         <div>
-          <Grid  alignCenter>
+          
             <GridContainer justify="center">
               <GridItem >
                 <CircularProgress className={classes.progress} />
               </GridItem>
             </GridContainer>
-          </Grid>
         </div>
       );
     } else {
