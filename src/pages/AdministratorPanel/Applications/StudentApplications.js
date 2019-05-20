@@ -102,21 +102,12 @@ class StudentApplications extends React.Component {
 
     clickHandler = (e, mentorId, menteeId, status) => {
         e.preventDefault();
-        this.setState({
-            ...this.state,
-            [e.target.name]: true
-        });
         if(status === "approved"){
             this.props.createMatch({
                 mentor_id: mentorId,
                 mentee_id: menteeId,
                 deleted: false,
-                status: status
             });
-            //create a match
-            //remove that mentor from the available mentors
-            
-            // this.props.evaluateMatch(e, mentorId, menteeId);
         } else if(status === "deny") {
             this.props.deleteMentee(menteeId);
         }

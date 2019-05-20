@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
+import { connect } from 'react-redux';
+import { updateUser, deleteMentor } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // material-ui icons
@@ -90,19 +92,27 @@ class MentorApplications extends React.Component {
         return filteredUsers;
     };
 
+    clickHandler = (e, mentor, status) => {
+        e.preventDefault();
+        const clickedUser = this.props.users.filter(user => {
+            return user.id == mentor.id;
+        })[0];
+        
+        if(status === "approved"){
+            this.props.updateUser(
+                clickedUser.id, 
+                {
+                    ...clickedUser, 
+                    role: "MENTOR"
+                }
+            );
+        } else if(status === "denied") {
+            this.props.deleteMentor(mentor.mentor_id);
+        }
+    }
+
     render() {
         const { classes } = this.props;
-        const fillButtons = [
-          { color: "info", icon: Person },
-          { color: "success", icon: Done },
-          { color: "danger", icon: Close }
-        ].map((prop, key) => {
-          return (
-            <Button justIcon size="sm" color={prop.color} key={key}>
-              <prop.icon />
-            </Button>
-          );
-        });
 
         return (
             <Paper className={classes.root}>
@@ -143,10 +153,10 @@ class MentorApplications extends React.Component {
                                     <Button justIcon size="sm" color={"info"} >
                                         <Person />
                                     </Button>,
-                                    <Button justIcon size="sm" color={"success"} >
+                                    <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentor, "approved")} >
                                         <Done />
                                     </Button>,
-                                    <Button justIcon size="sm" color={"danger"} >
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentor, "denied")}>
                                         <Close />
                                     </Button>
                                 ]
@@ -163,4 +173,4 @@ MentorApplications.propTypes = {
     mentors: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(MentorApplications);
+export default connect(null, { updateUser, deleteMentor })(withStyles(styles)(MentorApplications));
