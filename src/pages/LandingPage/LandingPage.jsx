@@ -46,12 +46,7 @@ class LandingPage extends React.Component {
           <AppContainer className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={6} md={6}>
-                <h1 className={classes.title}>Mentor Match.</h1>
-                <h4>
-                We help organizations manage the lifecycle of their mentorship programs, 
-                from initial matchmaking to flourishing those relationships allowing you 
-                to provide ongoing support and continuous improvement.
-                </h4>
+                <h1 className={classes.title}>Connect people within your organization to accelerate their growth in a whole new way with the world’s #1&nbsp;Mentorship platform.</h1>
                 <br />
                 <Button
                   color="info"
