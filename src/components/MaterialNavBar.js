@@ -250,13 +250,8 @@ class MaterialNavbar extends React.Component {
             )}
             </div>
             <div className={classes.sectionMobile}>
-<<<<<<< HEAD
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="info">
-                <MoreIcon />
-=======
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} style={{color: "white"}}>
                 <MoreIcon style={{color: "white"}} />
->>>>>>> c6b54282e4a43817ef26b848d4db7c3bd260d831
               </IconButton>
             </div>
           </Toolbar>
