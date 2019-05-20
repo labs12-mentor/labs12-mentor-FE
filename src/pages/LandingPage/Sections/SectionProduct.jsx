@@ -5,6 +5,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import Chat from "@material-ui/icons/Chat";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
+import Face from "@material-ui/icons/Face";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 // core components
 import GridContainer from "../../../material-components/Grid/GridContainer.jsx";
@@ -54,7 +55,7 @@ class SectionProduct extends React.Component {
               <InfoArea
                 title="Mentors/ Mentee Profiles"
                 description="Profiles that allow users to showcase skills and interests."
-                icon={Fingerprint}
+                icon={Face}
                 iconColor="danger"
                 vertical
               />

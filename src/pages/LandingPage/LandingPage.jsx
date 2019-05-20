@@ -69,12 +69,13 @@ class LandingPage extends React.Component {
             </GridContainer>
           </AppContainer>
         </Parallax>
+
         <AppContainer>
           <div className={classNames(classes.main, classes.mainRaised)}>
             <div className={classes.container}>
               <SectionProduct />
               <SectionTeam />
-              <SectionWork />
+            {/* <SectionWork /> */}
             </div>
           </div>
         </AppContainer>
