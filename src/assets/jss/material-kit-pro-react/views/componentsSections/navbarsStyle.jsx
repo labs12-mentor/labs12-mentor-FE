@@ -7,7 +7,8 @@ const navbarsStyle = theme => ({
   section: {
     padding: "0",
     paddingBottom: "0",
-    width: '100%'
+    width: '100%',
+    maxWidth: '100%'
   },
   title: {
     ...title,

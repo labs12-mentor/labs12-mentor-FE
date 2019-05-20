@@ -23,7 +23,8 @@ const customTabsStyle = theme => ({
   tabsContainer: {
     color: whiteColor,
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    justifyContent: 'center'
   },
   tabsContainerRTL: {
     float: "right"
@@ -49,7 +50,8 @@ const customTabsStyle = theme => ({
     height: "auto",
     padding: "10px 15px",
     display: "block",
-    minHeight: "unset"
+    minHeight: "unset",
+    margin: '0 auto'
   },
   customTabLabelContainer: {
     color: "inherit",

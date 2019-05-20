@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
+import { connect } from 'react-redux';
+import { updateUser, deleteMentor } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // material-ui icons
 import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
+import Done from "@material-ui/icons/Done";
 import Close from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
 import LinkIcon from '@material-ui/icons/Link';
@@ -31,7 +33,7 @@ const styles = theme => ({
       overflowX: "auto",
     },
     table: {
-      minWidth: 700
+      minWidth: 700,
     },
     input: {
         flex: 1,
@@ -90,19 +92,28 @@ class MentorApplications extends React.Component {
         return filteredUsers;
     };
 
+    clickHandler = (e, mentor, status) => {
+        e.preventDefault();
+        const clickedUser = this.props.users.filter(user => {
+            return user.id == mentor.id;
+        })[0];
+        
+        if(status === "approved"){
+            clickedUser.role = "MENTOR";
+            
+            this.props.updateUser(
+                clickedUser.id, 
+                {
+                    ...clickedUser
+                }
+            );
+        } else if(status === "denied") {
+            this.props.deleteMentor(mentor.mentor_id);
+        }
+    }
+
     render() {
         const { classes } = this.props;
-        const fillButtons = [
-          { color: "info", icon: Person },
-          { color: "success", icon: Edit },
-          { color: "danger", icon: Close }
-        ].map((prop, key) => {
-          return (
-            <Button justIcon size="sm" color={prop.color} key={key}>
-              <prop.icon />
-            </Button>
-          );
-        });
 
         return (
             <Paper className={classes.root}>
@@ -129,16 +140,27 @@ class MentorApplications extends React.Component {
                     tableData={this.filterBySearch('mentor').map((mentor, index)=> {
                         return (
                             [
-                                <IconButton 
-                                    style={{color: 'black'}} 
-                                    className={classes.iconButton}
-                                > 
-                                    <LinkIcon /> 
-                                </IconButton>, 
+                                // <IconButton 
+                                //     style={{color: 'black'}} 
+                                //     className={classes.iconButton}
+                                // > 
+                                //     <LinkIcon /> 
+                                // </IconButton>,
+                                ' ',
                                 mentor.last_name, 
                                 mentor.first_name, 
                                 mentor.email, 
-                                fillButtons
+                                [
+                                    <Button justIcon size="sm" color={"info"} >
+                                        <Person />
+                                    </Button>,
+                                    <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentor, "approved")} >
+                                        <Done />
+                                    </Button>,
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentor, "denied")}>
+                                        <Close />
+                                    </Button>
+                                ]
                             ]
                         )
                     })}
@@ -152,4 +174,4 @@ MentorApplications.propTypes = {
     mentors: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(MentorApplications);
+export default connect(null, { updateUser, deleteMentor })(withStyles(styles)(MentorApplications));
