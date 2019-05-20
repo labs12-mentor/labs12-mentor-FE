@@ -92,6 +92,7 @@ class UserProfile extends React.Component {
   }
 
   async componentDidMount() {
+    //console.log("hi")
     await this.props.getCurrentUser();
     await this.props.getMentees();
     await this.props.getMatches();
@@ -117,6 +118,7 @@ class UserProfile extends React.Component {
         isLoaded: true
       });
     }
+    //console.log("hi")
   }
 
   toggleApply() {
@@ -136,12 +138,13 @@ class UserProfile extends React.Component {
   };
 
   handleChange = (event, value) => {
+    event.preventDefault();
     this.setState({ value });
   };
 
   render() {
     const { classes } = this.props;
-    //console.log(this.state.user)
+    // console.log(this.state.applied)
     //const { value } = this.state;
 
     if (this.state.isLoaded === false) {
