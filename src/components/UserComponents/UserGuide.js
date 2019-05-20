@@ -11,19 +11,15 @@ import GridItem from "../../material-components/Grid/GridItem.jsx";
 import Card from "../../material-components/Card/Card.jsx";
 
 import carouselStyle from "../../assets/jss/material-kit-pro-react/views/componentsSections/carouselStyle.jsx";
-import '../../assets/scss/plugins/_plugin-react-slick.scss'
+import "../../assets/scss/plugins/_plugin-react-slick.scss";
 
 import CardBody from "../../material-components/Card/CardBody.jsx";
 
 import imagesStyles from "../../assets/jss/material-kit-pro-react/imagesStyles.jsx";
 
-
-
 import image1 from "../../assets/img/bg.jpg";
 import image2 from "../../assets/img/bg2.jpg";
 import image3 from "../../assets/img/bg3.jpg";
-
-
 
 function UserGuide(props) {
   const { classes } = props;
@@ -41,8 +37,8 @@ function UserGuide(props) {
         <GridContainer>
           <GridItem xs={12} sm={12} md={8} className={classes.marginAuto}>
             {/* <Card> */}
-              <Carousel {...settings}>
-                {/* <div>
+            <Carousel {...settings}>
+              {/* <div>
                   <img
                     src={image1}
                     alt="First slide"
@@ -81,32 +77,33 @@ function UserGuide(props) {
                     </h4>
                   </div>
                 </div> */}
-                <Card style={{ width: "20rem" }}>
+              <Card style={{ width: "20rem" }}>
+                <img src={image1} alt="First slide" className="slick-image" />
 
-      <CardBody>
-        <p>
-        User Profile tab stores your basic information and experiences.
-                      There is an option to add experiences. 
-        </p>
-      </CardBody>
-    </Card>
-    <Card style={{ width: "20rem" }}>
-      <CardBody>
-        <p>
-        Meetings tab allows user to view current meetings or create new meetings with 
-                      their matched mentor.
-        </p>
-      </CardBody>
-    </Card>
-    <Card style={{ width: "20rem" }}>
-
-      <CardBody>
-        <p>
-        Mentor Tab allows user to apply to be a mentor or apply to one mentor
-        </p>
-      </CardBody>
-    </Card>
-              </Carousel>
+                <CardBody>
+                  <p>
+                    User Profile tab stores your basic information and
+                    experiences. There is an option to add experiences.
+                  </p>
+                </CardBody>
+              </Card>
+              <Card style={{ width: "20rem" }}>
+                <CardBody>
+                  <p>
+                    Meetings tab allows user to view current meetings or create
+                    new meetings with their matched mentor.
+                  </p>
+                </CardBody>
+              </Card>
+              <Card style={{ width: "20rem" }}>
+                <CardBody>
+                  <p>
+                    Mentor Tab allows user to apply to be a mentor or apply to
+                    one mentor
+                  </p>
+                </CardBody>
+              </Card>
+            </Carousel>
             {/* </Card> */}
           </GridItem>
         </GridContainer>

@@ -42,7 +42,7 @@ class LandingPage extends React.Component {
                 <h1 className={classes.title}>Mentor Match.</h1>
                 <h4>
                 We help organizations manage the lifecycle of their mentorship programs, 
-                from initial matchmaking to supporting those relationships allowing you 
+                from initial matchmaking to flourishing those relationships allowing you 
                 to provide ongoing support and continuous improvement.
                 </h4>
                 <br />

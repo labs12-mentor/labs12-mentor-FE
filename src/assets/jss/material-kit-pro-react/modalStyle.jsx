@@ -8,7 +8,7 @@ const modalStyle = theme => ({
   modal: {
     [theme.breakpoints.up("sm")]: {
       //500px
-      maxWidth: "750px",
+      maxWidth: "700px",
       margin: "auto"
     },
     borderRadius: "6px",
