@@ -1,12 +1,13 @@
 import {
   container,
+  infoColor,
   description,
   cardTitle,
   blackColor,
   whiteColor,
   grayColor,
   hexToRgb
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../material-kit-pro-react.jsx";
 
 const signupPageStyle = theme => ({
   description,
@@ -50,7 +51,7 @@ const signupPageStyle = theme => ({
   },
   cardHeader: {
     width: "auto",
-    textAlign: "center"
+    textAlign: "center",
   },
   socialLine: {
     marginTop: "1rem",
@@ -65,7 +66,7 @@ const signupPageStyle = theme => ({
   },
   iconButtons: {
     marginRight: "3px !important",
-    marginLeft: "3px !important"
+    marginLeft: "3px !important",
   },
   block: {
     color: "inherit",
@@ -116,6 +117,10 @@ const signupPageStyle = theme => ({
     bottom: "0",
     color: whiteColor,
     zIndex: "2"
+  },
+  submitButton: {
+    color: infoColor,
+    size: 'lg'
   }
 });
 
