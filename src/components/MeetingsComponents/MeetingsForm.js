@@ -35,6 +35,83 @@ class MeetingsForm extends React.Component {
       return (
         <div>
           <h1> Edit Meeting</h1>
+          <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel> Title</InputLabel>
+            <Input
+              name="title"
+              placeholder="Title"
+              value={this.state.title}
+              onChange={this.handleChanges}
+            />
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth={true}>
+            <InputLabel> Content</InputLabel>
+            <Input
+              name="content"
+              placeholder="Content"
+              value={this.state.content}
+              onChange={this.handleChanges}
+            />
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel> Match id</InputLabel>
+            <Input
+              name="match_id"
+              placeholder="match id"
+              value={this.state.match_id}
+              onChange={this.handleChanges}
+            />
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel>Start Time</InputLabel>
+            <Input
+              name="startTime"
+              placeholder="Start Time"
+              value={this.state.startTime}
+              onChange={this.handleChanges}
+            />
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel>End Time</InputLabel>
+            <Input
+              name="endTime"
+              placeholder="End Time"
+              value={this.state.endTime}
+              onChange={this.handleChanges}
+            />
+          </FormControl>
+        </FormGroup>
+
+        <FormGroup row>
+          <FormControl margin="normal" required fullWidth>
+            <InputLabel>Location</InputLabel>
+            <Input
+              name="location"
+              placeholder="location"
+              value={this.state.location}
+              onChange={this.handleChanges}
+            />
+          </FormControl>
+        </FormGroup>
+        <Button onClick={this.updateMeetingForm} color="info">
+            Add
+          </Button>
+          <Button onClick={this.props.handleClose} color="info">
+            Cancel
+          </Button>
           {/* <Form onSubmit={this.updateMeetingForm}>
             <FormGroup>
               <Label>Title</Label>

@@ -10,10 +10,13 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Button from "@material-ui/core/Button";
+import Button from "../../material-components/CustomButtons/Button.jsx";
+
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import Edit from "@material-ui/icons/Edit";
+import Clear from "@material-ui/icons/Clear";
 
 const styles = theme => ({
   root: {
@@ -42,9 +45,41 @@ class MeetingCard extends React.Component {
   };
 
   render() {
+    console.log(this.props.id)
     return (
       <div>
-        <ExpansionPanel>
+        <Button
+          justIcon
+          color="info"
+          size="sm"
+          style={{ marginLeft: 30, marginRight: 10 }}
+          variant="outlined"
+          onClick={this.handleClickOpen}
+        >
+          <Edit style={{ fontSize: 30 }} />
+        </Button>
+        <Button justIcon color="info" size="sm" style={{ marginLeft: 10 }}
+          onClick={() => {
+            this.props.deleteMeeting(this.props.id);
+          }}
+        >
+          <Clear style={{ fontSize: 40 }} />
+        </Button>
+
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogContent>
+            <MeetingsForm
+              canEdit={true}
+              id={this.props.id}
+              content={this.props.content}
+            />
+          </DialogContent>
+        </Dialog>
+        {/* <ExpansionPanel>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <h3>{this.props.content}</h3>
           </ExpansionPanelSummary>
@@ -87,7 +122,7 @@ class MeetingCard extends React.Component {
               </DialogActions>
             </Dialog>
           </ExpansionPanelDetails>
-        </ExpansionPanel>
+        </ExpansionPanel> */}
       </div>
     );
   }

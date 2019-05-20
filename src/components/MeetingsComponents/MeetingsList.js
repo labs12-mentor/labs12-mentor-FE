@@ -18,6 +18,7 @@ import Clear from "@material-ui/icons/Clear";
 // core components
 import Table from "../../material-components/Table/Table.jsx";
 
+
 const styles = theme => ({
   // root: {
   //     flexGrow: 1,
@@ -108,11 +109,15 @@ class MeetingsList extends React.Component {
             </Dialog>
 
           <Table
+          // nonDeleted.slice(1,7).map backend logic
           tableData={nonDeleted.slice(1,7).map(meeting => {
             return ([
                 <p className={classes.cardTitle}>{meeting.content}</p>,
                 <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button
+                <MeetingCard
+                id={meeting.id}
+                />
+                  {/* <Button
                     justIcon
                     color="info"
                     size="sm"
@@ -127,7 +132,7 @@ class MeetingsList extends React.Component {
                     style={{ marginLeft: 10 }}
                   >
                     <Clear style={{ fontSize: 40 }} />
-                  </Button>
+                  </Button> */}
                 </div>
             ])
           })}
