@@ -1,4 +1,4 @@
-import { blackColor, hexToRgb } from "assets/jss/material-kit-pro-react.jsx";
+import { blackColor, hexToRgb } from "../../material-kit-pro-react.jsx";
 
 const cardAvatarStyle = {
   cardAvatar: {
