@@ -27,7 +27,7 @@ import Assignments from './Assignments/Assignments';
 import MentorApplications from './Applications/MentorApplications';
 import MatchApplications from './Applications/StudentApplications';
 import MentorAssignments from './Assignments/Mentors';
-import StudentAssignments from './Assignments/Students';
+import MatchAssignments from './Assignments/Students';
 import ProfileForms from './ProfileForms/ProfileForms';
 
 function TabContainer(props) {
@@ -179,27 +179,33 @@ class AdminPanel extends React.Component {
             tabName: "Match Applications",
             tabIcon: Chat,
             tabContent: (
-            <MatchApplications 
-                users={this.state.users}
-                mentees={this.filterMentees()}
-                mentors={this.filterMentors()}
-            />
+                <MatchApplications 
+                    users={this.state.users}
+                    mentees={this.filterMentees()}
+                    mentors={this.filterMentors()}
+                />
             )
           },
           {
             tabName: "Mentor Assignments",
             tabIcon: Build,
             tabContent: (
-              <p className={classes.textCenter}>
-              </p>
+                <MentorAssignments 
+                    matchedUsers={matchedUsers} 
+                    users={this.state.users}
+                    matches={this.state.matches}
+                />
             )
           },
           {
             tabName: "Match Assignments",
             tabIcon: Build,
             tabContent: (
-              <p className={classes.textCenter}>
-              </p>
+                <MatchAssignments
+                    matchedUsers={matchedUsers} 
+                    users={this.state.users}
+                    matches={this.state.matches}
+                />
             )
           },
           {

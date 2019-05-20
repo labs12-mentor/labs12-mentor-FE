@@ -87,8 +87,22 @@ class MentorAssignments extends React.Component {
 
     render() {
         const { classes } = this.props;
-        let mentorApplications = [];
+        const fillButtons = [
+            { color: "info", icon: Person },
+            { color: "success", icon: Edit },
+            { color: "danger", icon: Close }
+          ].map((prop, key) => {
+            return (
+              <Button justIcon size="sm" color={prop.color} key={key}>
+                <prop.icon />
+              </Button>
+            );
+          });
         
+          const approvedMentors = this.props.users.filter(user => {
+              return user.role === "MENTOR"
+          });
+          
         return (
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}
@@ -105,6 +119,32 @@ class MentorAssignments extends React.Component {
                   <IconButton className={classes.iconButton} aria-label="Search">
                       <SearchIcon />
                   </IconButton>
+
+                <Table
+                    tableHead={[
+                    " ",
+                    "Last Name",
+                    "First Name",
+                    "Email",
+                    "",
+                    ]}
+                    tableData={approvedMentors.map((mentor, index)=> {
+                        return (
+                            [
+                                <IconButton 
+                                    style={{color: 'black'}} 
+                                    className={classes.iconButton}
+                                > 
+                                    <LinkIcon /> 
+                                </IconButton>, 
+                                mentor.last_name, 
+                                mentor.first_name, 
+                                mentor.email, 
+                                fillButtons
+                            ]
+                        )
+                    })}
+                />
 
                 {/* <Table className={classes.table}>
                     <TableHead>

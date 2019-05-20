@@ -128,7 +128,18 @@ class MentorApplications extends React.Component {
                     ]}
                     tableData={this.filterBySearch('mentor').map((mentor, index)=> {
                         return (
-                            [<IconButton style={{color: 'black'}} className={classes.iconButton}> <LinkIcon /> </IconButton>, mentor.last_name, mentor.first_name, mentor.email, fillButtons]
+                            [
+                                <IconButton 
+                                    style={{color: 'black'}} 
+                                    className={classes.iconButton}
+                                > 
+                                    <LinkIcon /> 
+                                </IconButton>, 
+                                mentor.last_name, 
+                                mentor.first_name, 
+                                mentor.email, 
+                                fillButtons
+                            ]
                         )
                     })}
                 />
