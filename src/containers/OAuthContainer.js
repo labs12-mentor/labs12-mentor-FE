@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { loadCSS } from 'fg-loadcss/src/loadCSS';
 import { withStyles } from '@material-ui/core/styles';
-import Icon from '@material-ui/core/Icon';
+import Button from '../material-components/CustomButtons/Button';
 
 const styles = theme => ({
     root: {
@@ -112,11 +112,14 @@ class OAuth extends Component {
 
         return (
         <div>
-            <Icon 
-                className={classNames(classes.iconHover, 'fab fa-github-square')}
-                color="inherit"
-                style={{ fontSize: 30 }}
-                onClick={this.startAuth} />
+            <Button
+                justIcon
+                color="transparent"
+                className={classes.iconButtons}
+                onClick={this.startAuth}
+            >
+                <i className="fab fa-github lg" style={{ fontSize: 30 }} />
+            </Button>
         </div>
         );
     }

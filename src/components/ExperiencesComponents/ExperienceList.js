@@ -5,18 +5,19 @@ import {
   getSpecificExperience,
   updateExperience
 } from "../../actions";
-import ExperienceForm from "./ExperienceForm";
-import ExeperienceCard from "./ExperienceCard";
-import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import ExperienceForm from './ExperienceForm';
+import ExperienceCard from './ExperienceCard'
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
+// @material-ui/icons
 
+// core components
+import Table from "../../material-components/Table/Table.jsx";
+import Button from "../../material-components/CustomButtons/Button.jsx";
 
 const styles = theme => ({
   // root: {
@@ -62,17 +63,17 @@ class ExperienceList extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { isLoaded } = this.state;
 
     const nonDeleted = this.props.experiences.filter(experience => {
-      return experience.deleted === false;
+      return experience.deleted === false && this.props.userId === experience.user_id;
     });
+    
     return (
-      <Card>
-        
-        <h1>Experiences</h1>
+      <div style={{ width: '100%' }}>
         <Button
           variant="contained"
-          color="primary"
+          color="info"
           onClick={this.handleClickOpen}
           className={classes.button}
         >
@@ -84,34 +85,89 @@ class ExperienceList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-            <ExperienceForm canEdit={false} userId={this.props.userId} />
+            <ExperienceForm canEdit={false} userId={this.props.userId}
+            handleClose={this.handleClose}
+            />
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+          {/* <DialogActions>
+            <Button onClick={this.handleClose} color="warning">
               Cancel
             </Button>
-          </DialogActions>
+          </DialogActions> */}
         </Dialog>
 
-        {this.state.isLoaded ? (
-          <Card className={classes.card}>
-            <CardContent>
-              {nonDeleted.map(experience => {
-                return (
-                  <ExeperienceCard
-                    id={experience.id}
-                    key={experience.id}
-                    name={experience.name}
-                  />
-                );
-              })}
-            </CardContent>
-          </Card>
-        ) : (
-          <h2>Loading</h2>
-        )}
+        <Table
+          tableData={nonDeleted.map(experience => {
+            return ([
+                <p className={classes.cardTitle}>{experience.name}</p>,
+                <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <ExperienceCard
+                id={experience.id}
+                />
+                  {/* <Button
+                    justIcon
+                    color="info"
+                    size="sm"
+                    style={{ marginLeft: 30, marginRight: 10 }}
+                  >
+                    <Edit style={{ fontSize: 30 }} />
+                  </Button>
+                  <Button
+                    justIcon
+                    color="info"
+                    size="sm"
+                    style={{ marginLeft: 10 }}
+                  >
+                    <Clear style={{ fontSize: 40 }} />
+                  </Button> */}
+                </div>
+            ])
+          })}
+        />
+      </div>
+      // <Card>
+      //   <Button
+      //     variant="contained"
+      //     color="primary"
+      //     onClick={this.handleClickOpen}
+      //     className={classes.button}
+      //   >
+      //     Create New Experience
+      //   </Button>
+      //   <Dialog
+      //     open={this.state.open}
+      //     onClose={this.handleClose}
+      //     aria-labelledby="form-dialog-title"
+      //   >
+      //     <DialogContent>
+      //       <ExperienceForm canEdit={false} userId={this.props.userId} />
+      //     </DialogContent>
+      //     <DialogActions>
+      //       <Button onClick={this.handleClose} color="primary">
+      //         Cancel
+      //       </Button>
+      //     </DialogActions>
+      //   </Dialog>
+
+      //   {this.state.isLoaded ? (
+      //     <Card className={classes.card}>
+      //       <CardContent>
+      //         {nonDeleted.map(experience => {
+      //           return (
+      //             <ExeperienceCard
+      //               id={experience.id}
+      //               key={experience.id}
+      //               name={experience.name}
+      //             />
+      //           );
+      //         })}
+      //       </CardContent>
+      //     </Card>
+      //   ) : (
+      //     <h2>Loading</h2>
+      //   )}
         
-      </Card>
+      // </Card>
       
     );
   }

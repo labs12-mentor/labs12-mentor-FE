@@ -2,20 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
-import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import { updateUser } from '../../../actions';
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+// material-ui icons
+import Person from "@material-ui/icons/Person";
+import Edit from "@material-ui/icons/Edit";
+import Done from '@material-ui/icons/Done';
+import Close from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
-import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
+import LinkIcon from '@material-ui/icons/Link';
+// core components
+import Table from "../../../material-components/Table/Table.jsx";
+import Button from "../../../material-components/CustomButtons/Button.jsx";
+
+import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
 
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import Input from '@material-ui/core/Input';
 
 import { deleteMatch } from '../../../actions';
 
@@ -39,16 +46,19 @@ const styles = theme => ({
     extendedIcon: {
         marginRight: theme.spacing.unit,
     },
+    DeleteForever: {
+        fontSize: '30px',
+    },
   });
   
 
 class MentorAssignments extends React.Component {
     state = {
-        searchBarContents: ''
+        searchBarContents: '',
     }
 
-    routeToAssignments(id) {
-        // history.push(`/user/admin/mentorassignment/${id}/mentor`);
+    routeOnClick(id) {
+        history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
 
     changeHandler = (e) => {
@@ -66,21 +76,40 @@ class MentorAssignments extends React.Component {
 
     filterBySearch = (role) => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        const filteredMentees = this.props.matchedUsers.filter((match) => {
+        const approvedMentors = this.props.users.filter(user => {
+            return user.role === "MENTOR"
+        });
+
+        const filteredMentees = approvedMentors.filter(mentor => {
             return (
-                match[role].last_name.toLowerCase().includes(searchInput) ||
-                match[role].first_name.toLowerCase().includes(searchInput) ||
-                match[role].email.toLowerCase().includes(searchInput)
+                mentor.last_name.toLowerCase().includes(searchInput) ||
+                mentor.first_name.toLowerCase().includes(searchInput) ||
+                mentor.email.toLowerCase().includes(searchInput)
             );
         });
 
         return filteredMentees;
     };
 
+    clickHandler = (e, mentor) => {
+        e.preventDefault();
+        const clickedUser = this.props.users.filter(user => {
+            return user.id == mentor.id;
+        })[0];
+
+        clickedUser.role = "MENTEE";
+        
+        this.props.updateUser(
+            clickedUser.id, 
+            {
+                ...clickedUser
+            }
+        );
+    }
+
     render() {
         const { classes } = this.props;
-        let mentorApplications = [];
-        
+          
         return (
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}
@@ -98,41 +127,33 @@ class MentorAssignments extends React.Component {
                       <SearchIcon />
                   </IconButton>
 
-                <Table className={classes.table}>
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Mentor ID</TableCell>
-                        <TableCell align="left">Mentor Name</TableCell>
-                        <TableCell align="left">Mentor Email</TableCell>
-                        <TableCell align="left">Student Name</TableCell>
-                        <TableCell align="left"></TableCell>
-                    </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                    {this.filterBySearch('mentor').map(match => (
-                        <TableRow key={match.id}>
-                        <TableCell component="th" scope="row">
-                            {match.mentor.id}
-                        </TableCell>
-                        <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
-                        <TableCell align="left">{match.mentor.email}</TableCell>
-                        <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
-                        <TableCell align="left">
-                            <Button 
-                                variant="outlined" 
-                                size="small" 
-                                color="primary" 
-                                className={classes.margin}
-                                onClick={e => this.deleteMatch(e, match.id)}
-                            >
-                                Delete
-                            </Button>
-                        </TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
+                <Table
+                    tableHead={[
+                    " ",
+                    "Last Name",
+                    "First Name",
+                    "Email",
+                    "",
+                    ]}
+                    tableData={this.filterBySearch('mentor').map((mentor, index)=> {
+                        return (
+                            [
+                                ' ', 
+                                mentor.last_name, 
+                                mentor.first_name, 
+                                mentor.email,                                  
+                                [
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentor.id)} >
+                                        <Person />
+                                    </Button>,
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentor)}>
+                                        <Close />
+                                    </Button>
+                                ]
+                            ]
+                        )
+                    })}
+                />
             </Paper>
         );
     }
@@ -142,4 +163,4 @@ class MentorAssignments extends React.Component {
 //     matchedUsers: PropTypes.array.isRequired
 // };
 
-export default connect(null, { deleteMatch })(withStyles(styles)(MentorAssignments));
+export default connect(null, { updateUser })(withStyles(styles)(MentorAssignments));

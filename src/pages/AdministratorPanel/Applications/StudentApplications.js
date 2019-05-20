@@ -1,18 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
-import { withStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import { connect } from 'react-redux';
+import { createMatch, deleteMentee } from '../../../actions';
+import { withStyles } from "@material-ui/core/styles"
+import Table from "../../../material-components/Table/Table.jsx";
+import Button from "../../../material-components/CustomButtons/Button.jsx";
+// material-ui icons
+import Person from "@material-ui/icons/Person";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
+import Done from "@material-ui/icons/Done";
 import Paper from "@material-ui/core/Paper";
+import LinkIcon from '@material-ui/icons/Link';
+
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
+
+import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
 
 import StudentApplicationCard from './StudentApplicationCard';
 
@@ -55,8 +63,8 @@ class StudentApplications extends React.Component {
         });
     }
 
-    routeToApplication(id) {
-        // history.push(`/user/admin/mentorapplication/${id}`);
+    routeOnClick(id) {
+        history.push(`/user/admin/mentorapplication/${id}`);
     }
 
     changeHandler = (e) => {
@@ -92,17 +100,42 @@ class StudentApplications extends React.Component {
         return filteredUsers;
     };
 
+    clickHandler = (e, mentorId, menteeId, status) => {
+        e.preventDefault();
+        if(status === "approved"){
+            this.props.createMatch({
+                mentor_id: mentorId,
+                mentee_id: menteeId,
+                deleted: false,
+            });
+        } else if(status === "denied") {
+            this.props.deleteMentee(menteeId);
+        }
+    }
+
     render() {
+        const { classes } = this.props;
+        const fillButtons = [
+          { color: "info", icon: Person },
+          { color: "success", icon: Edit },
+          { color: "danger", icon: Close }
+        ].map((prop, key) => {
+          return (
+            <Button justIcon size="sm" color={"danger"} >
+                <Close />
+            </Button>
+          );
+        });
+
         let menteeApplications = [];
         this.filterBySearch("mentee").forEach(mentee => {
             this.state.mentors.forEach(mentor => {
-                if(mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
+                if(!mentee.deleted && mentee.wanted_mentor_id === mentor.mentor_id && mentor.status === "AVAILABLE"){
                     menteeApplications.push(mentee);
                 }
             });
         });
-        
-        const { classes } = this.props;
+        console.log(menteeApplications);
 
         return (
             <Paper className={classes.root}>
@@ -122,27 +155,39 @@ class StudentApplications extends React.Component {
                     <SearchIcon />
                 </IconButton>
 
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                        <TableCell>Mentee ID</TableCell>
-                            <TableCell align="left">Last Name</TableCell>
-                            <TableCell align="left">First Name</TableCell>
-                            <TableCell align="left">Email</TableCell>
-                            <TableCell align="left">Desired Mentor</TableCell>
-                            <TableCell align="left"></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {menteeApplications.map((mentee, index) => {
-                            return ( <StudentApplicationCard key={index} 
-                                        mentee={mentee} 
-                                        users={this.props.users} 
-                                        evaluateMatch={this.evaluateMatch}
-                                    /> )
-                        })}
-                </TableBody>
-            </Table>
+                <Table
+                    tableHead={[
+                    " ",
+                    "Last Name",
+                    "First Name",
+                    "Email",
+                    "Desired Mentor",
+                    "",
+                    ]}
+                    tableData={menteeApplications.map((mentee, index)=> {
+                        return (
+                            [
+                            // <IconButton style={{color: 'black'}} className={classes.iconButton}> <LinkIcon /> </IconButton>, 
+                            ' ',
+                            mentee.last_name, 
+                            mentee.first_name,
+                            mentee.email,
+                            this.props.users.filter(user => {return user.id === mentee.wanted_mentor_id}).map(user => {return user.first_name + " " + user.last_name}),
+                            [
+                                <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentee.id)} >
+                                    <Person />
+                                </Button>,
+                                <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} >
+                                    <Done />
+                                </Button>,
+                                <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} >
+                                    <Close />
+                                </Button>
+                            ]
+                        ]
+                        )
+                    })}
+                />
         </Paper>
         );
     }
@@ -153,4 +198,4 @@ StudentApplications.propTypes = {
     users: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(StudentApplications);
+export default connect(null, { createMatch, deleteMentee })(withStyles(styles)(StudentApplications));

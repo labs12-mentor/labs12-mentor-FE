@@ -32,13 +32,13 @@ class Assignment extends React.Component {
         console.log(this.props);
         let mentorMatch = {};
         let menteeMatch = {};
-        if (this.props.match.params.role === 'mentor') {
+        if (this.props.currentMatch && this.props.match.params.role === 'mentor') {
             this.props.users.forEach((user) => {
                 if (user.id === this.props.currentMatch.mentor_id) {
                     mentorMatch = user;
                 }
             });
-        } else if (this.props.match.params.role === 'mentee') {
+        } else if (this.props.currentMatch && this.props.match.params.role === 'mentee') {
             this.props.users.forEach((user) => {
                 if (user.id === this.props.currentMatch.mentee_id) {
                     menteeMatch = user;

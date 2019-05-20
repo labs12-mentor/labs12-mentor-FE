@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions';
+import { logoutUser, getCurrentUser } from '../actions';
 import NotificationButton from '../pages/NotificationButton';
 
 import { theme } from '../themes.js';
@@ -25,14 +25,18 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+// import navbarsStyle from "../assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.jsx";
+
 
 const styles = theme => ({
   root: {
     width: '100%',
     position: 'fixed',
-    zIndex: 1,
+    zIndex: 1000,
     top: 0,
     marginBottom: 30,
+    color: 'white',
+
   },
   grow: {
     flexGrow: 1,
@@ -40,11 +44,13 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    color: 'white',
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+      color: 'white'
     },
   },
   search: {
@@ -70,6 +76,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'white',
   },
   inputRoot: {
     color: 'inherit',
@@ -100,10 +107,11 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+    color: 'white',
   },
   input: {
     display: 'none',
-  },
+  }
 });
 
 class MaterialNavbar extends React.Component {
@@ -111,6 +119,10 @@ class MaterialNavbar extends React.Component {
     anchorEl: null,
     mobileMoreAnchorEl: null,
   };
+
+  async componentDidMount() {
+    await this.props.getCurrentUser();
+  }
 
   handleProfileMenuOpen = event => {
     this.setState({ anchorEl: event.currentTarget });
@@ -130,6 +142,7 @@ class MaterialNavbar extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);
@@ -144,6 +157,7 @@ class MaterialNavbar extends React.Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem component={RouterLink} to="/user/profile" onClick={this.handleMenuClose}>Profile</MenuItem>
+        {this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <MenuItem component={RouterLink} to="/user/admin/panel" onClick={this.handleMenuClose}>Panel</MenuItem>}
         <MenuItem component={RouterLink} to="/organization" onClick={this.handleMenuClose}>Organization</MenuItem>
         <MenuItem component={RouterLink} to="/" onClick={()=> {this.props.logoutUser(); this.handleMenuClose()}}>Logout</MenuItem>
       </Menu>
@@ -209,15 +223,17 @@ class MaterialNavbar extends React.Component {
 
         <AppBar position="static" color="primary">
           <Toolbar>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              MentorMatch
-            </Typography>
+            <Link component={RouterLink} to="/" style={{textDecoration: 'none'}}>
+              <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+                MentorMatch
+              </Typography>
+            </Link>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
 
             {!this.props.authenticated && 
               navlinksPublic.map((elem, i) => (
-                <Button key={i} component={RouterLink} to={elem.linkTo} color="inherit">
+                <Button key={i} component={RouterLink} to={elem.linkTo} style={{color: "white"}}>
                   {elem.text}
                 </Button>
               ))
@@ -225,15 +241,15 @@ class MaterialNavbar extends React.Component {
             
             {this.props.authenticated && (
               <div>
-                {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)}
-                <IconButton color="inherit" component={RouterLink} to="/user/notifications">
+                {/* {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)} */}
+                <IconButton style={{color: "white"}} component={RouterLink} to="/user/notifications">
                     <NotificationButton />
                 </IconButton>
                 <IconButton
                   aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
-                  color="inherit"
+                  style={{color: "white"}}
                 >
                   <AccountCircle />
                 </IconButton>
@@ -242,8 +258,8 @@ class MaterialNavbar extends React.Component {
             )}
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                <MoreIcon />
+              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} style={{color: "white"}}>
+                <MoreIcon style={{color: "white"}} />
               </IconButton>
             </div>
           </Toolbar>
@@ -271,7 +287,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  logoutUser
+  logoutUser,
+  getCurrentUser
 };
 
 export default connect(

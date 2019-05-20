@@ -81,6 +81,7 @@ class SignIn extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.state);
     this.props.loginUser(this.state);
   };
 
@@ -121,7 +122,7 @@ class SignIn extends Component {
                 Sign in
               </Button>
             </form>
-            <OAuthContainer provider={provider} socket={socket} />
+            {/* <OAuthContainer provider={provider} socket={socket} /> */}
           </Paper>
         </main>
       </MuiThemeProvider>
