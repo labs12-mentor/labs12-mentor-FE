@@ -8,6 +8,12 @@ import { getSpecificMatch, getUsers } from '../../../actions';
 
 import Recommended from './Recommended';
 import MapView from './MapView';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    width: 80%;
+    margin: 60px auto;
+`;
 
 class Assignment extends React.Component {
     state = {
@@ -46,7 +52,7 @@ class Assignment extends React.Component {
             });
         }
         return (
-            <div className='Assignment'>
+            <AppContainer>
                 <Nav tabs>
                     <NavItem>
                         <NavLink
@@ -84,7 +90,7 @@ class Assignment extends React.Component {
                         <MapView mentorMatch={mentorMatch} menteeMatch={menteeMatch} />
                     </TabPane>
                 </TabContent>
-            </div>
+            </AppContainer>
         );
     }
 }

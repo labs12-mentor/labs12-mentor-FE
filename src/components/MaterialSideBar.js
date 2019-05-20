@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
   card: {
-    minWidth: 275,
+    minWidth: 200,
   },
   title: {
     fontSize: 14,

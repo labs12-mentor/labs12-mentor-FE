@@ -26,6 +26,13 @@ import SectionProduct from "./Sections/SectionProduct.jsx";
 import SectionTeam from "./Sections/SectionTeam.jsx";
 import SectionWork from "./Sections/SectionWork.jsx";
 
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    margin: 60px auto;
+    width: 80%;
+`;
+
 class LandingPage extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -36,7 +43,7 @@ class LandingPage extends React.Component {
     return (
       <div>        
         <Parallax image={require("../../assets/img/teaching.jpg")} filter="dark">
-          <div className={classes.container}>
+          <AppContainer className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={6} md={6}>
                 <h1 className={classes.title}>Mentor Match.</h1>
@@ -60,15 +67,18 @@ class LandingPage extends React.Component {
                 </Button>
               </GridItem>
             </GridContainer>
-          </div>
+          </AppContainer>
         </Parallax>
-        <div className={classNames(classes.main, classes.mainRaised)}>
-          <div className={classes.container}>
-            <SectionProduct />
-            <SectionTeam />
+
+        <AppContainer>
+          <div className={classNames(classes.main, classes.mainRaised)}>
+            <div className={classes.container}>
+              <SectionProduct />
+              <SectionTeam />
             {/* <SectionWork /> */}
+            </div>
           </div>
-        </div>
+        </AppContainer>
       </div>
     );
   }

@@ -55,6 +55,14 @@ import profilePageStyle from "../assets/jss/material-kit-pro-react/views/profile
 
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    width: 80%;
+    margin: 60px auto !important;
+    align-self: center;
+`;
+
 const styles = theme => ({
   progress: {
     margin: theme.spacing.unit * 2
@@ -158,7 +166,7 @@ class UserProfile extends React.Component {
             filter="dark"
             className={classes.parallax}
           />
-          <div className={classNames(classes.main, classes.mainRaised)}>
+          <AppContainer className={classNames(classes.main, classes.mainRaised)}>
             <div className={classes.container}>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={6}>
@@ -311,7 +319,7 @@ class UserProfile extends React.Component {
               </div>
               <Clearfix />
             </div>
-          </div>
+          </AppContainer>
         </div>
       );
     }

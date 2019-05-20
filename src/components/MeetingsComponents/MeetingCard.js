@@ -51,7 +51,8 @@ class MeetingCard extends React.Component {
           justIcon
           color="info"
           size="sm"
-          style={{ marginLeft: 30, marginRight: 10 }}
+          // style={{ marginLeft: 30, marginRight: 10 }}
+          style={{ marginRight: 10 }}
           variant="outlined"
           onClick={this.handleClickOpen}
         >
@@ -61,7 +62,7 @@ class MeetingCard extends React.Component {
           justIcon
           color="info"
           size="sm"
-          style={{ marginLeft: 10 }}
+          // style={{ marginLeft: 10 }}
           onClick={() => {
             this.props.deleteMeeting(this.props.id);
           }}

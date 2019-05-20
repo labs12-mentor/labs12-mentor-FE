@@ -9,6 +9,13 @@ import { getSpecificUser } from '../../../actions';
 import ProfileInfo from './ProfileInfo';
 import ApplicationRes from './ApplicationRes';
 
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    width: 80%;
+    margin: 80px auto;
+`;
+
 class Application extends React.Component {
     state = {
         activeTab: '1',
@@ -32,7 +39,7 @@ class Application extends React.Component {
 
     render() {
         return (
-            <div className='Application'>
+            <AppContainer>
                 <Nav tabs>
                     <NavItem>
                         <NavLink
@@ -69,7 +76,7 @@ class Application extends React.Component {
                         <ApplicationRes />
                     </TabPane>
                 </TabContent>
-            </div>
+            </AppContainer>
         );
     }
 }
