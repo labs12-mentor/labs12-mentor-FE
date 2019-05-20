@@ -34,6 +34,7 @@ import blogposts from '../pages/BlogPostPage/BlogPostPage';
 import shoppingcart from '../pages/ShoppingCart';
 
 import materialtable from '../pages/AdministratorPanel/MaterialTable';
+import NavBar from '../components/newNav';
 
 import UserModal from '../components/UserComponents/UserModal'
 

@@ -25,14 +25,18 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+// import navbarsStyle from "../assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.jsx";
+
 
 const styles = theme => ({
   root: {
     width: '100%',
     position: 'fixed',
-    zIndex: 1,
+    zIndex: 1000,
     top: 0,
     marginBottom: 30,
+    color: 'white',
+
   },
   grow: {
     flexGrow: 1,
@@ -40,11 +44,13 @@ const styles = theme => ({
   menuButton: {
     marginLeft: -12,
     marginRight: 20,
+    color: 'white',
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+      color: 'white'
     },
   },
   search: {
@@ -70,6 +76,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'white',
   },
   inputRoot: {
     color: 'inherit',
@@ -100,6 +107,7 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+    color: 'white',
   },
   input: {
     display: 'none',
@@ -217,7 +225,7 @@ class MaterialNavbar extends React.Component {
 
             {!this.props.authenticated && 
               navlinksPublic.map((elem, i) => (
-                <Button key={i} component={RouterLink} to={elem.linkTo} color="inherit">
+                <Button key={i} component={RouterLink} to={elem.linkTo} style={{color: "white"}}>
                   {elem.text}
                 </Button>
               ))
@@ -226,14 +234,14 @@ class MaterialNavbar extends React.Component {
             {this.props.authenticated && (
               <div>
                 {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)}
-                <IconButton color="inherit" component={RouterLink} to="/user/notifications">
+                <IconButton style={{color: "white"}} component={RouterLink} to="/user/notifications">
                     <NotificationButton />
                 </IconButton>
                 <IconButton
                   aria-owns={isMenuOpen ? 'material-appbar' : undefined}
                   aria-haspopup="true"
                   onClick={this.handleProfileMenuOpen}
-                  color="inherit"
+                  style={{color: "white"}}
                 >
                   <AccountCircle />
                 </IconButton>
@@ -242,8 +250,13 @@ class MaterialNavbar extends React.Component {
             )}
             </div>
             <div className={classes.sectionMobile}>
+<<<<<<< HEAD
               <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="info">
                 <MoreIcon />
+=======
+              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} style={{color: "white"}}>
+                <MoreIcon style={{color: "white"}} />
+>>>>>>> c6b54282e4a43817ef26b848d4db7c3bd260d831
               </IconButton>
             </div>
           </Toolbar>

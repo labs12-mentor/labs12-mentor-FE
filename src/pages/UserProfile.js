@@ -274,7 +274,7 @@ class UserProfile extends React.Component {
 }
 
 UserProfile.propTypes = {
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   mentees: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired
 };

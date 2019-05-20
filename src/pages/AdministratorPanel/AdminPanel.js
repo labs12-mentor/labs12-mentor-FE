@@ -9,6 +9,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Face from "@material-ui/icons/Face";
 import Chat from "@material-ui/icons/Chat";
 import Build from "@material-ui/icons/Build";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Group from '@material-ui/icons/Group';
 // core components
 import CustomTabs from "../../material-components/CustomTabs/CustomTabs.jsx";
 
@@ -69,28 +71,22 @@ class AdminPanel extends React.Component {
             matches: [],
             mentees: [],
             mentors: [],
-            menteeUserInfo: [],
-            mentorUserInfo: [],
             value: 0
         };
     }
 
     async componentDidMount() {
-        await this.props
-            .getUsers()
-            .then(async (res) => {
-                await this.props.getMentees();
-                await this.props.getMentors();
-                await this.props.getMatches();
-            })
-            .then((res) => {
-                this.setState({
-                    users: this.props.users,
-                    mentees: this.props.mentees,
-                    mentors: this.props.mentors,
-                    matches: this.props.matches
-                });
-            });
+        await this.props.getUsers()
+        await this.props.getMentees();
+        await this.props.getMentors();
+        await this.props.getMatches();
+
+        this.setState({
+            users: this.props.users,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors,
+            matches: this.props.matches
+        });
     }
 
     toggleTab = (tab) => {
@@ -106,30 +102,32 @@ class AdminPanel extends React.Component {
       };
 
     filterMentees = () => {
+        const menteeUserInfo = [];
         this.state.users.filter((user) => {
             this.state.mentees.map((mentee) => {
-                if (user.id === mentee.user_id) {
+                if (user.id === mentee.user_id && !mentee.deleted) {
                     user.wanted_mentor_id = mentee.wanted_mentor_id;
-                    this.state.menteeUserInfo.push(user);
+                    menteeUserInfo.push(user);
                 }
             });
         });
 
-        return this.state.menteeUserInfo;
+        return menteeUserInfo;
     };
 
     filterMentors = () => {
+        const mentorUserInfo = []
         this.state.users.filter((user) => {
             this.state.mentors.map((mentor) => {
-                if (user.id === mentor.user_id) {
+                if (user.id === mentor.user_id  && !mentor.deleted) {
                     user.status = mentor.status;
                     user.mentor_id = mentor.id;
-                    this.state.mentorUserInfo.push(user);
+                    mentorUserInfo.push(user);
                 }
             });
         });
 
-        return this.state.mentorUserInfo;
+        return mentorUserInfo;
     };
 
     render() {
@@ -145,11 +143,9 @@ class AdminPanel extends React.Component {
                 this.state.users.forEach(user => {
                     if(user.id === match.mentor_id){
                         userMatchInfo.mentor = user;
-                        // userMatchInfo.mentee = user;//delete according to below
                     } else if(user.id === match.mentee_id){
                         userMatchInfo.mentee = user;
                     }
-                    //this needs to be uncommented and the above line removed when the mentor/mentee ids in match are different
                     
                 });
                 matchedUsers.push(userMatchInfo);
@@ -161,9 +157,9 @@ class AdminPanel extends React.Component {
         
         return (
             <div className={classes.root}>
-            <CustomTabs
-        headerColor="info"
-        tabs={[
+            <CustomTabs 
+            headerColor="info"
+            tabs={[
           {
             tabName: "Mentor Applications",
             tabIcon: Face,
@@ -177,7 +173,7 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Match Applications",
-            tabIcon: Chat,
+            tabIcon: Group,
             tabContent: (
                 <MatchApplications 
                     users={this.state.users}
@@ -188,18 +184,19 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Mentor Assignments",
-            tabIcon: Build,
+            tabIcon: Face,
             tabContent: (
                 <MentorAssignments 
                     matchedUsers={matchedUsers} 
                     users={this.state.users}
                     matches={this.state.matches}
+                    mentors={this.filterMentors()}
                 />
             )
           },
           {
             tabName: "Match Assignments",
-            tabIcon: Build,
+            tabIcon: Group,
             tabContent: (
                 <MatchAssignments
                     matchedUsers={matchedUsers} 
@@ -210,7 +207,7 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Profile Forms",
-            tabIcon: Build,
+            tabIcon: AccountCircle,
             tabContent: (
               <p className={classes.textCenter}>
               </p>
@@ -219,34 +216,6 @@ class AdminPanel extends React.Component {
         ]}
       />
       </div>
-            // <NoSsr>
-            //     <div className={classes.root}>
-            //         <MaterialTabs />
-            //         <MuiThemeProvider theme={theme}>
-
-            //         <AppBar position="static">
-            //         <Tabs variant="fullWidth" value={value} onChange={this.handleChange} style={styles.primaryText} >
-            //             <Tab label="Applications" />
-            //             <Tab label="Match Assignments" />
-            //             <Tab label="Profile Forms" />
-            //         </Tabs>
-            //         </AppBar>
-            //         {value === 0 && 
-            //             <Applications
-            //                 users={this.state.users}
-            //                 mentees={this.filterMentees()}
-            //                 mentors={this.filterMentors()} 
-            //             />}
-            //         {value === 1 && 
-            //             <Assignments 
-            //                 matchedUsers={matchedUsers} 
-            //                 users={this.state.users}
-            //                 matches={this.state.matches}
-            //             />}
-            //         {value === 2 && <ProfileForms />}
-            //         </MuiThemeProvider>
-            //     </div>
-            // </NoSsr>
         );
     }
 }

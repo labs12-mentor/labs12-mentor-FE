@@ -15,6 +15,9 @@ import ListItem from "@material-ui/core/ListItem";
 import Camera from "@material-ui/icons/Camera";
 import Palette from "@material-ui/icons/Palette";
 import People from "@material-ui/icons/People";
+import AirportShuttle from "@material-ui/icons/AirportShuttle";
+import PeopleOutline from "@material-ui/icons/PeopleOutline";
+import PersonAdd from '@material-ui/icons/PersonAdd';
 import Add from "@material-ui/icons/Add";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
@@ -172,7 +175,7 @@ class UserProfile extends React.Component {
                 tabs={[
                   {
                     tabButton: "Experiences",
-                    tabIcon: Palette,
+                    tabIcon: AirportShuttle,
                     tabContent: (
                       <GridContainer>
                         <GridItem
@@ -200,7 +203,7 @@ class UserProfile extends React.Component {
                   },
                   {
                     tabButton: "Meetings",
-                    tabIcon: Palette,
+                    tabIcon: PeopleOutline,
                     tabContent: (
                       <GridContainer>
                         <GridItem
@@ -237,7 +240,7 @@ class UserProfile extends React.Component {
                   },
                   {
                     tabButton: "User Update",
-                    tabIcon: Camera,
+                    tabIcon: PersonAdd,
                     tabContent: (
                       <GridContainer justify="center" style={{ width: '100%' }}>
                         <UserProfileForm style={{ width: '100%' }} />

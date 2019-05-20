@@ -63,6 +63,7 @@ class MeetingsForm extends React.Component {
             <FormControl margin="normal" required fullWidth>
               <InputLabel> Match id</InputLabel>
               <Input
+                type="number"
                 name="match_id"
                 placeholder="match id"
                 value={this.state.match_id}

@@ -122,7 +122,7 @@ class SignIn extends Component {
                 Sign in
               </Button>
             </form>
-            <OAuthContainer provider={provider} socket={socket} />
+            {/* <OAuthContainer provider={provider} socket={socket} /> */}
           </Paper>
         </main>
       </MuiThemeProvider>
