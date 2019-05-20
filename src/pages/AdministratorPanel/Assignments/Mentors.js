@@ -76,11 +76,15 @@ class MentorAssignments extends React.Component {
 
     filterBySearch = (role) => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        const filteredMentees = this.props.matchedUsers.filter((match) => {
+        const approvedMentors = this.props.users.filter(user => {
+            return user.role === "MENTOR"
+        });
+
+        const filteredMentees = approvedMentors.filter(mentor => {
             return (
-                match[role].last_name.toLowerCase().includes(searchInput) ||
-                match[role].first_name.toLowerCase().includes(searchInput) ||
-                match[role].email.toLowerCase().includes(searchInput)
+                mentor.last_name.toLowerCase().includes(searchInput) ||
+                mentor.first_name.toLowerCase().includes(searchInput) ||
+                mentor.email.toLowerCase().includes(searchInput)
             );
         });
 
@@ -105,10 +109,6 @@ class MentorAssignments extends React.Component {
 
     render() {
         const { classes } = this.props;
-        
-          const approvedMentors = this.props.users.filter(user => {
-              return user.role === "MENTOR"
-          });
           
         return (
             <Paper className={classes.root}>
@@ -135,7 +135,7 @@ class MentorAssignments extends React.Component {
                     "Email",
                     "",
                     ]}
-                    tableData={approvedMentors.map((mentor, index)=> {
+                    tableData={this.filterBySearch('mentor').map((mentor, index)=> {
                         return (
                             [
                                 ' ', 
