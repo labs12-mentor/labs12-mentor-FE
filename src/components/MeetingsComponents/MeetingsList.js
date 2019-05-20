@@ -96,13 +96,15 @@ class MeetingsList extends React.Component {
               aria-labelledby="form-dialog-title"
             >
               <DialogContent>
-                <MeetingsForm canEdit={false} />
+                <MeetingsForm canEdit={false} 
+                handleClose={this.handleClose}
+                />
               </DialogContent>
-              <DialogActions>
+              {/* <DialogActions>
                 <Button onClick={this.handleClose} color="info">
                   Cancel
                 </Button>
-              </DialogActions>
+              </DialogActions> */}
             </Dialog>
 
           <Table

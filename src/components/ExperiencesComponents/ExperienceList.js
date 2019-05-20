@@ -88,7 +88,7 @@ class ExperienceList extends React.Component {
             <ExperienceForm canEdit={false} userId={this.props.userId} />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleClose} color="warning">
               Cancel
             </Button>
           </DialogActions>
