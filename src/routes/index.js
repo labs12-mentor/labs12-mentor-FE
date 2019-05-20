@@ -52,7 +52,7 @@ const Routes = (props) => {
         <Router history={props.history}>
             <MaterialNavbar />
             <AppCont>
-            <Route exact path='/' component={RouteNoAuthNeeded(LandingPage)} />
+            <Route exact path='/' component={LandingPage} />
             <Route
                 exact
                 path='/organization/register'

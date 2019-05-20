@@ -111,7 +111,7 @@ const styles = theme => ({
   },
   input: {
     display: 'none',
-  },
+  }
 });
 
 class MaterialNavbar extends React.Component {
@@ -217,9 +217,11 @@ class MaterialNavbar extends React.Component {
 
         <AppBar position="static" color="primary">
           <Toolbar>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              MentorMatch
-            </Typography>
+            <Link component={RouterLink} to="/" style={{textDecoration: 'none'}}>
+              <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+                MentorMatch
+              </Typography>
+            </Link>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
 
