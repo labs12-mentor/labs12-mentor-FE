@@ -50,7 +50,7 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#cj" onClick={e => e.preventDefault()}>
                         <img src={cj} alt="..." />
                       </a>
                       <div
@@ -93,7 +93,7 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#jordan" onClick={e => e.preventDefault()}>
                         <img src={jordan} alt="..." />
                       </a>
                       <div
@@ -140,7 +140,7 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#jor" onClick={e => e.preventDefault()}>
                         <img src={jor} alt="..." />
                       </a>
                       <div
@@ -182,7 +182,7 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#lukas" onClick={e => e.preventDefault()}>
                         <img src={lukas} alt="..." />
                       </a>
                       <div
@@ -196,7 +196,7 @@ class SectionTeam extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={7} md={7}>
                     <CardBody plain>
-                      <h4 className={classes.cardTitle}>Lukas Siatkas</h4>
+                      <h4 className={classes.cardTitle}>Lukas Siatka</h4>
                       <Muted>
                         <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
                       </Muted>
@@ -224,7 +224,7 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#kathryn" onClick={e => e.preventDefault()}>
                         <img src={kathryn} alt="..." />
                       </a>
                       <div
@@ -266,7 +266,7 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <a href="#thomas" onClick={e => e.preventDefault()}>
                         <img src={thomas} alt="..." />
                       </a>
                       <div
