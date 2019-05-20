@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
+
+import { deleteMatch } from '../../../actions';
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Table from "../../../material-components/Table/Table.jsx";
@@ -25,8 +27,6 @@ import Close from "@material-ui/icons/Close";
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
-
-import { deleteMatch } from '../../../actions';
 
 const styles = theme => ({
     root: {
@@ -94,20 +94,15 @@ class StudentAssignments extends React.Component {
         return filteredMentees;
     };
 
+    clickHandler = (e, match) => {
+        e.preventDefault();
+        
+        console.log(match);
+        this.props.deleteMatch(match.id);
+    }
+
     render() {
         const { classes } = this.props;
-
-        const fillButtons = [
-            { color: "info", icon: Person },
-            { color: "success", icon: Edit },
-            { color: "danger", icon: Close }
-          ].map((prop, key) => {
-            return (
-              <Button justIcon size="sm" color={prop.color} key={key}>
-                <prop.icon />
-              </Button>
-            );
-          });
 
         return (
             <Paper className={classes.root}>
@@ -136,12 +131,7 @@ class StudentAssignments extends React.Component {
                     ]}
                     tableData={this.filterBySearch('mentee').map(match => (
                         [
-                            <IconButton 
-                                style={{color: 'black'}} 
-                                className={classes.iconButton}
-                            > 
-                                <LinkIcon /> 
-                            </IconButton>,
+                            ' ',
                             `${match.mentee.first_name} ${match.mentee.last_name}`,
                             match.mentee.email,
                             `${match.mentor.first_name} ${match.mentor.last_name}`,                             
@@ -149,7 +139,7 @@ class StudentAssignments extends React.Component {
                                 <Button justIcon size="sm" color={"info"} >
                                     <Person />
                                 </Button>,
-                                <Button justIcon size="sm" color={"danger"} >
+                                <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, match)} >
                                     <Close />
                                 </Button>
                             ]

@@ -22,7 +22,7 @@ import RegDetails from '../pages/RegistrationDetails';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
-import MaterialNavbar from '../components/MaterialNavBar';
+// import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 import OrganizationRegister from '../components/MaterialSignUp';
@@ -33,6 +33,7 @@ import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
 import materialtable from '../pages/AdministratorPanel/MaterialTable';
+import NavBar from '../components/newNav';
 
 import styled from 'styled-components';
 
@@ -45,7 +46,7 @@ const AppCont = styled.div`
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-            <MaterialNavbar />
+            <NavBar />
             <AppCont>
             <Route exact path='/' component={RouteNoAuthNeeded(LandingPage)} />
             <Route
@@ -53,7 +54,6 @@ const Routes = (props) => {
                 path='/organization/register'
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
-            <Route exact path='/table' component={materialtable} />
             <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
