@@ -158,37 +158,6 @@ class StudentAssignments extends React.Component {
                     ]}
                     customHeadClassesForCells={[0, 4, 5]}
                 />
-
-                {/* <Table className={classes.table}>
-                    <TableHead>
-                    <TableRow>
-                        {/* <TableCell>Mentee ID</TableCell> */}
-                        {/* <TableCell align="left">Mentee Name</TableCell>
-                        <TableCell align="left">Mentee Email</TableCell>
-                        <TableCell align="left">Mentor Name</TableCell>
-                        <TableCell align="left"></TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {this.filterBySearch('mentee').map(match => (
-                        <TableRow key={match.id}>
-                            {/* <TableCell component="th" scope="row">
-                                {match.mentee.id}
-                            </TableCell> */}
-                            {/* <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
-                            <TableCell align="left">{match.mentee.email}</TableCell>
-                            <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
-                            <TableCell align="left">
-                                <Tooltip title="Delete">
-                                    <IconButton>
-                                        <DeleteForeverIcon color='primary' className={classes.DeleteForever} onClick={e => this.deleteMatch(e, match.id)} />
-                                    </IconButton>
-                                </Tooltip>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody> */}
-                {/* </Table> */}
             </Paper>
         );
     }
