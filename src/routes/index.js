@@ -22,7 +22,7 @@ import RegDetails from '../pages/RegistrationDetails';
 import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
-// import MaterialNavbar from '../components/MaterialNavBar';
+import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 import OrganizationRegister from '../components/MaterialSignUp';
@@ -34,7 +34,7 @@ import blogposts from '../pages/BlogPostPage/BlogPostPage';
 import shoppingcart from '../pages/ShoppingCart';
 
 import materialtable from '../pages/AdministratorPanel/MaterialTable';
-import NavBar from '../components/newNav';
+// import NavBar from '../components/newNav';
 
 import UserModal from '../components/UserComponents/UserModal'
 
@@ -50,7 +50,7 @@ const AppCont = styled.div`
 const Routes = (props) => {
     return (
         <Router history={props.history}>
-            <NavBar />
+            <MaterialNavbar />
             <AppCont>
             <Route exact path='/' component={RouteNoAuthNeeded(LandingPage)} />
             <Route
