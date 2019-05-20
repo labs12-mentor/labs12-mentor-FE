@@ -55,14 +55,14 @@ const tableStyle = {
     lineHeight: "1.5em",
     padding: "12px 8px!important",
     verticalAlign: "middle",
-    fontSize: "0.875rem",
+    fontSize: "1.1rem",
     borderBottom: "none",
     borderTop: "1px solid " + grayColor[6],
     position: "relative",
     color: grayColor[1]
   },
   tableHeadCell: {
-    fontSize: "1.063rem",
+    fontSize: "1.3rem",
     borderBottomWidth: "1px",
     fontWeight: "300",
     color: grayColor[15],
@@ -70,12 +70,12 @@ const tableStyle = {
   },
   tableCellTotal: {
     fontWeight: "500",
-    fontSize: "1.0625rem",
+    fontSize: "2rem",
     paddingTop: "20px",
     textAlign: "right"
   },
   tableCellAmount: {
-    fontSize: "26px",
+    fontSize: "40px",
     fontWeight: "300",
     marginTop: "5px",
     textAlign: "right"

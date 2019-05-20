@@ -91,7 +91,7 @@ class UserLogin extends React.Component {
                     <p
                       className={`${classes.description} ${classes.textCenter}`}
                     >
-                      Or Be Classical
+                      or be classical
                     </p>
                     <CardBody signup>
                             <FormGroup row>
