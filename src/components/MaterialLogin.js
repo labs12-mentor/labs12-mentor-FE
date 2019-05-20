@@ -85,14 +85,7 @@ class UserLogin extends React.Component {
                     >
                       <h4 className={classes.cardTitle}>Login</h4>
                       <div className={classes.socialLine}>                        
-                        <Button
-                          justIcon
-                          color="transparent"
-                          className={classes.iconButtons}
-                          onClick={e => e.preventDefault()}
-                        >
-                          <i className="fab fa-github lg" style={{ fontSize: 30 }} />
-                        </Button>
+                        <OAuthContainer provider={provider} socket={socket} />
                       </div>
                     </CardHeader>
                     <p
@@ -141,7 +134,6 @@ class UserLogin extends React.Component {
                       </Button>
                     </div>
                   </form>
-                  <OAuthContainer provider={provider} socket={socket} />
                 </Card>
               </GridItem>
             </GridContainer>
