@@ -11,7 +11,11 @@ import GridContainer from "../../../material-components/Grid/GridContainer.jsx";
 import GridItem from "../../../material-components/Grid/GridItem.jsx";
 import InfoArea from "../../../material-components/InfoArea/InfoArea.jsx";
 
+
+
+
 import productStyle from "../../../assets/jss/material-kit-pro-react/views/landingPageSections/productStyle.jsx";
+
 
 class SectionProduct extends React.Component {
   render() {
@@ -20,13 +24,9 @@ class SectionProduct extends React.Component {
       <div className={classes.section}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={8} md={8}>
-            <h2 className={classes.title}>Let's talk product</h2>
+            <h2 className={classes.title}>Provide the connection between your organization's mentors and mentees</h2>
             <h5 className={classes.description}>
-              This is the paragraph where you can write more details about your
-              product. Keep you user engaged by providing meaningful
-              information. Remember that by this time, the user is curious,
-              otherwise he wouldn't scroll to get here. Add a button if you want
-              the user to see more.
+              Create the perfect match for your mentees to progress and improve. Mentors can keep a record of meetings and discussions with their mentees without a worry.
             </h5>
           </GridItem>
         </GridContainer>
@@ -35,7 +35,7 @@ class SectionProduct extends React.Component {
             <GridItem xs={12} sm={4} md={4}>
               <InfoArea
                 title="Create an Organization"
-                description="Using Profiles and Machine learning to assist your match mentors and mentees based on interests, skills, and location. Helping you manage your mentorship program."
+                description="Manage users of your organization through your personal admin panel"
                 icon={Chat}
                 iconColor="info"
                 vertical
