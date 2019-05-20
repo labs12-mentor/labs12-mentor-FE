@@ -25,15 +25,18 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+// import navbarsStyle from "../assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.jsx";
 
 
 const styles = theme => ({
   root: {
     width: '100%',
     position: 'fixed',
-    zIndex: 1,
+    zIndex: 1000,
     top: 0,
     marginBottom: 30,
+    color: 'white',
+
   },
   grow: {
     flexGrow: 1,
@@ -46,6 +49,7 @@ const styles = theme => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+      color: 'white'
     },
   },
   search: {
