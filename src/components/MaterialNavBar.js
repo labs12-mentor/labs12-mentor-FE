@@ -242,7 +242,7 @@ class MaterialNavbar extends React.Component {
             )}
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
+              <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="info">
                 <MoreIcon />
               </IconButton>
             </div>

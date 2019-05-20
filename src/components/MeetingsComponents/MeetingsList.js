@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { getMeetings } from "../../actions";
 import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
-import styled from "styled-components";
-import MaterialSideBar from "../MaterialSideBar";
 import Button from "../../material-components/CustomButtons/Button.jsx";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -13,8 +11,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import Edit from "@material-ui/icons/Edit";
-import Clear from "@material-ui/icons/Clear";
 // core components
 import Table from "../../material-components/Table/Table.jsx";
 
