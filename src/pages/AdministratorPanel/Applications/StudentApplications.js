@@ -63,8 +63,8 @@ class StudentApplications extends React.Component {
         });
     }
 
-    routeToApplication(id) {
-        // history.push(`/user/admin/mentorapplication/${id}`);
+    routeOnClick(id) {
+        history.push(`/user/admin/mentorapplication/${id}`);
     }
 
     changeHandler = (e) => {
@@ -174,7 +174,7 @@ class StudentApplications extends React.Component {
                             mentee.email,
                             this.props.users.filter(user => {return user.id === mentee.wanted_mentor_id}).map(user => {return user.first_name + " " + user.last_name}),
                             [
-                                <Button justIcon size="sm" color={"info"} >
+                                <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentee.id)} >
                                     <Person />
                                 </Button>,
                                 <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} >
@@ -188,28 +188,6 @@ class StudentApplications extends React.Component {
                         )
                     })}
                 />
-
-                {/* <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            {/* <TableCell>Mentee ID</TableCell> */}
-                            {/* <TableCell align="left">Last Name</TableCell>
-                            <TableCell align="left">First Name</TableCell>
-                            <TableCell align="left">Email</TableCell>
-                            <TableCell align="left">Desired Mentor</TableCell>
-                            <TableCell align="left"></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {menteeApplications.map((mentee, index) => {
-                            return ( <StudentApplicationCard key={index} 
-                                        mentee={mentee} 
-                                        users={this.props.users} 
-                                        evaluateMatch={this.evaluateMatch}
-                                    /> )
-                        })}
-                </TableBody>
-            </Table> */}
         </Paper>
         );
     }

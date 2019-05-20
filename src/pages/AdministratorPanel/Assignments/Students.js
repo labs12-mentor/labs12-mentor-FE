@@ -63,8 +63,8 @@ class StudentAssignments extends React.Component {
     }
 
 
-    routeToAssignments(id) {
-        // history.push(`/user/admin/mentorassignment/${id}/mentee`);
+    routeOnClick(id) {
+        history.push(`/user/admin/mentorassignment/${id}/mentee`);
     }
 
     changeHandler = (e) => {
@@ -136,7 +136,7 @@ class StudentAssignments extends React.Component {
                             match.mentee.email,
                             `${match.mentor.first_name} ${match.mentor.last_name}`,                             
                             [
-                                <Button justIcon size="sm" color={"info"} >
+                                <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(match.mentee.id)} >
                                     <Person />
                                 </Button>,
                                 <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, match)} >

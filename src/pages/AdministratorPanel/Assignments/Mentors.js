@@ -57,8 +57,8 @@ class MentorAssignments extends React.Component {
         searchBarContents: '',
     }
 
-    routeToAssignments(id) {
-        // history.push(`/user/admin/mentorassignment/${id}/mentor`);
+    routeOnClick(id) {
+        history.push(`/user/admin/mentorassignment/${id}/mentor`);
     }
 
     changeHandler = (e) => {
@@ -143,7 +143,7 @@ class MentorAssignments extends React.Component {
                                 mentor.first_name, 
                                 mentor.email,                                  
                                 [
-                                    <Button justIcon size="sm" color={"info"} >
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentor.id)} >
                                         <Person />
                                     </Button>,
                                     <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentor)}>
@@ -154,37 +154,6 @@ class MentorAssignments extends React.Component {
                         )
                     })}
                 />
-
-                {/* <Table className={classes.table}>
-                    <TableHead>
-                    <TableRow>
-                        {/* <TableCell>Mentor ID</TableCell> */}
-                        {/* <TableCell align="left">Mentor Name</TableCell>
-                        <TableCell align="left">Mentor Email</TableCell>
-                        <TableCell align="left">Student Name</TableCell>
-                        <TableCell align="left"></TableCell>
-                    </TableRow>
-                    </TableHead>
-
-                    <TableBody>
-                    {this.filterBySearch('mentor').map(match => (
-                        <TableRow key={match.id}>
-                        {/* <TableCell component="th" scope="row">
-                            {match.mentor.id}
-                        </TableCell> */}
-                        {/* <TableCell align="left">{match.mentor.first_name + " " + match.mentor.last_name}</TableCell>
-                        <TableCell align="left">{match.mentor.email}</TableCell>
-                        <TableCell align="left">{match.mentee.first_name + " " + match.mentee.last_name}</TableCell>
-                        <TableCell align="left">
-                            <Tooltip title="Delete">
-                                <IconButton>
-                                    <DeleteForeverIcon color='primary' className={classes.DeleteForever} onClick={e => this.deleteMatch(e, match.id)} />
-                                </IconButton>                            
-                            </Tooltip>
-                        </TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>*/}
             </Paper>
         );
     }

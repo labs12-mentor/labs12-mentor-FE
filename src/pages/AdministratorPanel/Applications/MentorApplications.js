@@ -55,8 +55,8 @@ class MentorApplications extends React.Component {
         searchBarContents: ''
     }
 
-    routeToApplication(id) {
-        // history.push(`/user/admin/mentorapplication/${id}`);
+    routeOnClick(id) {
+        history.push(`/user/admin/mentorapplication/${id}`);
     }
 
     changeHandler = (e) => {
@@ -151,7 +151,7 @@ class MentorApplications extends React.Component {
                                 mentor.first_name, 
                                 mentor.email, 
                                 [
-                                    <Button justIcon size="sm" color={"info"} >
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentor.id)}>
                                         <Person />
                                     </Button>,
                                     <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentor, "approved")} >
