@@ -26,6 +26,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 // const style = {
 //   ...cardsStyle
@@ -187,7 +188,19 @@ class MentorProfile extends React.Component {
             </Grid>
           </div>
         ) : (
-          <h2>Loading</h2>
+          <div>
+            <Grid
+              container
+              // spacing={0}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              spacing={24}
+              style={{ minHeight: "100vh" }}
+            >
+              <CircularProgress className={classes.progress} />
+            </Grid>
+          </div>
         )}
       </div>
     );
