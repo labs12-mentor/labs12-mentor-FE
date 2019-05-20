@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
+import { connect } from 'react-redux';
+import { createMatch, deleteMentee } from '../../../actions';
 import { withStyles } from "@material-ui/core/styles"
 import Table from "../../../material-components/Table/Table.jsx";
 import Button from "../../../material-components/CustomButtons/Button.jsx";
@@ -8,6 +10,7 @@ import Button from "../../../material-components/CustomButtons/Button.jsx";
 import Person from "@material-ui/icons/Person";
 import Edit from "@material-ui/icons/Edit";
 import Close from "@material-ui/icons/Close";
+import Done from "@material-ui/icons/Done";
 import Paper from "@material-ui/core/Paper";
 import LinkIcon from '@material-ui/icons/Link';
 
@@ -114,6 +117,8 @@ class StudentApplications extends React.Component {
             //remove that mentor from the available mentors
             
             // this.props.evaluateMatch(e, mentorId, menteeId);
+        } else if(status === "deny") {
+            this.props.deleteMentee(menteeId);
         }
     }
 
@@ -125,8 +130,8 @@ class StudentApplications extends React.Component {
           { color: "danger", icon: Close }
         ].map((prop, key) => {
           return (
-            <Button justIcon size="sm" color={prop.color} key={key}>
-              <prop.icon />
+            <Button justIcon size="sm" color={"danger"} >
+                <Close />
             </Button>
           );
         });
@@ -170,12 +175,23 @@ class StudentApplications extends React.Component {
                     tableData={menteeApplications.map((mentee, index)=> {
                         return (
                             [
-                            <IconButton style={{color: 'black'}} className={classes.iconButton}> <LinkIcon /> </IconButton>, 
+                            // <IconButton style={{color: 'black'}} className={classes.iconButton}> <LinkIcon /> </IconButton>, 
+                            ' ',
                             mentee.last_name, 
                             mentee.first_name,
                             mentee.email,
                             this.props.users.filter(user => {return user.id === mentee.wanted_mentor_id}).map(user => {return user.first_name + " " + user.last_name}),
-                            fillButtons
+                            [
+                                <Button justIcon size="sm" color={"info"} >
+                                    <Person />
+                                </Button>,
+                                <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "approved")} >
+                                    <Done />
+                                </Button>,
+                                <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee.id, "denied")} >
+                                    <Close />
+                                </Button>
+                            ]
                         ]
                         )
                     })}
@@ -212,4 +228,4 @@ StudentApplications.propTypes = {
     users: PropTypes.array.isRequired
 };
 
-export default withStyles(styles)(StudentApplications);
+export default connect(null, { createMatch, deleteMentee })(withStyles(styles)(StudentApplications));

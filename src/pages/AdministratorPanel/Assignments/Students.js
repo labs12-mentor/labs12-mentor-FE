@@ -19,6 +19,7 @@ import style from "../../../assets/jss/material-kit-pro-react/views/componentsSe
 
 import Person from "@material-ui/icons/Person";
 import Edit from "@material-ui/icons/Edit";
+import Done from '@material-ui/icons/Done';
 import Close from "@material-ui/icons/Close";
 
 import InputBase from '@material-ui/core/InputBase';
@@ -143,8 +144,15 @@ class StudentAssignments extends React.Component {
                             </IconButton>,
                             `${match.mentee.first_name} ${match.mentee.last_name}`,
                             match.mentee.email,
-                            `${match.mentor.first_name} ${match.mentor.last_name}`,
-                            fillButtons
+                            `${match.mentor.first_name} ${match.mentor.last_name}`,                             
+                            [
+                                <Button justIcon size="sm" color={"info"} >
+                                    <Person />
+                                </Button>,
+                                <Button justIcon size="sm" color={"danger"} >
+                                    <Close />
+                                </Button>
+                            ]
                         ]
                     ))}
                     customCellClasses={[

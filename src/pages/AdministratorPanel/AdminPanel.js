@@ -9,6 +9,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Face from "@material-ui/icons/Face";
 import Chat from "@material-ui/icons/Chat";
 import Build from "@material-ui/icons/Build";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Group from '@material-ui/icons/Group';
 // core components
 import CustomTabs from "../../material-components/CustomTabs/CustomTabs.jsx";
 
@@ -161,9 +163,9 @@ class AdminPanel extends React.Component {
         
         return (
             <div className={classes.root}>
-            <CustomTabs
-        headerColor="info"
-        tabs={[
+            <CustomTabs 
+            headerColor="info"
+            tabs={[
           {
             tabName: "Mentor Applications",
             tabIcon: Face,
@@ -177,7 +179,7 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Match Applications",
-            tabIcon: Chat,
+            tabIcon: Group,
             tabContent: (
                 <MatchApplications 
                     users={this.state.users}
@@ -188,7 +190,7 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Mentor Assignments",
-            tabIcon: Build,
+            tabIcon: Face,
             tabContent: (
                 <MentorAssignments 
                     matchedUsers={matchedUsers} 
@@ -199,7 +201,7 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Match Assignments",
-            tabIcon: Build,
+            tabIcon: Group,
             tabContent: (
                 <MatchAssignments
                     matchedUsers={matchedUsers} 
@@ -210,7 +212,7 @@ class AdminPanel extends React.Component {
           },
           {
             tabName: "Profile Forms",
-            tabIcon: Build,
+            tabIcon: AccountCircle,
             tabContent: (
               <p className={classes.textCenter}>
               </p>

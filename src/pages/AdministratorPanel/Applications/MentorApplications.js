@@ -5,7 +5,7 @@ import history from '../../../history';
 import withStyles from "@material-ui/core/styles/withStyles";
 // material-ui icons
 import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
+import Done from "@material-ui/icons/Done";
 import Close from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
 import LinkIcon from '@material-ui/icons/Link';
@@ -31,7 +31,7 @@ const styles = theme => ({
       overflowX: "auto",
     },
     table: {
-      minWidth: 700
+      minWidth: 700,
     },
     input: {
         flex: 1,
@@ -94,7 +94,7 @@ class MentorApplications extends React.Component {
         const { classes } = this.props;
         const fillButtons = [
           { color: "info", icon: Person },
-          { color: "success", icon: Edit },
+          { color: "success", icon: Done },
           { color: "danger", icon: Close }
         ].map((prop, key) => {
           return (
@@ -129,16 +129,27 @@ class MentorApplications extends React.Component {
                     tableData={this.filterBySearch('mentor').map((mentor, index)=> {
                         return (
                             [
-                                <IconButton 
-                                    style={{color: 'black'}} 
-                                    className={classes.iconButton}
-                                > 
-                                    <LinkIcon /> 
-                                </IconButton>, 
+                                // <IconButton 
+                                //     style={{color: 'black'}} 
+                                //     className={classes.iconButton}
+                                // > 
+                                //     <LinkIcon /> 
+                                // </IconButton>,
+                                ' ',
                                 mentor.last_name, 
                                 mentor.first_name, 
                                 mentor.email, 
-                                fillButtons
+                                [
+                                    <Button justIcon size="sm" color={"info"} >
+                                        <Person />
+                                    </Button>,
+                                    <Button justIcon size="sm" color={"success"} >
+                                        <Done />
+                                    </Button>,
+                                    <Button justIcon size="sm" color={"danger"} >
+                                        <Close />
+                                    </Button>
+                                ]
                             ]
                         )
                     })}
