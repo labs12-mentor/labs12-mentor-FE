@@ -21,6 +21,14 @@ import cardProfile6Square from "../../../assets/img/faces/card-profile6-square.j
 import teamsStyle from "../../../assets/jss/material-kit-pro-react/views/sectionsSections/teamsStyle.jsx";
 import teamStyle from "../../../assets/jss/material-kit-pro-react/views/landingPageSections/teamStyle.jsx";
 
+const cj = "https://github.com/cwright0428.png"
+const lukas = "https://github.com/Estrax.png"
+const jordan = "https://github.com/jdspell.png"
+const jor = "https://github.com/JorPoon.png"
+const kathryn = "https://github.com/khamp19.png"
+const thomas = "https://github.com/tfolbrecht.png"
+
+
 const style = {
   ...teamsStyle,
   ...teamStyle,
@@ -43,12 +51,12 @@ class SectionTeam extends React.Component {
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        <img src={cardProfile1Square} alt="..." />
+                        <img src={cj} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${cardProfile1Square})`,
+                          backgroundImage: `url(${cj})`,
                           opacity: "1"
                         }}
                       />
@@ -86,12 +94,12 @@ class SectionTeam extends React.Component {
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        <img src={cardProfile6Square} alt="..." />
+                        <img src={jordan} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${cardProfile6Square})`,
+                          backgroundImage: `url(${jordan})`,
                           opacity: "1"
                         }}
                       />
@@ -133,12 +141,12 @@ class SectionTeam extends React.Component {
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        <img src={cardProfile4Square} alt="..." />
+                        <img src={jor} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${cardProfile4Square})`,
+                          backgroundImage: `url(${jor})`,
                           opacity: "1"
                         }}
                       />
@@ -175,12 +183,12 @@ class SectionTeam extends React.Component {
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        <img src={cardProfile2Square} alt="..." />
+                        <img src={lukas} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${cardProfile2Square})`,
+                          backgroundImage: `url(${lukas})`,
                           opacity: "1"
                         }}
                       />
@@ -217,12 +225,12 @@ class SectionTeam extends React.Component {
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        <img src={cardProfile2Square} alt="..." />
+                        <img src={kathryn} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${cardProfile2Square})`,
+                          backgroundImage: `url(${kathryn})`,
                           opacity: "1"
                         }}
                       />
@@ -259,12 +267,12 @@ class SectionTeam extends React.Component {
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
                       <a href="#pablo" onClick={e => e.preventDefault()}>
-                        <img src={cardProfile2Square} alt="..." />
+                        <img src={thomas} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${cardProfile2Square})`,
+                          backgroundImage: `url(${thomas})`,
                           opacity: "1"
                         }}
                       />
