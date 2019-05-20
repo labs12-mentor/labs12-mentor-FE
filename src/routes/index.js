@@ -32,7 +32,11 @@ import UserProfile from '../components/MaterialIUserProfile';
 import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
+
+import materialtable from '../pages/AdministratorPanel/MaterialTable';
+
 import UserModal from '../components/UserComponents/UserModal'
+
 
 import styled from 'styled-components';
 

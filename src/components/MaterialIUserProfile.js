@@ -194,32 +194,6 @@ class UserProfile extends React.Component {
                           className={classes.gridItem}
                         >
                         <MaterialSideBar />
-                          {/* <h4 className={classes.title}>Stats</h4>
-                          <ul className={classes.listUnstyled}>
-                            <li>
-                              <b>60</b> Products
-                            </li>
-                            <li>
-                              <b>4</b> Collections
-                            </li>
-                            <li>
-                              <b>331</b> Influencers
-                            </li>
-                            <li>
-                              <b>1.2K</b> Likes
-                            </li>
-                          </ul>
-                          <hr />
-                          <h4 className={classes.title}>About this work</h4>
-                          <p className={classes.description}>
-                            French luxury footwear and fashion. The footwear has
-                            incorporated shiny, red-lacquered soles that have
-                            become his signature.
-                          </p>
-                          <hr />
-                          <h4 className={classes.title}>Focus</h4>
-                          <Badge color="primary">Footwear</Badge>
-                          <Badge color="rose">Luxury</Badge> */}
                         </GridItem>
                       </GridContainer>
                     )
@@ -246,32 +220,6 @@ class UserProfile extends React.Component {
                           className={classes.gridItem}
                         >
                         <MaterialSideBar />
-                          {/* <h4 className={classes.title}>Stats</h4>
-                          <ul className={classes.listUnstyled}>
-                            <li>
-                              <b>60</b> Products
-                            </li>
-                            <li>
-                              <b>4</b> Collections
-                            </li>
-                            <li>
-                              <b>331</b> Influencers
-                            </li>
-                            <li>
-                              <b>1.2K</b> Likes
-                            </li>
-                          </ul>
-                          <hr />
-                          <h4 className={classes.title}>About this work</h4>
-                          <p className={classes.description}>
-                            French luxury footwear and fashion. The footwear has
-                            incorporated shiny, red-lacquered soles that have
-                            become his signature.
-                          </p>
-                          <hr />
-                          <h4 className={classes.title}>Focus</h4>
-                          <Badge color="primary">Footwear</Badge>
-                          <Badge color="rose">Luxury</Badge> */}
                         </GridItem>
                       </GridContainer>
                     )
