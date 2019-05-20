@@ -7,7 +7,11 @@ import {
 } from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-
+import ExperienceForm from './ExperienceForm';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 // @material-ui/icons
 import Edit from "@material-ui/icons/Edit";
 import Clear from "@material-ui/icons/Clear";
@@ -59,37 +63,63 @@ class ExperienceList extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { isLoaded } = this.state;
 
     const nonDeleted = this.props.experiences.filter(experience => {
       return experience.deleted === false && this.props.userId === experience.user_id;
     });
     
     return (
-      <Table
-        tableData={nonDeleted.map(experience => {
-          return ([
-              <h3 className={classes.cardTitle}>{experience.name}</h3>,
-              <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Button
-                  justIcon
-                  color="info"
-                  size="md"
-                  style={{ marginLeft: 30, marginRight: 10 }}
-                >
-                  <Edit style={{ fontSize: 30 }} />
-                </Button>
-                <Button
-                  justIcon
-                  color="info"
-                  size="md"
-                  style={{ marginLeft: 10 }}
-                >
-                  <Clear style={{ fontSize: 40 }} />
-                </Button>
-              </div>
-          ])
-        })}
-      />
+      <div style={{ width: '100%' }}>
+        <Button
+          variant="contained"
+          color="info"
+          onClick={this.handleClickOpen}
+          className={classes.button}
+        >
+          Create New Experience
+        </Button>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogContent>
+            <ExperienceForm canEdit={false} userId={this.props.userId} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        <Table
+          tableData={nonDeleted.map(experience => {
+            return ([
+                <p className={classes.cardTitle}>{experience.name}</p>,
+                <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button
+                    justIcon
+                    color="info"
+                    size="sm"
+                    style={{ marginLeft: 30, marginRight: 10 }}
+                  >
+                    <Edit style={{ fontSize: 30 }} />
+                  </Button>
+                  <Button
+                    justIcon
+                    color="info"
+                    size="sm"
+                    style={{ marginLeft: 10 }}
+                  >
+                    <Clear style={{ fontSize: 40 }} />
+                  </Button>
+                </div>
+            ])
+          })}
+        />
+      </div>
       // <Card>
       //   <Button
       //     variant="contained"

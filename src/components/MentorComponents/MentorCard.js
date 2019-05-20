@@ -37,7 +37,7 @@ class MentorCard extends React.Component {
       <ExpansionPanel>
       
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} >
-          <h4>{this.props.id}</h4>
+          <h4>{`${this.props.mentor.first_name} ${this.props.mentor.last_name}`}</h4>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
         <Button

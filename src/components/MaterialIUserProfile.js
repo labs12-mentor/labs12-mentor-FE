@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from "react";
+import { Link as RouterLink } from 'react-router-dom';
 import { connect } from "react-redux";
 import history from "../history";
 import PropTypes from "prop-types";
@@ -24,6 +25,8 @@ import GridItem from "../material-components/Grid/GridItem.jsx";
 import HeaderLinks from "../material-components/Header/HeaderLinks.jsx";
 import NavPills from "../material-components/NavPills/NavPills.jsx";
 import Card from "../material-components/Card/Card.jsx";
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 import CardBody from "../material-components/Card/CardBody.jsx";
 import CardHeader from "../material-components/Card/CardHeader.jsx";
 import Badge from "../material-components/Badge/Badge.jsx";
@@ -31,18 +34,9 @@ import Muted from "../material-components/Typography/Muted.jsx";
 import Parallax from "../material-components/Parallax/Parallax.jsx";
 import Clearfix from "../material-components/Clearfix/Clearfix.jsx";
 import Button from "../material-components/CustomButtons/Button.jsx";
+import Typography from '@material-ui/core/Typography';
 
-import christian from "../assets/img/faces/christian.jpg";
-import oluEletu from "../assets/img/examples/olu-eletu.jpg";
-import clemOnojeghuo from "../assets/img/examples/clem-onojeghuo.jpg";
-import cynthiaDelRio from "../assets/img/examples/cynthia-del-rio.jpg";
-import mariyaGeorgieva from "../assets/img/examples/mariya-georgieva.jpg";
-import clemOnojegaw from "../assets/img/examples/clem-onojegaw.jpg";
-import darrenColeshill from "../assets/img/examples/darren-coleshill.jpg";
-import avatar from "../assets/img/faces/avatar.jpg";
-import marc from "../assets/img/faces/marc.jpg";
-import kendall from "../assets/img/faces/kendall.jpg";
-import cardProfile2Square from "../assets/img/faces/card-profile2-square.jpg";
+import ProfilePic from "../assets/img/faces/ladyWithBook.jpg";
 
 import ExperienceList from "../components/ExperiencesComponents/ExperienceList";
 import MeetingsList from "../components/MeetingsComponents/MeetingsList";
@@ -62,7 +56,7 @@ class UserProfile extends React.Component {
       this.state = {
         isLoaded: false,
         applied: false,
-        user: [],
+        user: {},
         menteed: [],
         matches: [],
         wanted_mentor: [],
@@ -143,66 +137,34 @@ class UserProfile extends React.Component {
               <GridItem xs={12} sm={12} md={6}>
                 <div className={classes.profile}>
                   <div>
-                    <img src={christian} alt="..." className={imageClasses} />
+                    <img src={ProfilePic} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Christian Louboutin</h3>
+                    <h3 className={classes.title}>{`${this.state.user.first_name} ${this.state.user.last_name}`}</h3>                    
                     <h6>DESIGNER</h6>
                     <Button
                       justIcon
                       simple
-                      color="dribbble"
+                      color="linkedin"
+                      size="lg"
                       className={classes.margin5}
                     >
-                      <i className={classes.socials + " fab fa-dribbble"} />
+                      <i className={"fab fa-linkedin"} />
                     </Button>
                     <Button
                       justIcon
                       simple
-                      color="twitter"
+                      size="lg"
+                      color="github"
                       className={classes.margin5}
                     >
-                      <i className={classes.socials + " fab fa-twitter"} />
-                    </Button>
-                    <Button
-                      justIcon
-                      simple
-                      color="pinterest"
-                      className={classes.margin5}
-                    >
-                      <i className={classes.socials + " fab fa-pinterest"} />
+                      <i className={"fab fa-github"} />
                     </Button>
                   </div>
                 </div>
-                <div className={classes.follow}>
-                  <Tooltip
-                    id="tooltip-top"
-                    title="Follow this user"
-                    placement="top"
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button
-                      justIcon
-                      round
-                      color="primary"
-                      className={classes.followButton}
-                    >
-                      <Add className={classes.followIcon} />
-                    </Button>
-                  </Tooltip>
-                </div>
               </GridItem>
             </GridContainer>
-            {/* <div
-              className={classNames(classes.description, classes.textCenter)}
-            >
-              <p>
-                An artist of considerable range, Chet Faker — the name taken by
-                Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                and records all of his own music, giving it a warm, intimate
-                feel with a solid groove structure.{" "}
-              </p>
-            </div> */}
+
             <div className={classes.profileTabs}>
               <NavPills
                 alignCenter
@@ -216,11 +178,11 @@ class UserProfile extends React.Component {
                         <GridItem
                           xs={12}
                           sm={12}
-                          md={7}
+                          md={8}
                           className={classes.gridItem}
                         >
-                          <h4 className={classes.title}>Latest Collections</h4>
-                          <GridContainer className={classes.collections} style={{ width: '100%' }}>
+                          
+                          <GridContainer className={classes.collections} style={{ width: '100%', marginLeft: 30 }}>
                             <ExperienceList style={{ width: '100%' }} userId={this.state.user.id} />
                           </GridContainer>
                                                   
@@ -228,10 +190,11 @@ class UserProfile extends React.Component {
                         <GridItem
                           xs={12}
                           sm={12}
-                          md={2}
+                          md={3}
                           className={classes.gridItem}
                         >
-                          <h4 className={classes.title}>Stats</h4>
+                        <MaterialSideBar />
+                          {/* <h4 className={classes.title}>Stats</h4>
                           <ul className={classes.listUnstyled}>
                             <li>
                               <b>60</b> Products
@@ -256,7 +219,7 @@ class UserProfile extends React.Component {
                           <hr />
                           <h4 className={classes.title}>Focus</h4>
                           <Badge color="primary">Footwear</Badge>
-                          <Badge color="rose">Luxury</Badge>
+                          <Badge color="rose">Luxury</Badge> */}
                         </GridItem>
                       </GridContainer>
                     )
@@ -269,21 +232,21 @@ class UserProfile extends React.Component {
                         <GridItem
                           xs={12}
                           sm={12}
-                          md={7}
+                          md={9}
                           className={classes.gridItem}
                         >
-                          <h4 className={classes.title}>Latest Collections</h4>
-                          <GridContainer className={classes.collections}>
-                            <MeetingsList />
+                          <GridContainer className={classes.collections} style={{ width: '100%', marginLeft: 30 }}>
+                            <MeetingsList style={{ width: '100%' }} user={this.state.user} matches={this.state.matches} />
                           </GridContainer>
                         </GridItem>
                         <GridItem
                           xs={12}
                           sm={12}
-                          md={2}
+                          md={3}
                           className={classes.gridItem}
                         >
-                          <h4 className={classes.title}>Stats</h4>
+                        <MaterialSideBar />
+                          {/* <h4 className={classes.title}>Stats</h4>
                           <ul className={classes.listUnstyled}>
                             <li>
                               <b>60</b> Products
@@ -308,7 +271,7 @@ class UserProfile extends React.Component {
                           <hr />
                           <h4 className={classes.title}>Focus</h4>
                           <Badge color="primary">Footwear</Badge>
-                          <Badge color="rose">Luxury</Badge>
+                          <Badge color="rose">Luxury</Badge> */}
                         </GridItem>
                       </GridContainer>
                     )
@@ -328,8 +291,8 @@ class UserProfile extends React.Component {
                     tabButton: "User Update",
                     tabIcon: Camera,
                     tabContent: (
-                      <GridContainer justify="center">
-                        <UserProfileForm />
+                      <GridContainer justify="center" style={{ width: '100%' }}>
+                        <UserProfileForm style={{ width: '100%' }} />
                       </GridContainer>
                     )
                   }

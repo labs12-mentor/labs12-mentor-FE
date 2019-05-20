@@ -74,7 +74,7 @@ class UserProfile extends React.Component {
       isLoaded: false,
       activeTab: "1",
       applied: false,
-      user: [],
+      user: {},
       menteed: [],
       matches: [],
       wanted_mentor: [],
