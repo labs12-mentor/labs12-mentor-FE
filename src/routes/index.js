@@ -28,15 +28,11 @@ import MentorProfile from '../components/MentorComponents/MentorProfile';
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
-<<<<<<< HEAD
-import UserModal from '../components/UserComponents/UserModal';
-=======
 import UserProfile from '../components/MaterialIUserProfile';
 import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
 
->>>>>>> a61911265a850047deff2c6fc437f44afe9c83d8
 import styled from 'styled-components';
 
 const AppCont = styled.div`
