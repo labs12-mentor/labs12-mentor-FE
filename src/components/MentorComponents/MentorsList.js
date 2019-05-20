@@ -123,7 +123,7 @@ class MentorsList extends React.Component {
                         <p className={classes.cardTitle}>{`${mentor.first_name} ${mentor.last_name}`}</p>,
                         <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
                           <Button
-                            justIcon
+                            //justicon
                             color="info"
                             size="sm"
                             style={{ marginLeft: 30, marginRight: 10 }}
