@@ -75,7 +75,12 @@ class MeetingCard extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogContent>
+          <DialogContent
+                              style={{    
+                                width: "100%",
+                                minWidth: "500px"
+                                }}
+          >
             <MeetingsForm
               canEdit={true}
               id={this.props.id}

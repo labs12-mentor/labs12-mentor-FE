@@ -56,8 +56,8 @@ class MeetingsForm extends React.Component {
     const { classes } = this.props;
     if (this.props.canEdit === true) {
       return (
-        <div>
-          <h1> Edit Meeting</h1>
+        <div style={{width: "100%"}}>
+          <h3> Edit Meeting</h3>
           <FormGroup row>
             <FormControl margin="normal" required fullWidth>
               <InputLabel> Title</InputLabel>
@@ -117,10 +117,16 @@ class MeetingsForm extends React.Component {
         />
       </FormControl>
           </FormGroup> */}
-          <InputLabel className={classes.label}>Datetime Picker</InputLabel>
+          {/* <InputLabel className={classes.label}>Datetime Picker</InputLabel> */}
           <br />
           <FormControl fullWidth>
-            <Datetime inputProps={{ placeholder: "Datetime Picker Here" }} />
+            <Datetime 
+            value={this.state.startTime}
+            inputProps={{ placeholder: "Start Time",
+          }}
+            onChange={this.handleChanges} 
+          
+          />
           </FormControl>
 
           <FormGroup row>
@@ -153,7 +159,7 @@ class MeetingsForm extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div style={{width: "100%"}}>
           <h3> Create a Meeting</h3>
           <FormGroup row>
             <FormControl margin="normal" required fullWidth>

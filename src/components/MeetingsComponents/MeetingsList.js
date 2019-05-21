@@ -16,8 +16,8 @@ import Table from "../../material-components/Table/Table.jsx";
 
 const styles = theme => ({
   root: {
-      flexGrow: 1,
-      width: "100%"
+    flexGrow: 1,
+    width: "100%"
   },
   // demo: {
   //     backgroundColor: theme.palette.background.paper,
@@ -34,7 +34,6 @@ const styles = theme => ({
     margin: theme.spacing.unit
   }
 });
-
 
 class MeetingsList extends React.Component {
   constructor(props) {
@@ -64,7 +63,6 @@ class MeetingsList extends React.Component {
     this.setState({ open: false });
   };
 
-
   render() {
     const { classes } = this.props;
 
@@ -82,7 +80,14 @@ class MeetingsList extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogContent>
+          <DialogContent
+            style={{
+              width: "100%",
+              minWidth: "500px",
+              height: "100%"
+            }}
+          >
+            
             <MeetingsForm canEdit={false} handleClose={this.handleClose} />
           </DialogContent>
           {/* <DialogActions>

@@ -10,10 +10,15 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from "../material-components/CustomButtons/Button.jsx";
 import Typography from '@material-ui/core/Typography';
+import GridContainer from "../material-components/Grid/GridContainer.jsx";
+import GridItem from "../material-components/Grid/GridItem.jsx";
+import Grid from "@material-ui/core/Grid";
 
 const styles = {
   card: {
     minWidth: 200,
+    alignItems: "center",
+    justify: "center"
   },
   title: {
     fontSize: 14,
@@ -27,6 +32,16 @@ function MaterialSideBar(props) {
   const { classes } = props;
 
   return (
+    <Grid
+    container
+    //spacing={0}
+  
+    alignItems="center"
+    alignText="center"
+    justify="center"
+    
+    
+  >
       <Card className={classes.card}>
         <CardContent>
           <Typography variant="h5" component="h2">
@@ -37,6 +52,7 @@ function MaterialSideBar(props) {
           <Button color="info" size="sm" component={RouterLink} to="/user/mentorprofile">View Profile</Button>
         </CardActions>
       </Card>
+      </Grid>
   );
 }
 
