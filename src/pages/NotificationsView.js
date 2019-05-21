@@ -18,6 +18,12 @@ import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    margin: 80px auto;
+    width: 80%;
+`;
 
 const styles = theme => ({
     root: {
@@ -54,39 +60,41 @@ class Notifications extends Component {
         const { classes } = this.props;
         const { dense } = this.state;
         return (
-            <div className={classes.root}>
-                <Typography variant="h6" className={classes.title}>
-                    Your Notifications
-                </Typography>
-                {this.state.pageLoaded ? (
-                    <Card className={classes.card}>
-                        <CardContent>
-                            <List dense={dense}>
-                                {this.props.isFetching ? <p>waiting for notifications list</p> : null}
-                                {this.props.notification_error ? (
-                                    <p>cannot get notifications at this time</p>
-                                ) : null}
-                                {this.props.notifications.map((notification) => {
-                                    return (
-                                        <ListItem key={notification.id}>
-                                            <Notification
-                                                id={notification.id}
-                                                notification={notification.content}
-                                                watched={notification.watched}
-                                            />
-                                            <ListItemSecondaryAction>
-                                                <IconButton aria-label="Delete">
-                                                    <DeleteIcon />
-                                                </IconButton>
-                                            </ListItemSecondaryAction>
-                                        </ListItem>
-                                    );
-                                })}
-                            </List>
-                        </CardContent>
-                    </Card>
-                ) : null}
-            </div>
+            <AppContainer>
+                <div className={classes.root}>
+                    <Typography variant="h6" className={classes.title}>
+                        Your Notifications
+                    </Typography>
+                    {this.state.pageLoaded ? (
+                        <Card className={classes.card}>
+                            <CardContent>
+                                <List dense={dense}>
+                                    {this.props.isFetching ? <p>waiting for notifications list</p> : null}
+                                    {this.props.notification_error ? (
+                                        <p>cannot get notifications at this time</p>
+                                    ) : null}
+                                    {this.props.notifications.map((notification) => {
+                                        return (
+                                            <ListItem key={notification.id}>
+                                                <Notification
+                                                    id={notification.id}
+                                                    notification={notification.content}
+                                                    watched={notification.watched}
+                                                />
+                                                <ListItemSecondaryAction>
+                                                    <IconButton aria-label="Delete">
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </ListItemSecondaryAction>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                            </CardContent>
+                        </Card>
+                    ) : null}
+                </div>
+            </AppContainer>
         );
     }
 }

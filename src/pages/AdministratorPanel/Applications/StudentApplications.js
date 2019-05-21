@@ -150,6 +150,10 @@ class StudentApplications extends React.Component {
                     inputProps={{
                     'aria-label': 'Description',
                     }}
+                    style={{
+                        fontSize: '1.3rem',
+                        width: '40%',
+                    }}
                 />
                 <IconButton className={classes.iconButton} aria-label="Search">
                     <SearchIcon />

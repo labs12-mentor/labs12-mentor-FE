@@ -36,6 +36,11 @@ const ProfileContainer = styled.div`
     margin: auto;
 `;
 
+const AppContainer = styled.div`
+    margin: 60px auto;
+    width: 80%;
+`;
+
 class OrganizationDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -49,33 +54,36 @@ class OrganizationDetails extends React.Component {
 
     render() {
         return (
+
             <div>
                 <BlogPostsPage />
-            <Row>
-                <Col sm='12'>
-                    <ContainerDiv>
-                        <Sidebar />
-                        <ProfileContainer>
-                            <Row>
-                                <img
-                                    src={
-                                        this.props.organization.logo
-                                            ? this.props.organization.logo
-                                            : 'https://picsum.photos/'
-                                    }
-                                />
-                            </Row>
-                            <Row>
-                                <h1>{this.props.organization.name}</h1>
-                            </Row>
-                            <Row>
-                                <p>{this.props.organization.description}</p>
-                            </Row>
-                        </ProfileContainer>
-                    </ContainerDiv>
-                </Col>
-            </Row>
             </div>
+            <AppContainer>
+                <Row>
+                    <Col sm='12'>
+                        <ContainerDiv>
+                            <Sidebar />
+                            <ProfileContainer>
+                                <Row>
+                                    <img
+                                        src={
+                                            this.props.organization.logo
+                                                ? this.props.organization.logo
+                                                : 'https://picsum.photos/'
+                                        }
+                                    />
+                                </Row>
+                                <Row>
+                                    <h1>{this.props.organization.name}</h1>
+                                </Row>
+                                <Row>
+                                    <p>{this.props.organization.description}</p>
+                                </Row>
+                            </ProfileContainer>
+                        </ContainerDiv>
+                    </Col>
+                </Row>
+            </AppContainer>
         );
     }
 }

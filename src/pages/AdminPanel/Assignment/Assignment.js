@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import NavPills from "../../../material-components/NavPills/NavPills.jsx";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 
@@ -8,6 +9,12 @@ import { getSpecificMatch, getUsers } from '../../../actions';
 
 import Recommended from './Recommended';
 import MapView from './MapView';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    width: 80%;
+    margin: 80px auto;
+`;
 
 class Assignment extends React.Component {
     state = {
@@ -46,45 +53,29 @@ class Assignment extends React.Component {
             });
         }
         return (
-            <div className='Assignment'>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => {
-                                this.toggleTab('1');
-                            }}
-                        >
-                            Recommended
-                        </NavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => {
-                                this.toggleTab('2');
-                            }}
-                        >
-                            Map View
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId='1'>
-                        <Recommended
-                            currentMatch={this.state.currentMatch}
-                            mentorMatch={mentorMatch}
-                            menteeMatch={menteeMatch}
-                        />
-                    </TabPane>
-
-                    <TabPane tabId='2'>
-                        <MapView mentorMatch={mentorMatch} menteeMatch={menteeMatch} />
-                    </TabPane>
-                </TabContent>
-            </div>
+            <AppContainer>
+                <NavPills
+                    color="info"
+                    tabs={[
+                        {
+                        tabButton: "Match Information",
+                        tabContent: (
+                            <Recommended
+                                currentMatch={this.state.currentMatch}
+                                mentorMatch={mentorMatch}
+                                menteeMatch={menteeMatch}
+                            />
+                        )
+                        },
+                        {
+                        tabButton: "Match Map View",
+                        tabContent: (
+                            <MapView mentorMatch={mentorMatch} menteeMatch={menteeMatch} />
+                        )
+                        }
+                    ]}
+                />
+            </AppContainer>
         );
     }
 }

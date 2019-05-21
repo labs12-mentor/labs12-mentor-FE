@@ -31,6 +31,12 @@ import MatchApplications from './Applications/StudentApplications';
 import MentorAssignments from './Assignments/Mentors';
 import MatchAssignments from './Assignments/Students';
 import ProfileForms from './ProfileForms/ProfileForms';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    margin: 60px auto;
+    width: 80%;
+`;
 
 function TabContainer(props) {
     return (
@@ -156,7 +162,7 @@ class AdminPanel extends React.Component {
         const { value } = this.state;
         
         return (
-            <div className={classes.root}>
+            <AppContainer className={classes.root}>
             <CustomTabs 
             headerColor="info"
             tabs={[
@@ -215,7 +221,7 @@ class AdminPanel extends React.Component {
           }
         ]}
       />
-      </div>
+      </AppContainer>
         );
     }
 }

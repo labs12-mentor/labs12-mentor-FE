@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import NavPills from "../../../material-components/NavPills/NavPills.jsx";
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 
@@ -8,6 +9,13 @@ import { getSpecificUser } from '../../../actions';
 
 import ProfileInfo from './ProfileInfo';
 import ApplicationRes from './ApplicationRes';
+
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    width: 80%;
+    margin: 80px auto;
+`;
 
 class Application extends React.Component {
     state = {
@@ -32,44 +40,28 @@ class Application extends React.Component {
 
     render() {
         return (
-            <div className='Application'>
-                <Nav tabs>
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '1' })}
-                            onClick={() => {
-                                this.toggleTab('1');
-                            }}
-                        >
-                            Profile Information
-                        </NavLink>
-                    </NavItem>
-
-                    <NavItem>
-                        <NavLink
-                            className={classnames({ active: this.state.activeTab === '2' })}
-                            onClick={() => {
-                                this.toggleTab('2');
-                            }}
-                        >
-                            Application Response
-                        </NavLink>
-                    </NavItem>
-                </Nav>
-
-                <TabContent activeTab={this.state.activeTab}>
-                    <TabPane tabId='1'>
-                        <ProfileInfo
-                            menteeId={this.props.match.params.id}
-                            currentUser={this.state.currentUser}
-                        />
-                    </TabPane>
-
-                    <TabPane tabId='2'>
-                        <ApplicationRes />
-                    </TabPane>
-                </TabContent>
-            </div>
+            <AppContainer>
+                <NavPills
+                    color="info"
+                    tabs={[
+                        {
+                        tabButton: "Profile Information",
+                        tabContent: (
+                            <ProfileInfo
+                                menteeId={this.props.match.params.id}
+                                currentUser={this.state.currentUser}
+                            />
+                        )
+                        },
+                        {
+                        tabButton: "Mentor Application",
+                        tabContent: (
+                            <ApplicationRes />
+                        )
+                        }
+                    ]}
+                />
+            </AppContainer>
         );
     }
 }
