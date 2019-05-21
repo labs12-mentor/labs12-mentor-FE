@@ -3,7 +3,7 @@ import {
   title,
   description,
   grayColor
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../../material-kit-pro-react.jsx";
 
 const sectionSubscribeLineStyle = {
   container,
