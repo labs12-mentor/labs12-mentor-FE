@@ -38,9 +38,9 @@ class Recommended extends React.Component {
         const { classes } = this.props;
         const mentor = this.props.mentorMatch;
         const mentee = this.props.menteeMatch;
-        
+
         return (
-            <div>
+            <div className={classes.enclosingDiv}>
             <Card className={classes.card}>
                 <CardContent>
                     <Typography variant="h4" component="h2">
