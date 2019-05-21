@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
+      margin: '0 auto',
       minWidth: 200,
       width: '50%'
     },
@@ -20,10 +21,10 @@ const styles = {
       marginBottom: 12,
     },
     email:{
-        marginTop: '200'
+        marginTop: 20
     },
     address: {
-        margin: '20 0'
+        marginTop: 20
     }
   };
 
@@ -40,14 +41,15 @@ class ProfileInfo extends React.Component {
                     <Typography variant="h6" component="h2" className={classes.email}>
                         {`${this.props.currentUser.email}`}
                     </Typography>
-
-                    <Typography variant="h6" component="h2" className={classes.address}>
-                        {`${this.props.currentUser.street}, ${this.props.currentUser.city},`}
-                    </Typography>
-                    <Typography variant="h6" component="h2" className={classes.address}>
-                        {`${this.props.currentUser.state}, ${this.props.currentUser.zipcode}, ${this.props.currentUser.country}`}
-                    </Typography>
-
+                    <div className={classes.address}>
+                        <Typography variant="h6" component="h2" >
+                            {`${this.props.currentUser.street}, ${this.props.currentUser.city},`}
+                        </Typography>
+                
+                        <Typography variant="h6" component="h2">
+                            {`${this.props.currentUser.state}, ${this.props.currentUser.zipcode}, ${this.props.currentUser.country}`}
+                        </Typography>
+                    </div>
                 </CardContent>
 
                 <CardActions>
