@@ -1,66 +1,92 @@
 import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from "../../../material-components/CustomButtons/Button.jsx";
+import Typography from '@material-ui/core/Typography';
+
+const styles = {
+    card: {
+      margin: '0 auto',
+      minWidth: 200,
+      width: '50%'
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    applicationItem:{
+        marginTop: 20
+    },
+    applicationItemAnswer: {
+        marginLeft: 4
+    }
+  };
+
 
 class ApplicationRes extends React.Component {
-    render() {
+    render() {        
+        const { classes } = this.props;
+
         return (
-            <div className='ProfileInfo'>
-                <Button>Undecided</Button>
-                <Button>Decline</Button>
-                <Button>Approve</Button>
+                
+        <Card className={classes.card}>
+            <CardContent>
+                <Typography variant="h4" component="h2">
+                    Application Details
+                </Typography>
 
-                <Form>
-                    <FormGroup>
-                        <Label for='startDate'>Application Start Date</Label>
-                        <Input type='date' name='name' placeholder='date placeholder' />
-                    </FormGroup>
+                <Typography variant="h5" component="h2" className={classes.applicationItem}>
+                    Start Date
+                </Typography>
+                <Typography variant="h6" component="h2" className={classes.applicationItemAnswer}>
+                    05/20/2019
+                </Typography>
 
-                    <FormGroup check>
-                        <Label check>
-                            <Input type='checkbox' /> Willing to meet students in person.
-                        </Label>
-                    </FormGroup>
+                <Typography variant="h5" component="h2" className={classes.applicationItem}>
+                    Days Available
+                </Typography>
+                <Typography variant="h6" component="h2" className={classes.applicationItemAnswer}>
+                    Monday-Friday
+                </Typography>
 
-                    <FormGroup>
-                        <Label>Location</Label>
-                        <Input type='text' />
-                        Work or School Zip Code
-                        <Input type='text' />
-                        Home Zip Code
-                    </FormGroup>
+                <Typography variant="h5" component="h2" className={classes.applicationItem}>
+                    Time Available
+                </Typography>
+                <Typography variant="h6" component="h2" className={classes.applicationItemAnswer}>
+                    8am-5pm
+                </Typography>
 
-                    <FormGroup>
-                        <FormGroup>
-                            <Label> Interest in Stipend </Label>
-                        </FormGroup>
+                <Typography variant="h5" component="h2" className={classes.applicationItem}>
+                    Location
+                </Typography>
+                <Typography variant="h6" component="h2" className={classes.applicationItemAnswer}>
+                    57891
+                </Typography>
 
-                        <FormGroup check>
-                            <Label check>
-                                <Input type='checkbox' /> $40 / Checkin
-                            </Label>
-                        </FormGroup>
-
-                        <FormGroup check>
-                            <Label check>
-                                <Input type='checkbox' /> $40 / Checkin donation to local STEM
-                            </Label>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for='participationReason'>
-                                In a few sentences, tell us what makes you want to participate in
-                                the Mentor Program.
-                            </Label>
-                            <Input type='textbox' name='participationReason' />
-                        </FormGroup>
-                    </FormGroup>
-                </Form>
-            </div>
+                <Typography variant="h5" component="h2" className={classes.applicationItem}>
+                    Why Do You Want To Be A Mentor?
+                </Typography>
+                <Typography variant="h6" component="h2" className={classes.applicationItemAnswer}>
+                It's so important to do something every day that will make you happy. Nice 
+                little fluffy clouds laying around in the sky being lazy. We want to use a lot 
+                pressure while using no pressure at all. We don't make mistakes we just have happy little accidents.
+                </Typography>
+            </CardContent>
+            <CardActions>
+                    <Button color="success" size="sm" >Approve</Button>
+                    <Button color="danger" size="sm" >Deny</Button>
+            </CardActions>
+        </Card>
         );
     }
 }
 
 ApplicationRes.propTypes = {};
 
-export default ApplicationRes;
+export default withStyles(styles)(ApplicationRes);
