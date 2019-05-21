@@ -20,7 +20,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { FormGroup } from '@material-ui/core';
 
 import loginPageStyle from "../assets/jss/material-kit-pro-react/views/loginPageStyle.jsx";
-import image from "../assets/img/bg7.jpg";
+import image from '../assets/img/afro-beautiful-beauty-1081226.jpg';
 
 import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
