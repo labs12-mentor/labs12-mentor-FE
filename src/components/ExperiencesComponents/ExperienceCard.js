@@ -76,7 +76,7 @@ class ExperienceCard extends React.Component {
               canEdit={true}
               id={this.props.id}
               name={this.props.name}
-              handleClose={this.props.handleClose}
+              closing={this.handleClose}
             />
           </DialogContent>
           {/* <DialogActions>
