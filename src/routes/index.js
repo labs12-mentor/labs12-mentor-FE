@@ -5,7 +5,8 @@ import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
 
 import HomePage from '../pages/HomePage';
 // import OrganizationRegister from '../pages/OrganizationRegister';
-import OrganizationDetails from '../pages/OrganizationDetails';
+// import OrganizationDetails from '../pages/OrganizationDetails';
+import NewOrgsPage from '../pages/OrgsPage/NewOrgsPage.jsx';
 import UserRegister from '../pages/UserRegistration';
 // import UserLogin from '../pages/UserLogin';
 // import SignIn from '../pages/MaterialLogIn';
@@ -29,7 +30,6 @@ import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import UserProfile from '../components/MaterialIUserProfile';
-import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
 
@@ -73,7 +73,7 @@ const Routes = (props) => {
             <Route exact path='/user/mentorform' component={RouteAuthNeeded(MentorForm)} />
             <Route exact path='/user/inviteform' component={InviteForm} />
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
-            <Route exact path='/organization' component={RouteAuthNeeded(OrganizationDetails)} />
+                <Route exact path='/organization' component={RouteAuthNeeded(NewOrgsPage)} />
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
         </Router>
     );
