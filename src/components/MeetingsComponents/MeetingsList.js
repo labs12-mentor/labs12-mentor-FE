@@ -15,9 +15,10 @@ import PropTypes from "prop-types";
 import Table from "../../material-components/Table/Table.jsx";
 
 const styles = theme => ({
-  // root: {
-  //     flexGrow: 1,
-  // },
+  root: {
+      flexGrow: 1,
+      width: "100%"
+  },
   // demo: {
   //     backgroundColor: theme.palette.background.paper,
   // },
@@ -34,18 +35,6 @@ const styles = theme => ({
   }
 });
 
-// const ContainerDiv = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-//   height: 100%;
-//   padding: 10px;
-// `;
-
-// const MeetingContainer = styled.div`
-//   width: 70%;
-//   margin: auto;
-// `;
 
 class MeetingsList extends React.Component {
   constructor(props) {
@@ -61,8 +50,8 @@ class MeetingsList extends React.Component {
     this.setState({ ...this.state, isLoaded: true });
   }
 
-  async componentDidUpdate (prevProps, PrevState) {
-    if(this.props.meetings.length !== prevProps.meetings.length) {
+  async componentDidUpdate(prevProps, PrevState) {
+    if (this.props.meetings.length !== prevProps.meetings.length) {
       await this.props.getMeetings();
     }
   }
@@ -75,14 +64,6 @@ class MeetingsList extends React.Component {
     this.setState({ open: false });
   };
 
-  // creatingMeetingForm = (e, info) => {
-  //   e.preventDefault();
-  //   this.props.createMeeting(info)
-    
-  //   this.setState({...this.state})
-    
-    
-  // };
 
   render() {
     const { classes } = this.props;
@@ -91,7 +72,7 @@ class MeetingsList extends React.Component {
       return meeting.deleted === false;
     });
     return (
-      <div>
+      <div className={classes.root}>
         <Button variant="contained" color="info" onClick={this.handleClickOpen}>
           Create New Meeting
         </Button>
@@ -102,10 +83,7 @@ class MeetingsList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-            <MeetingsForm canEdit={false} 
-            handleClose={this.handleClose} 
-            // createMeetingForm={this.creatingMeetingForm}
-            />
+            <MeetingsForm canEdit={false} handleClose={this.handleClose} />
           </DialogContent>
           {/* <DialogActions>
                 <Button onClick={this.handleClose} color="info">
@@ -116,87 +94,20 @@ class MeetingsList extends React.Component {
 
         <Table
           //nonDeleted.slice(1,7).map backend logic
-          tableData={nonDeleted.slice((nonDeleted.length - 8), nonDeleted.length).map(meeting => {
-            return [
-              <p className={classes.cardTitle}>{meeting.content}</p>,
-              <div
-                className={classes.buttonGroup}
-                style={{ display: "flex", justifyContent: "flex-end" }}
-              >
-                <MeetingCard id={meeting.id} 
-                
-                />
-                {/* <Button
-                    justIcon
-                    color="info"
-                    size="sm"
-                    style={{ marginLeft: 30, marginRight: 10 }}
-                  >
-                    <Edit style={{ fontSize: 30 }} />
-                  </Button>
-                  <Button
-                    justIcon
-                    color="info"
-                    size="sm"
-                    style={{ marginLeft: 10 }}
-                  >
-                    <Clear style={{ fontSize: 40 }} />
-                  </Button> */}
-              </div>
-            ];
-          })}
+          tableData={nonDeleted
+            .slice(nonDeleted.length - 8, nonDeleted.length)
+            .map(meeting => {
+              return [
+                <p className={classes.cardTitle}>{meeting.content}</p>,
+                <div
+                  className={classes.buttonGroup}
+                  style={{ display: "flex", justifyContent: "flex-end" }}
+                >
+                  <MeetingCard id={meeting.id} />
+                </div>
+              ];
+            })}
         />
-        {/* <h1>Your Meetings</h1>
-        <ContainerDiv>
-          <MeetingContainer>
-            <h2>Upcoming Meetings</h2>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleClickOpen}
-            >
-              Create New Meeting
-            </Button>
-
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
-            >
-              <DialogContent>
-                <MeetingsForm canEdit={false} />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Dialog>
-
-            {this.state.isLoaded ? (
-              <Card className={classes.card}>
-                <CardContent>
-                  {nonDeleted.map((meeting, index) => {
-                    return (
-                      <div key={index}>
-                        <MeetingCard
-                          id={meeting.id}
-                          content={meeting.content}
-                          match_id={meeting.match_id}
-                          deleteMeeting={this.props.deleteMeeting}
-                        />
-                      </div>
-                    );
-                  })}
-                </CardContent>
-              </Card>
-            ) : (
-              <h3>Loading</h3>
-            )}
-
-            <h2>Past Meetings</h2>
-          </MeetingContainer>
-        </ContainerDiv> */}
       </div>
     );
   }
