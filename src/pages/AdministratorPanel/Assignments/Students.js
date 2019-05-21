@@ -108,13 +108,17 @@ class StudentAssignments extends React.Component {
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Student" /> */}
                     <Input
-                        placeholder="Search Matches by Student"
+                        placeholder="Search Match Assignments"
                         className={classes.input}
                         name='searchBarContents'
                         value={this.state.searchBarContents}
                         onChange={this.changeHandler}
                         inputProps={{
                             'aria-label': 'Description',
+                        }}
+                        style={{
+                            fontSize: '1.3rem',
+                            width: '40%',
                         }}
                     />
                   <IconButton className={classes.iconButton} aria-label="Search">

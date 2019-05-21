@@ -124,6 +124,10 @@ class MentorApplications extends React.Component {
                     value={this.state.searchBarContents}
                     onChange={this.changeHandler}
                     inputProps={{ 'aria-label': 'Description', }}
+                    style={{
+                        fontSize: '1.3rem',
+                        width: '40%',
+                    }}
                 />
                 <IconButton className={classes.iconButton} aria-label="Search">
                     <SearchIcon />

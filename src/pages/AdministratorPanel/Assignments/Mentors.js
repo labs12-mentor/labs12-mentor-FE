@@ -114,13 +114,17 @@ class MentorAssignments extends React.Component {
             <Paper className={classes.root}>
                 {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}
                     <Input
-                        placeholder="Search Matches by Mentor"
+                        placeholder="Search Mentor Assignments"
                         className={classes.input}
                         name='searchBarContents'
                         value={this.state.searchBarContents}
                         onChange={this.changeHandler}
                         inputProps={{
                             'aria-label': 'Description',
+                        }}
+                        style={{
+                            fontSize: '1.3rem',
+                            width: '40%',
                         }}
                     />
                   <IconButton className={classes.iconButton} aria-label="Search">
