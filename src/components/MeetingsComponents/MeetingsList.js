@@ -79,15 +79,16 @@ class MeetingsList extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          text-Align= "center"
         >
           <DialogContent
             style={{
               width: "100%",
               minWidth: "500px",
-              height: "100%"
+              height: "100%",
+              //textAlign: "center" 
             }}
           >
-            
             <MeetingsForm canEdit={false} handleClose={this.handleClose} />
           </DialogContent>
           {/* <DialogActions>
