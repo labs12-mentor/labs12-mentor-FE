@@ -7,18 +7,38 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "../../material-components/CustomButtons/Button";
 import { createMeeting, updateMeeting } from "../../actions/meetings.js";
+import Datetime from "react-datetime";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+//import "../../assets/scss/plugins/_plugin-react-datetime.scss"
+
+const style = {
+  label: {
+    color: "rgba(0, 0, 0, 0.26)",
+    cursor: "pointer",
+    display: "inline-flex",
+    fontSize: "14px",
+    transition: "0.3s ease all",
+    lineHeight: "1.428571429",
+    fontWeight: "400",
+    paddingLeft: "0"
+  }
+};
 
 class MeetingsForm extends React.Component {
-  state = {
-    title: "",
-    startTime: "",
-    endTime: "",
-    location: "",
-    content: "",
-    match_id: "",
-    deleted: false,
-    canEdit: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: "",
+      startTime: "",
+      endTime: "",
+      location: "",
+      content: "",
+      match_id: "",
+      deleted: false,
+      canEdit: false
+    };
+  }
 
   creatingMeetingForm = e => {
     e.preventDefault();
@@ -31,6 +51,7 @@ class MeetingsForm extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     if (this.props.canEdit === true) {
       return (
         <div>
@@ -77,12 +98,32 @@ class MeetingsForm extends React.Component {
               <InputLabel>Start Time</InputLabel>
               <Input
                 name="startTime"
-                placeholder="Start Time"
+                placeholder="End Time"
                 value={this.state.startTime}
                 onChange={this.handleChanges}
               />
             </FormControl>
           </FormGroup>
+          {/* <FormGroup row>
+           <InputLabel className={classes.label}>
+         Datetime Picker
+      </InputLabel>
+       <br />
+       <FormControl fullWidth>
+         <Datetime
+          inputProps={{ placeholder: "Datetime Picker Here" }}
+        />
+      </FormControl>
+          </FormGroup> */}
+          {/* <InputLabel className={classes.label}>
+        Datetime Picker
+      </InputLabel>
+      <br />
+      <FormControl fullWidth>
+        <Datetime
+          inputProps={{ placeholder: "Datetime Picker Here" }}
+        />
+      </FormControl> */}
 
           <FormGroup row>
             <FormControl margin="normal" required fullWidth>
@@ -110,72 +151,6 @@ class MeetingsForm extends React.Component {
           <Button onClick={this.updateMeetingForm} color="info">
             Update
           </Button>
-          {/* <Button onClick={this.props.handleClose} color="info">
-            Cancel
-          </Button> */}
-          {/* <Form onSubmit={this.updateMeetingForm}>
-            <FormGroup>
-              <Label>Title</Label>
-              <Input
-                type="text"
-                name="title"
-                placeholder="title"
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>{this.props.content}</Label>
-              <Input
-                type="text"
-                name="content"
-                placeholder="content"
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Match ID</Label>
-              <Input
-                type="text"
-                name="match_id"
-                placeholder="match_id"
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Start Time</Label>
-              <Input
-                type="text"
-                name="startTime"
-                placeholder="Date / Time"
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>End Time</Label>
-              <Input
-                type="text"
-                name="endTime"
-                placeholder="End Time"
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Label>Location</Label>
-              <Input
-                type="text"
-                name="location"
-                placeholder="Where is the meeting taking place?"
-                onChange={this.handleChanges}
-              />
-            </FormGroup>
-
-            <Button type="submit">Submit</Button>
-          </Form> */}
         </div>
       );
     } else {
@@ -275,4 +250,4 @@ class MeetingsForm extends React.Component {
 export default connect(
   null,
   { createMeeting, updateMeeting }
-)(MeetingsForm);
+)(withStyles(style)(MeetingsForm));
