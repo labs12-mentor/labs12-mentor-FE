@@ -4,7 +4,6 @@ import {
   createExperience,
   updateExperience
 } from "../../actions/experiences.js";
-// import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { FormGroup } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
@@ -41,6 +40,11 @@ class ExperienceForm extends React.Component {
   render() {
     if (this.props.canEdit === true) {
       return (
+        <div
+        style={{
+          width: "100%",
+          textAlign: "center"}}
+        >
         <FormGroup row>
           <FormControl margin="normal" required fullWidth>
             <InputLabel> Experience</InputLabel>
@@ -58,10 +62,15 @@ class ExperienceForm extends React.Component {
             Cancel
           </Button> */}
         </FormGroup>
+        </div>
       );
     } else {
       return (
-        <FormGroup row>
+        <FormGroup row
+        style={{
+          textAlign: "center"
+        }}
+        >
           <FormControl margin="normal" required fullWidth>
             <InputLabel> Experience</InputLabel>
             <Input

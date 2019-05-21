@@ -67,7 +67,8 @@ class MeetingsList extends React.Component {
     const { classes } = this.props;
 
     const nonDeleted = this.props.meetings.filter(meeting => {
-      return meeting.deleted === false;
+      return meeting.deleted === false 
+      // && this.props.userId === meeting.user_id;
     });
     return (
       <div className={classes.root}>

@@ -51,6 +51,7 @@ class ExperienceList extends React.Component {
   async componentDidMount() {
     await this.props.getExperiences();
     this.setState({ isLoaded: true });
+    console.log(this.props.experiences)
   }
 
   async componentDidUpdate (prevProps, PrevState) {
@@ -61,6 +62,16 @@ class ExperienceList extends React.Component {
     // if(deleted) {
     //   await this.props.getExperiences();
     // }
+    // for (let i = 0 ; i < this.props.experiences.length ; i++) {
+    //     for (let x = 0; x < prevProps.experiences.length; x++) {
+    //       if(this.props.experiences[i].deleted !== prevProps.experiences[x].deleted){
+    //         await this.props.getExperiences();
+    //       } else {
+    //         return null
+    //       }
+    //     };
+
+    // };
   }
 
   handleClickOpen = () => {
@@ -93,8 +104,11 @@ class ExperienceList extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          //text-Align="center"
         >
-          <DialogContent>
+          <DialogContent
+
+          >
             <ExperienceForm canEdit={false} userId={this.props.userId}
             handleClose={this.handleClose}
             />
