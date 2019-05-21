@@ -24,7 +24,8 @@ import PasswordIcon from '@material-ui/icons/Lock';
 import Link from '@material-ui/icons/Link';
 
 import signupPageStyle from '../assets/jss/material-kit-pro-react/views/signUpPageStyle.jsx';
-import image from "../assets/img/bg7.jpg";
+// import image from "../assets/img/bg7.jpg";
+import image from '../assets/img/sergio-souza-1318950-unsplash.jpg';
 
 import { registerOrganization } from '../actions';
 
