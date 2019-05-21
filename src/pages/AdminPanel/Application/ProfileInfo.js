@@ -31,6 +31,7 @@ const styles = {
 class ProfileInfo extends React.Component {
     render() {
         const { classes } = this.props;
+        
         return (
             <Card className={classes.card}>
                 <CardContent>

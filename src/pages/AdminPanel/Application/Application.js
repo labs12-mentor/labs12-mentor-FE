@@ -54,7 +54,7 @@ class Application extends React.Component {
                         )
                         },
                         {
-                        tabButton: "Application Response",
+                        tabButton: "Mentor Application",
                         tabContent: (
                             <ApplicationRes />
                         )
