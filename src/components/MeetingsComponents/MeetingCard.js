@@ -80,6 +80,7 @@ class MeetingCard extends React.Component {
               canEdit={true}
               id={this.props.id}
               content={this.props.content}
+              closing={this.handleClose}
             />
           </DialogContent>
         </Dialog>

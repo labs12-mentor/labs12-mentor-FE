@@ -115,15 +115,17 @@ class MeetingsList extends React.Component {
         </Dialog>
 
         <Table
-          // nonDeleted.slice(1,7).map backend logic
-          tableData={nonDeleted.map(meeting => {
+          //nonDeleted.slice(1,7).map backend logic
+          tableData={nonDeleted.slice((nonDeleted.length - 8), nonDeleted.length).map(meeting => {
             return [
               <p className={classes.cardTitle}>{meeting.content}</p>,
               <div
                 className={classes.buttonGroup}
                 style={{ display: "flex", justifyContent: "flex-end" }}
               >
-                <MeetingCard id={meeting.id} />
+                <MeetingCard id={meeting.id} 
+                
+                />
                 {/* <Button
                     justIcon
                     color="info"
