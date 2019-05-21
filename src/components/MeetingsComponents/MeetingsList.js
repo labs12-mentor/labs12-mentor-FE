@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getMeetings } from "../../actions";
+import { getMeetings, createMeeting } from "../../actions";
 import MeetingsForm from "./MeetingsForm";
 import MeetingCard from "./MeetingCard";
 import Button from "../../material-components/CustomButtons/Button.jsx";
@@ -61,6 +61,12 @@ class MeetingsList extends React.Component {
     this.setState({ ...this.state, isLoaded: true });
   }
 
+  async componentDidUpdate (prevProps, PrevState) {
+    if(this.props.meetings.length !== prevProps.meetings.length) {
+      await this.props.getMeetings();
+    }
+  }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -68,6 +74,15 @@ class MeetingsList extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  // creatingMeetingForm = (e, info) => {
+  //   e.preventDefault();
+  //   this.props.createMeeting(info)
+    
+  //   this.setState({...this.state})
+    
+    
+  // };
 
   render() {
     const { classes } = this.props;
@@ -87,7 +102,10 @@ class MeetingsList extends React.Component {
           aria-labelledby="form-dialog-title"
         >
           <DialogContent>
-            <MeetingsForm canEdit={false} handleClose={this.handleClose} />
+            <MeetingsForm canEdit={false} 
+            handleClose={this.handleClose} 
+            // createMeetingForm={this.creatingMeetingForm}
+            />
           </DialogContent>
           {/* <DialogActions>
                 <Button onClick={this.handleClose} color="info">
@@ -98,7 +116,7 @@ class MeetingsList extends React.Component {
 
         <Table
           // nonDeleted.slice(1,7).map backend logic
-          tableData={nonDeleted.slice(1, 7).map(meeting => {
+          tableData={nonDeleted.map(meeting => {
             return [
               <p className={classes.cardTitle}>{meeting.content}</p>,
               <div
@@ -194,5 +212,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getMeetings }
+  { getMeetings, createMeeting }
 )(withStyles(styles)(MeetingsList));

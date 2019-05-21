@@ -10,7 +10,7 @@ import { createMeeting, updateMeeting } from "../../actions/meetings.js";
 import Datetime from "react-datetime";
 import withStyles from "@material-ui/core/styles/withStyles";
 
-//import "../../assets/scss/plugins/_plugin-react-datetime.scss"
+import "../../assets/scss/material-kit-pro-react.scss";
 
 const style = {
   label: {
@@ -93,7 +93,7 @@ class MeetingsForm extends React.Component {
             </FormControl>
           </FormGroup>
 
-          <FormGroup row>
+          {/* <FormGroup row>
             <FormControl margin="normal" required fullWidth>
               <InputLabel>Start Time</InputLabel>
               <Input
@@ -103,7 +103,7 @@ class MeetingsForm extends React.Component {
                 onChange={this.handleChanges}
               />
             </FormControl>
-          </FormGroup>
+          </FormGroup> */}
           {/* <FormGroup row>
            <InputLabel className={classes.label}>
          Datetime Picker
@@ -115,15 +115,11 @@ class MeetingsForm extends React.Component {
         />
       </FormControl>
           </FormGroup> */}
-          {/* <InputLabel className={classes.label}>
-        Datetime Picker
-      </InputLabel>
-      <br />
-      <FormControl fullWidth>
-        <Datetime
-          inputProps={{ placeholder: "Datetime Picker Here" }}
-        />
-      </FormControl> */}
+          <InputLabel className={classes.label}>Datetime Picker</InputLabel>
+          <br />
+          <FormControl fullWidth>
+            <Datetime inputProps={{ placeholder: "Datetime Picker Here" }} />
+          </FormControl>
 
           <FormGroup row>
             <FormControl margin="normal" required fullWidth>
