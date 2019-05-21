@@ -53,6 +53,16 @@ class ExperienceList extends React.Component {
     this.setState({ isLoaded: true });
   }
 
+  async componentDidUpdate (prevProps, PrevState) {
+    if(this.props.experiences.length !== prevProps.experiences.length) {
+      await this.props.getExperiences();
+    }
+    //const deleted = this.props.experiences.filter(experience => experience.deleted === true)
+    // if(deleted) {
+    //   await this.props.getExperiences();
+    // }
+  }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };

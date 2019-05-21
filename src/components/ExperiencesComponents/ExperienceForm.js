@@ -29,6 +29,7 @@ class ExperienceForm extends React.Component {
   createAnExperience = e => {
     e.preventDefault();
     this.props.createExperience(this.state);
+    this.props.handleClose();
   };
 
   updateAnExperience = e => {
