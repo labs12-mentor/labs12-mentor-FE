@@ -72,7 +72,6 @@ class OAuth extends Component {
         const left = window.innerWidth / 2 - width / 2;
         const top = window.innerHeight / 2 - height / 2;
         const url = registerMode ? `${API_URL}/invitations/${invitation_id}/${provider}?socketId=${socket.id}` : `${API_URL}/auth/${provider}?socketId=${socket.id}`;
-        console.log(this.props.invitation_id);
         return window.open(
             url,
             '',
