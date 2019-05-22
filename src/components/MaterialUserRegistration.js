@@ -188,6 +188,20 @@ class UserRegistration extends React.Component {
                             </FormControl>
                         </FormGroup>
 
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='city'><Group /> City</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='city'
+                                    id='city'
+                                    placeholder='Enter your address - city'
+                                    value={this.city}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
                         </form>
                         <Button
                                 type="submit"
