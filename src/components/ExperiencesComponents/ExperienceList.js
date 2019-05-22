@@ -7,9 +7,9 @@ import {
 } from "../../actions";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import ExperienceForm from './ExperienceForm';
-import ExperienceCard from './ExperienceCard'
-import CircularProgress from '@material-ui/core/CircularProgress';
+import ExperienceForm from "./ExperienceForm";
+import ExperienceCard from "./ExperienceCard";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -51,11 +51,11 @@ class ExperienceList extends React.Component {
   async componentDidMount() {
     await this.props.getExperiences();
     this.setState({ isLoaded: true });
-    console.log(this.props.experiences)
+    console.log(this.props.experiences);
   }
 
-  async componentDidUpdate (prevProps, PrevState) {
-    if(this.props.experiences.length !== prevProps.experiences.length) {
+  async componentDidUpdate(prevProps, PrevState) {
+    if (this.props.experiences.length !== prevProps.experiences.length) {
       await this.props.getExperiences();
     }
     //const deleted = this.props.experiences.filter(experience => experience.deleted === true)
@@ -87,11 +87,13 @@ class ExperienceList extends React.Component {
     const { isLoaded } = this.state;
 
     const nonDeleted = this.props.experiences.filter(experience => {
-      return experience.deleted === false && this.props.userId === experience.user_id;
+      return (
+        experience.deleted === false && this.props.userId === experience.user_id
+      );
     });
-    
+
     return (
-      <div style={{ width: '100%' }}>
+      <div style={{ width: "100%" }}>
         <Button
           variant="contained"
           color="info"
@@ -106,11 +108,11 @@ class ExperienceList extends React.Component {
           aria-labelledby="form-dialog-title"
           //text-Align="center"
         >
-          <DialogContent
-
-          >
-            <ExperienceForm canEdit={false} userId={this.props.userId}
-            handleClose={this.handleClose}
+          <DialogContent>
+            <ExperienceForm
+              canEdit={false}
+              userId={this.props.userId}
+              handleClose={this.handleClose}
             />
           </DialogContent>
           {/* <DialogActions>
@@ -121,14 +123,26 @@ class ExperienceList extends React.Component {
         </Dialog>
 
         <Table
+          style={{
+            textAlign: "center"
+          }}
           tableData={nonDeleted.map(experience => {
-            return ([
-                <p className={classes.cardTitle}>{experience.name}</p>,
-                <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <ExperienceCard
-                id={experience.id}
-                />
-                  {/* <Button
+            return [
+              <p
+                className={classes.cardTitle}
+                style={{
+                  fontSize: "1.3rem",
+                  lineHeight: "5vh"
+                }}
+              >
+                {experience.name}
+              </p>,
+              <div
+                className={classes.buttonGroup}
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <ExperienceCard id={experience.id} />
+                {/* <Button
                     justIcon
                     color="info"
                     size="sm"
@@ -144,8 +158,8 @@ class ExperienceList extends React.Component {
                   >
                     <Clear style={{ fontSize: 40 }} />
                   </Button> */}
-                </div>
-            ])
+              </div>
+            ];
           })}
         />
       </div>
@@ -190,9 +204,8 @@ class ExperienceList extends React.Component {
       //   ) : (
       //     <h2>Loading</h2>
       //   )}
-        
+
       // </Card>
-      
     );
   }
 }
