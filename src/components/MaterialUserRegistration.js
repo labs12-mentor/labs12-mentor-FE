@@ -239,6 +239,20 @@ class UserRegistration extends React.Component {
                             </FormControl>
                         </FormGroup>
 
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_country'><Group /> Country</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='user_country'
+                                    id='user_country'
+                                    placeholder='Enter your address - country'
+                                    value={this.user_country}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
                         </form>
                         <Button
                                 type="submit"
