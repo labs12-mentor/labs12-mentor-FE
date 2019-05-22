@@ -143,7 +143,6 @@ class MaterialNavbar extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const { anchorEl, mobileMoreAnchorEl } = this.state;
     const { classes } = this.props;
     const isMenuOpen = Boolean(anchorEl);

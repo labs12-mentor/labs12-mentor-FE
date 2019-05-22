@@ -1,4 +1,5 @@
 export * from './auth';
+export * from './contact';
 export * from './experiences';
 export * from './invitations';
 export * from './matches';

@@ -89,6 +89,7 @@ class MentorProfile extends React.Component {
     const applied = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
+<<<<<<< HEAD
 
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
     console.log("mentee list", this.state.wanted_mentor);
@@ -106,6 +107,15 @@ class MentorProfile extends React.Component {
      console.log("current user",this.state.user)
     // console.log(this.state.profile)
     // console.log(applied);
+=======
+    await this.setState({ ...this.state, wanted_mentor: applied[0] });
+    await this.props.getSpecificMentor(
+      this.state.wanted_mentor.wanted_mentor_id
+    );
+    await this.setState({ ...this.state, mentor: this.props.mentor });
+    await this.props.getSpecificUser(this.state.mentor.user_id);
+    await this.setState({ ...this.state, profile: this.props.profile });
+>>>>>>> 93d30fca8fa7acc9c97b4d6f6724c48dc641f7d8
   }
 
   handleExpandClick = () => {

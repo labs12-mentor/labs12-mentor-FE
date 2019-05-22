@@ -205,6 +205,7 @@ class UserProfileForm extends React.Component {
                 </FormControl>
               </FormGroup>
 
+<<<<<<< HEAD
               <Button
                 type="submit"
                 variant="contained"
@@ -217,6 +218,21 @@ class UserProfileForm extends React.Component {
             </form>
           </Paper>
         </main>
+=======
+        <Button 
+          center="true"
+          type="submit"
+          variant="contained"
+          color="info"
+          className={classes.submit}
+          onClick={this.updateUser}
+        >
+            Update
+        </Button>
+      </form>
+      </Paper>
+      </main>
+>>>>>>> 93d30fca8fa7acc9c97b4d6f6724c48dc641f7d8
       </MuiThemeProvider>
     );
   }

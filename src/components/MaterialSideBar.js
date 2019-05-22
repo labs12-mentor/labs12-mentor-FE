@@ -35,9 +35,15 @@ function MaterialSideBar(props) {
     <Grid
     container
   
+<<<<<<< HEAD
     // alignItems="center"
     // alignText="center"
     // justify="center"
+=======
+    alignItems="center"
+    aligntext="center"
+    justify="center"
+>>>>>>> 93d30fca8fa7acc9c97b4d6f6724c48dc641f7d8
     
     
   >
