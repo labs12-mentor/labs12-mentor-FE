@@ -37,6 +37,7 @@ import materialtable from '../pages/AdministratorPanel/MaterialTable';
 import NavBar from '../components/newNav';
 
 import UserModal from '../components/UserComponents/UserModal'
+import InvitationForm from '../pages/Invitations/InvitationForm';
 
 const Routes = (props) => {
     return (
@@ -56,6 +57,7 @@ const Routes = (props) => {
             <Route exact path='/user/notifications' component={RouteAuthNeeded(Notifications)} />
             <Route exact path='/user/admin/profile' component={RouteAuthNeeded(AdminPanel)} />
             <Route exact path='/user/admin/panel' component={RouteAuthNeeded(AdministratorPanel)} />
+            <Route exact path='/user/admin/invite' component={RouteAuthNeeded(InvitationForm)} />
             <Route
                 exact
                 path='/user/admin/mentorapplication/:id'

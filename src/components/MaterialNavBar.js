@@ -21,6 +21,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ContactMail from '@material-ui/icons/ContactMail';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -241,7 +242,10 @@ class MaterialNavbar extends React.Component {
             
             {this.props.authenticated && (
               <div>
-                {/* {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" && <Button href="/user/admin/panel" className={classes.button}>Panel</Button>)} */}
+                {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR" &&
+                <IconButton style={{color: "white"}} component={RouterLink} to="/user/admin/invite">
+                    <ContactMail />
+                </IconButton>)}
                 <IconButton style={{color: "white"}} component={RouterLink} to="/user/notifications">
                     <NotificationButton />
                 </IconButton>

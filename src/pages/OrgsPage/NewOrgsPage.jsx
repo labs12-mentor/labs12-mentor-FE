@@ -1,12 +1,12 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { getCurrentUser, getSpecificOrganization } from '../../actions';
+import PropTypes from 'prop-types';
+import history from '../../history';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import history from '../../history';
-import { getCurrentUser, getSpecificOrganization } from '../../actions';
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
@@ -14,6 +14,7 @@ import Favorite from "@material-ui/icons/Favorite";
 import Header from "../../material-components/Header/Header.jsx";
 import HeaderLinks from "../../material-components/Header/HeaderLinks.jsx";
 import Footer from "../../material-components/Footer/Footer.jsx";
+import NavPills from "../../material-components/NavPills/NavPills.jsx";
 import GridContainer from "../../material-components/Grid/GridContainer.jsx";
 import GridItem from "../../material-components/Grid/GridItem.jsx";
 import Parallax from "../../material-components/Parallax/Parallax.jsx";
@@ -25,6 +26,9 @@ import SectionInterested from "./Sections/SectionInterested.jsx";
 import logo from './Sections/lambda-logo.jpg';
 import ppl from './Sections/charles-forerunner-378-unsplash.jpg';
 import blogPostsPageStyle from "../../assets/jss/material-kit-pro-react/views/blogPostsPageStyle.jsx";
+
+import MembersList from './Sections/MembersList';
+import InvitationsList from './Sections/InvitationsList';
 
 class NewOrgsPage extends React.Component {
   constructor(props) {
@@ -59,10 +63,39 @@ class NewOrgsPage extends React.Component {
             </GridContainer>
           </div>
         </Parallax>
+
         <div className={classes.main}>
-          <div className={classes.container}>
-            <SectionPills />
-            <SectionInterested />
+          <div className={classes.container} style={{ paddingTop: 30 }}>
+            <NavPills
+              color="info"
+              tabs={[
+                {
+                  tabButton: "Mentoring Resources",
+                  tabContent: (
+                    <span>                      
+                      <SectionPills />
+                      <SectionInterested />
+                    </span>
+                  )
+                },
+                {
+                  tabButton: "Organization Members",
+                  tabContent: (
+                    <span>
+                      <MembersList />
+                    </span>
+                  )
+                },
+                {
+                  tabButton: "Organization Invitations",
+                  tabContent: (
+                    <span>
+                      <InvitationsList />
+                    </span>
+                  )
+                }
+              ]}
+            />
           </div>
         </div>
       </div>
