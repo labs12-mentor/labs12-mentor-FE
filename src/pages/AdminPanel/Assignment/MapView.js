@@ -9,7 +9,7 @@ class MapView extends React.Component {
         const mentor = this.props.mentorMatch;
         const mentee = this.props.menteeMatch;
         return (
-            <GoogleMaps />
+            <GoogleMaps mentor={mentor} mentee={mentee} />
             // <div className='MapView'>
             //     {Object.keys(mentee).length === 0 ? (
             //         <div>

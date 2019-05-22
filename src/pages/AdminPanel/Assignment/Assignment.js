@@ -36,7 +36,6 @@ class Assignment extends React.Component {
     };
 
     render() {
-        console.log(this.props);
         let mentorMatch = {};
         let menteeMatch = {};
         if (this.props.currentMatch && this.props.match.params.role === 'mentor') {
@@ -70,7 +69,10 @@ class Assignment extends React.Component {
                         {
                         tabButton: "Match Map View",
                         tabContent: (
-                            <MapView mentorMatch={mentorMatch} menteeMatch={menteeMatch} />
+                            <MapView 
+                                mentorMatch={mentorMatch} 
+                                menteeMatch={menteeMatch} 
+                            />
                         )
                         }
                     ]}
