@@ -51,7 +51,6 @@ class ExperienceList extends React.Component {
   async componentDidMount() {
     await this.props.getExperiences();
     this.setState({ isLoaded: true });
-    console.log(this.props.experiences)
   }
 
   async componentDidUpdate (prevProps, PrevState) {
