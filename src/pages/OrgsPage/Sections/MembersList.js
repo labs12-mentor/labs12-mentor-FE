@@ -142,12 +142,12 @@ class MembersList extends React.Component {
                                 user.email,
                                 user.role,
                                 [
-                                    <Button justIcon size="sm" color={"info"}>
-                                        <Person />
-                                    </Button>,
-                                    <Button justIcon size="sm" color={"success"}>
-                                        <Done />
-                                    </Button>,
+                                    // <Button justIcon size="sm" color={"info"}>
+                                    //     <Person />
+                                    // </Button>,
+                                    // <Button justIcon size="sm" color={"success"}>
+                                    //     <Done />
+                                    // </Button>,
                                     <Button justIcon size="sm" color={"danger"}>
                                         <Close />
                                     </Button>
