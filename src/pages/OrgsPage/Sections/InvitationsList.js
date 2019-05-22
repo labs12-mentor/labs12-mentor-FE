@@ -75,38 +75,29 @@ class InvitationsList extends React.Component {
     //     history.push(`/user/admin/mentorapplication/${id}`);
     // }
 
-    // changeHandler = (e) => {
-    //     e.preventDefault();
-    //     this.setState({
-    //         ...this.state,
-    //         [e.target.name]: e.target.value
-    //     });
-    // };
+    changeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            ...this.state,
+            [e.target.name]: e.target.value
+        });
+    };
 
-    // filterBySearch = (role) => {
-    //     const searchInput = this.state.searchBarContents.toLowerCase();
-    //     let filteredUsers = [];
+    filterBySearch = () => {
+        const searchInput = this.state.searchBarContents.toLowerCase();
+        let filteredInvites = [];
+        
+        filteredInvites = this.state.invitations.filter(invite => {
+            return (
+                invite.last_name.toLowerCase().includes(searchInput) ||
+                invite.first_name.toLowerCase().includes(searchInput) ||
+                invite.email.toLowerCase().includes(searchInput) ||
+                invite.role.toLowerCase().includes(searchInput)
+            );
+        });        
 
-    //     if (role === 'mentee') {
-    //         filteredUsers = this.props.mentees.filter((mentee) => {
-    //             return (
-    //                 mentee.last_name.toLowerCase().includes(searchInput) ||
-    //                 mentee.first_name.toLowerCase().includes(searchInput) ||
-    //                 mentee.email.toLowerCase().includes(searchInput)
-    //             );
-    //         });
-    //     } else if (role === 'mentor') {
-    //         filteredUsers = this.props.mentors.filter((mentor) => {
-    //             return (
-    //                 mentor.last_name.toLowerCase().includes(searchInput) ||
-    //                 mentor.first_name.toLowerCase().includes(searchInput) ||
-    //                 mentor.email.toLowerCase().includes(searchInput)
-    //             );
-    //         });
-    //     }
-
-    //     return filteredUsers;
-    // };
+        return filteredInvites;
+    };
 
     // clickHandler = (e, mentor, status) => {
     //     e.preventDefault();
@@ -130,7 +121,6 @@ class InvitationsList extends React.Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.state.invitations);
         return (
             <Paper className={classes.root}>
                 <Input
@@ -158,7 +148,7 @@ class InvitationsList extends React.Component {
                     "Role",
                     "",
                     ]}
-                    tableData={this.state.invitations.map((invite, index)=> {
+                    tableData={this.filterBySearch().map((invite, index)=> {
                         return (
                             [
                                 ' ',
