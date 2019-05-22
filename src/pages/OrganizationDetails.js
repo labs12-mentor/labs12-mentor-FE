@@ -21,6 +21,7 @@ import history from '../history';
 import { getCurrentUser, getSpecificOrganization } from '../actions';
 import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
+import BlogPostsPage from './OrgsPage/BlogPostsPage.jsx';
 
 const ContainerDiv = styled.div`
     display: flex;
@@ -53,6 +54,10 @@ class OrganizationDetails extends React.Component {
 
     render() {
         return (
+
+            <div>
+                <BlogPostsPage />
+            </div>
             <AppContainer>
                 <Row>
                     <Col sm='12'>

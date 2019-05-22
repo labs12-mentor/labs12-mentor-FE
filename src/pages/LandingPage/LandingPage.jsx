@@ -18,7 +18,6 @@ import Parallax from "../../material-components/Parallax/Parallax.jsx";
 //import {Link} from "react-router-dom"
 import { Link as RouterLink } from 'react-router-dom';
 
-
 import landingPageStyle from "../../assets/jss/material-kit-pro-react/views/landingPageStyle.jsx";
 
 // Sections for this page
