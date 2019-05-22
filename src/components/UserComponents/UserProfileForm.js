@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-// import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { updateUser, getCurrentUser } from "../../actions";
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from "../../material-components/CustomButtons/Button.jsx";
