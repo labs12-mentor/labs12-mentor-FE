@@ -26,6 +26,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
+import GridContainer from "../../material-components/Grid/GridContainer.jsx";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // const style = {
@@ -87,16 +89,23 @@ class MentorProfile extends React.Component {
     const applied = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
-    //console.log(applied)
+
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
-    //console.log(this.state.wanted_mentor)
-    await this.props.getSpecificMentor(
-      this.state.wanted_mentor.wanted_mentor_id
-    );
-    await this.setState({ ...this.state, mentor: this.props.mentor });
-    //console.log(this.state.mentor)
-    await this.props.getSpecificUser(this.state.mentor.user_id);
-    await this.setState({ ...this.state, profile: this.props.profile });
+    console.log(this.state.wanted_mentor);
+    if (this.state.wanted_mentor.length < 1) {
+      await this.props.getSpecificMentor(
+        this.state.wanted_mentor.wanted_mentor_id
+      );
+
+      await this.setState({ ...this.state, mentor: this.props.mentor });
+
+      await this.props.getSpecificUser(this.state.mentor.user_id);
+      await this.setState({ ...this.state, profile: this.props.profile });
+    }
+    // console.log(this.state.wanted_mentor);
+    // console.log(this.state.mentor)
+    // console.log(this.state.profile)
+    // console.log(applied);
   }
 
   handleExpandClick = () => {
@@ -105,46 +114,69 @@ class MentorProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
-    return (
-      <div>
-        {this.state.isLoaded ? (
-          <div>
-            <Grid
-              container
-              // spacing={0}
-              direction="column"
-              alignItems="center"
-              justify="center"
-              spacing={24}
-               style={{ minHeight: '100vh' }}
-            >
-              <Grid item xs={12}>
-                <Card className={classes.card}>
-                  <CardHeader
-                    avatar={
-                      <Avatar aria-label="Recipe" className={classes.avatar}>
-                        M
-                      </Avatar>
-                    }
-                    // action={
-                    //   <IconButton>
-                    //     <MoreVertIcon />
-                    //   </IconButton>
-                    // }
-                    title={`${this.state.profile.first_name}  ${
-                      this.state.profile.last_name
-                    }`}
-                    subheader="Mentor Profile"
-                  />
-                  <CardMedia />
-                  <CardContent>
-                    <Typography component="p">Email:</Typography>
-                    <Typography component="p">
-                      {this.state.profile.email}
-                    </Typography>
-                  </CardContent>
-                  <CardActions className={classes.actions} disableActionSpacing>
-                    {/* <IconButton aria-label="github">
+    if (this.state.profile.length < 1) {
+      return (
+        <div>
+          <Grid
+            container
+            direction="column"
+            alignItems="center"
+            justify="center"
+            spacing={24}
+            style={{ minHeight: "100vh", textAlign: "center" }}
+          >
+            <Card style={{ width: "50%" }}>
+              <CardContent style={{ alignSelf: "center" }}>
+                <Typography>Please wait to be match</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {this.state.isLoaded ? (
+            <div>
+              <Grid
+                container
+                // spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                spacing={24}
+                style={{ minHeight: "100vh" }}
+              >
+                <Grid item xs={12}>
+                  <Card className={classes.card}>
+                    <CardHeader
+                      avatar={
+                        <Avatar aria-label="Recipe" className={classes.avatar}>
+                          M
+                        </Avatar>
+                      }
+                      // action={
+                      //   <IconButton>
+                      //     <MoreVertIcon />
+                      //   </IconButton>
+                      // }
+                      title={`${this.state.profile.first_name}  ${
+                        this.state.profile.last_name
+                      }`}
+                      subheader="Mentor Profile"
+                    />
+                    <CardMedia />
+                    <CardContent>
+                      <Typography component="p">Email:</Typography>
+                      <Typography component="p">
+                        {this.state.profile.email}
+                      </Typography>
+                    </CardContent>
+                    <CardActions
+                      className={classes.actions}
+                      disableActionSpacing
+                    >
+                      {/* <IconButton aria-label="github">
                 <FavoriteIcon/>
                 </IconButton>
                 <IconButton aria-label="Share">
@@ -160,14 +192,14 @@ class MentorProfile extends React.Component {
                 >
                   <ExpandMoreIcon />
                 </IconButton> */}
-                  </CardActions>
-                  <Collapse
-                    in={this.state.expanded}
-                    timeout="auto"
-                    unmountOnExit
-                  >
-                    <CardContent>
-                      {/* <Typography paragraph>State:</Typography>
+                    </CardActions>
+                    <Collapse
+                      in={this.state.expanded}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <CardContent>
+                        {/* <Typography paragraph>State:</Typography>
                   <Typography paragraph>{this.state.profile.state}</Typography>
                   <Typography paragraph>Street:</Typography>
 
@@ -177,29 +209,30 @@ class MentorProfile extends React.Component {
                   <Typography paragraph>
                     {this.state.profile.zipcode}
                   </Typography> */}
-                    </CardContent>
-                  </Collapse>
-                </Card>
+                      </CardContent>
+                    </Collapse>
+                  </Card>
+                </Grid>
               </Grid>
-            </Grid>
-          </div>
-        ) : (
-          <div>
-            <Grid
-              container
-              // spacing={0}
-              direction="column"
-              alignItems="center"
-              justify="center"
-              spacing={24}
-              style={{ minHeight: "100vh" }}
-            >
-              <CircularProgress className={classes.progress} />
-            </Grid>
-          </div>
-        )}
-      </div>
-    );
+            </div>
+          ) : (
+            <div>
+              <Grid
+                container
+                // spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                spacing={24}
+                style={{ minHeight: "100vh" }}
+              >
+                <CircularProgress className={classes.progress} />
+              </Grid>
+            </div>
+          )}
+        </div>
+      );
+    }
   }
 }
 

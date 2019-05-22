@@ -112,6 +112,8 @@ class UserProfile extends React.Component {
         isLoaded: true
       });
     }
+    console.log(this.state.user);
+    console.log(matched)
   }
 
   toggleApply() {
