@@ -33,15 +33,15 @@ class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      street: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      country: ''
+      user_first_name: '',
+      user_last_name: '',
+      user_email: '',
+      user_password: '',
+      user_street: '',
+      user_city: '',
+      user_state: '',
+      user_zipcode: '',
+      user_country: ''
     };
   }
 
@@ -59,6 +59,15 @@ class UserRegistration extends React.Component {
       this.props.registerOrganization(
           {
             ...this.state,
+            first_name: this.state.user_first_name,
+            last_name: this.state.user_last_name,
+            email: this.state.user_email,
+            password: this.state.user_password,
+            street: this.state.user_street,
+            city: this.state.user_city,
+            state: this.state.user_state,
+            zipcode: this.state.user_zipcode,
+            country: this.state.user_country,
             organization_id: this.props.invitation.organization_id,
             role: this.props.invitation.role
           }
@@ -120,13 +129,13 @@ class UserRegistration extends React.Component {
                         
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='first_name'><Group /> First name</InputLabel>
+                                <InputLabel htmlFor='user_first_name'><Group /> First name</InputLabel>
                                 <Input
                                     type='text'
-                                    name='first_name'
-                                    id='first_name'
+                                    name='user_first_name'
+                                    id='user_first_name'
                                     placeholder='Enter your first name'
-                                    value={this.first_name}
+                                    value={this.user_first_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -134,13 +143,13 @@ class UserRegistration extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='last_name'><Group /> Last name</InputLabel>
+                                <InputLabel htmlFor='user_last_name'><Group /> Last name</InputLabel>
                                 <Input
                                     type='text'
-                                    name='last_name'
-                                    id='last_name'
+                                    name='user_last_name'
+                                    id='user_last_name'
                                     placeholder='Enter your last name'
-                                    value={this.last_name}
+                                    value={this.user_last_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -148,13 +157,13 @@ class UserRegistration extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='email'><Group /> Email</InputLabel>
+                                <InputLabel htmlFor='user_email'><Group /> Email</InputLabel>
                                 <Input
                                     type='email'
-                                    name='email'
-                                    id='email'
+                                    name='user_email'
+                                    id='user_email'
                                     placeholder='Enter your email'
-                                    value={this.email}
+                                    value={this.user_email}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -162,13 +171,13 @@ class UserRegistration extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='password'><Group /> Password</InputLabel>
+                                <InputLabel htmlFor='user_password'><Group /> Password</InputLabel>
                                 <Input
                                     type='password'
-                                    name='password'
-                                    id='password'
+                                    name='user_password'
+                                    id='user_password'
                                     placeholder='Enter your password'
-                                    value={this.password}
+                                    value={this.user_password}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -176,13 +185,13 @@ class UserRegistration extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='street'><Group /> Street</InputLabel>
+                                <InputLabel htmlFor='user_street'><Group /> Street</InputLabel>
                                 <Input
                                     type='text'
-                                    name='street'
-                                    id='street'
+                                    name='user_street'
+                                    id='user_street'
                                     placeholder='Enter your address - street'
-                                    value={this.street}
+                                    value={this.user_street}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -190,13 +199,27 @@ class UserRegistration extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='city'><Group /> City</InputLabel>
+                                <InputLabel htmlFor='user_city'><Group /> City</InputLabel>
                                 <Input
                                     type='text'
-                                    name='city'
-                                    id='city'
+                                    name='user_city'
+                                    id='user_city'
                                     placeholder='Enter your address - city'
-                                    value={this.city}
+                                    value={this.user_city}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_state'><Group /> State</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='user_state'
+                                    id='user_street'
+                                    placeholder='Enter your address - street'
+                                    value={this.user_street}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
