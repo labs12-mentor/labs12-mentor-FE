@@ -29,7 +29,6 @@ import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import UserProfile from '../components/MaterialIUserProfile';
-import InvitationsForm from '../pages/invitationForm';
 import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
@@ -38,7 +37,7 @@ import materialtable from '../pages/AdministratorPanel/MaterialTable';
 import NavBar from '../components/newNav';
 
 import UserModal from '../components/UserComponents/UserModal'
-import InvitationForm from '../pages/invitationForm';
+import InvitationForm from '../pages/Invitations/InvitationForm';
 
 const Routes = (props) => {
     return (

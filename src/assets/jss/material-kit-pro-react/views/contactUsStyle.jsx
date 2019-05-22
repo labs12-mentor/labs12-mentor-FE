@@ -13,6 +13,9 @@ const contactUsStyle = {
   title,
   mlAuto,
   description,
+  main: {
+    ...main,
+  },
   container: {
     ...container,
     maxWidth: "970px !important"
