@@ -218,7 +218,7 @@ class UserRegistration extends React.Component {
                                     type='text'
                                     name='user_state'
                                     id='user_street'
-                                    placeholder='Enter your address - street'
+                                    placeholder='Enter your address - state'
                                     value={this.user_street}
                                     onChange={this.handleInputs}
                                 />
