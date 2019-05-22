@@ -29,6 +29,7 @@ import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import UserProfile from '../components/MaterialIUserProfile';
+import InvitationsForm from '../pages/invitationForm';
 import blogposts from '../pages/BlogPostPage/BlogPostPage';
 // import table from '../components/ExperiencesComponents/table';
 import shoppingcart from '../pages/ShoppingCart';
@@ -37,6 +38,7 @@ import materialtable from '../pages/AdministratorPanel/MaterialTable';
 import NavBar from '../components/newNav';
 
 import UserModal from '../components/UserComponents/UserModal'
+import InvitationForm from '../pages/invitationForm';
 
 const Routes = (props) => {
     return (
@@ -56,6 +58,7 @@ const Routes = (props) => {
             <Route exact path='/user/notifications' component={RouteAuthNeeded(Notifications)} />
             <Route exact path='/user/admin/profile' component={RouteAuthNeeded(AdminPanel)} />
             <Route exact path='/user/admin/panel' component={RouteAuthNeeded(AdministratorPanel)} />
+            <Route exact path='/user/admin/invite' component={RouteAuthNeeded(InvitationForm)} />
             <Route
                 exact
                 path='/user/admin/mentorapplication/:id'

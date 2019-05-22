@@ -5,7 +5,7 @@ import {
   mainRaised,
   mlAuto,
   description
-} from "assets/jss/material-kit-pro-react.jsx";
+} from "../../material-kit-pro-react.jsx";
 
 const contactUsStyle = {
   main,
@@ -18,6 +18,7 @@ const contactUsStyle = {
     maxWidth: "970px !important"
   },
   contactContent: {
+    marginTop: "150px",
     paddingBottom: "40px",
     paddingTop: "40px"
   },
