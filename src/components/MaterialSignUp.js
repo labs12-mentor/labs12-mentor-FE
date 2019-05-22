@@ -54,7 +54,6 @@ class OrganizationRegister extends React.Component {
   };
 
   handleSubmit = (e) => {
-    console.log(this.state);
       e.preventDefault();
       this.props.registerOrganization(this.state);
   };
