@@ -114,8 +114,6 @@ export function registerOrganization(orgData) {
 export function registerUser(invitation_id, userData) {
     return async (dispatch) => {
         await dispatch(request());
-        console.log(invitation_id);
-        console.log(userData);
 
         return await axios
             .post(`${API_URL}/invitations/${invitation_id}`, userData)
