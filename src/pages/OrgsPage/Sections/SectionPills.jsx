@@ -25,11 +25,6 @@ function SectionPills({ ...props }) {
   return (
     <div className={classes.section}>
       <GridContainer>
-        <GridItem className={classes.textCenter}>
-          <h2>Resources</h2>
-        </GridItem>
-      </GridContainer>
-      <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card
             raised

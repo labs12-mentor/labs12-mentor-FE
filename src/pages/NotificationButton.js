@@ -29,7 +29,7 @@ class NotificationButton extends Component {
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
-                    <Badge badgeContent={this.props.notificationsCount} color="error">
+                    <Badge badgeContent={this.props.notificationsCount} color="secondary">
                         <NotificationsIcon />
                     </Badge>
                 </MuiThemeProvider>
