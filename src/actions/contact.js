@@ -15,6 +15,7 @@ export function sendEmailViaContactForm(email) {
             .post(`${API_URL}/contact/sendemail`, email)
             .then(async (res) => {
                 if (res.status === 200) {
+                    await alert(`Thank you, ${email.name}! Your message has been sent successfully.`)
                     await dispatch(success(res.data));
                     return await history.push('/');
                 } else {
