@@ -74,20 +74,17 @@ class Notifications extends Component {
                                         <p>cannot get notifications at this time</p>
                                     ) : null}
                                     {this.props.notifications.map((notification) => {
-                                        return (
-                                            <ListItem key={notification.id}>
-                                                <Notification
-                                                    id={notification.id}
-                                                    notification={notification.content}
-                                                    watched={notification.watched}
-                                                />
-                                                <ListItemSecondaryAction>
-                                                    <IconButton aria-label="Delete">
-                                                        <DeleteIcon />
-                                                    </IconButton>
-                                                </ListItemSecondaryAction>
-                                            </ListItem>
-                                        );
+                                        if (!notification.watched){
+                                            return (
+                                                <ListItem key={notification.id}>
+                                                    <Notification
+                                                        id={notification.id}
+                                                        notification={notification.content}
+                                                        watched={notification.watched}
+                                                    />
+                                                </ListItem>
+                                            );
+                                        }
                                     })}
                                 </List>
                             </CardContent>
