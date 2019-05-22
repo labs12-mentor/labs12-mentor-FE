@@ -91,7 +91,7 @@ class MentorProfile extends React.Component {
     });
 
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
-    console.log(this.state.wanted_mentor);
+    console.log("mentee list", this.state.wanted_mentor);
     if (this.state.wanted_mentor.length < 1) {
       await this.props.getSpecificMentor(
         this.state.wanted_mentor.wanted_mentor_id
@@ -103,7 +103,7 @@ class MentorProfile extends React.Component {
       await this.setState({ ...this.state, profile: this.props.profile });
     }
     // console.log(this.state.wanted_mentor);
-    // console.log(this.state.mentor)
+     console.log("current user",this.state.user)
     // console.log(this.state.profile)
     // console.log(applied);
   }

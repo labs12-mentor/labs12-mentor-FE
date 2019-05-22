@@ -55,6 +55,7 @@ class InvitationPage extends React.Component {
       user_id: this.props.currentUser.id,
       organization_id: this.props.currentUser.organization_id
     }
+    console.log(invitation_data)
     
     await this.props.createInvitation(invitation_data)
       .then(res => {
@@ -69,6 +70,7 @@ class InvitationPage extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     const { classes } = this.props;
     return (
       <div>
@@ -87,9 +89,9 @@ class InvitationPage extends React.Component {
                   <form>
                     <CustomInput
                       labelText="Name of Invitee"
-                      name="InviteeName"
-                      value={this.state.InviteeName}
-                      onChange={e => this.changeHandler(e)}
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.changeHandler}
                       id="float"
                       formControlProps={{
                         fullWidth: true
@@ -97,9 +99,9 @@ class InvitationPage extends React.Component {
                     />
                     <CustomInput
                       labelText="Email address"
-                      name="InviteeName"
-                      value={this.state.InviteeName}
-                      onChange={e => this.changeHandler(e)}
+                      name="email"
+                      value={this.state.email}
+                      onChange={this.changeHandler}
                       id="float"
                       formControlProps={{
                         fullWidth: true
