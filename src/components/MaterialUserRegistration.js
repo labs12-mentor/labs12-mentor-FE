@@ -63,18 +63,9 @@ class UserRegistration extends React.Component {
   handleSubmit = (e) => {
     console.log(this.state);
       e.preventDefault();
-      this.props.registerOrganization(
+      this.props.registerUser(this.props.match.params.id,
           {
             ...this.state,
-            first_name: this.state.user_first_name,
-            last_name: this.state.user_last_name,
-            email: this.state.user_email,
-            password: this.state.user_password,
-            street: this.state.user_street,
-            city: this.state.user_city,
-            state: this.state.user_state,
-            zipcode: this.state.user_zipcode,
-            country: this.state.user_country,
             organization_id: this.props.invitation.organization_id,
             role: this.props.invitation.role
           }
@@ -133,7 +124,7 @@ class UserRegistration extends React.Component {
                       </GridItem>
                       <GridItem xs={12} sm={5} md={5}>
                         
-                        <OAuthContainer provider={provider} socket={socket} />
+                        <OAuthContainer registerMode={true} invitation_id={this.props.match.params.id} provider={provider} socket={socket} />
                         <form className={classes.form} onSubmit={this.handleSubmit}>
                         
                         <FormGroup row>
