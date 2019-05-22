@@ -160,6 +160,20 @@ class UserRegistration extends React.Component {
                             </FormControl>
                         </FormGroup>
 
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='password'><Group /> Password</InputLabel>
+                                <Input
+                                    type='password'
+                                    name='password'
+                                    id='password'
+                                    placeholder='Enter your password'
+                                    value={this.password}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
                         </form>
                         <Button
                                 type="submit"
