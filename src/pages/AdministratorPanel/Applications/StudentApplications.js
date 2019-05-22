@@ -135,7 +135,6 @@ class StudentApplications extends React.Component {
                 }
             });
         });
-        console.log(menteeApplications);
 
         return (
             <Paper className={classes.root}>

@@ -26,7 +26,6 @@ class MeetingsContainer extends React.Component {
   };
 
   removeMeeting = id => {
-    console.log("hi");
   };
 }
 

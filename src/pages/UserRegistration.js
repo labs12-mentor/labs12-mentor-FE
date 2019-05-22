@@ -7,6 +7,12 @@ import { Link } from 'react-router-dom';
 import { Form, Input, Button } from 'reactstrap';
 
 import { registerUser, getSpecificInvitation, getSpecificOrganization } from '../actions';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+    width: 80%;
+    margin: 100px auto;
+`;
 
 class UserRegistration extends Component {
     constructor(props) {
@@ -44,7 +50,7 @@ class UserRegistration extends Component {
     render() {
         const { firstName, lastName, email, username, password, linkedIn } = this.state;
         return (
-            <div>
+            <AppContainer>
                 {/*Org logo*/}
                 <div>
                     <h2>User Registration</h2>
@@ -123,7 +129,7 @@ class UserRegistration extends Component {
                         </Button>
                     </Link>
                 </div>
-            </div>
+            </AppContainer>
         );
     }
 }

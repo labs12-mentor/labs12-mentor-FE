@@ -66,13 +66,12 @@ class OAuth extends Component {
     }
 
     openPopup() {
-        const { provider, socket } = this.props;
+        const { provider, socket, registerMode, invitation_id } = this.props;
         const width = 600,
             height = 600;
         const left = window.innerWidth / 2 - width / 2;
         const top = window.innerHeight / 2 - height / 2;
-        const url = `${API_URL}/auth/${provider}?socketId=${socket.id}`;
-
+        const url = registerMode ? `${API_URL}/invitations/${invitation_id}/${provider}?socketId=${socket.id}` : `${API_URL}/auth/${provider}?socketId=${socket.id}`;
         return window.open(
             url,
             '',

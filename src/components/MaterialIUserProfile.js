@@ -334,7 +334,7 @@ UserProfile.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.currentUser,
+    user: state.auth.currentUser || {},
     mentees: state.mentees.mentees,
     matches: state.matches.matches
   };
