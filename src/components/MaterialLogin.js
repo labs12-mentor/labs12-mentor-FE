@@ -124,6 +124,7 @@ class UserLogin extends React.Component {
                     </CardBody>
                     <div className={classes.textCenter}>
                       <Button 
+                        type= "submit"
                         simple 
                         color="info" 
                         size="lg" 
