@@ -33,13 +33,15 @@ class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      organization_name: '',
-      organization_description: '',
-      programUrl: '',
-      user_email: '',
-      user_password: '',
-      user_first_name: '',
-      user_last_name: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      street: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      country: ''
     };
   }
 
@@ -54,7 +56,13 @@ class UserRegistration extends React.Component {
   handleSubmit = (e) => {
     console.log(this.state);
       e.preventDefault();
-      this.props.registerOrganization(this.state);
+      this.props.registerOrganization(
+          {
+            ...this.state,
+            organization_id: this.props.invitation.organization_id,
+            role: this.props.invitation.role
+          }
+      );
   };
 
   async componentDidMount() {
@@ -69,13 +77,6 @@ class UserRegistration extends React.Component {
     
     return (
       <div>
-        {/* <Header
-          absolute
-          color="transparent"
-          brand="Material Kit PRO React"
-          links={<HeaderLinks dropdownHoverColor="rose" />}
-          {...rest}
-        /> */}
         <div
           className={classes.pageHeader}
           style={{
@@ -89,7 +90,75 @@ class UserRegistration extends React.Component {
               <GridItem xs={12} sm={10} md={10}>
                 <Card className={classes.cardSignup}>
                   <h2 className={classes.cardTitle}>Join {this.props.organization.name} as a {this.props.invitation.role}</h2>
-                  
+                  <CardBody>
+                    <GridContainer justify="center">
+                      <GridItem xs={12} sm={5} md={5}>
+                        <InfoArea
+                          className={classes.infoArea}
+                          title="Create Groups that Resonate"
+                          description="Launch an organization to bring together people who want to connect and learn."
+                          icon={Timeline}
+                          iconColor="rose"
+                        />
+                        <InfoArea
+                          className={classes.infoArea}
+                          title="Connect People"
+                          description="Experienced individuals have the opportunity to apply for mentorship. Users can then apply to be mentored by these experienced individuals."
+                          icon={Code}
+                          iconColor="primary"
+                        />
+                        <InfoArea
+                          className={classes.infoArea}
+                          title="Build and Inspire Individuals"
+                          description="Create a space where teaching and learning flow naturally."
+                          icon={Group}
+                          iconColor="info"
+                        />
+                      </GridItem>
+                      <GridItem xs={12} sm={5} md={5}>
+                        <form className={classes.form} onSubmit={this.handleSubmit}>
+                        
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='first_name'><Group /> First name</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='first_name'
+                                    id='first_name'
+                                    placeholder='Enter your first name'
+                                    value={this.first_name}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='last_name'><Group /> Last name</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='last_name'
+                                    id='last_name'
+                                    placeholder='Enter your last name'
+                                    value={this.last_name}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+                        
+                        </form>
+                        <Button
+                                type="submit"
+                                variant="contained"
+                                color="info"
+                                className={classes.submit}
+                                onClick={this.handleSubmit}
+                            >
+                            Join {this.props.organization.name}
+                        </Button>
+                      </GridItem>
+                    </GridContainer>
+                  </CardBody>
                 </Card>
               </GridItem>
             </GridContainer>
