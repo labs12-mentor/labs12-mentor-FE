@@ -145,7 +145,21 @@ class UserRegistration extends React.Component {
                                 />
                             </FormControl>
                         </FormGroup>
-                        
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='email'><Group /> Email</InputLabel>
+                                <Input
+                                    type='email'
+                                    name='email'
+                                    id='email'
+                                    placeholder='Enter your email'
+                                    value={this.email}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
                         </form>
                         <Button
                                 type="submit"
