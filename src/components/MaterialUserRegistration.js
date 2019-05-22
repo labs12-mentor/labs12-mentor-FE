@@ -217,9 +217,23 @@ class UserRegistration extends React.Component {
                                 <Input
                                     type='text'
                                     name='user_state'
-                                    id='user_street'
+                                    id='user_state'
                                     placeholder='Enter your address - state'
                                     value={this.user_street}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_zipcode'><Group /> Zip code</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='user_zipcode'
+                                    id='user_zipcode'
+                                    placeholder='Enter your address - zip code'
+                                    value={this.user_zipcode}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
