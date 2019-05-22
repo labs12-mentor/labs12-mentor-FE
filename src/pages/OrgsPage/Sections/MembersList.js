@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
-import { getUsers } from '../../../actions';
+import { getUsers, deleteUser } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
@@ -50,8 +50,13 @@ class MembersList extends React.Component {
 
     async componentDidMount() {
         await this.props.getUsers();
+
+        let existingUser = this.props.users.filter(user => {
+            return user.deleted === false;
+        });
+
         this.setState({
-            users: this.props.users
+            users: existingUser
         });
     }
 
@@ -83,25 +88,11 @@ class MembersList extends React.Component {
         return filteredUsers;
     };
 
-    // clickHandler = (e, mentor, status) => {
-    //     e.preventDefault();
-    //     const clickedUser = this.props.users.filter(user => {
-    //         return user.id == mentor.id;
-    //     })[0];
-        
-    //     if(status === "approved"){
-    //         clickedUser.role = "MENTOR";
-            
-    //         this.props.updateUser(
-    //             clickedUser.id, 
-    //             {
-    //                 ...clickedUser
-    //             }
-    //         );
-    //     } else if(status === "denied") {
-    //         this.props.deleteMentor(mentor.mentor_id);
-    //     }
-    // }
+    clickHandler = (e, id) => {
+        e.preventDefault();
+
+        this.props.deleteUser(id);
+    }
 
     render() {
         const { classes } = this.props;
@@ -148,7 +139,7 @@ class MembersList extends React.Component {
                                     // <Button justIcon size="sm" color={"success"}>
                                     //     <Done />
                                     // </Button>,
-                                    <Button justIcon size="sm" color={"danger"}>
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, user.id)}>
                                         <Close />
                                     </Button>
                                 ]
@@ -171,4 +162,4 @@ const mstp = state => {
     }
 }
 
-export default connect(mstp, { getUsers })(withStyles(styles)(MembersList));
+export default connect(mstp, { getUsers, deleteUser })(withStyles(styles)(MembersList));
