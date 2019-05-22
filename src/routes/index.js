@@ -7,6 +7,7 @@ import HomePage from '../pages/HomePage';
 // import OrganizationRegister from '../pages/OrganizationRegister';
 import OrganizationDetails from '../pages/OrganizationDetails';
 import UserRegister from '../pages/UserRegistration';
+import UserRegistration from '../components/MaterialUserRegistration';
 // import UserLogin from '../pages/UserLogin';
 // import SignIn from '../pages/MaterialLogIn';
 import Notifications from '../pages/NotificationsView';
@@ -49,7 +50,8 @@ const Routes = (props) => {
                 component={RouteNoAuthNeeded(OrganizationRegister)}
             />
             {/* <Route exact path="/guide" component={UserModal}/> */}
-            <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegister)} />
+            <Route exact path='/invitation-plain/:id' component={RouteNoAuthNeeded(UserRegister)} />
+            <Route exact path='/invitation/:id' component={RouteNoAuthNeeded(UserRegistration)} />
             <Route exact path='/user/register/2' component={RouteNoAuthNeeded(RegDetails)} />
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
             <Route exact path='/user/profile' component={RouteAuthNeeded(UserProfile)} />
