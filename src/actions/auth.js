@@ -114,12 +114,20 @@ export function registerOrganization(orgData) {
 export function registerUser(invitation_id, userData) {
     return async (dispatch) => {
         await dispatch(request());
+        console.log(invitation_id);
+        console.log(userData);
 
         return await axios
-            .post(`${API_URL}+/invitations/${invitation_id}`, userData)
+            .post(`${API_URL}/invitations/${invitation_id}`, userData)
             .then(async (res) => {
                 if (res.status === 201) {
-                    return await dispatch(success(res.data));
+                    await dispatch(success(res.data));
+                    return await dispatch(
+                        loginUser({
+                            email: userData.user_email,
+                            password: userData.user_password
+                        })
+                    );
                 } else {
                     await dispatch(error(res.data.error));
                     return await Promise.reject(res.data);
