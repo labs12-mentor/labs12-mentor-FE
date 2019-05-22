@@ -29,6 +29,13 @@ import image from '../assets/img/sergio-souza-1318950-unsplash.jpg';
 
 import { registerUser, getSpecificInvitation, getSpecificOrganization } from '../actions';
 
+import OAuthContainer from '../containers/OAuthContainer';
+import io from 'socket.io-client';
+import { API_URL_HOME } from '../constants/config';
+
+const socket = io(API_URL_HOME);
+const provider = 'github';
+
 class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
@@ -125,6 +132,8 @@ class UserRegistration extends React.Component {
                         />
                       </GridItem>
                       <GridItem xs={12} sm={5} md={5}>
+                        
+                        <OAuthContainer provider={provider} socket={socket} />
                         <form className={classes.form} onSubmit={this.handleSubmit}>
                         
                         <FormGroup row>
