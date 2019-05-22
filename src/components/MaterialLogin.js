@@ -85,7 +85,7 @@ class UserLogin extends React.Component {
                     >
                       <h4 className={classes.cardTitle}>Login</h4>
                       <div className={classes.socialLine}>                        
-                        <OAuthContainer provider={provider} socket={socket} />
+                        <OAuthContainer registerMode={false} provider={provider} socket={socket} />
                       </div>
                     </CardHeader>
                     <p

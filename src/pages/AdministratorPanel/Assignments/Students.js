@@ -97,7 +97,6 @@ class StudentAssignments extends React.Component {
     clickHandler = (e, match) => {
         e.preventDefault();
         
-        console.log(match);
         this.props.deleteMatch(match.id);
     }
 

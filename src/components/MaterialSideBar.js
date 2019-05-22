@@ -37,7 +37,7 @@ function MaterialSideBar(props) {
     //spacing={0}
   
     alignItems="center"
-    alignText="center"
+    aligntext="center"
     justify="center"
     
     

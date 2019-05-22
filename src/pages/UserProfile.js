@@ -92,7 +92,6 @@ class UserProfile extends React.Component {
   }
 
   async componentDidMount() {
-    //console.log("hi")
     await this.props.getCurrentUser();
     await this.props.getMentees();
     await this.props.getMatches();
@@ -118,7 +117,6 @@ class UserProfile extends React.Component {
         isLoaded: true
       });
     }
-    //console.log("hi")
   }
 
   toggleApply() {
@@ -144,7 +142,6 @@ class UserProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
-    // console.log(this.state.applied)
     //const { value } = this.state;
 
     if (this.state.isLoaded === false) {

@@ -206,7 +206,7 @@ class UserProfileForm extends React.Component {
         </FormGroup>
 
         <Button 
-          center
+          center="true"
           type="submit"
           variant="contained"
           color="info"

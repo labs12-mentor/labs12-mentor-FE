@@ -27,22 +27,29 @@ import signupPageStyle from '../assets/jss/material-kit-pro-react/views/signUpPa
 // import image from "../assets/img/bg7.jpg";
 import image from '../assets/img/sergio-souza-1318950-unsplash.jpg';
 
-import { registerOrganization } from '../actions';
+import { registerUser, getSpecificInvitation, getSpecificOrganization } from '../actions';
 
-class OrganizationRegister extends React.Component {
+import OAuthContainer from '../containers/OAuthContainer';
+import io from 'socket.io-client';
+import { API_URL_HOME } from '../constants/config';
+
+const socket = io(API_URL_HOME);
+const provider = 'github';
+
+class UserRegistration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      organization_name: '',
-      organization_description: '',
-      programUrl: '',
-      user_email: '',
-      user_password: '',
       user_first_name: '',
       user_last_name: '',
-      // checked: [1]
+      user_email: '',
+      user_password: '',
+      user_street: '',
+      user_city: '',
+      user_state: '',
+      user_zipcode: '',
+      user_country: ''
     };
-    // this.handleToggle = this.handleToggle.bind(this);
   }
 
   handleInputs = (e) => {
@@ -55,42 +62,27 @@ class OrganizationRegister extends React.Component {
 
   handleSubmit = (e) => {
       e.preventDefault();
-      this.props.registerOrganization(this.state);
+      this.props.registerUser(this.props.match.params.id,
+          {
+            ...this.state,
+            organization_id: this.props.invitation.organization_id,
+            role: this.props.invitation.role
+          }
+      );
   };
 
-
-  // handleToggle(value) {
-  //   const { checked } = this.state;
-  //   const currentIndex = checked.indexOf(value);
-  //   const newChecked = [...checked];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-
-  //   this.setState({
-  //     checked: newChecked
-  //   });
-  // }
-
-  componentDidMount() {
+  async componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
+    await this.props.getSpecificInvitation(this.props.match.params.id);
+    await this.props.getSpecificOrganization(this.props.invitation.organization_id);
   }
+
   render() {
     const { classes, ...rest } = this.props;
     
     return (
       <div>
-        {/* <Header
-          absolute
-          color="transparent"
-          brand="Material Kit PRO React"
-          links={<HeaderLinks dropdownHoverColor="rose" />}
-          {...rest}
-        /> */}
         <div
           className={classes.pageHeader}
           style={{
@@ -103,7 +95,7 @@ class OrganizationRegister extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={10} md={10}>
                 <Card className={classes.cardSignup}>
-                  <h2 className={classes.cardTitle}>Register</h2>
+                  <h2 className={classes.cardTitle}>Join {this.props.organization.name} as a {this.props.invitation.role}</h2>
                   <CardBody>
                     <GridContainer justify="center">
                       <GridItem xs={12} sm={5} md={5}>
@@ -130,16 +122,19 @@ class OrganizationRegister extends React.Component {
                         />
                       </GridItem>
                       <GridItem xs={12} sm={5} md={5}>
+                        
+                        <OAuthContainer registerMode={true} invitation_id={this.props.match.params.id} provider={provider} socket={socket} />
                         <form className={classes.form} onSubmit={this.handleSubmit}>
+                        
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='organization_name'><Group /> Organization Name</InputLabel>
+                                <InputLabel htmlFor='user_first_name'><Group /> First name</InputLabel>
                                 <Input
                                     type='text'
-                                    name='organization_name'
-                                    id='organization_name'
-                                    placeholder='Enter a program name'
-                                    value={this.organization_name}
+                                    name='user_first_name'
+                                    id='user_first_name'
+                                    placeholder='Enter your first name'
+                                    value={this.user_first_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -147,13 +142,13 @@ class OrganizationRegister extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='organization_description'><Group /> Organization Description</InputLabel>
+                                <InputLabel htmlFor='user_last_name'><Group /> Last name</InputLabel>
                                 <Input
                                     type='text'
-                                    name='organization_description'
-                                    id='organization_description'
-                                    placeholder='Enter a program description'
-                                    value={this.organization_description}
+                                    name='user_last_name'
+                                    id='user_last_name'
+                                    placeholder='Enter your last name'
+                                    value={this.user_last_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -161,25 +156,12 @@ class OrganizationRegister extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='programUrl'><Link /> https://mentormatch.com/</InputLabel>
-                                <Input
-                                    type='text'
-                                    name='programUrl'
-                                    id='programUrl'
-                                    placeholder='Enter a program url'
-                                    value={this.programUrl}
-                                    onChange={this.handleInputs}
-                                />
-                            </FormControl>
-                        </FormGroup>
-                        <FormGroup row>
-                            <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='user_email'><EmailIcon />  Email</InputLabel>
+                                <InputLabel htmlFor='user_email'><Group /> Email</InputLabel>
                                 <Input
                                     type='email'
                                     name='user_email'
                                     id='user_email'
-                                    placeholder='Enter the user email'
+                                    placeholder='Enter your email'
                                     value={this.user_email}
                                     onChange={this.handleInputs}
                                 />
@@ -188,12 +170,12 @@ class OrganizationRegister extends React.Component {
 
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
-                                <InputLabel htmlFor='user_password'><PasswordIcon /> Password</InputLabel>
+                                <InputLabel htmlFor='user_password'><Group /> Password</InputLabel>
                                 <Input
                                     type='password'
                                     name='user_password'
                                     id='user_password'
-                                    placeholder='Enter the user password'
+                                    placeholder='Enter your password'
                                     value={this.user_password}
                                     onChange={this.handleInputs}
                                 />
@@ -201,28 +183,70 @@ class OrganizationRegister extends React.Component {
                         </FormGroup>
 
                         <FormGroup row>
-                            <FormControl margin='normal' fullWidth>
-                                <InputLabel htmlFor='user_first_name'><Face /> First name</InputLabel>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_street'><Group /> Street</InputLabel>
                                 <Input
                                     type='text'
-                                    name='user_first_name'
-                                    id='user_first_name'
-                                    placeholder='Enter the user first name'
-                                    value={this.user_first_name}
+                                    name='user_street'
+                                    id='user_street'
+                                    placeholder='Enter your address - street'
+                                    value={this.user_street}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
                         </FormGroup>
 
                         <FormGroup row>
-                            <FormControl margin='normal' fullWidth>
-                                <InputLabel htmlFor='user_last_name'><Face /> Last name</InputLabel>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_city'><Group /> City</InputLabel>
                                 <Input
                                     type='text'
-                                    name='user_last_name'
-                                    id='user_last_name'
-                                    placeholder='Enter the user last name'
-                                    value={this.user_last_name}
+                                    name='user_city'
+                                    id='user_city'
+                                    placeholder='Enter your address - city'
+                                    value={this.user_city}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_state'><Group /> State</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='user_state'
+                                    id='user_state'
+                                    placeholder='Enter your address - state'
+                                    value={this.user_street}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_zipcode'><Group /> Zip code</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='user_zipcode'
+                                    id='user_zipcode'
+                                    placeholder='Enter your address - zip code'
+                                    value={this.user_zipcode}
+                                    onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <InputLabel htmlFor='user_country'><Group /> Country</InputLabel>
+                                <Input
+                                    type='text'
+                                    name='user_country'
+                                    id='user_country'
+                                    placeholder='Enter your address - country'
+                                    value={this.user_country}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -236,7 +260,7 @@ class OrganizationRegister extends React.Component {
                                 className={classes.submit}
                                 onClick={this.handleSubmit}
                             >
-                            Launch Program
+                            Join {this.props.organization.name}
                         </Button>
                       </GridItem>
                     </GridContainer>
@@ -251,19 +275,30 @@ class OrganizationRegister extends React.Component {
   }
 }
 
-OrganizationRegister.propTypes = {
+UserRegistration.propTypes = {
   classes: PropTypes.object.isRequired,
+  invitation: PropTypes.object.isRequired,
+  organization: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {
-  return {};
+    return {
+        invitation: state.invitations.currentInvitation
+            ? state.invitations.currentInvitation
+            : { organization_id: -1, role: 'USER' },
+        organization: state.organizations.currentOrganization
+            ? state.organizations.currentOrganization
+            : { name: '' }
+    };
 };
 
 const mapDispatchToProps = {
-  registerOrganization
+  registerUser,
+  getSpecificInvitation,
+  getSpecificOrganization
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(signupPageStyle)(OrganizationRegister));
+)(withStyles(signupPageStyle)(UserRegistration));
