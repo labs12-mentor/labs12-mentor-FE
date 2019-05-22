@@ -46,13 +46,12 @@ class GetMentorApplication extends React.Component {
                 </thead>
 
                 <tbody>
-                {menteeApplications.map((mentee, index) => {
-                        return ( <GetMentorApplicationCard key={index} 
-                                    mentee={mentee} 
-                                    users={this.props.users} 
-                                    evaluateMatch={this.evaluateMatch}
-                                /> )
-                    })}
+                {menteeApplications.map((mentee, index) => 
+                        <GetMentorApplicationCard key={`mentorapplication${index}`} 
+                            mentee={mentee} 
+                            users={this.props.users} 
+                            evaluateMatch={this.evaluateMatch}
+                        />)}
                 </tbody>
             </Table>
         );
