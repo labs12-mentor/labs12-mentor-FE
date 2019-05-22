@@ -61,7 +61,6 @@ class UserRegistration extends React.Component {
   };
 
   handleSubmit = (e) => {
-    console.log(this.state);
       e.preventDefault();
       this.props.registerUser(this.props.match.params.id,
           {
