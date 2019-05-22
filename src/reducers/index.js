@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import auth from './auth';
+import contact from './contact';
 import experiences from './experiences';
 import invitations from './invitations';
 import matches from './matches';
@@ -13,6 +14,7 @@ import users from './users';
 
 export default combineReducers({
     auth,
+    contact,
     experiences,
     invitations,
     matches,
