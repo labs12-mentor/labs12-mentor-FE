@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
 import { markNotification } from '../actions/notifications';
 
@@ -18,10 +21,15 @@ class Notification extends Component {
     render() {
         return (
             <div
-                style={{ textDecoration: this.props.watched ? 'line-through' : 'none' }}
+                style={{ display: 'flex', textDecoration: this.props.watched ? 'line-through' : 'none' }}
                 onClick={this.toggleRead}
             >
                 <p>{this.props.notification}</p>
+                <ListItemSecondaryAction>
+                    <IconButton aria-label="Delete">
+                        <DeleteIcon />
+                    </IconButton>
+                </ListItemSecondaryAction>
             </div>
         );
     }
