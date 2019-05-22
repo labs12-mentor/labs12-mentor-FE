@@ -260,7 +260,7 @@ class UserProfile extends React.Component {
                             >
                               <MeetingsList
                                 style={{ width: "100%" }}
-                                // user={this.state.user}
+                                userId={this.state.user.id}
                                 // matches={this.state.matches}
                               />
                             </GridContainer>

@@ -9,6 +9,8 @@ import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 import { loginUser } from '../actions';
 
+import SignIn from './MaterialLogIn';
+
 const socket = io(API_URL_HOME);
 const provider = 'github';
 
@@ -40,6 +42,7 @@ class UserLogin extends Component {
     render() {
         return (
             <div className='UserLogin'>
+            <SignIn />
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label for='email' />

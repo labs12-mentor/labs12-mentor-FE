@@ -1,6 +1,6 @@
 import React from "react";
 import ExperienceForm from "./ExperienceForm";
-import { deleteExperience } from "../../actions";
+import { deleteExperience, getExperiences } from "../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -60,7 +60,9 @@ class ExperienceCard extends React.Component {
           size="sm"
           style={{ marginLeft: 10 }}
           onClick={() => {
-            this.props.deleteExperience(this.props.id);
+            this.props.deleteExperience(this.props.id).then(res => {
+              this.props.getExperiences();
+            });
           }}
         >
           <Clear style={{ fontSize: 40 }} />
@@ -76,7 +78,7 @@ class ExperienceCard extends React.Component {
               canEdit={true}
               id={this.props.id}
               name={this.props.name}
-              handleClose={this.props.handleClose}
+              closing={this.handleClose}
             />
           </DialogContent>
           {/* <DialogActions>
@@ -139,7 +141,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  deleteExperience
+  deleteExperience,
+  getExperiences
 };
 
 export default connect(

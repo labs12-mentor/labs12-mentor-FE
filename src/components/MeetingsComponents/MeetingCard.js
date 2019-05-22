@@ -1,8 +1,7 @@
 import React from "react";
 import MeetingsForm from "./MeetingsForm.js";
 import { connect } from "react-redux";
-import { Modal, ModalBody } from "reactstrap";
-import { deleteMeeting } from "../../actions";
+import { deleteMeeting, getMeetings } from "../../actions";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -64,7 +63,9 @@ class MeetingCard extends React.Component {
           size="sm"
           // style={{ marginLeft: 10 }}
           onClick={() => {
-            this.props.deleteMeeting(this.props.id);
+            this.props.deleteMeeting(this.props.id).then(res => {
+              this.props.getMeetings();
+            });
           }}
         >
           <Clear style={{ fontSize: 40 }} />
@@ -75,11 +76,17 @@ class MeetingCard extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogContent>
+          <DialogContent
+            style={{
+              width: "100%",
+              minWidth: "500px"
+            }}
+          >
             <MeetingsForm
               canEdit={true}
               id={this.props.id}
               content={this.props.content}
+              closing={this.handleClose}
             />
           </DialogContent>
         </Dialog>
@@ -137,7 +144,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  deleteMeeting
+  deleteMeeting,
+  getMeetings
 };
 
 export default connect(

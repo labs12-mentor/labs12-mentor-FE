@@ -105,10 +105,6 @@ class MentorProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
-    // console.log(applied)
-    //console.log(this.state.profile);
-    // console.log(this.state.menteed)
-    // console.log(this.state.matches)
     return (
       <div>
         {this.state.isLoaded ? (
@@ -120,7 +116,7 @@ class MentorProfile extends React.Component {
               alignItems="center"
               justify="center"
               spacing={24}
-              // style={{ minHeight: '100vh' }}
+               style={{ minHeight: '100vh' }}
             >
               <Grid item xs={12}>
                 <Card className={classes.card}>
