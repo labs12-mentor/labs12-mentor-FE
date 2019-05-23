@@ -62,6 +62,8 @@ class MeetingCard extends React.Component {
           color="info"
           size="sm"
           // style={{ marginLeft: 10 }}
+          
+          //no refresh on delete
           onClick={() => {
             this.props.deleteMeeting(this.props.id).then(res => {
               this.props.getMeetings();
