@@ -163,30 +163,11 @@ class MeetingsForm extends React.Component {
                   placeholder: "Start Time"
                 }}
                 onChange={this.handleStartDate}
-                // renderInput={(dateInputProps, open, close) => (
-                //   <CustomInput
-                //   inputProps={{ ...dateInputProps}}
-                //   value={this.state.startTime}
-                //   name="startTime"
-                //   onChange={this.handleChanges}
-                //   id="float"
-                //   formControlProps={{
-                //     fullWidth: true
-                //   }}
-                //   />
-                // )}
               />
             </FormControl>
 
             <FormGroup row>
               <FormControl margin="normal" required fullWidth>
-                {/* <InputLabel>End Time</InputLabel> */}
-                {/* <Input
-                  name="endTime"
-                  placeholder="End Time"
-                  value={this.state.endTime}
-                  onChange={this.handleChanges}
-                /> */}
                 <Datetime
                   value={this.state.endTime}
                   //value={this.selected}
@@ -195,18 +176,6 @@ class MeetingsForm extends React.Component {
                     placeholder: "End Time"
                   }}
                   onChange={this.handleEndDate}
-                  // renderInput={(dateInputProps, open, close) => (
-                  //   <CustomInput
-                  //   inputProps={{ ...dateInputProps}}
-                  //   value={this.state.startTime}
-                  //   name="startTime"
-                  //   onChange={this.handleChanges}
-                  //   id="float"
-                  //   formControlProps={{
-                  //     fullWidth: true
-                  //   }}
-                  //   />
-                  // )}
                 />
               </FormControl>
             </FormGroup>
@@ -264,25 +233,27 @@ class MeetingsForm extends React.Component {
 
 
             <FormGroup row>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel>Start Time</InputLabel>
-                <Input
-                  name="startTime"
-                  placeholder="Start Time"
-                  value={this.state.startTime}
-                  onChange={this.handleChanges}
-                />
-              </FormControl>
+            <FormControl fullWidth>
+              <Datetime
+                value={this.state.startTime}
+                name="startTime"
+                inputProps={{
+                  placeholder: "Start Time"
+                }}
+                onChange={this.handleStartDate}
+              />
+            </FormControl>
             </FormGroup>
 
             <FormGroup row>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel>End Time</InputLabel>
-                <Input
-                  name="endTime"
-                  placeholder="End Time"
+            <FormControl margin="normal" required fullWidth>
+                <Datetime
                   value={this.state.endTime}
-                  onChange={this.handleChanges}
+                  name="endtTime"
+                  inputProps={{
+                    placeholder: "End Time"
+                  }}
+                  onChange={this.handleEndDate}
                 />
               </FormControl>
             </FormGroup>

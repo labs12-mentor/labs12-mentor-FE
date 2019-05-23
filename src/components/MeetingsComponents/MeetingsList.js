@@ -13,6 +13,11 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 // core components
 import Table from "../../material-components/Table/Table.jsx";
+import GridContainer from "../../material-components/Grid/GridContainer.jsx";
+import GridItem from "../../material-components/Grid/GridItem.jsx";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+
 
 const styles = theme => ({
   root: {
@@ -40,7 +45,8 @@ class MeetingsList extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      open: false
+      open: false,
+      match_id: this.props.matchId
     };
   }
 
@@ -70,6 +76,24 @@ class MeetingsList extends React.Component {
       return meeting.deleted === false;
       // && this.props.userId === meeting.user_id;
     });
+    if (this.state.match_id === null) {
+      return (
+        <div>
+        <GridContainer
+          direction="column"
+          alignItems="center"
+          justify="center"
+          spacing={24}
+        >
+          <Card style={{ width: "50%" }}>
+            <CardContent style={{ alignSelf: "center" }}>
+              <Typography>Please wait to be matched</Typography>
+            </CardContent>
+          </Card>
+        </GridContainer>
+      </div>
+      )
+    } else {
     return (
       <div className={classes.root}>
         <Button variant="contained" color="info" onClick={this.handleClickOpen}>
@@ -132,6 +156,7 @@ class MeetingsList extends React.Component {
         />
       </div>
     );
+          }
   }
 }
 

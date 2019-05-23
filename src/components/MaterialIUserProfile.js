@@ -101,9 +101,6 @@ class UserProfile extends React.Component {
       return id.mentee_id === this.state.user.id;
     });
     await this.setState({ ...this.state, wanted_mentor: matched[0] });
-    //console.log()
-    console.log(matched);
-    console.log(this.state.wanted_mentor.id)
     // if (this.state.wanted_mentor !== undefined) {
     //   await this.setState({
     //     ...this.state,
