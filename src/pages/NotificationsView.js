@@ -19,6 +19,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import styled from 'styled-components';
+import CircularDeterminate from '../components/CircularProgress.js';
+
 
 const AppContainer = styled.div`
     margin: 80px auto;
@@ -71,7 +73,7 @@ class Notifications extends Component {
                         <Card className={classes.card}>
                             <CardContent>
                                 <List dense={dense}>
-                                    {this.props.isFetching ? <p>waiting for notifications list</p> : null}
+                                    {this.props.isFetching ? <CircularDeterminate /> : null}
                                     {this.props.notification_error ? (
                                         <p>cannot get notifications at this time</p>
                                     ) : null}
@@ -91,9 +93,10 @@ class Notifications extends Component {
                                 </List>
                             </CardContent>
                         </Card>
-                    ) : null}
+                    ) : <CircularDeterminate />}
                 </div>
             </AppContainer>
+
         );
     }
 }

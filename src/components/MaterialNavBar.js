@@ -13,19 +13,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ContactMail from '@material-ui/icons/ContactMail';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import LogoHz from '../assets/img/MM-logo-hz.png';
+import LogoHz from '../assets/img/MM-logo-hz [HQ].png';
 
 
 // import navbarsStyle from "../assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.jsx";
@@ -229,7 +224,7 @@ class MaterialNavbar extends React.Component {
               <Typography className={classes.title} variant="h6" color="inherit" noWrap>
                 MYMentrMatch
               </Typography>
-                <img src={LogoHz} alt="MM logo wide" height="75" width="175" />
+                <img src={LogoHz} alt="MM logo wide" height="75" width="75" />
             </Link>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
