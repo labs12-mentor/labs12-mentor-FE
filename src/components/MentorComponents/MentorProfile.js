@@ -81,6 +81,7 @@ class MentorProfile extends React.Component {
     await this.props.getMentees();
     await this.props.getMatches();
     this.setState({
+      ...this.state,
       isLoaded: true,
       user: this.props.user,
       menteed: this.props.mentees,

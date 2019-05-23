@@ -67,7 +67,9 @@ class MentorsList extends React.Component {
     e.preventDefault();
     this.props.createMentee({
       user_id: this.props.user.id,
+      //user_id: 1,
       wanted_mentor_id: this.props.mentorId,
+      //wanted_mentor_id: 7,
       deleted: false
     });
   };
