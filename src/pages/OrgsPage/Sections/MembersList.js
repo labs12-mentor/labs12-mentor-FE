@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import history from '../../../history';
 import { connect } from 'react-redux';
 import { getUsers, deleteUser } from '../../../actions';
 // @material-ui/core components
@@ -9,8 +8,6 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 // material-ui icons
-import Person from "@material-ui/icons/Person";
-import Done from "@material-ui/icons/Done";
 import Close from "@material-ui/icons/Close";
 import SearchIcon from '@material-ui/icons/Search';
 // core components
@@ -56,13 +53,10 @@ class MembersList extends React.Component {
         });
 
         this.setState({
+            ...this.state,
             users: existingUsers
         });
     }
-
-    // routeOnClick(id) {
-    //     history.push(`/user/admin/mentorapplication/${id}`);
-    // }
 
     changeHandler = (e) => {
         e.preventDefault();
@@ -99,6 +93,7 @@ class MembersList extends React.Component {
             });
     
             this.setState({
+                ...this.state,
                 users: existingUsers
             });
         });
@@ -143,12 +138,6 @@ class MembersList extends React.Component {
                                 user.email,
                                 user.role,
                                 [
-                                    // <Button justIcon size="sm" color={"info"}>
-                                    //     <Person />
-                                    // </Button>,
-                                    // <Button justIcon size="sm" color={"success"}>
-                                    //     <Done />
-                                    // </Button>,
                                     <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, user.id)}>
                                         <Close />
                                     </Button>
@@ -162,9 +151,6 @@ class MembersList extends React.Component {
     }
 }
 
-// MentorApplications.propTypes = {
-//     mentors: PropTypes.array.isRequired
-// };
 
 const mstp = state => {
     return {

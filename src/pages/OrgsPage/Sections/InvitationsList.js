@@ -70,14 +70,11 @@ class InvitationsList extends React.Component {
         });
 
         this.setState({
+            ...this.state,
             invitations: invites,
             users: this.props.users
         });
     }
-
-    // routeOnClick(id) {
-    //     history.push(`/user/admin/mentorapplication/${id}`);
-    // }
 
     changeHandler = (e) => {
         e.preventDefault();
@@ -103,10 +100,34 @@ class InvitationsList extends React.Component {
         return filteredInvites;
     };
 
-    clickHandler = (e, id) => {
+    clickHandler = async (e, id) => {
         e.preventDefault();
 
-        this.props.deleteInvitation(id);
+        await this.props.deleteInvitation(id)
+            .then(async res => {
+                await this.props.getInvitations();
+
+                let existingInvitations = this.props.invitations.filter(invite => {
+                    return invite.deleted === false;
+                });
+
+                let invites = existingInvitations.map(invite => {
+                    const invited_user = this.props.users.filter(user => {
+                        return user.id === invite.user_id;
+                    })[0];
+                    
+                    invite.last_name = invited_user.last_name;
+                    invite.first_name = invited_user.first_name;
+                    invite.email = invited_user.email;
+
+                    return invite;
+                });
+
+                this.setState({
+                    ...this.state,
+                    invitations: invites,
+                });
+            });
     }
 
     render() {
