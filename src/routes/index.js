@@ -16,7 +16,8 @@ import Notifications from '../pages/NotificationsView';
 import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage';
 import Application from '../pages/AdministratorPanel/Applications/ApplicationInfoPages/Application';
-import Assignment from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/Assignment';
+import MatchAssignment from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchAssignment';
+import MatchApplication from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchApplication';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import RegDetails from '../pages/RegistrationDetails';
@@ -26,6 +27,9 @@ import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
 import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
+
+//ADMINISTRATOR PANEL
+import MentorApplication from '../pages/AdministratorPanel/MentorApplications/SpecificApplicationInfo/Application';
 
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
@@ -61,13 +65,23 @@ const Routes = (props) => {
             <Route exact path='/user/admin/invite' component={RouteAuthNeeded(InvitationForm)} />
             <Route
                 exact
+                path='/user/admin/mentor-application/:id'
+                component={RouteAuthNeeded(MentorApplication)}
+            />
+            <Route
+                exact
                 path='/user/admin/mentor/:id'
                 component={RouteAuthNeeded(Application)}
             />
             <Route
                 exact
-                path='/user/admin/matchassignment/:id'
-                component={RouteAuthNeeded(Assignment)}
+                path='/user/admin/match-assignment/:id'
+                component={RouteAuthNeeded(MatchAssignment)}
+            />
+            <Route
+                exact
+                path='/user/admin/match-application/:id'
+                component={RouteAuthNeeded(MatchApplication)}
             />
             <Route exact path='/user/meetings' component={RouteAuthNeeded(MeetingsPage)} />
             <Route exact path='/user/experiences' component={RouteAuthNeeded(ExperienceList)} />

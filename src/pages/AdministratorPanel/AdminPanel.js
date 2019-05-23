@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
-import MentorApplications from './Applications/MentorApplications';
+import MentorApplications from './MentorApplications/MentorApplications';
 import MatchApplications from './Applications/StudentApplications';
 import MentorAssignments from './Assignments/Mentors';
 import MatchAssignments from './Assignments/Students';
