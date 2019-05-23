@@ -66,7 +66,7 @@ const Routes = (props) => {
             />
             <Route
                 exact
-                path='/user/admin/mentorassignment/:id/:role'
+                path='/user/admin/mentorassignment/:id'
                 component={RouteAuthNeeded(Assignment)}
             />
             <Route exact path='/user/meetings' component={RouteAuthNeeded(MeetingsPage)} />
