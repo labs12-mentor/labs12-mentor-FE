@@ -86,7 +86,7 @@ class ExperienceForm extends React.Component {
           <Button onClick={this.createAnExperience} color="info">
             Add
           </Button>
-          <Button onClick={this.props.handleClose} color="info">
+          <Button onClick={this.props.handleClose} color="danger">
             Cancel
           </Button>
         </FormGroup>

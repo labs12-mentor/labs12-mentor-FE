@@ -81,30 +81,47 @@ class MentorProfile extends React.Component {
     await this.props.getMentees();
     await this.props.getMatches();
     this.setState({
+      ...this.state,
       isLoaded: true,
       user: this.props.user,
       menteed: this.props.mentees,
       matches: this.props.matches
     });
+    
     const applied = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
 
+   //console.log("current user", this.state.user)
+
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
-    console.log("mentee list", this.state.wanted_mentor);
-    if (this.state.wanted_mentor.length < 1) {
-      await this.props.getSpecificMentor(
-        this.state.wanted_mentor.wanted_mentor_id
-      );
+     console.log("mentee table", this.state.wanted_mentor);
+    //  console.log("menteed list matched with user", applied)
 
+    let connected = await this.state.matches.filter(id => {
+      return id.mentee_id === this.state.wanted_mentor.id;
+    });
+
+    // connected[0].mentor_id = 7
+    //console.log("mentee connected with match table", connected[0])
+     
+    if (typeof connected[0].mentor_id === "number" ) {
+      await this.props.getSpecificMentor(connected[0].mentor_id );
       await this.setState({ ...this.state, mentor: this.props.mentor });
-
       await this.props.getSpecificUser(this.state.mentor.user_id);
       await this.setState({ ...this.state, profile: this.props.profile });
-    }
-    // console.log(this.state.wanted_mentor);
-     console.log("current user",this.state.user)
-    // console.log(this.state.profile)
+      } else {
+        await this.setState({...this.state, mentor: 0})
+      };
+
+
+
+     
+  //   // console.log(this.state.wanted_mentor);
+  //   console.log("current user", this.state.user)
+  //  console.log("current user match with mentor ", applied);
+  //   console.log("mentor id",this.state.mentor)
+  //   console.log("mentor profile", this.state.profile)
     // console.log(applied);
   }
 
@@ -114,7 +131,7 @@ class MentorProfile extends React.Component {
 
   render() {
     const { classes } = this.props;
-    if (this.state.profile.length < 1) {
+    if (this.state.mentor === 0) {
       return (
         <div>
           <Grid

@@ -59,7 +59,7 @@ class MeetingCard extends React.Component {
         </Button>
         <Button
           justIcon
-          color="info"
+          color="danger"
           size="sm"
           // style={{ marginLeft: 10 }}
           
@@ -89,6 +89,7 @@ class MeetingCard extends React.Component {
               id={this.props.id}
               content={this.props.content}
               closing={this.handleClose}
+              match_id={this.props.match_id}
             />
           </DialogContent>
         </Dialog>

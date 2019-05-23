@@ -56,7 +56,7 @@ class ExperienceCard extends React.Component {
         </Button>
         <Button
           justIcon
-          color="info"
+          color="danger"
           size="sm"
           style={{ marginLeft: 10 }}
           onClick={() => {
