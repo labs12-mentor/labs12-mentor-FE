@@ -8,7 +8,11 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Button from "../../material-components/CustomButtons/Button";
 import { createMeeting, updateMeeting } from "../../actions/meetings.js";
 import Datetime from "react-datetime";
+// import DatePicker from "react-datepicker";
+import DateTimePicker from "react-datetime-picker";
 import withStyles from "@material-ui/core/styles/withStyles";
+import CustomInput from "../../material-components/CustomInput/CustomInput";
+import moment from "moment";
 
 import "../../assets/scss/material-kit-pro-react.scss";
 
@@ -52,8 +56,45 @@ class MeetingsForm extends React.Component {
     this.props.closing();
   };
 
+  handleChanges = e => {
+    // let value = e.target.value;
+    // if (e.target.name === "startTime") {
+    //   value = moment().format();
+    // }
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    });
+    //console.log(e.target.value)
+  };
+
+  handleStartDate = date => {
+    let start = moment(date._d).format("MMMM Do YYYY, h:mm:ss a");
+
+    this.setState({
+      ...this.state,
+      startTime: start
+    });
+  };
+
+  handleEndDate = date => {
+    let end = moment(date._d).format("MMMM Do YYYY, h:mm:ss a");
+
+    this.setState({
+      ...this.state,
+      endTime: end
+    });
+  };
+
   render() {
-    const { classes } = this.props;
+    //const { classes } = this.props;
+    // const {
+    //   inputProps: { onBlur, onFocus, value, onChange, ...restInputProps },
+    //   formControlProps,
+    //   labelText,
+    //   ...restProps
+    // } = this.props;
+    console.log(this.state);
     if (this.props.canEdit === true) {
       return (
         <div
@@ -71,6 +112,7 @@ class MeetingsForm extends React.Component {
                   name="title"
                   placeholder="Title"
                   value={this.state.title}
+                  //selected={value}
                   onChange={this.handleChanges}
                 />
               </FormControl>
@@ -127,22 +169,57 @@ class MeetingsForm extends React.Component {
             <br />
             <FormControl fullWidth>
               <Datetime
-                selected={this.state.startTime}
+                value={this.state.startTime}
                 //value={this.selected}
                 name="startTime"
-                inputProps={{ placeholder: "Start Time" }}
-                onChange={this.handleChanges}
+                inputProps={{
+                  placeholder: "Start Time"
+                }}
+                onChange={this.handleStartDate}
+                // renderInput={(dateInputProps, open, close) => (
+                //   <CustomInput
+                //   inputProps={{ ...dateInputProps}}
+                //   value={this.state.startTime}
+                //   name="startTime"
+                //   onChange={this.handleChanges}
+                //   id="float"
+                //   formControlProps={{
+                //     fullWidth: true
+                //   }}
+                //   />
+                // )}
               />
             </FormControl>
 
             <FormGroup row>
               <FormControl margin="normal" required fullWidth>
-                <InputLabel>End Time</InputLabel>
-                <Input
+                {/* <InputLabel>End Time</InputLabel> */}
+                {/* <Input
                   name="endTime"
                   placeholder="End Time"
                   value={this.state.endTime}
                   onChange={this.handleChanges}
+                /> */}
+                <Datetime
+                  value={this.state.endTime}
+                  //value={this.selected}
+                  name="endtTime"
+                  inputProps={{
+                    placeholder: "End Time"
+                  }}
+                  onChange={this.handleEndDate}
+                  // renderInput={(dateInputProps, open, close) => (
+                  //   <CustomInput
+                  //   inputProps={{ ...dateInputProps}}
+                  //   value={this.state.startTime}
+                  //   name="startTime"
+                  //   onChange={this.handleChanges}
+                  //   id="float"
+                  //   formControlProps={{
+                  //     fullWidth: true
+                  //   }}
+                  //   />
+                  // )}
                 />
               </FormControl>
             </FormGroup>
@@ -260,13 +337,6 @@ class MeetingsForm extends React.Component {
       );
     }
   }
-
-  handleChanges = e => {
-    this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value
-    });
-  };
 }
 
 export default connect(
