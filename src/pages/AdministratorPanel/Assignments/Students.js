@@ -2,30 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
-
-import { deleteMatch } from '../../../actions';
+import { createMatch, deleteMatch, getMentees, getMatches, getMentors, getUsers, updateMentee } from '../../../actions';
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Table from "../../../material-components/Table/Table.jsx";
 import Button from "../../../material-components/CustomButtons/Button.jsx";
-
-import LinkIcon from '@material-ui/icons/Link';
 import Paper from "@material-ui/core/Paper";
 import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import Tooltip from '@material-ui/core/Tooltip';
-
-import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
-
 import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
-import Done from '@material-ui/icons/Done';
 import Close from "@material-ui/icons/Close";
-
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import SearchIcon from '@material-ui/icons/Search';
 
 const styles = theme => ({
@@ -59,12 +45,63 @@ const styles = theme => ({
 
 class StudentAssignments extends React.Component {
     state = {
+        mentees: [],
+        mentors: [],
+        users: [],
+        matches: [],
+        matchInfo: [],
         searchBarContents: ''
+    }
+
+    async componentDidMount() {
+        await this.props.getUsers();
+        await this.props.getMentors();
+        await this.props.getMentees();
+        await this.props.getMatches();
+
+        const matchUserInfo = this.props.matches.map(match => {
+            let userInfo = {
+                id: match.id,
+                mentee: {},
+                mentor: {},
+                deleted: false
+            };
+            userInfo.deleted = match.deleted;
+
+            let menteeId = this.props.mentees.filter(mentee => {
+                return mentee.id === match.mentee_id;
+            })[0].user_id;
+
+            userInfo.mentee = this.props.users.filter(user => {
+                return user.id === menteeId;
+            })[0];
+
+            let mentorId = this.props.mentors.filter(mentor => {
+                return mentor.id === match.mentor_id;
+            })[0].user_id;
+
+            userInfo.mentor = this.props.users.filter(user => {
+                return user.id === mentorId;
+            })[0];
+
+            return userInfo;
+        }).filter(match => {
+            return match.deleted === false;
+        });
+
+        this.setState({
+            ...this.state,
+            users: this.props.users,
+            matches: this.props.matches,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors,
+            matchInfo: matchUserInfo
+        });
     }
 
 
     routeOnClick(id) {
-        history.push(`/user/admin/mentorassignment/${id}/mentee`);
+        history.push(`/user/admin/match/${id}`);
     }
 
     changeHandler = (e) => {
@@ -75,29 +112,66 @@ class StudentAssignments extends React.Component {
         });
     };
 
-    deleteMatch = (e, matchId) => {
-        e.preventDefault();
-        this.props.deleteMatch(matchId);
-    }
-
-    filterBySearch = (role) => {
+    filterBySearch = () => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        
-        const filteredMentees = this.props.matchedUsers.filter((match) => {
+        let filteredMatches = this.state.matchInfo.filter(match => {
             return (
-                match[role].last_name.toLowerCase().includes(searchInput) ||
-                match[role].first_name.toLowerCase().includes(searchInput) ||
-                match[role].email.toLowerCase().includes(searchInput)
+                match.mentee.first_name.toLowerCase().includes(searchInput) ||
+                match.mentee.last_name.toLowerCase().includes(searchInput) ||
+                match.mentee.email.toLowerCase().includes(searchInput) ||
+                match.mentor.first_name.toLowerCase().includes(searchInput) ||
+                match.mentor.last_name.toLowerCase().includes(searchInput) ||
+                match.mentor.email.toLowerCase().includes(searchInput)
             );
         });
 
-        return filteredMentees;
+        return filteredMatches;
     };
 
-    clickHandler = (e, match) => {
+    clickHandler = async (e, match) => {
         e.preventDefault();
-        
-        this.props.deleteMatch(match.id);
+        console.log(match);
+        await this.props.deleteMatch(match.id);
+        await this.props.getMatches();
+
+        const matchUserInfo = this.props.matches.map(match => {
+            let userInfo = {
+                id: match.id,
+                mentee: {},
+                mentor: {},
+                deleted: false
+            };
+            userInfo.deleted = match.deleted;
+
+            let menteeId = this.props.mentees.filter(mentee => {
+                return mentee.id === match.mentee_id;
+            })[0].user_id;
+
+            userInfo.mentee = this.props.users.filter(user => {
+                return user.id === menteeId;
+            })[0];
+
+            let mentorId = this.props.mentors.filter(mentor => {
+                return mentor.id === match.mentor_id;
+            })[0].user_id;
+
+            userInfo.mentor = this.props.users.filter(user => {
+                return user.id === mentorId;
+            })[0];
+
+            return userInfo;
+        }).filter(match => {
+            return match.deleted === false;
+        });
+
+        this.setState({
+            ...this.state,
+            users: this.props.users,
+            matches: this.props.matches,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors,
+            matchInfo: matchUserInfo
+        });
     }
 
     render() {
@@ -125,28 +199,32 @@ class StudentAssignments extends React.Component {
 
                   <Table
                     tableHead={[
-                    "",
-                    "Mentee Name",
-                    "Mentee Email",
-                    "Mentor Name",
-                    ""
+                        " ",
+                        "Mentee Name",
+                        "Mentee Email",
+                        "Mentor Name",
+                        "Mentor Email",
+                        "",
                     ]}
-                    tableData={this.filterBySearch('mentee').map(match => (
-                        [
-                            ' ',
-                            `${match.mentee.first_name} ${match.mentee.last_name}`,
-                            match.mentee.email,
-                            `${match.mentor.first_name} ${match.mentor.last_name}`,                             
+                    tableData={this.filterBySearch().map((match, index)=> {
+                        return (
                             [
-                                <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(match.mentee.id)} >
-                                    <Person />
-                                </Button>,
-                                <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, match)} >
-                                    <Close />
-                                </Button>
+                                ' ',
+                                `${match.mentee.first_name} ${match.mentee.last_name}`,
+                                `${match.mentee.email}`,
+                                `${match.mentor.first_name} ${match.mentor.last_name}`,
+                                `${match.mentor.email}`,
+                                [
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(match.id)} >
+                                        <Person />
+                                    </Button>,
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, match)} >
+                                        <Close />
+                                    </Button>
+                                ]
                             ]
-                        ]
-                    ))}
+                        )
+                    })}
                     customCellClasses={[
                     classes.textCenter,
                     classes.textRight,
@@ -165,6 +243,23 @@ class StudentAssignments extends React.Component {
     }
 }
 
-// StudentAssignList.propTypes = {};
+const mstp = state => {
+    return {
+        mentees: state.mentees.mentees,
+        mentors: state.mentors.mentors,
+        matches: state.matches.matches,
+        users: state.users.users
+    }
+}
 
-export default connect(null, { deleteMatch })(withStyles(styles)(StudentAssignments));
+export default connect(
+    mstp, 
+    { 
+        createMatch, 
+        deleteMatch,
+        getMatches,
+        getMentees,
+        getMentors,
+        getUsers,
+        updateMentee
+    })(withStyles(styles)(StudentAssignments));

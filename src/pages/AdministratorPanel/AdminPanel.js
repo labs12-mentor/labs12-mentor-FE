@@ -61,28 +61,8 @@ class AdminPanel extends React.Component {
         super(props);
         this.state = {
             activeTab: '1',
-            users: [],
-            matches: [],
-            mentees: [],
-            mentors: [],
             value: 0
         };
-    }
-
-    async componentDidMount() {
-        await this.props.getUsers();
-        await this.props.getMentees();
-        await this.props.getMentors();
-        await this.props.getMatches();
-
-        // const mentorInfo = this.filterMentors();
-
-        this.setState({
-            users: this.props.users,
-            mentees: this.props.mentees,
-            mentors: [],
-            matches: this.props.matches
-        });
     }
 
     toggleTab = (tab) => {
@@ -97,132 +77,53 @@ class AdminPanel extends React.Component {
         this.setState({ value });
       };
 
-    filterMentees = () => {
-        const menteeUserInfo = [];
-        this.state.users.filter((user) => {
-            this.state.mentees.map((mentee) => {
-                if (user.id === mentee.user_id && !mentee.deleted) {
-                    user.wanted_mentor_id = mentee.wanted_mentor_id;
-                    menteeUserInfo.push(user);
-                }
-            });
-        });
-
-        return menteeUserInfo;
-    };
-
-    // filterMentors = () => {
-    //     //fetches all user data for the mentor application and filters out deleted mentor applications
-    //     const existingMentorInfo = this.props.mentors.map(mentor => {
-    //         return this.props.users.filter(user => {
-    //             user.status = mentor.status;
-    //             user.mentor_id = mentor.id;
-    //             user.mentor_deleted = mentor.deleted;
-    //             return mentor.user_id === user.id;
-    //         })[0];
-    //     }).filter(mentor => {
-    //         return mentor.mentor_deleted === false;
-    //     });
-    //     return existingMentorInfo;
-
-    //     // const mentorUserInfo = []
-    //     // this.state.users.filter((user) => {
-    //     //     this.state.mentors.map((mentor) => {
-    //     //         if (user.id === mentor.user_id  && !mentor.deleted) {
-    //     //             user.status = mentor.status;
-    //     //             user.mentor_id = mentor.id;
-    //     //             mentorUserInfo.push(user);
-    //     //         }
-    //     //     });
-    //     // });
-
-    //     // return mentorUserInfo;
-    // };
-
     render() {
-        const matchedUsers = [];
-        this.state.matches.forEach(match => {
-            if(match.deleted === false && match.mentor_id !== match.mentee_id){
-                let userMatchInfo = {
-                    mentor: {},
-                    mentee: {},
-                    id: match.id,
-                    status: "undecided"
-                }
-                this.state.users.forEach(user => {
-                    if(user.id === match.mentor_id){
-                        userMatchInfo.mentor = user;
-                    } else if(user.id === match.mentee_id){
-                        userMatchInfo.mentee = user;
-                    }
-                    
-                });
-                matchedUsers.push(userMatchInfo);
-            }
-        });
-
         const { classes } = this.props;
-        const { value } = this.state;
         
         return (
             <AppContainer className={classes.root}>
-            <CustomTabs 
-            headerColor="info"
-            tabs={[
-          {
-            tabName: "Mentor Applications",
-            tabIcon: Face,
-            tabContent: (
-                <MentorApplications 
-                    // mentorApps={this.state.mentors}
+                <CustomTabs 
+                        headerColor="info"
+                        tabs={[
+                    {
+                        tabName: "Mentor Applications",
+                        tabIcon: Face,
+                        tabContent: (
+                            <MentorApplications />
+                        )
+                    },
+                    {
+                        tabName: "Match Applications",
+                        tabIcon: Group,
+                        tabContent: (
+                            <MatchApplications />
+                        )
+                    },
+                    {
+                        tabName: "Mentor Assignments",
+                        tabIcon: Face,
+                        tabContent: (
+                            <MentorAssignments />
+                        )
+                    },
+                    {
+                        tabName: "Match Assignments",
+                        tabIcon: Group,
+                        tabContent: (
+                            <MatchAssignments />
+                        )
+                    },
+                    {
+                        tabName: "Profile Forms",
+                        tabIcon: AccountCircle,
+                        tabContent: (
+                        <p className={classes.textCenter}>
+                        </p>
+                        )
+                    }
+                    ]}
                 />
-            )
-          },
-          {
-            tabName: "Match Applications",
-            tabIcon: Group,
-            tabContent: (
-                <MatchApplications 
-                    // users={this.state.users}
-                    // mentees={this.filterMentees()}
-                    // mentors={this.filterMentors()}
-                />
-            )
-          },
-          {
-            tabName: "Mentor Assignments",
-            tabIcon: Face,
-            tabContent: (
-                <MentorAssignments 
-                    // matchedUsers={matchedUsers} 
-                    // users={this.state.users}
-                    // matches={this.state.matches}
-                    // mentors={this.filterMentors()}
-                />
-            )
-          },
-          {
-            tabName: "Match Assignments",
-            tabIcon: Group,
-            tabContent: (
-                <MatchAssignments
-                    // matchedUsers={matchedUsers} 
-                    // users={this.state.users}
-                    // matches={this.state.matches}
-                />
-            )
-          },
-          {
-            tabName: "Profile Forms",
-            tabIcon: AccountCircle,
-            tabContent: (
-              <p className={classes.textCenter}>
-              </p>
-            )
-          }
-        ]}
-      />
-      </AppContainer>
+            </AppContainer>
         );
     }
 }
