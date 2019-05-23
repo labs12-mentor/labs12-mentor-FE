@@ -14,7 +14,7 @@ import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import GridContainer from "../../material-components/Grid/GridContainer.jsx";
 import GridItem from "../../material-components/Grid/GridItem.jsx";
 import InfoArea from "../../material-components/InfoArea/InfoArea.jsx";
-import CustomInput from "../../material-components/CustomInput/CustomInput.jsx";
+import CustomInput from "../../material-components/CustomInput/CustomInputContactForm";
 import Button from "../../material-components/CustomButtons/Button.jsx";
 
 import SingleSelect from './SingleSelect';
@@ -91,7 +91,7 @@ class InvitationPage extends React.Component {
                       labelText="Name of Invitee"
                       name="name"
                       value={this.state.name}
-                      onChange={this.changeHandler}
+                      handleInput={this.changeHandler}
                       id="float"
                       formControlProps={{
                         fullWidth: true
@@ -101,7 +101,7 @@ class InvitationPage extends React.Component {
                       labelText="Email address"
                       name="email"
                       value={this.state.email}
-                      onChange={this.changeHandler}
+                      handleInput={this.changeHandler}
                       id="float"
                       formControlProps={{
                         fullWidth: true
