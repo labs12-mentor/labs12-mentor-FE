@@ -242,7 +242,7 @@ class UserProfile extends React.Component {
                             md={3}
                             className={classes.gridItem}
                           >
-                            <MaterialSideBar />
+                            {/* <MaterialSideBar /> */}
                           </GridItem>
                         </GridContainer>
                       )
