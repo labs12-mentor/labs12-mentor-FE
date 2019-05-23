@@ -90,7 +90,7 @@ class MeetingsForm extends React.Component {
     //   labelText,
     //   ...restProps
     // } = this.props;
-    console.log(this.state);
+    console.log(this.props.match_id);
     //console.log(this.props.meetings);
 
     if (this.props.canEdit === true) {

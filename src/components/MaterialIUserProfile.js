@@ -79,7 +79,8 @@ class UserProfile extends React.Component {
       menteed: [],
       matches: [],
       wanted_mentor: [],
-      value: 0
+      value: 0,
+      match_id: ""
     };
   }
 
@@ -112,7 +113,7 @@ class UserProfile extends React.Component {
     console.log("mentee connected with match table", connected[0])
 
     if (typeof connected[0].mentor_id === "number" ) {
-      this.setState({...this.state, applied: true})
+      this.setState({...this.state, applied: true, match_id: connected[0].id})
       } else {
       this.setState({...this.state, applied: false})
       };
@@ -265,7 +266,7 @@ class UserProfile extends React.Component {
                               <MeetingsList
                                 style={{ width: "100%" }}
                                 userId={this.state.user.id}
-                                matchId={this.state.wanted_mentor.id}
+                                matchId={this.state.match_id}
                                 // matches={this.state.matches}
                               />
                             </GridContainer>
