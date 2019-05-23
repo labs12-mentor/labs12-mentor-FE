@@ -122,7 +122,10 @@ class MeetingsList extends React.Component {
                   className={classes.buttonGroup}
                   style={{ display: "flex", justifyContent: "flex-end" }}
                 >
-                  <MeetingCard id={meeting.id} />
+                  <MeetingCard 
+                  id={meeting.id} 
+                  match_id={this.props.matchId}
+                  />
                 </div>
               ];
             })}

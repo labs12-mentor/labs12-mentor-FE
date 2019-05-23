@@ -87,6 +87,7 @@ class MeetingCard extends React.Component {
               id={this.props.id}
               content={this.props.content}
               closing={this.handleClose}
+              match_id={this.props.match_id}
             />
           </DialogContent>
         </Dialog>

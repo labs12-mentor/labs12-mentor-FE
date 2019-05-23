@@ -128,18 +128,7 @@ class MeetingsForm extends React.Component {
               </FormControl>
             </FormGroup>
 
-            <FormGroup row>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel> Match id</InputLabel>
-                <Input
-                  type="number"
-                  name="match_id"
-                  placeholder="match id"
-                  value={this.state.match_id}
-                  onChange={this.handleChanges}
-                />
-              </FormControl>
-            </FormGroup>
+
 
             {/* <FormGroup row>
             <FormControl margin="normal" required fullWidth>
@@ -273,17 +262,6 @@ class MeetingsForm extends React.Component {
               </FormControl>
             </FormGroup>
 
-            {/* <FormGroup row>
-              <FormControl margin="normal" required fullWidth>
-                <InputLabel> Match id</InputLabel>
-                <Input
-                  name="match_id"
-                  placeholder="match id"
-                  value={this.state.match_id}
-                  onChange={this.handleChanges}
-                />
-              </FormControl>
-            </FormGroup> */}
 
             <FormGroup row>
               <FormControl margin="normal" required fullWidth>
