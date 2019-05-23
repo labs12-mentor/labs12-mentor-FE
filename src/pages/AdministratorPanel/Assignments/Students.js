@@ -105,7 +105,6 @@ class StudentAssignments extends React.Component {
 
         return (
             <Paper className={classes.root}>
-                {/* <InputBase className={classes.input} placeholder="Search Matches by Student" /> */}
                     <Input
                         placeholder="Search Match Assignments"
                         className={classes.input}

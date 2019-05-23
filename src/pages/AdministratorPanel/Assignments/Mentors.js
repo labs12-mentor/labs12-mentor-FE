@@ -75,8 +75,7 @@ class MentorAssignments extends React.Component {
     }
 
     routeOnClick(id) {
-        // history.push(`/user/admin/mentorassignment/${id}/mentor`);
-        // history.push(`/user/admin/mentorapplication/${id}`);
+        history.push(`/user/admin/mentor/${id}`);
     }
 
     changeHandler = (e) => {

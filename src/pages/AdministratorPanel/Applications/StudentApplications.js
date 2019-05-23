@@ -78,7 +78,7 @@ class StudentApplications extends React.Component {
     }
 
     routeOnClick(id) {
-        history.push(`/user/admin/mentorassignment/${id}`);
+        history.push(`/user/admin/match/${id}`);
     }
 
     changeHandler = (e) => {

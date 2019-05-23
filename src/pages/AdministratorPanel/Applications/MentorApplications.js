@@ -73,7 +73,7 @@ class MentorApplications extends React.Component {
     }
 
     routeOnClick(id) {
-        history.push(`/user/admin/mentorapplication/${id}`);
+        history.push(`/user/admin/mentor/${id}`);
     }
 
     changeHandler = (e) => {
@@ -102,7 +102,7 @@ class MentorApplications extends React.Component {
         const clickedUser = this.props.users.filter(user => {
             return user.id == mentor.id;
         })[0];
-        
+
         if(status === "approved"){
             clickedUser.role = "MENTOR";
             await this.props.updateUser(clickedUser.id, { ...clickedUser });
