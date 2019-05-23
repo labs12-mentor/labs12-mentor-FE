@@ -2,29 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
-import { updateUser } from '../../../actions';
+import { updateUser, deleteMentor, getUsers, getMentors } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // material-ui icons
 import Person from "@material-ui/icons/Person";
-import Edit from "@material-ui/icons/Edit";
-import Done from '@material-ui/icons/Done';
 import Close from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
-import LinkIcon from '@material-ui/icons/Link';
 // core components
-import Table from "../../../material-components/Table/Table.jsx";
-import Button from "../../../material-components/CustomButtons/Button.jsx";
-
-import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
-
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
+import Table from "../../../material-components/Table/Table.jsx";
+import Button from "../../../material-components/CustomButtons/Button.jsx";
 
-import { deleteMatch } from '../../../actions';
 
 const styles = theme => ({
     root: {
@@ -55,10 +46,37 @@ const styles = theme => ({
 class MentorAssignments extends React.Component {
     state = {
         searchBarContents: '',
+        users: [],
+        mentors: []
+    }
+
+    async componentDidMount() {
+        await this.props.getUsers();
+        await this.props.getMentors();
+        
+        //fetches all user data for the mentor application and filters out deleted mentor applications
+        const existingMentorInfo = this.props.mentors.map(mentor => {
+            const alteredUser = this.props.users.filter(user => {                
+                return user.id === mentor.user_id;
+            })[0];
+
+            alteredUser.status = mentor.status;
+            alteredUser.mentor_id = mentor.id;
+            alteredUser.mentor_deleted = mentor.deleted;
+            return alteredUser;
+        }).filter(mentor => {
+            return mentor.role === "MENTOR" && mentor.mentor_deleted === false;
+        });
+
+        this.setState({
+            users: this.props.users,
+            mentors: existingMentorInfo,
+        });
     }
 
     routeOnClick(id) {
-        history.push(`/user/admin/mentorassignment/${id}/mentor`);
+        // history.push(`/user/admin/mentorassignment/${id}/mentor`);
+        // history.push(`/user/admin/mentorapplication/${id}`);
     }
 
     changeHandler = (e) => {
@@ -76,11 +94,8 @@ class MentorAssignments extends React.Component {
 
     filterBySearch = (role) => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        const approvedMentors = this.props.users.filter(user => {
-            return user.role === "MENTOR"
-        });
 
-        const filteredMentees = approvedMentors.filter(mentor => {
+        const filteredMentors = this.state.mentors.filter(mentor => {
             return (
                 mentor.last_name.toLowerCase().includes(searchInput) ||
                 mentor.first_name.toLowerCase().includes(searchInput) ||
@@ -88,23 +103,32 @@ class MentorAssignments extends React.Component {
             );
         });
 
-        return filteredMentees;
+        return filteredMentors;
     };
 
-    clickHandler = (e, mentor) => {
+    clickHandler = async (e, mentor) => {
         e.preventDefault();
-        const clickedUser = this.props.users.filter(user => {
-            return user.id == mentor.id;
-        })[0];
 
-        clickedUser.role = "MENTEE";
-        
-        this.props.updateUser(
-            clickedUser.id, 
-            {
-                ...clickedUser
-            }
-        );
+        await this.props.deleteMentor(mentor.mentor_id);
+        await this.props.getMentors();
+
+        const existingMentorInfo = this.props.mentors.map(mentor => {
+            const alteredUser = this.props.users.filter(user => {                
+                return user.id === mentor.user_id;
+            })[0];
+
+            alteredUser.status = mentor.status;
+            alteredUser.mentor_id = mentor.id;
+            alteredUser.mentor_deleted = mentor.deleted;
+            return alteredUser;
+        }).filter(mentor => {
+            return mentor.role === "MENTEE" && mentor.mentor_deleted === false;
+        });
+
+        this.setState({
+            ...this.state,
+            mentors: existingMentorInfo
+        });
     }
 
     render() {
@@ -112,7 +136,6 @@ class MentorAssignments extends React.Component {
           
         return (
             <Paper className={classes.root}>
-                {/* <InputBase className={classes.input} placeholder="Search Matches by Mentor" /> */}
                     <Input
                         placeholder="Search Mentor Assignments"
                         className={classes.input}
@@ -139,7 +162,7 @@ class MentorAssignments extends React.Component {
                     "Email",
                     "",
                     ]}
-                    tableData={this.filterBySearch('mentor').map((mentor, index)=> {
+                    tableData={this.filterBySearch().map((mentor, index)=> {
                         return (
                             [
                                 ' ', 
@@ -163,8 +186,18 @@ class MentorAssignments extends React.Component {
     }
 }
 
-// MentorAssignList.propTypes = {
-//     matchedUsers: PropTypes.array.isRequired
-// };
+const mstp = state => {
+    return {
+        users: state.users.users,
+        mentors: state.mentors.mentors
+    }
+}
 
-export default connect(null, { updateUser })(withStyles(styles)(MentorAssignments));
+export default connect(
+    mstp, 
+    { 
+        updateUser, 
+        deleteMentor,
+        getUsers,
+        getMentors
+    })(withStyles(styles)(MentorAssignments));

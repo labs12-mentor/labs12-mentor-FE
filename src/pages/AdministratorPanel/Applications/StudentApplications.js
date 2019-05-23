@@ -78,8 +78,7 @@ class StudentApplications extends React.Component {
     }
 
     routeOnClick(id) {
-        history.push(`/user/admin/mentorassignment/${id}`)
-        // history.push(`/user/admin/mentorapplication/${id}`);
+        history.push(`/user/admin/mentorassignment/${id}`);
     }
 
     changeHandler = (e) => {
@@ -90,7 +89,7 @@ class StudentApplications extends React.Component {
         });
     };
 
-    filterBySearch = (role) => {
+    filterBySearch = () => {
         const searchInput = this.state.searchBarContents.toLowerCase();
         let filteredUsers = this.state.mentees.filter((mentee) => {
             return (
