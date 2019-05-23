@@ -91,17 +91,18 @@ class MentorProfile extends React.Component {
       return id.user_id === this.state.user.id;
     });
 
-    console.log("current user", this.state.user)
+   //console.log("current user", this.state.user)
 
     await this.setState({ ...this.state, wanted_mentor: applied[0] });
      console.log("mentee table", this.state.wanted_mentor);
     //  console.log("menteed list matched with user", applied)
 
-    const connected = await this.state.matches.filter(id => {
+    let connected = await this.state.matches.filter(id => {
       return id.mentee_id === this.state.wanted_mentor.id;
     });
 
-    console.log("mentee connected with match table", connected[0])
+    // connected[0].mentor_id = 7
+    //console.log("mentee connected with match table", connected[0])
      
     if (typeof connected[0].mentor_id === "number" ) {
       await this.props.getSpecificMentor(connected[0].mentor_id );
