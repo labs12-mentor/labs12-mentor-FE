@@ -51,12 +51,12 @@ class MembersList extends React.Component {
     async componentDidMount() {
         await this.props.getUsers();
 
-        let existingUser = this.props.users.filter(user => {
+        let existingUsers = this.props.users.filter(user => {
             return user.deleted === false;
         });
 
         this.setState({
-            users: existingUser
+            users: existingUsers
         });
     }
 
@@ -88,10 +88,20 @@ class MembersList extends React.Component {
         return filteredUsers;
     };
 
-    clickHandler = (e, id) => {
+    clickHandler = async (e, id) => {
         e.preventDefault();
+        await this.props.deleteUser(id)
+        .then(async res => {
+            await this.props.getUsers();
 
-        this.props.deleteUser(id);
+            let existingUsers = this.props.users.filter(user => {
+                return user.deleted === false;
+            });
+    
+            this.setState({
+                users: existingUsers
+            });
+        });
     }
 
     render() {
