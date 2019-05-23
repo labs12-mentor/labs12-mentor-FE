@@ -6,14 +6,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Clear from "@material-ui/icons/Clear";
 import Button from "../material-components/CustomButtons/Button.jsx";
+import MailIcon from '@material-ui/icons/Mail';
+import Badge from '@material-ui/core/Badge';
+
 
 import { markNotification } from '../actions/notifications';
 
 class Notification extends Component {
     // constructor(props) {
     //     super(props);
-    // }
 
+    // }
+    
     // toggleRead = (e) => {
     //     e.preventDefault();
     //     let id = this.props.id;
@@ -23,10 +27,12 @@ class Notification extends Component {
     render() {
         const id = this.props.id;
         return (
-            <div style={{ display: 'flex'}}>
-                <p>{this.props.notification}</p>
+            <div style={{ display: 'flex' }}>
+                <IconButton style={{color: "#00bcd4"}}>
+                    <MailIcon />
+                </IconButton>
+                <p style={{ paddingTop: "10%" }}>{this.props.notification}</p>
                 <ListItemSecondaryAction>
-
                     <Button
                         justIcon
                         size="sm"
