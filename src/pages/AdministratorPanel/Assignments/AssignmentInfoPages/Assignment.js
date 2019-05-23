@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavPills from "../../../../material-components/NavPills/NavPills.jsx";
 
-import { getSpecificMatch, getUsers } from '../../../../actions';
+import { getSpecificMatch, deleteMatch, getMentees, getMatches, getMentors, getUsers } from '../../../../actions';
 
 import Recommended from './Recommended';
 import MapView from './MapView';
@@ -17,12 +17,42 @@ const AppContainer = styled.div`
 class Assignment extends React.Component {
     state = {
         activeTab: '1',
-        currentMatch: {}
+        mentees: [],
+        mentors: [],
+        users: [],
+        currentMatchInfo: {}
     };
 
     async componentDidMount() {
         await this.props.getSpecificMatch(this.props.match.params.id);
         await this.props.getUsers();
+        await this.props.getMentors();
+        await this.props.getMentees();
+
+        let matchUserInfo = {
+            id: this.props.currentMatch.id,
+            mentee: {},
+            mentor: {},
+            deleted: false
+        };
+
+        matchUserInfo.deleted = this.props.currentMatch.deleted;
+
+        matchUserInfo.mentee = this.props.users.filter(user => {
+            return user.id === this.props.currentMatch.mentee_id;
+        })[0];
+
+        matchUserInfo.mentor = this.props.users.filter(user => {
+            return user.id === this.props.currentMatch.mentor_id;
+        })[0];
+
+        this.setState({
+            ...this.state,
+            users: this.props.users,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors,
+            currentMatchInfo: matchUserInfo
+        });
     }
 
     toggleTab = (tab) => {
@@ -34,44 +64,22 @@ class Assignment extends React.Component {
     };
 
     render() {
-        let mentorMatch = {};
-        let menteeMatch = {};
-        if (this.props.currentMatch && this.props.match.params.role === 'mentor') {
-            this.props.users.forEach((user) => {
-                if (user.id === this.props.currentMatch.mentor_id) {
-                    mentorMatch = user;
-                }
-            });
-        } else if (this.props.currentMatch && this.props.match.params.role === 'mentee') {
-            this.props.users.forEach((user) => {
-                if (user.id === this.props.currentMatch.mentee_id) {
-                    menteeMatch = user;
-                }
-            });
-        }
         return (
             <AppContainer>
                 <NavPills
                     color="info"
                     tabs={[
                         {
-                        tabButton: "Match Information",
-                        tabContent: (
-                            <Recommended
-                                currentMatch={this.state.currentMatch}
-                                mentorMatch={mentorMatch}
-                                menteeMatch={menteeMatch}
-                            />
-                        )
+                            tabButton: "Match Information",
+                            tabContent: (
+                                <Recommended currentMatch={this.state.currentMatchInfo} />
+                            )
                         },
                         {
-                        tabButton: "Match Map View",
-                        tabContent: (
-                            <MapView 
-                                mentorMatch={mentorMatch} 
-                                menteeMatch={menteeMatch} 
-                            />
-                        )
+                            tabButton: "Match Map View",
+                            tabContent: (
+                                <MapView currentMatch={this.state.currentMatchInfo} />
+                            )
                         }
                     ]}
                 />
@@ -80,21 +88,27 @@ class Assignment extends React.Component {
     }
 }
 
-Assignment.propTypes = {
-    currentMatch: PropTypes.object.isRequired,
-    users: PropTypes.array.isRequired
-};
+// Assignment.propTypes = {
+//     currentMatch: PropTypes.object.isRequired,
+//     users: PropTypes.array.isRequired
+// };
 
 const mapStateToProps = (state) => {
     return {
         currentMatch: state.matches.currentMatch,
-        users: state.users.users
+        users: state.users.users,
+        mentees: state.mentees.mentees,
+        mentors: state.mentors.mentors,
     };
 };
 
 const mapDispatchToProps = {
     getSpecificMatch,
-    getUsers
+    deleteMatch,
+    getMatches,
+    getMentees,
+    getMentors,
+    getUsers,
 };
 
 export default connect(

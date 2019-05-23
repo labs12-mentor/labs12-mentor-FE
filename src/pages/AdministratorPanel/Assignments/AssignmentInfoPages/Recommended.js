@@ -1,18 +1,24 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from "../../../../material-components/CustomButtons/Button.jsx";
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
+    main: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
     enclosingDiv: {
         display: 'flex',
         flexDirection: 'row',
-        flexWrap: 'nowrap'
+        flexWrap: 'nowrap',
+        width: '100%'
+    },
+    btn: {
+        maxWidth: 110,
     },
     card: {
       margin: '0 auto',
@@ -34,13 +40,18 @@ const styles = {
   };
 
 class Recommended extends React.Component {
+    onClick = (e, status) => {
+        // e.preventd
+    }
+
     render() {
         const { classes } = this.props;
-        const mentor = this.props.mentorMatch;
-        const mentee = this.props.menteeMatch;
-
+        const {mentor, mentee} = this.props.currentMatch;
+        
         return (
-            <div className={classes.enclosingDiv}>
+            <div className={classes.main}>
+            {mentor && mentee &&
+            <div className={classes.enclosingDiv}>            
             <Card className={classes.card}>
                 <CardContent>
                     <Typography variant="h4" component="h2">
@@ -74,10 +85,6 @@ class Recommended extends React.Component {
                         </Typography>
                     </div>
                 </CardContent>
-                <CardActions>
-                        <Button color="success" size="sm" >Approve</Button>
-                        <Button color="danger" size="sm" >Deny</Button>
-                </CardActions>
             </Card>
             
             <Card className={classes.card}>
@@ -113,46 +120,14 @@ class Recommended extends React.Component {
                         </Typography>
                     </div>
                 </CardContent>
-                <CardActions>
-                        <Button color="success" size="sm" >Approve</Button>
-                        <Button color="danger" size="sm" >Deny</Button>
-                </CardActions>
             </Card>
-            </div>
-            // <div className='Recommended'>
-            //     <Button>Mark as Bad Match</Button>
-            //     <Button>Dismiss</Button>
-            //     <Button>Assign</Button>
+            </div>            
+            }
 
-            //     {Object.keys(mentee).length === 0 ? (
-            //         <div>
-            //             <p>Name: {`${mentor.first_name} ${mentor.last_name}`}</p>
-            //             <p>Email: {`${mentor.email}`}</p>
-            //             <p>
-            //                 Address:{' '}
-            //                 {`${mentor.street}, ${mentor.city}, 
-            //                 ${mentor.state}, ${mentor.zipcode} ${mentor.country}`}
-            //             </p>
-            //         </div>
-            //     ) : (
-            //         <div>
-            //             <p>Name: {`${mentee.first_name} ${mentee.last_name}`}</p>
-            //             <p>Email: {`${mentee.email}`}</p>
-            //             <p>
-            //                 Address:{' '}
-            //                 {`${mentee.street}, ${mentee.city}, 
-            //                 ${mentee.state}, ${mentee.zipcode} ${mentee.country}`}
-            //             </p>
-            //         </div>
-            //     )}
-            // </div>
+                <Button className={classes.btn} color="danger" size="lg" >Deny</Button>
+            </div>
         );
     }
 }
-
-Recommended.propTypes = {
-    mentorMatch: PropTypes.object.isRequired,
-    menteeMatch: PropTypes.object.isRequired
-};
 
 export default withStyles(styles)(Recommended);
