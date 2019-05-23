@@ -13,11 +13,11 @@ const styles = theme => ({
 
 class CircularDeterminate extends React.Component {
   state = {
-    completed: 0,
+    completed: 20,
   };
 
   componentDidMount() {
-    this.timer = setInterval(this.progress, 20);
+    this.timer = setInterval(this.progress, 10);
   }
 
   componentWillUnmount() {

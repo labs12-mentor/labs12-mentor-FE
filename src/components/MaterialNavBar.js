@@ -20,7 +20,7 @@ import { withStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ContactMail from '@material-ui/icons/ContactMail';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import LogoHz from '../assets/img/MM-logo-hz [HQ].png';
+import LogoHz from '../assets/img/MM-logo-hz[HQ]-white.png';
 
 
 // import navbarsStyle from "../assets/jss/material-kit-pro-react/views/componentsSections/navbarsStyle.jsx";
@@ -221,10 +221,10 @@ class MaterialNavbar extends React.Component {
         <AppBar position="static" color="primary">
           <Toolbar>
             <Link component={RouterLink} to="/" style={{textDecoration: 'none', display: 'flex'}}>
-              <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                MYMentrMatch
-              </Typography>
-                <img src={LogoHz} alt="MM logo wide" height="75" width="75" />
+            <img src={LogoHz} alt="MM logo wide" height="50" width="50" />
+            {/*<Typography className={classes.title} variant="h6" color="inherit" noWrap>
+              MYMentrMatch
+            </Typography>*/}
             </Link>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>

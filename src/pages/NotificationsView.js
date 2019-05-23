@@ -30,6 +30,7 @@ const AppContainer = styled.div`
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        paddingTop: 20,
     },
     demo: {
         backgroundColor: theme.palette.background.paper,
@@ -66,10 +67,11 @@ class Notifications extends Component {
         return (
             <AppContainer>
                 <div className={classes.root}>
-                    <Typography variant="h6" className={classes.title}>
-                        Your Notifications
-                    </Typography>
                     {this.state.pageLoaded ? (
+                        <div>
+                        <Typography variant="h6" className={classes.title}>
+                            Your Notifications
+                        </Typography>
                         <Card className={classes.card}>
                             <CardContent>
                                 <List dense={dense}>
@@ -77,23 +79,28 @@ class Notifications extends Component {
                                     {this.props.notification_error ? (
                                         <p>cannot get notifications at this time</p>
                                     ) : null}
-                                    {this.props.notifications.map((notification) => {
-                                        if (!notification.watched){
-                                            return (
-                                                <ListItem key={notification.id}>
-                                                    <Notification
-                                                        id={notification.id}
-                                                        notification={notification.content}
-                                                        watched={notification.watched}
-                                                    />
-                                                </ListItem>
-                                            );
-                                        }
-                                    })}
+                                    {this.props.notifications ? 
+                                        this.props.notifications.map((notification) => {
+                                            if (!notification.watched){
+                                                return (
+                                                    <ListItem key={notification.id}>
+                                                        <Notification
+                                                            id={notification.id}
+                                                            notification={notification.content}
+                                                            watched={notification.watched}
+                                                        />
+                                                    </ListItem>
+                                                );
+                                            }
+                                        }) 
+                                        : <CircularDeterminate />
+                                    }
                                 </List>
                             </CardContent>
                         </Card>
-                    ) : <CircularDeterminate />}
+                        </div>
+                    ) : 
+                    <CircularDeterminate style={{display: 'flex', justifyContent: 'center'}} />}
                 </div>
             </AppContainer>
 

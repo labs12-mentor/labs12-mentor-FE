@@ -12,7 +12,7 @@ import LogoHz from './assets/img/MM-logo-hz [HQ].png';
 ReactDOM.render(
     <Provider store={store}>
         <Routes history={history} />
-        <footer style={{display: 'flex', justifyContent: 'center', paddingTop: '10px'}}>
+        <footer style={{display: 'flex', justifyContent: 'center', paddingTop: '10px', paddingBottom: '30px'}}>
             <img src={LogoHz} alt="MM logo wide" height="75" width="75" />
         </footer>
 
