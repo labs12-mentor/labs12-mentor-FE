@@ -79,7 +79,7 @@ class StudentAssignments extends React.Component {
             let mentorId = this.props.mentors.filter(mentor => {
                 return mentor.id === match.mentor_id;
             })[0].user_id;
-
+            
             userInfo.mentor = this.props.users.filter(user => {
                 return user.id === mentorId;
             })[0];
@@ -100,8 +100,8 @@ class StudentAssignments extends React.Component {
     }
 
 
-    routeOnClick(id) {
-        history.push(`/user/admin/match/${id}`);
+    routeOnClick(id, match) {
+        history.push(`/user/admin/match/${id}`);        
     }
 
     changeHandler = (e) => {
@@ -130,7 +130,6 @@ class StudentAssignments extends React.Component {
 
     clickHandler = async (e, match) => {
         e.preventDefault();
-        
         await this.props.deleteMatch(match.id);
         await this.props.getMatches();
 
@@ -215,7 +214,7 @@ class StudentAssignments extends React.Component {
                                 `${match.mentor.first_name} ${match.mentor.last_name}`,
                                 `${match.mentor.email}`,
                                 [
-                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(match.id)} >
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(match.id, match)} >
                                         <Person />
                                     </Button>,
                                     <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, match)} >

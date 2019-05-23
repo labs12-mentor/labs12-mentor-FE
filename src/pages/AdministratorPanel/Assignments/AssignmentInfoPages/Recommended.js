@@ -56,6 +56,9 @@ class Recommended extends React.Component {
         
         return (
             <div className={classes.main}>
+            <Typography variant="h4" component="h2">
+                Assigned Match
+            </Typography>
             {mentor && mentee &&
             <div className={classes.enclosingDiv}>            
             <Card className={classes.card}>

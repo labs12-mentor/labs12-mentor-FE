@@ -38,12 +38,21 @@ class Assignment extends React.Component {
 
         matchUserInfo.deleted = this.props.currentMatch.deleted;
 
+
+        let menteeId = this.props.mentees.filter(mentee => {
+            return mentee.id === this.props.currentMatch.mentee_id;
+        })[0].user_id;
+
         matchUserInfo.mentee = this.props.users.filter(user => {
-            return user.id === this.props.currentMatch.mentee_id;
+            return user.id === menteeId;
         })[0];
 
+        let mentorId = this.props.mentors.filter(mentor => {
+            return mentor.id === this.props.currentMatch.mentor_id;
+        })[0].user_id;
+
         matchUserInfo.mentor = this.props.users.filter(user => {
-            return user.id === this.props.currentMatch.mentor_id;
+            return user.id === mentorId;
         })[0];
 
         this.setState({
