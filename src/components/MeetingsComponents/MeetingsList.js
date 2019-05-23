@@ -68,7 +68,7 @@ class MeetingsList extends React.Component {
     const { classes } = this.props;
 
     const nonDeleted = this.props.meetings.filter(meeting => {
-      return meeting.deleted === false 
+      return meeting.deleted === false;
       // && this.props.userId === meeting.user_id;
     });
     return (
@@ -81,14 +81,14 @@ class MeetingsList extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
-          text-Align= "center"
+          text-align="center"
         >
           <DialogContent
             style={{
               width: "100%",
               minWidth: "500px",
-              height: "100%",
-              //textAlign: "center" 
+              height: "100%"
+          
             }}
           >
             <MeetingsForm canEdit={false} handleClose={this.handleClose} />
@@ -106,7 +106,15 @@ class MeetingsList extends React.Component {
             .slice(nonDeleted.length - 8, nonDeleted.length)
             .map(meeting => {
               return [
-                <p className={classes.cardTitle}>{meeting.content}</p>,
+                <p
+                  style={{
+                    fontSize: "1.3rem",
+                    lineHeight: "5vh"
+                  }}
+                  className={classes.cardTitle}
+                >
+                  {meeting.content}
+                </p>,
                 <div
                   className={classes.buttonGroup}
                   style={{ display: "flex", justifyContent: "flex-end" }}

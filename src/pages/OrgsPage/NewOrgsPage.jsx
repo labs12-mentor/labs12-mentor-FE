@@ -66,6 +66,12 @@ class NewOrgsPage extends React.Component {
 
         <div className={classes.main}>
           <div className={classes.container} style={{ paddingTop: 30 }}>
+          {(this.props.currentUser && this.props.currentUser.role === "ADMINISTRATOR") ? (
+            <span>                      
+              <SectionPills />
+              <SectionInterested />
+            </span>
+            ) : (
             <NavPills
               color="info"
               tabs={[
@@ -95,7 +101,7 @@ class NewOrgsPage extends React.Component {
                   )
                 }
               ]}
-            />
+          />)}
           </div>
         </div>
       </div>

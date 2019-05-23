@@ -3,34 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
-// @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import Chat from "@material-ui/icons/Chat";
-import Build from "@material-ui/icons/Build";
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Group from '@material-ui/icons/Group';
-// core components
-import CustomTabs from "../../material-components/CustomTabs/CustomTabs.jsx";
-
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import NoSsr from '@material-ui/core/NoSsr';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import { theme } from '../../themes.js';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-
-import MaterialTabs from './MaterialTabs';
-
-import Applications from './Applications/Applications';
-import Assignments from './Assignments/Assignments';
 import MentorApplications from './Applications/MentorApplications';
 import MatchApplications from './Applications/StudentApplications';
 import MentorAssignments from './Assignments/Mentors';
 import MatchAssignments from './Assignments/Students';
-import ProfileForms from './ProfileForms/ProfileForms';
+
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+// @material-ui/icons
+import Face from "@material-ui/icons/Face";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Group from '@material-ui/icons/Group';
+// core components
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+
+import CustomTabs from "../../material-components/CustomTabs/CustomTabs.jsx";
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -73,10 +61,6 @@ class AdminPanel extends React.Component {
         super(props);
         this.state = {
             activeTab: '1',
-            users: [],
-            matches: [],
-            mentees: [],
-            mentors: [],
             value: 0
         };
     }
@@ -114,121 +98,45 @@ class AdminPanel extends React.Component {
         this.setState({ value });
       };
 
-    filterMentees = () => {
-        const menteeUserInfo = [];
-        this.state.users.filter((user) => {
-            this.state.mentees.map((mentee) => {
-                if (user.id === mentee.user_id && !mentee.deleted) {
-                    user.wanted_mentor_id = mentee.wanted_mentor_id;
-                    menteeUserInfo.push(user);
-                }
-            });
-        });
-
-        return menteeUserInfo;
-    };
-
-    filterMentors = () => {
-        const mentorUserInfo = []
-        this.state.users.filter((user) => {
-            this.state.mentors.map((mentor) => {
-                if (user.id === mentor.user_id  && !mentor.deleted) {
-                    user.status = mentor.status;
-                    user.mentor_id = mentor.id;
-                    mentorUserInfo.push(user);
-                }
-            });
-        });
-
-        return mentorUserInfo;
-    };
-
     render() {
-        const matchedUsers = [];
-        this.state.matches.forEach(match => {
-            if(match.deleted === false && match.mentor_id !== match.mentee_id){
-                let userMatchInfo = {
-                    mentor: {},
-                    mentee: {},
-                    id: match.id,
-                    status: "undecided"
-                }
-                this.state.users.forEach(user => {
-                    if(user.id === match.mentor_id){
-                        userMatchInfo.mentor = user;
-                    } else if(user.id === match.mentee_id){
-                        userMatchInfo.mentee = user;
-                    }
-                    
-                });
-                matchedUsers.push(userMatchInfo);
-            }
-        });
-
         const { classes } = this.props;
-        const { value } = this.state;
         
         return (
             <AppContainer className={classes.root}>
-            <CustomTabs 
-            headerColor="info"
-            tabs={[
-          {
-            tabName: "Mentor Applications",
-            tabIcon: Face,
-            tabContent: (
-                <MentorApplications 
-                    users={this.state.users}
-                    mentees={this.filterMentees()}
-                    mentors={this.filterMentors()}
+                <CustomTabs 
+                        headerColor="info"
+                        tabs={[
+                    {
+                        tabName: "Mentor Applications",
+                        tabIcon: Face,
+                        tabContent: (
+                            <MentorApplications />
+                        )
+                    },
+                    {
+                        tabName: "Match Applications",
+                        tabIcon: Group,
+                        tabContent: (
+                            <MatchApplications />
+                        )
+                    },
+                    {
+                        tabName: "Mentor Assignments",
+                        tabIcon: Face,
+                        tabContent: (
+                            <MentorAssignments />
+                        )
+                    },
+                    {
+                        tabName: "Match Assignments",
+                        tabIcon: Group,
+                        tabContent: (
+                            <MatchAssignments />
+                        )
+                    }
+                    ]}
                 />
-            )
-          },
-          {
-            tabName: "Match Applications",
-            tabIcon: Group,
-            tabContent: (
-                <MatchApplications 
-                    users={this.state.users}
-                    mentees={this.filterMentees()}
-                    mentors={this.filterMentors()}
-                />
-            )
-          },
-          {
-            tabName: "Mentor Assignments",
-            tabIcon: Face,
-            tabContent: (
-                <MentorAssignments 
-                    matchedUsers={matchedUsers} 
-                    users={this.state.users}
-                    matches={this.state.matches}
-                    mentors={this.filterMentors()}
-                />
-            )
-          },
-          {
-            tabName: "Match Assignments",
-            tabIcon: Group,
-            tabContent: (
-                <MatchAssignments
-                    matchedUsers={matchedUsers} 
-                    users={this.state.users}
-                    matches={this.state.matches}
-                />
-            )
-          },
-          {
-            tabName: "Profile Forms",
-            tabIcon: AccountCircle,
-            tabContent: (
-              <p className={classes.textCenter}>
-              </p>
-            )
-          }
-        ]}
-      />
-      </AppContainer>
+            </AppContainer>
         );
     }
 }

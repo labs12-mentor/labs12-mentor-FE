@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import history from '../../../history';
 import { connect } from 'react-redux';
-import { getUsers } from '../../../actions';
+import { getUsers, deleteUser } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 // material-ui icons
-import Person from "@material-ui/icons/Person";
-import Done from "@material-ui/icons/Done";
 import Close from "@material-ui/icons/Close";
 import SearchIcon from '@material-ui/icons/Search';
 // core components
@@ -50,14 +47,16 @@ class MembersList extends React.Component {
 
     async componentDidMount() {
         await this.props.getUsers();
+
+        let existingUsers = this.props.users.filter(user => {
+            return user.deleted === false;
+        });
+
         this.setState({
-            users: this.props.users
+            ...this.state,
+            users: existingUsers
         });
     }
-
-    // routeOnClick(id) {
-    //     history.push(`/user/admin/mentorapplication/${id}`);
-    // }
 
     changeHandler = (e) => {
         e.preventDefault();
@@ -83,25 +82,22 @@ class MembersList extends React.Component {
         return filteredUsers;
     };
 
-    // clickHandler = (e, mentor, status) => {
-    //     e.preventDefault();
-    //     const clickedUser = this.props.users.filter(user => {
-    //         return user.id == mentor.id;
-    //     })[0];
-        
-    //     if(status === "approved"){
-    //         clickedUser.role = "MENTOR";
-            
-    //         this.props.updateUser(
-    //             clickedUser.id, 
-    //             {
-    //                 ...clickedUser
-    //             }
-    //         );
-    //     } else if(status === "denied") {
-    //         this.props.deleteMentor(mentor.mentor_id);
-    //     }
-    // }
+    clickHandler = async (e, id) => {
+        e.preventDefault();
+        await this.props.deleteUser(id)
+        .then(async res => {
+            await this.props.getUsers();
+
+            let existingUsers = this.props.users.filter(user => {
+                return user.deleted === false;
+            });
+    
+            this.setState({
+                ...this.state,
+                users: existingUsers
+            });
+        });
+    }
 
     render() {
         const { classes } = this.props;
@@ -142,13 +138,7 @@ class MembersList extends React.Component {
                                 user.email,
                                 user.role,
                                 [
-                                    <Button justIcon size="sm" color={"info"}>
-                                        <Person />
-                                    </Button>,
-                                    <Button justIcon size="sm" color={"success"}>
-                                        <Done />
-                                    </Button>,
-                                    <Button justIcon size="sm" color={"danger"}>
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, user.id)}>
                                         <Close />
                                     </Button>
                                 ]
@@ -161,9 +151,6 @@ class MembersList extends React.Component {
     }
 }
 
-// MentorApplications.propTypes = {
-//     mentors: PropTypes.array.isRequired
-// };
 
 const mstp = state => {
     return {
@@ -171,4 +158,4 @@ const mstp = state => {
     }
 }
 
-export default connect(mstp, { getUsers })(withStyles(styles)(MembersList));
+export default connect(mstp, { getUsers, deleteUser })(withStyles(styles)(MembersList));

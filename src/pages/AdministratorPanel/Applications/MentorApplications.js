@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
-import { updateUser, deleteMentor } from '../../../actions';
+import { updateUser, deleteMentor, getUsers, getMentors } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // material-ui icons
@@ -10,21 +10,12 @@ import Person from "@material-ui/icons/Person";
 import Done from "@material-ui/icons/Done";
 import Close from "@material-ui/icons/Close";
 import Paper from "@material-ui/core/Paper";
-import LinkIcon from '@material-ui/icons/Link';
-
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
 // core components
 import Table from "../../../material-components/Table/Table.jsx";
 import Button from "../../../material-components/CustomButtons/Button.jsx";
-
-import style from "../../../assets/jss/material-kit-pro-react/views/componentsSections/contentAreas.jsx";
-
-
-import MentorApplicationCard from './MentorApplicationCard';
 
 const styles = theme => ({
     root: {
@@ -52,11 +43,37 @@ const styles = theme => ({
 
 class MentorApplications extends React.Component {
     state = {
-        searchBarContents: ''
+        searchBarContents: '',
+        users: [],
+        mentors: []
+    }
+
+    async componentDidMount() {
+        await this.props.getUsers();
+        await this.props.getMentors();
+        
+        //fetches all user data for the mentor application and filters out deleted mentor applications
+        const existingMentorInfo = this.props.mentors.map(mentor => {
+            const alteredUser = this.props.users.filter(user => {                
+                return user.id === mentor.user_id;
+            })[0];
+
+            alteredUser.status = mentor.status;
+            alteredUser.mentor_id = mentor.id;
+            alteredUser.mentor_deleted = mentor.deleted;
+            return alteredUser;
+        }).filter(mentor => {
+            return mentor.role === "MENTEE" && mentor.mentor_deleted === false;
+        });
+
+        this.setState({
+            users: this.props.users,
+            mentors: existingMentorInfo,
+        });
     }
 
     routeOnClick(id) {
-        history.push(`/user/admin/mentorapplication/${id}`);
+        history.push(`/user/admin/mentor/${id}`);
     }
 
     changeHandler = (e) => {
@@ -67,55 +84,57 @@ class MentorApplications extends React.Component {
         });
     };
 
-    filterBySearch = (role) => {
+    filterBySearch = () => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        let filteredUsers = [];
-
-        if (role === 'mentee') {
-            filteredUsers = this.props.mentees.filter((mentee) => {
-                return (
-                    mentee.last_name.toLowerCase().includes(searchInput) ||
-                    mentee.first_name.toLowerCase().includes(searchInput) ||
-                    mentee.email.toLowerCase().includes(searchInput)
-                );
-            });
-        } else if (role === 'mentor') {
-            filteredUsers = this.props.mentors.filter((mentor) => {
-                return (
-                    mentor.last_name.toLowerCase().includes(searchInput) ||
-                    mentor.first_name.toLowerCase().includes(searchInput) ||
-                    mentor.email.toLowerCase().includes(searchInput)
-                );
-            });
-        }
+        let filteredUsers = this.state.mentors.filter((mentor) => {
+            return (
+                mentor.last_name.toLowerCase().includes(searchInput) ||
+                mentor.first_name.toLowerCase().includes(searchInput) ||
+                mentor.email.toLowerCase().includes(searchInput)
+            );
+        });
 
         return filteredUsers;
     };
 
-    clickHandler = (e, mentor, status) => {
+    clickHandler = async (e, mentor, status) => {
         e.preventDefault();
         const clickedUser = this.props.users.filter(user => {
             return user.id == mentor.id;
         })[0];
-        
+
         if(status === "approved"){
             clickedUser.role = "MENTOR";
-            
-            this.props.updateUser(
-                clickedUser.id, 
-                {
-                    ...clickedUser
-                }
-            );
+            await this.props.updateUser(clickedUser.id, { ...clickedUser });
+            await this.props.getUsers();
+
         } else if(status === "denied") {
-            this.props.deleteMentor(mentor.mentor_id);
+            await this.props.deleteMentor(mentor.mentor_id);
+            await this.props.getMentors();
         }
-        console.log('props check', this.props)
+
+        const existingMentorInfo = this.props.mentors.map(mentor => {
+            const alteredUser = this.props.users.filter(user => {                
+                return user.id === mentor.user_id;
+            })[0];
+
+            alteredUser.status = mentor.status;
+            alteredUser.mentor_id = mentor.id;
+            alteredUser.mentor_deleted = mentor.deleted;
+            return alteredUser;
+        }).filter(mentor => {
+            return mentor.role === "MENTEE" && mentor.mentor_deleted === false;
+        });
+
+        this.setState({
+            ...this.state,
+            mentors: existingMentorInfo
+        });
     }
 
     render() {
         const { classes } = this.props;
-
+        
         return (
             <Paper className={classes.root}>
                 <Input
@@ -142,15 +161,9 @@ class MentorApplications extends React.Component {
                     "Email",
                     "",
                     ]}
-                    tableData={this.filterBySearch('mentor').map((mentor, index)=> {
+                    tableData={this.filterBySearch().map((mentor, index)=> {
                         return (
                             [
-                                // <IconButton 
-                                //     style={{color: 'black'}} 
-                                //     className={classes.iconButton}
-                                // > 
-                                //     <LinkIcon /> 
-                                // </IconButton>,
                                 ' ',
                                 mentor.last_name, 
                                 mentor.first_name, 
@@ -175,8 +188,19 @@ class MentorApplications extends React.Component {
     }
 }
 
-MentorApplications.propTypes = {
-    mentors: PropTypes.array.isRequired
-};
+const mstp = state => {
+    return {
+        users: state.users.users,
+        mentors: state.mentors.mentors
+    }
+}
 
-export default connect(null, { updateUser, deleteMentor })(withStyles(styles)(MentorApplications));
+
+export default connect(
+    mstp, 
+    { 
+        updateUser, 
+        deleteMentor,
+        getUsers,
+        getMentors
+    })(withStyles(styles)(MentorApplications));

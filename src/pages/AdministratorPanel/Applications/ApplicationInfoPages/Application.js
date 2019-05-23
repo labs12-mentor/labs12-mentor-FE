@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import NavPills from "../../../material-components/NavPills/NavPills.jsx";
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import classnames from 'classnames';
+import NavPills from "../../../../material-components/NavPills/NavPills.jsx";
 
-import { getSpecificUser } from '../../../actions';
+import { getSpecificUser } from '../../../../actions';
 
 import ProfileInfo from './ProfileInfo';
 import ApplicationRes from './ApplicationRes';

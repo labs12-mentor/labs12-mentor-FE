@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import history from '../../../history';
 import { connect } from 'react-redux';
-import { getInvitations, getUsers } from '../../../actions';
+import { getInvitations, getUsers, deleteInvitation } from '../../../actions';
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
@@ -53,7 +53,11 @@ class InvitationsList extends React.Component {
         await this.props.getInvitations();
         await this.props.getUsers();
 
-        let invites = this.props.invitations.map(invite => {
+        let existingInvitations = this.props.invitations.filter(invite => {
+            return invite.deleted === false;
+        });
+
+        let invites = existingInvitations.map(invite => {
             const invited_user = this.props.users.filter(user => {
                 return user.id === invite.user_id;
             })[0];
@@ -66,14 +70,11 @@ class InvitationsList extends React.Component {
         });
 
         this.setState({
+            ...this.state,
             invitations: invites,
             users: this.props.users
         });
     }
-
-    // routeOnClick(id) {
-    //     history.push(`/user/admin/mentorapplication/${id}`);
-    // }
 
     changeHandler = (e) => {
         e.preventDefault();
@@ -99,25 +100,35 @@ class InvitationsList extends React.Component {
         return filteredInvites;
     };
 
-    // clickHandler = (e, mentor, status) => {
-    //     e.preventDefault();
-    //     const clickedUser = this.props.users.filter(user => {
-    //         return user.id == mentor.id;
-    //     })[0];
-        
-    //     if(status === "approved"){
-    //         clickedUser.role = "MENTOR";
-            
-    //         this.props.updateUser(
-    //             clickedUser.id, 
-    //             {
-    //                 ...clickedUser
-    //             }
-    //         );
-    //     } else if(status === "denied") {
-    //         this.props.deleteMentor(mentor.mentor_id);
-    //     }
-    // }
+    clickHandler = async (e, id) => {
+        e.preventDefault();
+
+        await this.props.deleteInvitation(id)
+            .then(async res => {
+                await this.props.getInvitations();
+
+                let existingInvitations = this.props.invitations.filter(invite => {
+                    return invite.deleted === false;
+                });
+
+                let invites = existingInvitations.map(invite => {
+                    const invited_user = this.props.users.filter(user => {
+                        return user.id === invite.user_id;
+                    })[0];
+                    
+                    invite.last_name = invited_user.last_name;
+                    invite.first_name = invited_user.first_name;
+                    invite.email = invited_user.email;
+
+                    return invite;
+                });
+
+                this.setState({
+                    ...this.state,
+                    invitations: invites,
+                });
+            });
+    }
 
     render() {
         const { classes } = this.props;
@@ -157,13 +168,13 @@ class InvitationsList extends React.Component {
                                 invite.email,
                                 invite.role,
                                 [
-                                    <Button justIcon size="sm" color={"info"}>
-                                        <Person />
-                                    </Button>,
-                                    <Button justIcon size="sm" color={"success"}>
-                                        <Done />
-                                    </Button>,
-                                    <Button justIcon size="sm" color={"danger"}>
+                                    // <Button justIcon size="sm" color={"info"}>
+                                    //     <Person />
+                                    // </Button>,
+                                    // <Button justIcon size="sm" color={"success"}>
+                                    //     <Done />
+                                    // </Button>,
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, invite.id)}>
                                         <Close />
                                     </Button>
                                 ]
@@ -187,4 +198,4 @@ const mstp = state => {
     }
 }
 
-export default connect(mstp, { getInvitations, getUsers })(withStyles(styles)(InvitationsList));
+export default connect(mstp, { getInvitations, getUsers, deleteInvitation })(withStyles(styles)(InvitationsList));

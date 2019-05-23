@@ -8,10 +8,16 @@ import {
 import axios from 'axios';
 require('dotenv').config();
 
-// const latLongObj = () => {
-//     axios
-//         .get(`https://maps.googleapis.com/maps/api/geocode/json?parameters`)
-// }
+const latLongObj = () => {
+    axios
+        .get(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${process.env.REACT_APP_MAPKEY}`)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 const RegularMap = withScriptjs(
 withGoogleMap(props => (
@@ -28,7 +34,7 @@ withGoogleMap(props => (
 );
 
 function GoogleMaps({...props}){
-    console.log(process.env);
+    latLongObj();
 return (
     <RegularMap
     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPKEY}`}
