@@ -130,7 +130,7 @@ class StudentAssignments extends React.Component {
 
     clickHandler = async (e, match) => {
         e.preventDefault();
-        console.log(match);
+        
         await this.props.deleteMatch(match.id);
         await this.props.getMatches();
 

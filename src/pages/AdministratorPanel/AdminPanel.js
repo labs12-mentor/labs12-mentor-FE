@@ -112,14 +112,6 @@ class AdminPanel extends React.Component {
                         tabContent: (
                             <MatchAssignments />
                         )
-                    },
-                    {
-                        tabName: "Profile Forms",
-                        tabIcon: AccountCircle,
-                        tabContent: (
-                        <p className={classes.textCenter}>
-                        </p>
-                        )
                     }
                     ]}
                 />
