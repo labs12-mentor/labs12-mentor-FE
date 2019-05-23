@@ -276,7 +276,7 @@ class MeetingsForm extends React.Component {
             >
               Add
             </Button>
-            <Button onClick={this.props.handleClose} color="info">
+            <Button onClick={this.props.handleClose} color="danger">
               Cancel
             </Button>
           </form>
