@@ -12,11 +12,11 @@ import UserRegistration from '../components/MaterialUserRegistration';
 // import UserLogin from '../pages/UserLogin';
 // import SignIn from '../pages/MaterialLogIn';
 import Notifications from '../pages/NotificationsView';
-import AdminPanel from '../pages/AdminPanel/AdminPanel';
+// import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage';
-import Application from '../pages/AdminPanel/Application/Application';
-import Assignment from '../pages/AdminPanel/Assignment/Assignment';
+import Application from '../pages/AdministratorPanel/Applications/ApplicationInfoPages/Application';
+import Assignment from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import RegDetails from '../pages/RegistrationDetails';
@@ -57,7 +57,6 @@ const Routes = (props) => {
             <Route exact path='/user/login' component={RouteNoAuthNeeded(UserLogin)} />
             <Route exact path='/user/profile' component={RouteAuthNeeded(UserProfile)} />
             <Route exact path='/user/notifications' component={RouteAuthNeeded(Notifications)} />
-            <Route exact path='/user/admin/profile' component={RouteAuthNeeded(AdminPanel)} />
             <Route exact path='/user/admin/panel' component={RouteAuthNeeded(AdministratorPanel)} />
             <Route exact path='/user/admin/invite' component={RouteAuthNeeded(InvitationForm)} />
             <Route
