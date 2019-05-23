@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-// import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { FormGroup } from "@material-ui/core";
 import FormControl from "@material-ui/core/FormControl";
 import Input from "@material-ui/core/Input";
@@ -8,10 +7,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Button from "../../material-components/CustomButtons/Button";
 import { createMeeting, updateMeeting } from "../../actions/meetings.js";
 import Datetime from "react-datetime";
-// import DatePicker from "react-datepicker";
-import DateTimePicker from "react-datetime-picker";
 import withStyles from "@material-ui/core/styles/withStyles";
-import CustomInput from "../../material-components/CustomInput/CustomInput";
 import moment from "moment";
 
 import "../../assets/scss/material-kit-pro-react.scss";
