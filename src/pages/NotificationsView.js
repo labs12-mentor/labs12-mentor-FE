@@ -53,7 +53,9 @@ class Notifications extends Component {
 
     async componentDidMount() {
         await this.props.getNotifications();
-        this.setState({ pageLoaded: true });
+        this.setState({ 
+            pageLoaded: true,
+        });
     }
 
     render() {

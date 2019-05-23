@@ -110,6 +110,7 @@ class MentorApplications extends React.Component {
         } else if(status === "denied") {
             this.props.deleteMentor(mentor.mentor_id);
         }
+        console.log('props check', this.props)
     }
 
     render() {

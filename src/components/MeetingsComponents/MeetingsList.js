@@ -48,7 +48,8 @@ class MeetingsList extends React.Component {
     await this.props.getMeetings();
     this.setState({ ...this.state, isLoaded: true });
   }
-
+  
+  //no refresh on create
   async componentDidUpdate(prevProps, PrevState) {
     if (this.props.meetings.length !== prevProps.meetings.length) {
       await this.props.getMeetings();

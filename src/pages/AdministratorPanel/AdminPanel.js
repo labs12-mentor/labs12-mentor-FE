@@ -95,6 +95,13 @@ class AdminPanel extends React.Component {
         });
     }
 
+    // async componentDidUpdate(prevProps){
+    //     if(this.props.mentors.length !== prevProps.mentors.length){
+    //         await this.props.getMentors();
+    //         this.setState({ mentors: this.props.mentors })
+    //     }
+    // }
+
     toggleTab = (tab) => {
         if (this.state.activeTab !== tab) {
             this.setState({
