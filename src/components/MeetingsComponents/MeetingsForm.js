@@ -56,49 +56,52 @@ class MeetingsForm extends React.Component {
     const { classes } = this.props;
     if (this.props.canEdit === true) {
       return (
-        <div style={{
-          width: "100%",
-        textAlign: "center"
-        }}>
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center"
+          }}
+        >
           <h3> Edit Meeting</h3>
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel> Title</InputLabel>
-              <Input
-                name="title"
-                placeholder="Title"
-                value={this.state.title}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+          <form onSubmit={this.updateMeetingForm}>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel> Title</InputLabel>
+                <Input
+                  name="title"
+                  placeholder="Title"
+                  value={this.state.title}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth={true}>
-              <InputLabel> Content</InputLabel>
-              <Input
-                name="content"
-                placeholder="Content"
-                value={this.state.content}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth={true}>
+                <InputLabel> Content</InputLabel>
+                <Input
+                  name="content"
+                  placeholder="Content"
+                  value={this.state.content}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel> Match id</InputLabel>
-              <Input
-                type="number"
-                name="match_id"
-                placeholder="match id"
-                value={this.state.match_id}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel> Match id</InputLabel>
+                <Input
+                  type="number"
+                  name="match_id"
+                  placeholder="match id"
+                  value={this.state.match_id}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          {/* <FormGroup row>
+            {/* <FormGroup row>
             <FormControl margin="normal" required fullWidth>
               <InputLabel>Start Time</InputLabel>
               <Input
@@ -109,7 +112,7 @@ class MeetingsForm extends React.Component {
               />
             </FormControl>
           </FormGroup> */}
-          {/* <FormGroup row>
+            {/* <FormGroup row>
            <InputLabel className={classes.label}>
          Datetime Picker
       </InputLabel>
@@ -120,132 +123,139 @@ class MeetingsForm extends React.Component {
         />
       </FormControl>
           </FormGroup> */}
-          {/* <InputLabel className={classes.label}>Datetime Picker</InputLabel> */}
-          <br />
-          <FormControl fullWidth>
-            <Datetime 
-            selected={this.state.startTime}
-            //value={this.selected}
-            name="startTime"
-            inputProps={{ placeholder: "Start Time",
-          }}
-            onChange={this.handleChanges} 
-          
-          />
-          </FormControl>
-
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel>End Time</InputLabel>
-              <Input
-                name="endTime"
-                placeholder="End Time"
-                value={this.state.endTime}
+            {/* <InputLabel className={classes.label}>Datetime Picker</InputLabel> */}
+            <br />
+            <FormControl fullWidth>
+              <Datetime
+                selected={this.state.startTime}
+                //value={this.selected}
+                name="startTime"
+                inputProps={{ placeholder: "Start Time" }}
                 onChange={this.handleChanges}
               />
             </FormControl>
-          </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel>Location</InputLabel>
-              <Input
-                name="location"
-                placeholder="location"
-                value={this.state.location}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
-          <Button onClick={this.updateMeetingForm} color="info">
-            Update
-          </Button>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel>End Time</InputLabel>
+                <Input
+                  name="endTime"
+                  placeholder="End Time"
+                  value={this.state.endTime}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
+
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel>Location</InputLabel>
+                <Input
+                  name="location"
+                  placeholder="location"
+                  value={this.state.location}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
+            <Button type="submit" onClick={this.updateMeetingForm} color="info">
+              Update
+            </Button>
+          </form>
         </div>
       );
     } else {
       return (
-        <div style={{
-          width: "100%",
-          textAlign: "center"
-        }}>
+        <div
+          style={{
+            width: "100%",
+            textAlign: "center"
+          }}
+        >
           <h3> Create a Meeting</h3>
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel> Title</InputLabel>
-              <Input
-                name="title"
-                placeholder="Title"
-                value={this.state.title}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+          <form onSubmit={this.creatingMeetingForm}>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel> Title</InputLabel>
+                <Input
+                  name="title"
+                  placeholder="Title"
+                  value={this.state.title}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth={true}>
-              <InputLabel> Content</InputLabel>
-              <Input
-                name="content"
-                placeholder="Content"
-                value={this.state.content}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth={true}>
+                <InputLabel> Content</InputLabel>
+                <Input
+                  name="content"
+                  placeholder="Content"
+                  value={this.state.content}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel> Match id</InputLabel>
-              <Input
-                name="match_id"
-                placeholder="match id"
-                value={this.state.match_id}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel> Match id</InputLabel>
+                <Input
+                  name="match_id"
+                  placeholder="match id"
+                  value={this.state.match_id}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel>Start Time</InputLabel>
-              <Input
-                name="startTime"
-                placeholder="Start Time"
-                value={this.state.startTime}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel>Start Time</InputLabel>
+                <Input
+                  name="startTime"
+                  placeholder="Start Time"
+                  value={this.state.startTime}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel>End Time</InputLabel>
-              <Input
-                name="endTime"
-                placeholder="End Time"
-                value={this.state.endTime}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel>End Time</InputLabel>
+                <Input
+                  name="endTime"
+                  placeholder="End Time"
+                  value={this.state.endTime}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControl margin="normal" required fullWidth>
-              <InputLabel>Location</InputLabel>
-              <Input
-                name="location"
-                placeholder="location"
-                value={this.state.location}
-                onChange={this.handleChanges}
-              />
-            </FormControl>
-          </FormGroup>
-          <Button onClick={this.creatingMeetingForm} color="info">
-            Add
-          </Button>
-          <Button onClick={this.props.handleClose} color="info">
-            Cancel
-          </Button>
+            <FormGroup row>
+              <FormControl margin="normal" required fullWidth>
+                <InputLabel>Location</InputLabel>
+                <Input
+                  name="location"
+                  placeholder="location"
+                  value={this.state.location}
+                  onChange={this.handleChanges}
+                />
+              </FormControl>
+            </FormGroup>
+            <Button
+              type="submit"
+              onClick={this.creatingMeetingForm}
+              color="info"
+            >
+              Add
+            </Button>
+            <Button onClick={this.props.handleClose} color="info">
+              Cancel
+            </Button>
+          </form>
         </div>
       );
     }
