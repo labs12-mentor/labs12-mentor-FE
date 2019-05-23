@@ -3,34 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
-// @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
-import Face from "@material-ui/icons/Face";
-import Chat from "@material-ui/icons/Chat";
-import Build from "@material-ui/icons/Build";
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Group from '@material-ui/icons/Group';
-// core components
-import CustomTabs from "../../material-components/CustomTabs/CustomTabs.jsx";
-
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import NoSsr from '@material-ui/core/NoSsr';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import { theme } from '../../themes.js';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-
-import MaterialTabs from './MaterialTabs';
-
-import Applications from './Applications/Applications';
-import Assignments from './Assignments/Assignments';
 import MentorApplications from './Applications/MentorApplications';
 import MatchApplications from './Applications/StudentApplications';
 import MentorAssignments from './Assignments/Mentors';
 import MatchAssignments from './Assignments/Students';
-import ProfileForms from './ProfileForms/ProfileForms';
+
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+// @material-ui/icons
+import Face from "@material-ui/icons/Face";
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Group from '@material-ui/icons/Group';
+// core components
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+
+import CustomTabs from "../../material-components/CustomTabs/CustomTabs.jsx";
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -82,15 +70,17 @@ class AdminPanel extends React.Component {
     }
 
     async componentDidMount() {
-        await this.props.getUsers()
+        await this.props.getUsers();
         await this.props.getMentees();
         await this.props.getMentors();
         await this.props.getMatches();
 
+        // const mentorInfo = this.filterMentors();
+
         this.setState({
             users: this.props.users,
             mentees: this.props.mentees,
-            mentors: this.props.mentors,
+            mentors: [],
             matches: this.props.matches
         });
     }
@@ -121,20 +111,33 @@ class AdminPanel extends React.Component {
         return menteeUserInfo;
     };
 
-    filterMentors = () => {
-        const mentorUserInfo = []
-        this.state.users.filter((user) => {
-            this.state.mentors.map((mentor) => {
-                if (user.id === mentor.user_id  && !mentor.deleted) {
-                    user.status = mentor.status;
-                    user.mentor_id = mentor.id;
-                    mentorUserInfo.push(user);
-                }
-            });
-        });
+    // filterMentors = () => {
+    //     //fetches all user data for the mentor application and filters out deleted mentor applications
+    //     const existingMentorInfo = this.props.mentors.map(mentor => {
+    //         return this.props.users.filter(user => {
+    //             user.status = mentor.status;
+    //             user.mentor_id = mentor.id;
+    //             user.mentor_deleted = mentor.deleted;
+    //             return mentor.user_id === user.id;
+    //         })[0];
+    //     }).filter(mentor => {
+    //         return mentor.mentor_deleted === false;
+    //     });
+    //     return existingMentorInfo;
 
-        return mentorUserInfo;
-    };
+    //     // const mentorUserInfo = []
+    //     // this.state.users.filter((user) => {
+    //     //     this.state.mentors.map((mentor) => {
+    //     //         if (user.id === mentor.user_id  && !mentor.deleted) {
+    //     //             user.status = mentor.status;
+    //     //             user.mentor_id = mentor.id;
+    //     //             mentorUserInfo.push(user);
+    //     //         }
+    //     //     });
+    //     // });
+
+    //     // return mentorUserInfo;
+    // };
 
     render() {
         const matchedUsers = [];
@@ -171,9 +174,7 @@ class AdminPanel extends React.Component {
             tabIcon: Face,
             tabContent: (
                 <MentorApplications 
-                    users={this.state.users}
-                    mentees={this.filterMentees()}
-                    mentors={this.filterMentors()}
+                    // mentorApps={this.state.mentors}
                 />
             )
           },
@@ -182,9 +183,9 @@ class AdminPanel extends React.Component {
             tabIcon: Group,
             tabContent: (
                 <MatchApplications 
-                    users={this.state.users}
-                    mentees={this.filterMentees()}
-                    mentors={this.filterMentors()}
+                    // users={this.state.users}
+                    // mentees={this.filterMentees()}
+                    // mentors={this.filterMentors()}
                 />
             )
           },
@@ -193,10 +194,10 @@ class AdminPanel extends React.Component {
             tabIcon: Face,
             tabContent: (
                 <MentorAssignments 
-                    matchedUsers={matchedUsers} 
-                    users={this.state.users}
-                    matches={this.state.matches}
-                    mentors={this.filterMentors()}
+                    // matchedUsers={matchedUsers} 
+                    // users={this.state.users}
+                    // matches={this.state.matches}
+                    // mentors={this.filterMentors()}
                 />
             )
           },
@@ -205,9 +206,9 @@ class AdminPanel extends React.Component {
             tabIcon: Group,
             tabContent: (
                 <MatchAssignments
-                    matchedUsers={matchedUsers} 
-                    users={this.state.users}
-                    matches={this.state.matches}
+                    // matchedUsers={matchedUsers} 
+                    // users={this.state.users}
+                    // matches={this.state.matches}
                 />
             )
           },
