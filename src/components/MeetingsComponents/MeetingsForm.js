@@ -34,7 +34,7 @@ class MeetingsForm extends React.Component {
       endTime: "",
       location: "",
       content: "",
-      match_id: "",
+      match_id: this.props.match_id,
       deleted: false,
       canEdit: false
     };
@@ -91,6 +91,8 @@ class MeetingsForm extends React.Component {
     //   ...restProps
     // } = this.props;
     console.log(this.state);
+    //console.log(this.props.meetings);
+
     if (this.props.canEdit === true) {
       return (
         <div
@@ -271,7 +273,7 @@ class MeetingsForm extends React.Component {
               </FormControl>
             </FormGroup>
 
-            <FormGroup row>
+            {/* <FormGroup row>
               <FormControl margin="normal" required fullWidth>
                 <InputLabel> Match id</InputLabel>
                 <Input
@@ -281,7 +283,7 @@ class MeetingsForm extends React.Component {
                   onChange={this.handleChanges}
                 />
               </FormControl>
-            </FormGroup>
+            </FormGroup> */}
 
             <FormGroup row>
               <FormControl margin="normal" required fullWidth>

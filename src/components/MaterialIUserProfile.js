@@ -91,29 +91,31 @@ class UserProfile extends React.Component {
     await this.props.getMentees();
     await this.props.getMatches();
     await this.setState({
+      ...this.state,
       user: this.props.user,
       menteed: this.props.mentees,
-      matches: this.props.matches
+      matches: this.props.matches,
+      isLoaded: true
     });
-    let matched = await this.state.menteed.filter(id => {
-      return id.user_id === this.state.user.id;
+    let matched = await this.state.matches.filter(id => {
+      return id.mentee_id === this.state.user.id;
     });
     await this.setState({ ...this.state, wanted_mentor: matched[0] });
-
-    if (this.state.wanted_mentor !== undefined) {
-      await this.setState({
-        ...this.state,
-        isLoaded: true,
-        applied: true
-      });
-    } else {
-      await this.setState({
-        ...this.state,
-        isLoaded: true
-      });
-    }
-    console.log(this.state.user);
-    console.log(matched)
+    //console.log()
+    console.log(matched);
+    console.log(this.state.wanted_mentor.id)
+    // if (this.state.wanted_mentor !== undefined) {
+    //   await this.setState({
+    //     ...this.state,
+    //     isLoaded: true,
+    //     applied: true
+    //   });
+    // } else {
+    //   await this.setState({
+    //     ...this.state,
+    //     isLoaded: true
+    //   });
+    // }
   }
 
   toggleApply() {
@@ -263,6 +265,7 @@ class UserProfile extends React.Component {
                               <MeetingsList
                                 style={{ width: "100%" }}
                                 userId={this.state.user.id}
+                                matchId={this.state.wanted_mentor.id}
                                 // matches={this.state.matches}
                               />
                             </GridContainer>

@@ -65,7 +65,7 @@ class MeetingsList extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    //console.log(this.props.meetings)
     const nonDeleted = this.props.meetings.filter(meeting => {
       return meeting.deleted === false;
       // && this.props.userId === meeting.user_id;
@@ -90,7 +90,11 @@ class MeetingsList extends React.Component {
           
             }}
           >
-            <MeetingsForm canEdit={false} handleClose={this.handleClose} />
+            <MeetingsForm 
+            canEdit={false} 
+            handleClose={this.handleClose} 
+            match_id={this.props.matchId}
+            />
           </DialogContent>
           {/* <DialogActions>
                 <Button onClick={this.handleClose} color="info">
