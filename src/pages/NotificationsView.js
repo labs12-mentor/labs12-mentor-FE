@@ -61,15 +61,17 @@ class Notifications extends Component {
         });
     }
 
+  
     render() {
         const { classes } = this.props;
         const { dense } = this.state;
+
         return (
             <AppContainer>
                 <div className={classes.root}>
                     {this.state.pageLoaded ? (
                         <div>
-                        <Typography variant="h6" className={classes.title}>
+                        <Typography variant="h4" className={classes.title}>
                             Your Notifications
                         </Typography>
                         <Card className={classes.card}>
@@ -83,7 +85,10 @@ class Notifications extends Component {
                                         this.props.notifications.map((notification) => {
                                             if (!notification.watched){
                                                 return (
-                                                    <ListItem key={notification.id}>
+                                                    <ListItem 
+                                                        key={notification.id} 
+                                                        style={{ borderBottom: "1px solid #DCDCDC" }}
+                                                    >
                                                         <Notification
                                                             id={notification.id}
                                                             notification={notification.content}
