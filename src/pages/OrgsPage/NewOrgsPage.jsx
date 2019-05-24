@@ -52,10 +52,10 @@ class NewOrgsPage extends React.Component {
           <div className={classes.container}>
             <GridContainer justify="center" className={classes.textCenter}>
               <GridItem xs={12} sm={6} md={6}>
-                <img src={logo} alt="logo" height="175" width="175" />
+                <img src={this.props.organization.logo} alt="logo" height="175" width="175" />
               </GridItem>
               <GridItem xs={12} sm={6} md={6} className={classes.textCenter}>
-                <h2 className={classes.title}>Test organization</h2>
+                <h2 className={classes.title}>{this.props.organization.name}</h2>
                 <p style={{ color: "white" }}>
                   We at Your Organization hope you will find these articles useful in guiding your mentoring relationship.
                 </p>
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => {
             : { id: 0, email: '', organization_id: 0 },
         organization: state.organizations.currentOrganization
             ? state.organizations.currentOrganization
-            : { id: 0, name: '' }
+            : { id: 0, name: 'Test organization', logo: logo }
     };
 };
 

@@ -61,11 +61,15 @@ class InvitationsList extends React.Component {
             const invited_user = this.props.users.filter(user => {
                 return user.id === invite.user_id;
             })[0];
-            
-            invite.last_name = invited_user.last_name;
-            invite.first_name = invited_user.first_name;
-            invite.email = invited_user.email;
-
+            if(invited_user === undefined){
+                invite.last_name = "";
+                invite.first_name = "";
+                invite.email = "";
+            } else {
+                invite.last_name = invited_user.last_name;
+                invite.first_name = invited_user.first_name;
+                invite.email = invited_user.email;
+            }
             return invite;
         });
 

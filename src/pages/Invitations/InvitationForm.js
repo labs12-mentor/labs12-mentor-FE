@@ -73,7 +73,7 @@ class InvitationPage extends React.Component {
     //console.log(this.state)
     const { classes } = this.props;
     return (
-      <div>
+      <div className={"container"}>
 
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.contactContent}>

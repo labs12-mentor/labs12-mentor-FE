@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Button from "components/CustomButtons/Button.jsx";
+import CustomInput from "../CustomInput/CustomInput.jsx";
+import Button from "../CustomButtons/Button.jsx";
 
-import styles from "assets/jss/material-kit-pro-react/components/customFileInputStyle.jsx";
+import styles from "../../assets/jss/material-kit-pro-react/components/customFileInputStyle";
 
 class CustomFileInput extends React.Component {
   constructor(props) {
@@ -17,6 +17,21 @@ class CustomFileInput extends React.Component {
       files: null
     };
   }
+  componentDidMount(){
+    if(this.props.valueFile) this.setState({
+        ...this.state,
+        fileNames: this.props.valueFile.name
+      })
+  }
+
+  componentWillUpdate(){
+    if(this.state.fileNames === "" && this.props.valueFile) this.setState({
+        ...this.state,
+        fileNames: this.props.valueFile.name
+      })
+  }
+
+
   onFocus = e => {
     this.refs.hiddenFile.click(e);
   };
@@ -25,6 +40,7 @@ class CustomFileInput extends React.Component {
     // this.state.file is the file/image uploaded
     // in this function you can save the image (this.state.file) on form submit
     // you have to call it yourself
+    console.log(this.state.file);
   };
   addFile = e => {
     let fileNames = "";
@@ -65,7 +81,7 @@ class CustomFileInput extends React.Component {
     }
     if (endButton) {
       buttonEnd = (
-        <Button {...endButton.buttonProps} onClick={this.onFocus}>
+        <Button {...endButton.buttonProps} onClick={endButton.uploadFile}>
           {endButton.icon !== undefined ? endButton.icon : null}
           {endButton.text !== undefined ? endButton.text : null}
         </Button>
@@ -78,7 +94,7 @@ class CustomFileInput extends React.Component {
           className={classes.inputFile}
           multiple={multiple}
           ref="hiddenFile"
-          onChange={this.addFile}
+          onChange={this.props.handleFile}
         />
         <CustomInput
           id={id}

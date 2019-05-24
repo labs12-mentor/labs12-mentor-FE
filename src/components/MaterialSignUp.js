@@ -8,6 +8,8 @@ import Timeline from "@material-ui/icons/Timeline";
 import Code from "@material-ui/icons/Code";
 import Group from "@material-ui/icons/Group";
 import Face from "@material-ui/icons/Face";
+import AttachFile from "@material-ui/icons/AttachFile";
+import CloudUpload from "@material-ui/icons/CloudUpload";
 // core components
 import GridContainer from "../material-components/Grid/GridContainer.jsx";
 import GridItem from "../material-components/Grid/GridItem.jsx";
@@ -15,6 +17,7 @@ import Button from "../material-components/CustomButtons/Button.jsx";
 import Card from "../material-components/Card/Card.jsx";
 import CardBody from "../material-components/Card/CardBody.jsx";
 import InfoArea from "../material-components/InfoArea/InfoArea.jsx";
+import FileInput from "../material-components/CustomFileInput/CustomFileInput.jsx";
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -27,7 +30,7 @@ import signupPageStyle from '../assets/jss/material-kit-pro-react/views/signUpPa
 // import image from "../assets/img/bg7.jpg";
 import image from '../assets/img/sergio-souza-1318950-unsplash.jpg';
 
-import { registerOrganization } from '../actions';
+import { registerOrganization, uploadLogo, fetchCurrentFile } from '../actions';
 
 class OrganizationRegister extends React.Component {
   constructor(props) {
@@ -35,6 +38,7 @@ class OrganizationRegister extends React.Component {
     this.state = {
       organization_name: '',
       organization_description: '',
+      organization_logo: null,
       programUrl: '',
       user_email: '',
       user_password: '',
@@ -53,9 +57,12 @@ class OrganizationRegister extends React.Component {
     });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async(e) => {
       e.preventDefault();
-      this.props.registerOrganization(this.state);
+      return await this.props.registerOrganization({
+        ...this.state,
+        organization_logo: this.props.logo
+      });
   };
 
 
@@ -75,13 +82,26 @@ class OrganizationRegister extends React.Component {
   //   });
   // }
 
+  handleFile = (e) => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      organization_logo: e.target.files[0]
+    });
+  }
+
+  uploadFile = () => {
+    const formData = new FormData();
+    formData.append('logo', this.state.organization_logo);
+    this.props.uploadLogo(formData);
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
   render() {
     const { classes, ...rest } = this.props;
-    
     return (
       <div>
         {/* <Header
@@ -139,7 +159,7 @@ class OrganizationRegister extends React.Component {
                                     name='organization_name'
                                     id='organization_name'
                                     placeholder='Enter a program name'
-                                    value={this.organization_name}
+                                    value={this.state.organization_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -153,8 +173,38 @@ class OrganizationRegister extends React.Component {
                                     name='organization_description'
                                     id='organization_description'
                                     placeholder='Enter a program description'
-                                    value={this.organization_description}
+                                    value={this.state.organization_description}
                                     onChange={this.handleInputs}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                {/* <InputLabel htmlFor='organization_logo'><Group /> Organization Logo</InputLabel> */}
+                                <FileInput
+                                    type='file'
+                                    name='organization_logo'
+                                    id='organization_logo'
+                                    valueFile={this.state.organization_logo}
+                                    value={this.state.organization_logo}
+                                    handleFile={this.handleFile}
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      placeholder: "Upload a program logo..."
+                                    }}
+                                    endButton={{
+                                      uploadFile: this.uploadFile,
+                                      buttonProps: {
+                                        round: true,
+                                        color: "info",
+                                        justIcon: true,
+                                        fileButton: true
+                                      },
+                                      icon: <CloudUpload />
+                                    }}
                                 />
                             </FormControl>
                         </FormGroup>
@@ -167,7 +217,7 @@ class OrganizationRegister extends React.Component {
                                     name='programUrl'
                                     id='programUrl'
                                     placeholder='Enter a program url'
-                                    value={this.programUrl}
+                                    value={this.state.programUrl}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -180,7 +230,7 @@ class OrganizationRegister extends React.Component {
                                     name='user_email'
                                     id='user_email'
                                     placeholder='Enter the user email'
-                                    value={this.user_email}
+                                    value={this.state.user_email}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -194,7 +244,7 @@ class OrganizationRegister extends React.Component {
                                     name='user_password'
                                     id='user_password'
                                     placeholder='Enter the user password'
-                                    value={this.user_password}
+                                    value={this.state.user_password}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -208,7 +258,7 @@ class OrganizationRegister extends React.Component {
                                     name='user_first_name'
                                     id='user_first_name'
                                     placeholder='Enter the user first name'
-                                    value={this.user_first_name}
+                                    value={this.state.user_first_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -222,7 +272,7 @@ class OrganizationRegister extends React.Component {
                                     name='user_last_name'
                                     id='user_last_name'
                                     placeholder='Enter the user last name'
-                                    value={this.user_last_name}
+                                    value={this.state.user_last_name}
                                     onChange={this.handleInputs}
                                 />
                             </FormControl>
@@ -235,6 +285,7 @@ class OrganizationRegister extends React.Component {
                                 color="info"
                                 className={classes.submit}
                                 onClick={this.handleSubmit}
+                                disabled={this.props.logo === null || this.props.logo === undefined}
                             >
                             Launch Program
                         </Button>
@@ -256,11 +307,15 @@ OrganizationRegister.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    logo: state.files.currentFile
+  };
 };
 
 const mapDispatchToProps = {
-  registerOrganization
+  registerOrganization,
+  uploadLogo,
+  fetchCurrentFile
 };
 
 export default connect(
