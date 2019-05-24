@@ -14,7 +14,8 @@ const styles = {
     main: {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%'
     },
     enclosingDiv: {
         display: 'flex',
@@ -66,7 +67,7 @@ class Recommended extends React.Component {
     render() {
         const { classes } = this.props;
         const {mentor, mentee} = this.props.potentialMatch;
-        console.log('potential match', this.props.potentialMatch);
+        
         return (
             <div className={classes.main}>
             <Typography variant="h4" component="h2">
