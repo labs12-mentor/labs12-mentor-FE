@@ -40,12 +40,6 @@ class ProfileInfo extends React.Component {
         history.goBack();
     }
 
-    approveHandler = e => {
-        e.preventDefault();
-        this.props.updateUser(this.props.mentor.user_id, { ...this.props.user, role: "MENTOR" });
-        history.goBack();
-    }
-
     render() {
         const { classes, user } = this.props;
         console.log(this.props.user);
@@ -73,7 +67,6 @@ class ProfileInfo extends React.Component {
                 </CardContent>}
 
                 <CardActions>
-                    <Button color="success" size="sm" onClick={e => {this.approveHandler(e)}}>Approve</Button>
                     <Button color="danger" size="sm" onClick={e => {this.denyHandler(e)}}>Deny</Button>
                 </CardActions>
             </Card>

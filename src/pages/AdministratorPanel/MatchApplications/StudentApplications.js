@@ -141,7 +141,8 @@ class StudentApplications extends React.Component {
                 id: mentee.id,
                 mentee: {},
                 mentor: {},
-                deleted: mentee.deleted
+                deleted: mentee.deleted,
+                wanted_mentor_id: mentee.wanted_mentor_id
             };
 
             matchUserInfo.mentee = this.props.users.filter(user => {

@@ -31,7 +31,8 @@ class Assignment extends React.Component {
             id: this.props.currentMentee.id,
             mentee: {},
             mentor: {},
-            deleted: false
+            deleted: false,
+            wanted_mentor_id: this.props.currentMentee.wanted_mentor_id
         };
 
         menteeUserInfo.deleted = this.props.currentMentee.deleted;
