@@ -22,15 +22,15 @@ const AppContainer = styled.div`
 `;
 
 const styles = theme => ({
-    root: {
-      marginTop: '80px',
-      display: 'flex',
-      flexDirection: 'row',
-      flexWrap: 'nowrap'
-    },
-    btn: {
-        marginTop: '20px',
-    }
+    // root: {
+    //   marginTop: '80px',
+    //   display: 'flex',
+    //   flexDirection: 'row',
+    //   flexWrap: 'nowrap'
+    // },
+    // btn: {
+    //     marginTop: '20px',
+    // }
 });
 
 
@@ -69,8 +69,8 @@ class Application extends React.Component {
         const { classes } = this.props;
         return (
             <AppContainer>
-            <div className={classes.root} >
-                <Button 
+            {/* <div className={classes.root} > */}
+                {/* <Button 
                     justIcon 
                     variant="outlined" 
                     className={classes.btn} 
@@ -79,7 +79,7 @@ class Application extends React.Component {
                     onClick={e => this.backBtnClick(e)}
                 >
                     <FirstPage />
-                </Button>
+                </Button> */}
                 <NavPills
                     color="info"
                     tabs={[
@@ -101,7 +101,7 @@ class Application extends React.Component {
                         }
                     ]}
                 />
-                </div>
+                {/* </div> */}
             </AppContainer>
         );
     }

@@ -8,15 +8,19 @@ import {
 import axios from 'axios';
 require('dotenv').config();
 
+let userLatLong = { lat: 40.748817, lng: -73.985428 };
+
 const latLongObj = () => {
     axios
         .get(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${process.env.REACT_APP_GEOCODEKEY}`)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err);
-        });
+            .then(res => {
+                console.log(res);
+                userLatLong = res.data.results[0].geometry.location;
+                console.log(userLatLong);
+            })
+            .catch(err => {
+                console.log(err);
+            });
 }
 
 const RegularMap = withScriptjs(
@@ -29,6 +33,7 @@ withGoogleMap(props => (
     }}
     >
     <Marker position={{ lat: 40.748817, lng: -73.985428 }} />
+    <Marker position={userLatLong} />
     </GoogleMap>
 ))
 );
