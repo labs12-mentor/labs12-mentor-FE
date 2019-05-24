@@ -63,7 +63,7 @@ class Application extends React.Component {
                         tabContent: (
                             <SubmittedApplication />
                         )
-                        }
+                        },
                     ]}
                 />
             </AppContainer>
