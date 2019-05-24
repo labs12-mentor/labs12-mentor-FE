@@ -119,7 +119,7 @@ class MaterialNavbar extends React.Component {
   };
 
   async componentDidMount() {
-    await this.props.getCurrentUser();
+    if(this.props.authenticated) await this.props.getCurrentUser();
   }
 
   handleProfileMenuOpen = event => {
