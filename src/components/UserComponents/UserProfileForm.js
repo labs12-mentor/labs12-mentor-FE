@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { updateUser, getCurrentUser } from "../../actions";
+import { updateUser, getCurrentUser, uploadAvatar } from "../../actions";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "../../material-components/CustomButtons/Button.jsx";
 import FormControl from "@material-ui/core/FormControl";
@@ -9,6 +9,8 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
+import FileInput from "../../material-components/CustomFileInput/CustomFileInput.jsx";
+import CloudUpload from "@material-ui/icons/CloudUpload";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -65,6 +67,7 @@ class UserProfileForm extends React.Component {
     state: "",
     zipcode: "",
     country: "",
+    avatar_url: null,
     role: "",
     github_id: "",
     github_token: "",
@@ -102,8 +105,25 @@ class UserProfileForm extends React.Component {
 
   updateUser = e => {
     e.preventDefault();
-    this.props.updateUser(this.state.id, this.state);
+    this.props.updateUser(this.state.id, {
+      ...this.state,
+      avatar_url: this.props.avatar
+    });
   };
+
+  handleFile = (e) => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      avatar_url: e.target.files[0]
+    });
+  }
+
+  uploadFile = () => {
+    const formData = new FormData();
+    formData.append('avatar', this.state.avatar_url);
+    this.props.uploadAvatar(formData);
+  }
 
   render() {
     const { classes } = this.props;
@@ -116,6 +136,36 @@ class UserProfileForm extends React.Component {
               Update Your Info
             </Typography>
             <form className={classes.form} onSubmit={this.updateUser}>
+            <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                {/* <InputLabel htmlFor='organization_logo'><Group /> Organization Logo</InputLabel> */}
+                                <FileInput
+                                    type='file'
+                                    name='avatar_url'
+                                    id='avatar_url'
+                                    valueFile={this.state.avatar_url}
+                                    value={this.state.avatar_url}
+                                    handleFile={this.handleFile}
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      placeholder: "Upload the user avatar..."
+                                    }}
+                                    endButton={{
+                                      uploadFile: this.uploadFile,
+                                      buttonProps: {
+                                        round: true,
+                                        color: "info",
+                                        justIcon: true,
+                                        fileButton: true
+                                      },
+                                      icon: <CloudUpload />
+                                    }}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
               <FormGroup row>
                 <FormControl margin="normal" required fullWidth>
                   <InputLabel>{this.state.email}</InputLabel>
@@ -211,6 +261,7 @@ class UserProfileForm extends React.Component {
                 color="info"
                 className={classes.submit}
                 onClick={this.updateUser}
+                disabled={this.props.avatar === null || this.props.avatar === undefined}
               >
                 Update
               </Button>
@@ -228,13 +279,15 @@ UserProfileForm.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.currentUser
+    user: state.auth.currentUser,
+    avatar: state.files.currentFile
   };
 };
 
 const mapDispatchToProps = {
   updateUser,
-  getCurrentUser
+  getCurrentUser,
+  uploadAvatar
 };
 
 export default connect(
