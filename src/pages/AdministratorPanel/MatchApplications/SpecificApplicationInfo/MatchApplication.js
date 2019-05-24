@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavPills from "../../../../material-components/NavPills/NavPills.jsx";
-
+import Button from "../../../../material-components/CustomButtons/Button.jsx";
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import { withStyles } from "@material-ui/core/styles"
 import { getSpecificMentee, deleteMatch, getMentees, getMatches, getMentors, getUsers } from '../../../../actions';
-
 import Recommended from './Recommended';
 import MapView from './MapView';
 import styled from 'styled-components';
@@ -14,7 +15,13 @@ const AppContainer = styled.div`
     margin: 80px auto;
 `;
 
-class Assignment extends React.Component {
+const styles = theme => ({
+    root: {
+      marginTop: '100px'
+    },
+});
+
+class MatchApplication extends React.Component {
     state = {
         activeTab: '1',
         mentees: [],
@@ -48,7 +55,6 @@ class Assignment extends React.Component {
         menteeUserInfo.mentor = this.props.users.filter(user => {
             return user.id === mentorId;
         })[0];
-        console.log(menteeUserInfo);
         
         this.setState({
             ...this.state,
@@ -68,26 +74,33 @@ class Assignment extends React.Component {
     };
 
     render() {
+        const { classes } = this.props;
         return (
             <AppContainer>
-                <NavPills
-                    color="info"
-                    tabs={[
-                        {
-                            tabButton: "Match Information",
-                            tabContent: (
-                                <Recommended potentialMatch={this.state.potentialMatchInfo} />
-                            )
-                        },
-                        {
-                            tabButton: "Match Map View",
-                            tabContent: (
-                                <div></div>
-                                // <MapView currentMatch={this.state.currentMatchInfo} />
-                            )
-                        }
-                    ]}
-                />
+                <div className={classes.root} >
+                    <h1>HEllo</h1>
+                    <Button justIcon size="sm" color={"info"}>
+                        <ArrowBack />
+                    </Button>
+
+                    <NavPills
+                        color="info"
+                        tabs={[
+                            {
+                                tabButton: "Match Information",
+                                tabContent: (
+                                    <Recommended potentialMatch={this.state.potentialMatchInfo} />
+                                )
+                            },
+                            {
+                                tabButton: "Match Map View",
+                                tabContent: (
+                                    <MapView potentialMatch={this.state.potentialMatchInfo} />
+                                )
+                            }
+                        ]}
+                    />
+                </div>
             </AppContainer>
         );
     }
@@ -119,4 +132,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Assignment);
+)(withStyles(styles)(MatchApplication));

@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const latLongObj = () => {
     axios
-        .get(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${process.env.REACT_APP_MAPKEY}`)
+        .get(`https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=${process.env.REACT_APP_GEOCODEKEY}`)
         .then(res => {
             console.log(res);
         })

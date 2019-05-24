@@ -14,7 +14,6 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
-import { thisExpression } from '@babel/types';
 
 const styles = theme => ({
     root: {
