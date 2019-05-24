@@ -1,4 +1,7 @@
 import {
+    FETCH_FILE_START,
+    FETCH_FILE_SUCCESS,
+    FETCH_FILE_FAILURE,
     UPLOAD_AVATAR_START,
     UPLOAD_AVATAR_SUCCESS,
     UPLOAD_AVATAR_FAILURE,
@@ -9,15 +12,38 @@ import {
 import axios from 'axios';
 import { API_URL } from '../constants/config';
 
+export function fetchCurrentFile() {
+    return async (dispatch) => {
+        await dispatch(request());
+        return await dispatch(success());
+    }
+
+    function request() {
+        return {
+            type: FETCH_FILE_START
+        };
+    }
+
+    function success(data) {
+        return {
+            type: FETCH_FILE_SUCCESS,
+        };
+    }
+
+    function error(err) {
+        return {
+            type: FETCH_FILE_FAILURE,
+            payload: err
+        };
+    }
+}
+
 export function uploadAvatar(avatar) {
     return async (dispatch) => {
         await dispatch(request());
 
-        const formData = new FormData();
-        formData.append('avatar', avatar);
-
         return await axios
-            .post(`${API_URL}/files/avatar`, formData, {
+            .post(`${API_URL}/files/avatar`, avatar, {
                 headers: {
                     ContentType: 'multipart/form-data',
                     Authorization: localStorage.getItem('Authorization')
@@ -61,11 +87,8 @@ export function uploadLogo(logo) {
     return async (dispatch) => {
         await dispatch(request());
 
-        const formData = new FormData();
-        formData.append('logo', logo);
-
         return await axios
-            .post(`${API_URL}/files/logo`, formData, {
+            .post(`${API_URL}/files/logo`, logo, {
                 headers: {
                     ContentType: 'multipart/form-data',
                     Authorization: localStorage.getItem('Authorization')
