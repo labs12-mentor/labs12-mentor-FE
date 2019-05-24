@@ -1,4 +1,7 @@
 import {
+    FETCH_FILE_START,
+    FETCH_FILE_SUCCESS,
+    FETCH_FILE_FAILURE,
     UPLOAD_AVATAR_START,
     UPLOAD_AVATAR_SUCCESS,
     UPLOAD_AVATAR_FAILURE,
@@ -15,6 +18,25 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case FETCH_FILE_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+
+        case FETCH_FILE_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case FETCH_FILE_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
         case UPLOAD_AVATAR_START:
             return {
                 ...state,
