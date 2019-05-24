@@ -15,7 +15,7 @@ import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import RegDetails from '../pages/RegistrationDetails';
 // import UserProfile from '../pages/UserProfile';
-import InviteForm from '../components/InvitationComponents/InviteForm';
+//import InviteForm from '../components/InvitationComponents/InviteForm';
 import MentorForm from '../components/MentorComponents/MentorForm';
 import MatchesList from '../components/MatchesComponents/MatchesList';
 import MaterialNavbar from '../components/MaterialNavBar';
@@ -84,7 +84,7 @@ const Routes = (props) => {
             <Route exact path='/user/mentorsList' component={RouteAuthNeeded(MentorsList)} />
             {/* <Route exact path="/user/admin/invite" component={Invite} /> */}
             <Route exact path='/user/mentorform' component={RouteAuthNeeded(MentorForm)} />
-            <Route exact path='/user/inviteform' component={InviteForm} />
+            {/* <Route exact path='/user/inviteform' component={InviteForm} /> */}
             <Route exact path='/user/matchlist' component={RouteAuthNeeded(MatchesList)} />
                 <Route exact path='/organization' component={RouteAuthNeeded(NewOrgsPage)} />
             <Route exact path='/user/mentorprofile' component={MentorProfile}/>
