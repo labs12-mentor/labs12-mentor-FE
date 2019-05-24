@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavPills from "../../../../material-components/NavPills/NavPills.jsx";
 import Button from "../../../../material-components/CustomButtons/Button.jsx";
-import ArrowBack from '@material-ui/icons/ArrowBack';
+import FirstPage from '@material-ui/icons/FirstPage';
 import { withStyles } from "@material-ui/core/styles"
 import { getSpecificMentee, deleteMatch, getMentees, getMatches, getMentors, getUsers } from '../../../../actions';
 import Recommended from './Recommended';
@@ -17,8 +17,15 @@ const AppContainer = styled.div`
 
 const styles = theme => ({
     root: {
-      marginTop: '100px'
+      marginTop: '80px',
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'nowrap',
+      width: '100%'
     },
+    btn: {
+        marginTop: '20px',
+    }
 });
 
 class MatchApplication extends React.Component {
@@ -76,13 +83,18 @@ class MatchApplication extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <AppContainer>
+            <AppContainer >
                 <div className={classes.root} >
-                    <h1>HEllo</h1>
-                    <Button justIcon size="sm" color={"info"}>
-                        <ArrowBack />
-                    </Button>
-
+                <Button 
+                    justIcon 
+                    variant="outlined" 
+                    className={classes.btn} 
+                    size="medium" 
+                    color="info"
+                    onClick={e => this.backBtnClick(e)}
+                >
+                    <FirstPage />
+                </Button>
                     <NavPills
                         color="info"
                         tabs={[
