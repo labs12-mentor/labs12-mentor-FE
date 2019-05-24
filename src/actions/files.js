@@ -36,7 +36,8 @@ export function uploadAvatar(avatar) {
 
     function success(data) {
         return {
-            type: UPLOAD_AVATAR_SUCCESS
+            type: UPLOAD_AVATAR_SUCCESS,
+            payload: data.imageUrl
         };
     }
 
@@ -75,7 +76,8 @@ export function uploadLogo(logo) {
 
     function success(data) {
         return {
-            type: UPLOAD_LOGO_SUCCESS
+            type: UPLOAD_LOGO_SUCCESS,
+            payload: data.imageUrl
         };
     }
 
