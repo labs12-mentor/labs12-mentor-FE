@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteMentee, createMatch } from '../../../../actions';
+import { deleteMatch, createMatch } from '../../../../actions';
 import history from '../../../../history';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -46,7 +46,7 @@ class Recommended extends React.Component {
     deleteHandler = async (e) => {
         e.preventDefault();
         
-        await this.props.deleteMentee(this.props.matchInfo.mentee_id);
+        await this.props.deleteMatch(this.props.matchInfo.id);
         history.goBack();
     }
 
@@ -150,4 +150,4 @@ class Recommended extends React.Component {
     }
 }
 
-export default connect(null, { deleteMentee, createMatch })(withStyles(styles)(Recommended));
+export default connect(null, { deleteMatch, createMatch })(withStyles(styles)(Recommended));

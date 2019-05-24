@@ -6,7 +6,7 @@ import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 import MentorApplications from './MentorApplications/MentorApplications';
 import MatchApplications from './MatchApplications/StudentApplications';
 import MentorAssignments from './MentorAssignments/MentorAssignments';
-import MatchAssignments from './Assignments/Students';
+import MatchAssignments from './MatchAssignments/MatchAssignments';
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
