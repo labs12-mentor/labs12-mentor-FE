@@ -44,7 +44,7 @@ class SectionTeam extends React.Component {
       <div className={classes.section}>
         <h2 className={classes.title}>Here is our team</h2>
         <div>
-          <GridContainer>
+          <GridContainer className={classes.justifyContentCenter}>
             <GridItem xs={12} sm={6} md={6}>
               <Card profile plain className={classes.card3}>
                 <GridContainer>
@@ -66,22 +66,17 @@ class SectionTeam extends React.Component {
                     <CardBody plain>
                       <h4 className={classes.cardTitle}>CJ Wright</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>PROGRAM MANAGER</h6>
+                        <h6 className={classes.cardCategory}>PROJECT MANAGER</h6>
                       </Muted>
-                      <p className={classes.description}>
-                        Don't be scared of the truth because we need to restart
-                        the human foundation in truth...
-                      </p>
+                      {/* <p className={classes.description}>
+                      </p> */}
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
-                      <Button justIcon simple color="twitter">
-                        <i className="fab fa-twitter" />
+                      <Button justIcon simple color="github" href={"https://github.com/cwright0428"}>
+                        <i className="fab fa-github" />
                       </Button>
-                      <Button justIcon simple color="facebook">
-                        <i className="fab fa-facebook-square" />
-                      </Button>
-                      <Button justIcon simple color="google">
-                        <i className="fab fa-google" />
+                      <Button justIcon simple color="linkedin" href={"https://www.linkedin.com/in/cj-wright/"}>
+                        <i className="fab fa-linkedin" />
                       </Button>
                     </CardFooter>
                   </GridItem>
@@ -110,25 +105,19 @@ class SectionTeam extends React.Component {
                       <h4 className={classes.cardTitle}>Jordan Spell</h4>
                       <Muted>
                         <h6 className={classes.cardCategory}>
-                          WEB DEVELOPER
+                          SOFTWARE ENGINEER
                         </h6>
                       </Muted>
-                      <p className={classes.description}>
+                      {/* <p className={classes.description}>
                         Be Happy, Don't Worry
-                      </p>
+                      </p> */}
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
-                      <Button justIcon simple color="linkedin">
-                        <i className="fab fa-linkedin-in" />
+                      <Button justIcon simple color="github" href={"https://github.com/jdspell"}>
+                        <i className="fab fa-github" />
                       </Button>
-                      <Button justIcon simple color="facebook">
-                        <i className="fab fa-facebook-square" />
-                      </Button>
-                      <Button justIcon simple color="dribbble">
-                        <i className="fab fa-dribbble" />
-                      </Button>
-                      <Button justIcon simple color="google">
-                        <i className="fab fa-google" />
+                      <Button justIcon simple color="linkedin" href={"http://www.linkedin.com/in/jordan-spell"}>
+                        <i className="fab fa-linkedin" />
                       </Button>
                     </CardFooter>
                   </GridItem>
@@ -156,63 +145,18 @@ class SectionTeam extends React.Component {
                     <CardBody plain>
                       <h4 className={classes.cardTitle}>Jor Ming Poon</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
+                        <h6 className={classes.cardCategory}>SOFTWARE ENGINEER</h6>
                       </Muted>
-                      <p className={classes.description}>
+                      {/* <p className={classes.description}>
                         Be You
-                      </p>
+                      </p> */}
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
-                      <Button justIcon simple color="youtube">
-                        <i className="fab fa-youtube" />
+                      <Button justIcon simple color="github" href={"https://github.com/jorpoon"}>
+                        <i className="fab fa-github" />
                       </Button>
-                      <Button justIcon simple color="twitter">
-                        <i className="fab fa-twitter" />
-                      </Button>
-                      <Button justIcon simple color="instagram">
-                        <i className="fab fa-instagram" />
-                      </Button>
-                    </CardFooter>
-                  </GridItem>
-                </GridContainer>
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={6}>
-              <Card profile plain className={classes.card3}>
-                <GridContainer>
-                  <GridItem xs={12} sm={5} md={5}>
-                    <CardHeader image plain>
-                      <a href="#lukas" onClick={e => e.preventDefault()}>
-                        <img src={lukas} alt="..." />
-                      </a>
-                      <div
-                        className={classes.coloredShadow}
-                        style={{
-                          backgroundImage: `url(${lukas})`,
-                          opacity: "1"
-                        }}
-                      />
-                    </CardHeader>
-                  </GridItem>
-                  <GridItem xs={12} sm={7} md={7}>
-                    <CardBody plain>
-                      <h4 className={classes.cardTitle}>Lukas Siatka</h4>
-                      <Muted>
-                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
-                      </Muted>
-                      <p className={classes.description}>
-                        Be LUKAS
-                      </p>
-                    </CardBody>
-                    <CardFooter plain className={classes.justifyContentCenter}>
-                      <Button justIcon simple color="linkedin">
-                        <i className="fab fa-linkedin-in" />
-                      </Button>
-                      <Button justIcon simple color="facebook">
-                        <i className="fab fa-facebook-square" />
-                      </Button>
-                      <Button justIcon simple color="google">
-                        <i className="fab fa-google" />
+                      <Button justIcon simple color="linkedin" href={"http://www.linkedin.com/in/jor-ming-poon"}>
+                        <i className="fab fa-linkedin" />
                       </Button>
                     </CardFooter>
                   </GridItem>
@@ -240,21 +184,18 @@ class SectionTeam extends React.Component {
                     <CardBody plain>
                       <h4 className={classes.cardTitle}>Kathryn Hampton</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
+                        <h6 className={classes.cardCategory}>SOFTWARE ENGINEER</h6>
                       </Muted>
-                      <p className={classes.description}>
+                      {/* <p className={classes.description}>
                         Be Awesome
-                      </p>
+                      </p> */}
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
-                      <Button justIcon simple color="linkedin">
-                        <i className="fab fa-linkedin-in" />
+                      <Button justIcon simple color="github" href={"https://github.com/khamp19"}>
+                        <i className="fab fa-github" />
                       </Button>
-                      <Button justIcon simple color="facebook">
-                        <i className="fab fa-facebook-square" />
-                      </Button>
-                      <Button justIcon simple color="google">
-                        <i className="fab fa-google" />
+                      <Button justIcon simple color="linkedin" href={"https://www.linkedin.com/in/kathryn-hampton/"}>
+                        <i className="fab fa-linkedin" />
                       </Button>
                     </CardFooter>
                   </GridItem>
@@ -266,13 +207,13 @@ class SectionTeam extends React.Component {
                 <GridContainer>
                   <GridItem xs={12} sm={5} md={5}>
                     <CardHeader image plain>
-                      <a href="#thomas" onClick={e => e.preventDefault()}>
-                        <img src={thomas} alt="..." />
+                      <a href="#lukas" onClick={e => e.preventDefault()}>
+                        <img src={lukas} alt="..." />
                       </a>
                       <div
                         className={classes.coloredShadow}
                         style={{
-                          backgroundImage: `url(${thomas})`,
+                          backgroundImage: `url(${lukas})`,
                           opacity: "1"
                         }}
                       />
@@ -280,23 +221,23 @@ class SectionTeam extends React.Component {
                   </GridItem>
                   <GridItem xs={12} sm={7} md={7}>
                     <CardBody plain>
-                      <h4 className={classes.cardTitle}>Thomas Folbrecht</h4>
+                      <h4 className={classes.cardTitle}>Lukas Siatka</h4>
                       <Muted>
-                        <h6 className={classes.cardCategory}>WEB DEVELOPER</h6>
+                        <h6 className={classes.cardCategory}>SOFTWARE ENGINEER</h6>
                       </Muted>
-                      <p className={classes.description}>
-                        Be Cool
-                      </p>
+                      {/* <p className={classes.description}>
+                        Be LUKAS
+                      </p> */}
                     </CardBody>
                     <CardFooter plain className={classes.justifyContentCenter}>
-                      <Button justIcon simple color="linkedin">
-                        <i className="fab fa-linkedin-in" />
+                      <Button justIcon simple color="github" href={"https://github.com/estrax"}>
+                        <i className="fab fa-github" />
                       </Button>
-                      <Button justIcon simple color="facebook">
-                        <i className="fab fa-facebook-square" />
+                      <Button justIcon simple color="linkedin" href={"https://www.linkedin.com/in/estrax/"}>
+                        <i className="fab fa-linkedin" />
                       </Button>
-                      <Button justIcon simple color="google">
-                        <i className="fab fa-google" />
+                      <Button justIcon simple color="twitter" href={"http://twitter.com/estraxofficial"}>
+                        <i className="fab fa-twitter" />
                       </Button>
                     </CardFooter>
                   </GridItem>
