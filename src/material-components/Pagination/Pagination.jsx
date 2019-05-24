@@ -8,12 +8,14 @@ import classNames from "classnames";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Button from "@material-ui/core/Button";
 
-import paginationStyle from "assets/jss/material-kit-pro-react/components/paginationStyle.jsx";
+import paginationStyle from "../../assets/jss/material-kit-pro-react/components/paginationStyle.jsx";
 
 function Pagination({ ...props }) {
   const { classes, pages, color, className } = props;
   const paginationClasses = classNames(classes.pagination, className);
   return (
+    <div>
+      <div>{console.log('props', this.props)}</div>
     <ul className={paginationClasses}>
       {pages.map((prop, key) => {
         const paginationLink = classNames({
@@ -44,6 +46,8 @@ function Pagination({ ...props }) {
         );
       })}
     </ul>
+    
+    </div>
   );
 }
 

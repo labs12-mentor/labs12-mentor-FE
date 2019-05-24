@@ -79,7 +79,8 @@ class UserProfile extends React.Component {
       menteed: [],
       matches: [],
       wanted_mentor: [],
-      value: 0
+      value: 0,
+      match_id: ""
     };
   }
 
@@ -91,27 +92,31 @@ class UserProfile extends React.Component {
     await this.props.getMentees();
     await this.props.getMatches();
     await this.setState({
+      ...this.state,
       user: this.props.user,
       menteed: this.props.mentees,
-      matches: this.props.matches
+      matches: this.props.matches,
+      isLoaded: true
     });
     let matched = await this.state.menteed.filter(id => {
       return id.user_id === this.state.user.id;
     });
+    //console.log("matched", matched)
     await this.setState({ ...this.state, wanted_mentor: matched[0] });
+    console.log("mentee",this.state.wanted_mentor)
 
-    if (this.state.wanted_mentor !== undefined) {
-      await this.setState({
-        ...this.state,
-        isLoaded: true,
-        applied: true
-      });
-    } else {
-      await this.setState({
-        ...this.state,
-        isLoaded: true
-      });
-    }
+    let connected = await this.state.matches.filter(id => {
+      return id.mentee_id === this.state.wanted_mentor.id;
+    });
+
+   //connected[0].mentor_id = 7
+    console.log("mentee connected with match table", connected[0])
+
+    if (typeof connected[0].mentor_id === "number" ) {
+      this.setState({...this.state, applied: true, match_id: connected[0].id})
+      } else {
+      this.setState({...this.state, applied: false})
+      };
   }
 
   toggleApply() {
@@ -238,7 +243,7 @@ class UserProfile extends React.Component {
                             md={3}
                             className={classes.gridItem}
                           >
-                            <MaterialSideBar />
+                            {/* <MaterialSideBar /> */}
                           </GridItem>
                         </GridContainer>
                       )
@@ -246,7 +251,7 @@ class UserProfile extends React.Component {
                     {
                       tabButton: "Meetings",
                       tabIcon: PeopleOutline,
-                      tabContent: (
+                      tabContent: this.state.applied ? (
                         <GridContainer>
                           <GridItem
                             xs={12}
@@ -261,6 +266,7 @@ class UserProfile extends React.Component {
                               <MeetingsList
                                 style={{ width: "100%" }}
                                 userId={this.state.user.id}
+                                matchId={this.state.match_id}
                                 // matches={this.state.matches}
                               />
                             </GridContainer>
@@ -274,6 +280,21 @@ class UserProfile extends React.Component {
                             <MaterialSideBar />
                           </GridItem>
                         </GridContainer>
+                      ) : (
+                        <div>
+                        <GridContainer
+                          direction="column"
+                          alignItems="center"
+                          justify="center"
+                          spacing={24}
+                        >
+                          <Card style={{ width: "50%" }}>
+                            <CardContent style={{ alignSelf: "center" }}>
+                              <Typography>Please wait to be matched</Typography>
+                            </CardContent>
+                          </Card>
+                        </GridContainer>
+                      </div>
                       )
                     },
                     {

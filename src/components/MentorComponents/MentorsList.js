@@ -1,10 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getMentors, createMentee, getUsers, getCurrentUser } from "../../actions";
+import {
+  getMentors,
+  createMentee,
+  getUsers,
+  getCurrentUser
+} from "../../actions";
 import MentorCard from "./MentorCard.js";
 import MentorForm from "./MentorForm.js";
 import { Button, Modal, ModalBody } from "reactstrap";
-
 
 import Table from "../../material-components/Table/Table.jsx";
 import PersonAdd from "@material-ui/icons/PersonAdd";
@@ -63,7 +67,9 @@ class MentorsList extends React.Component {
     e.preventDefault();
     this.props.createMentee({
       user_id: this.props.user.id,
+      //user_id: 1,
       wanted_mentor_id: this.props.mentorId,
+      //wanted_mentor_id: 7,
       deleted: false
     });
   };
@@ -93,8 +99,8 @@ class MentorsList extends React.Component {
         <div>
           <h1>You Can Only Apply To One Mentor</h1>
           <Button
-            variant="contained" 
-            color="info" 
+            variant="contained"
+            color="info"
             onClick={this.toggle}
             className={classes.button}
           >
@@ -103,39 +109,47 @@ class MentorsList extends React.Component {
 
           {this.state.isLoading ? (
             <div>
-          <Modal
-            isOpen={this.state.modal}
-            toggle={this.toggle}
-            className={this.props.className}
-            external={externalCloseBtn}
-          >
-            <ModalBody>
-              <MentorForm 
-              userId={this.props.user.id}
-              />
-            </ModalBody>
-          </Modal>
+              <Modal
+                isOpen={this.state.modal}
+                toggle={this.toggle}
+                className={this.props.className}
+                external={externalCloseBtn}
+              >
+                <ModalBody>
+                  <MentorForm userId={this.props.user.id} />
+                </ModalBody>
+              </Modal>
 
-          
-                <Table
-                  tableData={mentorUserInfo.map((mentor, index) => {
-                    return ([
-                        <p className={classes.cardTitle}>{`${mentor.first_name} ${mentor.last_name}`}</p>,
-                        <div className={classes.buttonGroup} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                          <Button
-                            //justicon
-                            color="info"
-                            size="sm"
-                            style={{ marginLeft: 30, marginRight: 10 }}
-                            onClick={e => { this.apply(e,mentor.id); }}
-                          >
-                            <PersonAdd style={{ fontSize: 25 }} />
-                          </Button>
-                        </div>
-                    ])
-                  })}
-                />
-                </div>
+              <Table
+                tableData={mentorUserInfo.map((mentor, index) => {
+                  return [
+                    <p
+                      style={{
+                        fontSize: "1.3rem",
+                        lineHeight: "5vh"
+                      }}
+                      className={classes.cardTitle}
+                    >{`${mentor.first_name} ${mentor.last_name}`}</p>,
+                    <div
+                      className={classes.buttonGroup}
+                      style={{ display: "flex", justifyContent: "flex-end" }}
+                    >
+                      <Button
+                        //justicon
+                        color="info"
+                        size="sm"
+                        style={{ marginLeft: 30, marginRight: 10 }}
+                        onClick={e => {
+                          this.apply(e, mentor.id);
+                        }}
+                      >
+                        <PersonAdd style={{ fontSize: 25 }} />
+                      </Button>
+                    </div>
+                  ];
+                })}
+              />
+            </div>
           ) : (
             <h3>Loading</h3>
           )}

@@ -45,6 +45,7 @@ class ExperienceForm extends React.Component {
           width: "100%",
           textAlign: "center"}}
         >
+        <form onSubmit={this.updateAnExperience}>
         <FormGroup row>
           <FormControl margin="normal" required fullWidth>
             <InputLabel> Experience</InputLabel>
@@ -62,10 +63,12 @@ class ExperienceForm extends React.Component {
             Cancel
           </Button> */}
         </FormGroup>
+        </form>
         </div>
       );
     } else {
       return (
+        <form onSubmit={this.createAnExperience}>
         <FormGroup row
         style={{
           textAlign: "center"
@@ -83,10 +86,11 @@ class ExperienceForm extends React.Component {
           <Button onClick={this.createAnExperience} color="info">
             Add
           </Button>
-          <Button onClick={this.props.handleClose} color="info">
+          <Button onClick={this.props.handleClose} color="danger">
             Cancel
           </Button>
         </FormGroup>
+        </form>
       );
     }
   }
