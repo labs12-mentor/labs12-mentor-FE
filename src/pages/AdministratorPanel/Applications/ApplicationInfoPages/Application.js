@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavPills from "../../../../material-components/NavPills/NavPills.jsx";
+import Button from "../../../material-components/CustomButtons/Button.jsx";
 
 import { getSpecificUser } from '../../../../actions';
 
