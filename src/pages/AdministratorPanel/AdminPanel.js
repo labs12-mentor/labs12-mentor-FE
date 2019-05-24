@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
 import MentorApplications from './MentorApplications/MentorApplications';
-import MatchApplications from './Applications/StudentApplications';
+import MatchApplications from './MatchApplications/StudentApplications';
 import MentorAssignments from './Assignments/Mentors';
 import MatchAssignments from './Assignments/Students';
 
