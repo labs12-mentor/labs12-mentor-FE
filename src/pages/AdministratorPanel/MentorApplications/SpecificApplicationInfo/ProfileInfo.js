@@ -12,6 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Button from "../../../../material-components/CustomButtons/Button.jsx";
+import temp from "../../../../assets/img/1024px-No_image_available.png.png"
 
 const styles = {
     card: {
@@ -57,18 +58,25 @@ class ProfileInfo extends React.Component {
                     <Typography variant="h4" component="h2">
                         {`${user.first_name} ${user.last_name}`}
                     </Typography>
-
-                    <Typography variant="h6" component="h2" className={classes.email}>
-                        {`${user.email}`}
-                    </Typography>
-                    <div className={classes.address}>
-                        <Typography variant="h6" component="h2" >
-                            {`${user.street}, ${user.city},`}
-                        </Typography>
-                
-                        <Typography variant="h6" component="h2">
-                            {`${user.state}, ${user.zipcode}, ${user.country}`}
-                        </Typography>
+                    
+                    <div  style={{display: 'flex'}}>
+                        <div>
+                            <Typography variant="h6" component="h2" className={classes.email}>
+                                {`${user.email}`}
+                            </Typography>
+                            <div className={classes.address}>
+                                <Typography variant="h6" component="h2" >
+                                    {`${user.street}, ${user.city},`}
+                                </Typography>
+                        
+                                <Typography variant="h6" component="h2">
+                                    {`${user.state}, ${user.zipcode}, ${user.country}`}
+                                </Typography>
+                            </div>
+                        </div>
+                        <div style={{marginLeft:"auto"}}>
+                            <img src={temp} alt="placeholder" height="150px" width="150px" />
+                        </div>
                     </div>
                 </CardContent>}
 
