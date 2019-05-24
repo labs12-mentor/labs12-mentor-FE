@@ -105,18 +105,26 @@ class UserProfile extends React.Component {
     await this.setState({ ...this.state, wanted_mentor: matched[0] });
     console.log("mentee",this.state.wanted_mentor)
 
-    let connected = await this.state.matches.filter(id => {
-      return id.mentee_id === this.state.wanted_mentor.id;
-    });
+    let connected;
+    if(this.state.wanted_mentor !== undefined && this.state.wanted_mentor !== null){
+      connected = await this.state.matches.filter(id => {
+        return id.mentee_id === this.state.wanted_mentor.id;
+      });
+    } else {
+      connected = [];
+    }
 
    //connected[0].mentor_id = 7
     console.log("mentee connected with match table", connected[0])
-
-    if (typeof connected[0].mentor_id === "number" ) {
-      this.setState({...this.state, applied: true, match_id: connected[0].id})
+    if(connected[0] !== undefined){
+      if (typeof connected[0].mentor_id === "number" ) {
+        this.setState({...this.state, applied: true, match_id: connected[0].id})
       } else {
-      this.setState({...this.state, applied: false})
+        this.setState({...this.state, applied: false})
       };
+    } else {
+      this.setState({...this.state, applied: false})
+    };
   }
 
   toggleApply() {
@@ -178,8 +186,8 @@ class UserProfile extends React.Component {
                   <div className={classes.profile}>
                     <div>
                       <img
-                        src={ProfilePic}
-                        alt="..."
+                        src={this.state.user.avatar_url}
+                        alt={`${this.state.user.first_name} ${this.state.user.last_name}`}
                         className={imageClasses}
                       />
                     </div>
@@ -187,7 +195,7 @@ class UserProfile extends React.Component {
                       <h3 className={classes.title}>{`${
                         this.state.user.first_name
                       } ${this.state.user.last_name}`}</h3>
-                      <h6>DESIGNER</h6>
+                      <h6>{this.state.user.role}</h6>
                       <Button
                         justIcon
                         simple
@@ -355,7 +363,7 @@ UserProfile.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.currentUser || {},
+    user: state.auth.currentUser || { avatar_url: ProfilePic},
     mentees: state.mentees.mentees,
     matches: state.matches.matches
   };
