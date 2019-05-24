@@ -33,6 +33,25 @@ export default (state = initialState, action) => {
                 error: action.payload
             };
 
+        case UPLOAD_LOGO_START:
+            return {
+                ...state,
+                isFetching: true
+            };
+    
+        case UPLOAD_LOGO_SUCCESS:
+            return {
+                ...state,
+                isFetching: false
+            };
+
+        case UPLOAD_LOGO_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                error: action.payload
+            };
+
         default:
             return state;
     }
