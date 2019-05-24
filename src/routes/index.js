@@ -3,7 +3,6 @@ import { Router, Route } from 'react-router-dom';
 import RouteAuthNeeded from '../hoc/RouteAuthNeeded';
 import RouteNoAuthNeeded from '../hoc/RouteNoAuthNeeded';
 
-import HomePage from '../pages/HomePage';
 // import OrganizationRegister from '../pages/OrganizationRegister';
 // import OrganizationDetails from '../pages/OrganizationDetails';
 import NewOrgsPage from '../pages/OrgsPage/NewOrgsPage.jsx';
@@ -12,11 +11,6 @@ import UserRegistration from '../components/MaterialUserRegistration';
 // import UserLogin from '../pages/UserLogin';
 // import SignIn from '../pages/MaterialLogIn';
 import Notifications from '../pages/NotificationsView';
-// import AdminPanel from '../pages/AdminPanel/AdminPanel';
-import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
-import MeetingsPage from '../pages/MeetingsPage';
-import Application from '../pages/AdministratorPanel/Applications/ApplicationInfoPages/Application';
-import Assignment from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/Assignment';
 import ExperienceList from '../components/ExperiencesComponents/ExperienceList';
 import MentorsList from '../components/MentorComponents/MentorsList';
 import RegDetails from '../pages/RegistrationDetails';
@@ -27,17 +21,23 @@ import MatchesList from '../components/MatchesComponents/MatchesList';
 import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
+//ADMINISTRATOR PANEL
+import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
+import MentorApplication from '../pages/AdministratorPanel/MentorApplications/SpecificApplicationInfo/Application';
+import MatchApplication from '../pages/AdministratorPanel/MatchApplications/SpecificApplicationInfo/MatchApplication';
+import MentorAssignment from '../pages/AdministratorPanel/MentorAssignments/SpecificAssignmentInfo/Assignment';
+import MatchAssignment from '../pages/AdministratorPanel/MatchAssignments/SpecificAssignmentInfo/MatchAssignment';
+// import AdminPanel from '../pages/AdminPanel/AdminPanel';
+import MeetingsPage from '../pages/MeetingsPage';
+// import MentorAssignment from '../pages/AdministratorPanel/MentorAssignments/MentorAssignments';
+// import Application from '../pages/AdministratorPanel/Applications/ApplicationInfoPages/Application';
+// import MatchAssignment from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchAssignment';
+// import MatchApplication from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchApplication';
+
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import UserProfile from '../components/MaterialIUserProfile';
-// import table from '../components/ExperiencesComponents/table';
-import shoppingcart from '../pages/ShoppingCart';
-
-import materialtable from '../pages/AdministratorPanel/MaterialTable';
-import NavBar from '../components/newNav';
-
-import UserModal from '../components/UserComponents/UserModal'
 import InvitationForm from '../pages/Invitations/InvitationForm';
 
 const Routes = (props) => {
@@ -61,13 +61,23 @@ const Routes = (props) => {
             <Route exact path='/user/admin/invite' component={RouteAuthNeeded(InvitationForm)} />
             <Route
                 exact
-                path='/user/admin/mentor/:id'
-                component={RouteAuthNeeded(Application)}
+                path='/user/admin/mentor-application/:id'
+                component={RouteAuthNeeded(MentorApplication)}
             />
             <Route
                 exact
-                path='/user/admin/match/:id'
-                component={RouteAuthNeeded(Assignment)}
+                path='/user/admin/match-application/:id'
+                component={RouteAuthNeeded(MatchApplication)}
+            />
+            <Route
+                exact
+                path='/user/admin/mentor-assignment/:id'
+                component={RouteAuthNeeded(MentorAssignment)}
+            />
+            <Route
+                exact
+                path='/user/admin/match-assignment/:id'
+                component={RouteAuthNeeded(MatchAssignment)}
             />
             <Route exact path='/user/meetings' component={RouteAuthNeeded(MeetingsPage)} />
             <Route exact path='/user/experiences' component={RouteAuthNeeded(ExperienceList)} />

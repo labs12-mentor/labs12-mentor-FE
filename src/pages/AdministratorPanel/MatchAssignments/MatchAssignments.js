@@ -58,7 +58,7 @@ class StudentAssignments extends React.Component {
         await this.props.getMentors();
         await this.props.getMentees();
         await this.props.getMatches();
-
+        
         const matchUserInfo = this.props.matches.map(match => {
             let userInfo = {
                 id: match.id,

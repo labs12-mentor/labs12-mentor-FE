@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteMatch } from '../../../../actions';
+import { deleteMatch, createMatch } from '../../../../actions';
 import history from '../../../../history';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -46,14 +46,14 @@ class Recommended extends React.Component {
     deleteHandler = async (e) => {
         e.preventDefault();
         
-        await this.props.deleteMatch(this.props.potentialMatch.id);
-        history.push('/user/admin/panel');
+        await this.props.deleteMatch(this.props.matchInfo.id);
+        history.goBack();
     }
 
     render() {
         const { classes } = this.props;
-        const {mentor, mentee} = this.props.potentialMatch;
-        console.log('potential match', this.props.potentialMatch);
+        const { mentor, mentee } = this.props.matchInfo;
+        console.log('potential match', this.props.matchInfo);
         return (
             <div className={classes.main}>
             <Typography variant="h4" component="h2">
@@ -137,12 +137,6 @@ class Recommended extends React.Component {
                 mentee && 
                 (
                 <div>
-                    <Button 
-                    className={classes.btn} 
-                    color="success" 
-                    size="lg" 
-                    onClick={e => this.deleteHandler(e)}
-                >Approve</Button>
                 <Button 
                     className={classes.btn} 
                     color="danger" 
@@ -156,4 +150,4 @@ class Recommended extends React.Component {
     }
 }
 
-export default connect(null, { deleteMatch })(withStyles(styles)(Recommended));
+export default connect(null, { deleteMatch, createMatch })(withStyles(styles)(Recommended));

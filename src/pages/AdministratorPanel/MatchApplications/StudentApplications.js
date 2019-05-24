@@ -14,6 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Input from '@material-ui/core/Input';
+import { thisExpression } from '@babel/types';
 
 const styles = theme => ({
     root: {
@@ -44,7 +45,7 @@ class StudentApplications extends React.Component {
         mentees: [],
         mentors: [],
         users: [],
-        matches: [],
+        potentialMatches: [],
         searchBarContents: ''
     }
 
@@ -54,32 +55,44 @@ class StudentApplications extends React.Component {
         await this.props.getMentees();
         await this.props.getMatches();
         
-        const existingMenteeInfo = this.props.mentees.map(mentee => {
-            const alteredUser = this.props.users.filter(user => {                
+        const existingMentees = this.props.mentees.filter(mentee => {
+            return mentee.status === "AVAILABLE" && mentee.deleted === false;
+        });
+
+        let potentialMatchInfo = existingMentees.map(mentee => {
+            let matchUserInfo = {
+                id: mentee.id,
+                mentee: {},
+                mentor: {},
+                deleted: mentee.deleted,
+                wanted_mentor_id: mentee.wanted_mentor_id
+            };
+
+            matchUserInfo.mentee = this.props.users.filter(user => {
                 return user.id === mentee.user_id;
             })[0];
-            
-            alteredUser.status = mentee.status;
-            alteredUser.wanted_mentor_id = mentee.wanted_mentor_id;
-            alteredUser.mentee_id = mentee.id;
-            alteredUser.mentee_deleted = mentee.deleted;
-            return alteredUser;
-        }).filter(mentee => {
-            return mentee.status === "AVAILABLE" && mentee.mentee_deleted === false;
+
+            const mentorUserId = this.props.mentors.filter(mentor => {
+                return mentor.id === mentee.wanted_mentor_id;
+            })[0].user_id;
+
+            matchUserInfo.mentor = this.props.users.filter(user => {
+                return mentorUserId === user.id;
+            })[0];
+
+            return matchUserInfo;
         });
 
         this.setState({
             ...this.state,
             users: this.props.users,
-            matches: this.props.matches,
-            mentees: existingMenteeInfo,
+            potentialMatches: potentialMatchInfo,
+            mentees: existingMentees,
             mentors: this.props.mentors
         });
     }
 
-    routeOnClick(id, mentee) {
-        console.log('clicked mentee', mentee);
-        console.log('clicked mentee info', this.props.mentees.filter(mentee => (mentee.id === id)));
+    routeOnClick(id) {
         history.push(`/user/admin/match-application/${id}`);
     }
 
@@ -93,49 +106,66 @@ class StudentApplications extends React.Component {
 
     filterBySearch = () => {
         const searchInput = this.state.searchBarContents.toLowerCase();
-        let filteredUsers = this.state.mentees.filter((mentee) => {
+        let filteredUsers = this.state.potentialMatches.filter(match => {
             return (
-                mentee.last_name.toLowerCase().includes(searchInput) ||
-                mentee.first_name.toLowerCase().includes(searchInput) ||
-                mentee.email.toLowerCase().includes(searchInput)
+                match.mentee.last_name.toLowerCase().includes(searchInput) ||
+                match.mentee.first_name.toLowerCase().includes(searchInput) ||
+                match.mentee.email.toLowerCase().includes(searchInput)
             );
         });
 
         return filteredUsers;
     };
 
-    clickHandler = async (e, mentorId, mentee, status) => {
+    clickHandler = async (e, mentorId, menteeId, status, match) => {
         e.preventDefault();
 
         if(status === "approved"){
             await this.props.createMatch({
                 mentor_id: mentorId,
-                mentee_id: mentee.mentee_id,
-                deleted: false,
+                mentee_id: menteeId,
+                status: "AVAILABLE"
             });
             await this.props.getMentees();
         } else if(status === "denied") {
-            await this.props.deleteMentee(mentee.mentee_id);
+            await this.props.deleteMentee(menteeId);
             await this.props.getMentees();
         }
+        
+        const existingMentees = this.props.mentees.filter(mentee => {
+            return mentee.status === "AVAILABLE" && mentee.deleted === false;
+        });
 
-        const existingMenteeInfo = this.props.mentees.map(mentee => {
-            const alteredUser = this.props.users.filter(user => {                
+        let potentialMatchInfo = existingMentees.map(mentee => {
+            let matchUserInfo = {
+                id: mentee.id,
+                mentee: {},
+                mentor: {},
+                deleted: mentee.deleted,
+                wanted_mentor_id: mentee.wanted_mentor_id
+            };
+
+            matchUserInfo.mentee = this.props.users.filter(user => {
                 return user.id === mentee.user_id;
             })[0];
-            
-            alteredUser.status = mentee.status;
-            alteredUser.wanted_mentor_id = mentee.wanted_mentor_id;
-            alteredUser.mentee_id = mentee.id;
-            alteredUser.mentee_deleted = mentee.deleted;
-            return alteredUser;
-        }).filter(mentee => {
-            return mentee.status === "AVAILABLE" && mentee.mentee_deleted === false;
+
+            const mentorUserId = this.props.mentors.filter(mentor => {
+                return mentor.id === mentee.wanted_mentor_id;
+            })[0].user_id;
+
+            matchUserInfo.mentor = this.props.users.filter(user => {
+                return mentorUserId === user.id;
+            })[0];
+
+            return matchUserInfo;
         });
 
         this.setState({
             ...this.state,
-            mentees: existingMenteeInfo
+            users: this.props.users,
+            potentialMatches: potentialMatchInfo,
+            mentees: this.props.mentees,
+            mentors: this.props.mentors
         });
 
     }
@@ -172,22 +202,22 @@ class StudentApplications extends React.Component {
                     "Desired Mentor",
                     "",
                     ]}
-                    tableData={this.filterBySearch().map((mentee, index)=> {
+                    tableData={this.filterBySearch().map((match, index)=> {
                         return (
                             [
                                 ' ',
-                                mentee.last_name, 
-                                mentee.first_name,
-                                mentee.email,
-                                this.props.users.filter(user => {return user.id === mentee.wanted_mentor_id}).map(user => {return user.first_name + " " + user.last_name}),
+                                match.mentee.last_name, 
+                                match.mentee.first_name,
+                                match.mentee.email,
+                                `${match.mentor.first_name} ${match.mentor.last_name}`,
                                 [
-                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentee.id, mentee)} >
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(match.id)} >
                                         <Person />
                                     </Button>,
-                                    <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee, "approved")} >
+                                    <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, match.wanted_mentor_id, match.id, "approved", match)} >
                                         <Done />
                                     </Button>,
-                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee, "denied")} >
+                                    <Button justIcon size="sm" color={"danger"} onClick={e => this.clickHandler(e, match.wanted_mentor_id, match.id, "denied", match)} >
                                         <Close />
                                     </Button>
                                 ]
