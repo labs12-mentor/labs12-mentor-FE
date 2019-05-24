@@ -13,8 +13,11 @@ export function uploadAvatar(avatar) {
     return async (dispatch) => {
         await dispatch(request());
 
+        const formData = new FormData();
+        formData.append('avatar', avatar);
+
         return await axios
-            .post(`${API_URL}/files/avatar`, avatar)
+            .post(`${API_URL}/files/avatar`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
@@ -53,8 +56,11 @@ export function uploadLogo(logo) {
     return async (dispatch) => {
         await dispatch(request());
 
+        const formData = new FormData();
+        formData.append('logo', logo);
+
         return await axios
-            .post(`${API_URL}/files/logo`, logo)
+            .post(`${API_URL}/files/logo`, formData, {headers: {'Content-Type': 'multipart/form-data'}})
             .then(async (res) => {
                 if (res.status === 200) {
                     return await dispatch(success(res.data));
