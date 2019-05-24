@@ -9,6 +9,7 @@ import {
 
 const initialState = {
     isFetching: false,
+    currentFile: null,
     error: null
 };
 
@@ -23,13 +24,15 @@ export default (state = initialState, action) => {
         case UPLOAD_AVATAR_SUCCESS:
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                currentFile: action.payload
             };
 
         case UPLOAD_AVATAR_FAILURE:
             return {
                 ...state,
                 isFetching: false,
+                currentFile: null,
                 error: action.payload
             };
 
@@ -42,13 +45,15 @@ export default (state = initialState, action) => {
         case UPLOAD_LOGO_SUCCESS:
             return {
                 ...state,
-                isFetching: false
+                isFetching: false,
+                currentFile: action.payload
             };
 
         case UPLOAD_LOGO_FAILURE:
             return {
                 ...state,
                 isFetching: false,
+                currentFile: null,
                 error: action.payload
             };
 
