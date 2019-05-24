@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import auth from './auth';
 import contact from './contact';
 import experiences from './experiences';
+import files from './files';
 import invitations from './invitations';
 import matches from './matches';
 import meetings from './meetings';
@@ -16,6 +17,7 @@ export default combineReducers({
     auth,
     contact,
     experiences,
+    files,
     invitations,
     matches,
     meetings,

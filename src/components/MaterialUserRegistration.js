@@ -8,7 +8,9 @@ import Timeline from "@material-ui/icons/Timeline";
 import Code from "@material-ui/icons/Code";
 import Group from "@material-ui/icons/Group";
 import Face from "@material-ui/icons/Face";
+import CloudUpload from "@material-ui/icons/CloudUpload";
 // core components
+import FileInput from "../material-components/CustomFileInput/CustomFileInput.jsx";
 import GridContainer from "../material-components/Grid/GridContainer.jsx";
 import GridItem from "../material-components/Grid/GridItem.jsx";
 import Button from "../material-components/CustomButtons/Button.jsx";
@@ -27,7 +29,7 @@ import signupPageStyle from '../assets/jss/material-kit-pro-react/views/signUpPa
 // import image from "../assets/img/bg7.jpg";
 import image from '../assets/img/sergio-souza-1318950-unsplash.jpg';
 
-import { registerUser, getSpecificInvitation, getSpecificOrganization } from '../actions';
+import { registerUser, getSpecificInvitation, getSpecificOrganization, uploadAvatar } from '../actions';
 
 import OAuthContainer from '../containers/OAuthContainer';
 import io from 'socket.io-client';
@@ -48,7 +50,8 @@ class UserRegistration extends React.Component {
       user_city: '',
       user_state: '',
       user_zipcode: '',
-      user_country: ''
+      user_country: '',
+      user_avatar_url: ''
     };
   }
 
@@ -65,11 +68,26 @@ class UserRegistration extends React.Component {
       this.props.registerUser(this.props.match.params.id,
           {
             ...this.state,
+            user_avatar_url: this.props.avatar,
             organization_id: this.props.invitation.organization_id,
             role: this.props.invitation.role
           }
       );
   };
+
+  handleFile = (e) => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      avatar_url: e.target.files[0]
+    });
+  }
+
+  uploadFile = () => {
+    const formData = new FormData();
+    formData.append('avatar', this.state.avatar_url);
+    this.props.uploadAvatar(formData);
+  }
 
   async componentDidMount() {
     window.scrollTo(0, 0);
@@ -126,6 +144,35 @@ class UserRegistration extends React.Component {
                         <OAuthContainer registerMode={true} invitation_id={this.props.match.params.id} provider={provider} socket={socket} />
                         <form className={classes.form} onSubmit={this.handleSubmit}>
                         
+                        <FormGroup row>
+                            <FormControl margin='normal' required fullWidth>
+                                <FileInput
+                                    type='file'
+                                    name='avatar_url'
+                                    id='avatar_url'
+                                    valueFile={this.state.avatar_url}
+                                    value={this.state.avatar_url}
+                                    handleFile={this.handleFile}
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      placeholder: "Upload the user avatar..."
+                                    }}
+                                    endButton={{
+                                      uploadFile: this.uploadFile,
+                                      buttonProps: {
+                                        round: true,
+                                        color: "info",
+                                        justIcon: true,
+                                        fileButton: true
+                                      },
+                                      icon: <CloudUpload />
+                                    }}
+                                />
+                            </FormControl>
+                        </FormGroup>
+
                         <FormGroup row>
                             <FormControl margin='normal' required fullWidth>
                                 <InputLabel htmlFor='user_first_name'><Group /> First name</InputLabel>
@@ -259,6 +306,7 @@ class UserRegistration extends React.Component {
                                 color="info"
                                 className={classes.submit}
                                 onClick={this.handleSubmit}
+                                disabled={this.props.avatar === null || this.props.avatar === undefined}
                             >
                             Join {this.props.organization.name}
                         </Button>
@@ -288,14 +336,16 @@ const mapStateToProps = (state) => {
             : { organization_id: -1, role: 'USER' },
         organization: state.organizations.currentOrganization
             ? state.organizations.currentOrganization
-            : { name: '' }
+            : { name: '' },
+        avatar: state.files.currentFile
     };
 };
 
 const mapDispatchToProps = {
   registerUser,
   getSpecificInvitation,
-  getSpecificOrganization
+  getSpecificOrganization,
+  uploadAvatar
 };
 
 export default connect(
