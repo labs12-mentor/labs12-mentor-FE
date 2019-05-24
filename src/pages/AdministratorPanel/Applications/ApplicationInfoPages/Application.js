@@ -45,10 +45,11 @@ class Application extends React.Component {
                         {
                         tabButton: "Profile Information",
                         tabContent: (
-                            <ProfileInfo
-                                menteeId={this.props.match.params.id}
-                                currentUser={this.state.currentUser}
-                            />
+                            <div></div>
+                            // <ProfileInfo
+                            //     menteeId={this.props.match.params.id}
+                            //     currentUser={this.state.currentUser}
+                            // />
                         )
                         },
                         {

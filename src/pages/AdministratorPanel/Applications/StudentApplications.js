@@ -77,8 +77,10 @@ class StudentApplications extends React.Component {
         });
     }
 
-    routeOnClick(id) {
-        history.push(`/user/admin/match/${id}`);
+    routeOnClick(id, mentee) {
+        console.log('clicked mentee', mentee);
+        console.log('clicked mentee info', this.props.mentees.filter(mentee => (mentee.id === id)));
+        history.push(`/user/admin/match-application/${id}`);
     }
 
     changeHandler = (e) => {
@@ -179,7 +181,7 @@ class StudentApplications extends React.Component {
                                 mentee.email,
                                 this.props.users.filter(user => {return user.id === mentee.wanted_mentor_id}).map(user => {return user.first_name + " " + user.last_name}),
                                 [
-                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentee.id)} >
+                                    <Button justIcon size="sm" color={"info"} onClick={() => this.routeOnClick(mentee.id, mentee)} >
                                         <Person />
                                     </Button>,
                                     <Button justIcon size="sm" color={"success"} onClick={e => this.clickHandler(e, mentee.wanted_mentor_id, mentee, "approved")} >
