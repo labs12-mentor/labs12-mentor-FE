@@ -197,6 +197,9 @@ class SectionTeam extends React.Component {
                       <Button justIcon simple color="linkedin" href={"https://www.linkedin.com/in/kathryn-hampton/"}>
                         <i className="fab fa-linkedin" />
                       </Button>
+                      <Button justIcon simple color="info" href={"https://www.kathryn-hampton.com"}>
+                        <i className="fa fa-globe" />
+                      </Button>
                     </CardFooter>
                   </GridItem>
                 </GridContainer>
