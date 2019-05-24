@@ -22,13 +22,16 @@ import MaterialNavbar from '../components/MaterialNavBar';
 import MentorProfile from '../components/MentorComponents/MentorProfile';
 
 //ADMINISTRATOR PANEL
-import MentorApplication from '../pages/AdministratorPanel/MentorApplications/SpecificApplicationInfo/Application';
-// import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import AdministratorPanel from '../pages/AdministratorPanel/AdminPanel';
+import MentorApplication from '../pages/AdministratorPanel/MentorApplications/SpecificApplicationInfo/Application';
+import MatchApplication from '../pages/AdministratorPanel/MatchApplications/SpecificApplicationInfo/MatchApplication';
+import MentorAssignment from '../pages/AdministratorPanel/MentorAssignments/SpecificAssignmentInfo/Assignment';
+// import AdminPanel from '../pages/AdminPanel/AdminPanel';
 import MeetingsPage from '../pages/MeetingsPage';
-import Application from '../pages/AdministratorPanel/Applications/ApplicationInfoPages/Application';
+// import MentorAssignment from '../pages/AdministratorPanel/MentorAssignments/MentorAssignments';
+// import Application from '../pages/AdministratorPanel/Applications/ApplicationInfoPages/Application';
 import MatchAssignment from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchAssignment';
-import MatchApplication from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchApplication';
+// import MatchApplication from '../pages/AdministratorPanel/Assignments/AssignmentInfoPages/MatchApplication';
 
 import OrganizationRegister from '../components/MaterialSignUp';
 import UserLogin from '../components/MaterialLogin';
@@ -65,11 +68,11 @@ const Routes = (props) => {
                 path='/user/admin/match-application/:id'
                 component={RouteAuthNeeded(MatchApplication)}
             />
-            {/* <Route
+            <Route
                 exact
-                path='/user/admin/mentor/:id'
-                component={RouteAuthNeeded(Application)}
-            /> */}
+                path='/user/admin/mentor-assignment/:id'
+                component={RouteAuthNeeded(MentorAssignment)}
+            />
             <Route
                 exact
                 path='/user/admin/match-assignment/:id'
