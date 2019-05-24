@@ -94,7 +94,7 @@ class Assignment extends React.Component {
         const { classes } = this.props;
         return (
             <AppContainer>
-                <div className={classes.root} >
+                {/* <div className={classes.root} >
                 <Button 
                     justIcon 
                     variant="outlined" 
@@ -104,7 +104,7 @@ class Assignment extends React.Component {
                     onClick={e => this.backBtnClick(e)}
                 >
                     <FirstPage />
-                </Button>
+                </Button> */}
                 <NavPills
                     color="info"
                     tabs={[
@@ -123,7 +123,7 @@ class Assignment extends React.Component {
                         }
                     ]}
                 />
-            </div>
+            {/* </div> */}
             </AppContainer>
         );
     }
