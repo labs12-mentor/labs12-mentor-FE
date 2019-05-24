@@ -70,7 +70,7 @@ class StudentApplications extends React.Component {
             matchUserInfo.mentee = this.props.users.filter(user => {
                 return user.id === mentee.user_id;
             })[0];
-
+            
             const mentorUserId = this.props.mentors.filter(mentor => {
                 return mentor.id === mentee.wanted_mentor_id;
             })[0].user_id;
