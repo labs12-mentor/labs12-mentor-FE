@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getUsers, getMentees, getMentors, getMatches } from '../../actions';
 
-import MentorApplications from './Applications/MentorApplications';
-import MatchApplications from './Applications/StudentApplications';
-import MentorAssignments from './Assignments/Mentors';
-import MatchAssignments from './Assignments/Students';
+import MentorApplications from './MentorApplications/MentorApplications';
+import MatchApplications from './MatchApplications/StudentApplications';
+import MentorAssignments from './MentorAssignments/MentorAssignments';
+import MatchAssignments from './MatchAssignments/MatchAssignments';
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
