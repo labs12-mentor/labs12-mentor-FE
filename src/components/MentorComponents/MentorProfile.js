@@ -5,7 +5,9 @@ import {
   getMatches,
   getMentees,
   getCurrentUser,
-  getSpecificMentor
+  getSpecificMentor,
+  getMentors,
+  getSpecificMentee
 } from "../../actions";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -72,7 +74,9 @@ class MentorProfile extends React.Component {
       matches: [],
       wanted_mentor: [],
       mentor: [],
-      profile: []
+      profile: [],
+      matchedMentee: [],
+      specificMentee: []
     };
   }
 
@@ -80,48 +84,101 @@ class MentorProfile extends React.Component {
     await this.props.getCurrentUser();
     await this.props.getMentees();
     await this.props.getMatches();
+    await this.props.getMentors();
     this.setState({
       ...this.state,
       isLoaded: true,
       user: this.props.user,
       menteed: this.props.mentees,
-      matches: this.props.matches
-    });
-    
-    const applied = await this.state.menteed.filter(id => {
-      return id.user_id === this.state.user.id;
+      matches: this.props.matches,
+      matchedMentee: this.props.matchedMentee
     });
 
-   //console.log("current user", this.state.user)
+    //console.log(this.state.matchedMentee)
+    if (this.state.user.role === "MENTOR") {
+      const applied = await this.state.matchedMentee.filter(id => {
+        return id.user_id === this.state.user.id;
+      });
 
-    await this.setState({ ...this.state, wanted_mentor: applied[0] });
-     console.log("mentee table", this.state.wanted_mentor);
+      await this.setState({ ...this.state, wanted_mentor: applied[0] });
+
+      //console.log(applied)
+
+      let connected = await this.state.matches.filter(id => {
+        return id.mentor_id === this.state.wanted_mentor.id;
+      });
+
+      if (typeof connected[0].mentee_id === "number") {
+        await this.props.getSpecificMentee(connected[0].mentee_id);
+        await this.setState({
+          ...this.state,
+          specificMentee: this.props.specificMentee
+        });
+        await this.props.getSpecificUser(this.state.specificMentee.user_id);
+        await this.setState({ ...this.state, profile: this.props.profile });
+      } 
+      // else {
+      //   await this.setState({ ...this.state, mentor: 0 });
+      // }
+    } else {
+      const applied = await this.state.menteed.filter(id => {
+        return id.user_id === this.state.user.id;
+      });
+
+      //console.log("current user", this.state.user)
+
+      await this.setState({ ...this.state, wanted_mentor: applied[0] });
+      console.log("mentee table", this.state.wanted_mentor);
+      console.log("menteed list matched with user", applied);
+
+      let connected = await this.state.matches.filter(id => {
+        return id.mentee_id === this.state.wanted_mentor.id;
+      });
+
+      // connected[0].mentor_id = 7
+      //console.log("mentee connected with match table", connected[0])
+
+      if (typeof connected[0].mentor_id === "number") {
+        await this.props.getSpecificMentor(connected[0].mentor_id);
+        await this.setState({ ...this.state, mentor: this.props.mentor });
+        await this.props.getSpecificUser(this.state.mentor.user_id);
+        await this.setState({ ...this.state, profile: this.props.profile });
+      } else {
+        await this.setState({ ...this.state, mentor: 0 });
+      }
+    }
+
+    // const applied = await this.state.menteed.filter(id => {
+    //   return id.user_id === this.state.user.id;
+    // });
+
+    //console.log("current user", this.state.user)
+
+    // await this.setState({ ...this.state, wanted_mentor: applied[0] });
+    //  console.log("mentee table", this.state.wanted_mentor);
     //  console.log("menteed list matched with user", applied)
 
-    let connected = await this.state.matches.filter(id => {
-      return id.mentee_id === this.state.wanted_mentor.id;
-    });
+    // let connected = await this.state.matches.filter(id => {
+    //   return id.mentee_id === this.state.wanted_mentor.id;
+    // });
 
     // connected[0].mentor_id = 7
     //console.log("mentee connected with match table", connected[0])
-     
-    if (typeof connected[0].mentor_id === "number" ) {
-      await this.props.getSpecificMentor(connected[0].mentor_id );
-      await this.setState({ ...this.state, mentor: this.props.mentor });
-      await this.props.getSpecificUser(this.state.mentor.user_id);
-      await this.setState({ ...this.state, profile: this.props.profile });
-      } else {
-        await this.setState({...this.state, mentor: 0})
-      };
 
+    // if (typeof connected[0].mentor_id === "number" ) {
+    //   await this.props.getSpecificMentor(connected[0].mentor_id );
+    //   await this.setState({ ...this.state, mentor: this.props.mentor });
+    //   await this.props.getSpecificUser(this.state.mentor.user_id);
+    //   await this.setState({ ...this.state, profile: this.props.profile });
+    //   } else {
+    //     await this.setState({...this.state, mentor: 0})
+    //   };
 
-
-     
-  //   // console.log(this.state.wanted_mentor);
-  //   console.log("current user", this.state.user)
-  //  console.log("current user match with mentor ", applied);
-  //   console.log("mentor id",this.state.mentor)
-  //   console.log("mentor profile", this.state.profile)
+    //   // console.log(this.state.wanted_mentor);
+    //   console.log("current user", this.state.user)
+    //  console.log("current user match with mentor ", applied);
+    //   console.log("mentor id",this.state.mentor)
+    //   console.log("mentor profile", this.state.profile)
     // console.log(applied);
   }
 
@@ -259,7 +316,9 @@ const mstp = state => {
     mentees: state.mentees.mentees,
     matches: state.matches.matches,
     mentor: state.mentors.currentMentor,
-    profile: state.users.currentUser
+    profile: state.users.currentUser,
+    matchedMentee: state.mentors.mentors,
+    specificMentee: state.mentees.currentMentee
   };
 };
 
@@ -268,7 +327,9 @@ const mdtp = {
   getMatches,
   getSpecificMentor,
   getCurrentUser,
-  getMentees
+  getMentees,
+  getMentors,
+  getSpecificMentee
 };
 
 export default connect(
