@@ -222,9 +222,11 @@ class MaterialNavbar extends React.Component {
           <Toolbar>
             <Link component={RouterLink} to="/" style={{textDecoration: 'none', display: 'flex'}}>
             <img src={LogoHz} alt="MM logo wide" height="50" width="50" />
-            {/*<Typography className={classes.title} variant="h6" color="inherit" noWrap>
-              MYMentrMatch
-            </Typography>*/}
+            <Typography className={classes.title} 
+            style={{paddingTop: "10px", marginLeft: "5px"}}
+            variant="h6" color="inherit" noWrap>
+              MentrMatch
+            </Typography>
             </Link>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
